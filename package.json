@@ -2,7 +2,7 @@
   "name": "t-80",
   "config": {
     "template": "pug",
-    "webpack": "false",
+    "webpack": "true",
     "rucksack": "false",
     "autoprefixer": {
       "browsers": [
@@ -31,6 +31,7 @@
     "gulp-rimraf": "^0.2.0",
     "gulp-sftp": "^0.1.5",
     "gulp-zip": "^3.2.0",
+    "highcharts": "^5.0.10",
     "node-sass": "^3.4.2",
     "node-static": "^0.7.7",
     "postcss-inject": "^1.0.1",

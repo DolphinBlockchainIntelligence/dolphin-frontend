@@ -32,14 +32,6 @@ if (isRucksack) {
 
 var onError = function(err) {
 	beeper();
-	gulp.src(['public/css/app.css'])
-	.pipe(postcss([
-		require('postcss-inject')({
-			cssPlainText: 'body{background: red !important}'
-		})
-	]))
-	.pipe(gulp.dest('public/css'))
-	.pipe(connect.reload());
 	gutil.log(gutil.colors.red(err))
 };
 

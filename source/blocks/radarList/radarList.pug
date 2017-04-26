@@ -1,37 +1,42 @@
 -
-  var coinsList = [
-    {
-        "topicUrl": "https://bitcointalk.org/index.php?topic=1864282.0", 
-        "topicId": "1864282", 
-        "topicStarterUrl": "https://bitcointalk.org/index.php?action=profile;u=970309", 
-        "sentimJson": "1864282.json", 
-        "announce": "[ANN] [TOR] Torcoin - X11 PoW - Tor Integrated Crypto - Torcoin.org", 
-        "NumReplies": "263", 
-        "NumViews": "8616", 
-        "topicStarter": "thetorcoin"
-    }, 
-    {
-        "topicUrl": "https://bitcointalk.org/index.php?topic=1346646.0", 
-        "topicId": "1346646", 
-        "topicStarterUrl": "https://bitcointalk.org/index.php?action=profile;u=718244", 
-        "sentimJson": "1346646.json", 
-        "announce": "[ANN][LSK] Lisk | Blockchain Application Platform for JavaScript Developers", 
-        "NumReplies": "39671", 
-        "NumViews": "2177958", 
-        "topicStarter": "LiskHQ"
-    },
-  ];
+	var coinsList = [
+		{
+			"topicUrl": "https://bitcointalk.org/index.php?topic=1864282.0", 
+			"topicId": "1864282", 
+			"topicStarterUrl": "https://bitcointalk.org/index.php?action=profile;u=970309", 
+			"sentimJson": "1864282.json", 
+			"announce": "[ANN] [TOR] Torcoin - X11 PoW - Tor Integrated Crypto - Torcoin.org", 
+			"NumReplies": "263", 
+			"NumViews": "8616", 
+			"topicStarter": "thetorcoin"
+		}, 
+		{
+			"topicUrl": "https://bitcointalk.org/index.php?topic=1346646.0", 
+			"topicId": "1346646", 
+			"topicStarterUrl": "https://bitcointalk.org/index.php?action=profile;u=718244", 
+			"sentimJson": "1346646.json", 
+			"announce": "[ANN][LSK] Lisk | Blockchain Application Platform for JavaScript Developers", 
+			"NumReplies": "39671", 
+			"NumViews": "2177958", 
+			"topicStarter": "LiskHQ"
+		},
+	];
 
 mixin radarItem(coin)
-  .radarItem(data-href="/coin.html")
-      div
-        .title= coin.announce
-        a.fa.fa-external-link(href=coin.topicUrl)
-        a.fa.fa-user-o(href=coin.topicStarterUrl)
-      div
-        .numReplies replies: 256
-        .numViews views: 8621
+	tr(data-href="/coin.html")
+		td= coin.announce
+		td= coin.NumReplies
+		td= coin.NumViews
+		td.actions
+			a.fa.fa-external-link(href=coin.topicUrl)
+			a.fa.fa-user(href=coin.topicStarterUrl)
 
 .radarList
-  for coin in coinsList
-    +radarItem(coin)
+	table.table.table-hover
+		tr
+			th Name
+			th Replies
+			th Views
+			th
+		for coin in coinsList
+			+radarItem(coin)
