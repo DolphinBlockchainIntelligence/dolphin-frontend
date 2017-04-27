@@ -1,13 +1,17 @@
 image: node:6.10-alpine
 
+before_script:
+  - npm install
+
+stages:
+  - pages
+
 pages:
+  stage: pages
   cache:
     paths:
     - node_modules/
-
   script:
-  - npm install
-  - export PATH="$PATH:node_modules/.bin"
   - npm build
   artifacts:
     paths:
