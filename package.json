@@ -79,9 +79,9 @@
   "scripts": {
     "start": "./node_modules/.bin/gulp",
     "favicons": "./node_modules/.bin/gulp favicons",
-    "build": "NODE_ENV=production ./node_modules/.bin/gulp --serveroff",
-    "zip": "NODE_ENV=production ./node_modules/.bin/gulp --serveroff --zip",
-    "sftp": "NODE_ENV=production ./node_modules/.bin/gulp --serveroff --sftp"
+    "build": "NODE_ENV=production ./node_modules/.bin/gulp --del --serveroff",
+    "zip": "NODE_ENV=production ./node_modules/.bin/gulp --del --serveroff --zip",
+    "sftp": "NODE_ENV=production ./node_modules/.bin/gulp --del --serveroff --sftp"
   },
   "description": "gulp no build",
   "main": "gulpfile.js",

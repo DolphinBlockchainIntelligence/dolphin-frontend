@@ -8,7 +8,7 @@ pages:
   script:
   - npm install
   - export PATH="$PATH:node_modules/.bin"
-  - gulp --del --build
+  - npm build
   artifacts:
     paths:
     - public
