@@ -3,11 +3,7 @@ image: node:6.10-alpine
 before_script:
   - npm install
 
-stages:
-  - pages
-
 pages:
-  stage: pages
   cache:
     paths:
     - node_modules/
