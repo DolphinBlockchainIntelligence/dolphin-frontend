@@ -1,4 +1,4 @@
-image: kodifydev/node-yarn-alpine:6.10-onbuild-compile
+image: node:6.10-alpine
 
 pages:
   cache:
