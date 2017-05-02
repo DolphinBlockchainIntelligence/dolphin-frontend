@@ -4,10 +4,10 @@ before_script:
   - npm install
 
 stages:
-  - pages
+  - build
 
-pages:
-  stage: pages
+build:
+  stage: build
   cache:
     paths:
     - node_modules/
