@@ -45,7 +45,7 @@ function createChart() {
 }
 
 $.each(names, function(i, name) {
-    $.getJSON('/js/' + name + '.json', function(data) {
+    $.getJSON('/data/' + name + '.json', function(data) {
         seriesOptions[i] = {
             name: name,
             data: data,
