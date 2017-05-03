@@ -1,14 +1,13 @@
-var Highcharts = require('highcharts/highstock');
-var seriesOptions = [],
-    seriesCounter = 0,
-    names = ['MSFT', 'AAPL', 'GOOG'];
+let Highcharts = require('highcharts/highstock');
+let seriesOptions = [];
+let seriesCounter = 0;
+let names = ['positive', 'neutral', 'negative'];
 
 /**
- * Create the chart when all data is loaded
- * @returns {undefined}
- */
+* Create the chart when all data is loaded
+* @returns {undefined}
+*/
 function createChart() {
-
     Highcharts.stockChart('container', {
 
         rangeSelector: {
@@ -45,19 +44,17 @@ function createChart() {
     });
 }
 
-$.each(names, function (i, name) {
-
-    $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=' + name.toLowerCase() + '-c.json&callback=?',    function (data) {
-
+$.each(names, function(i, name) {
+    $.getJSON('/js/' + name + '.json', function(data) {
         seriesOptions[i] = {
             name: name,
-            data: data
+            data: data,
+            pointStart: Date.UTC(2016, 1, 30),
+            pointInterval: 3600 * 1000 * 24 // one hour
         };
-
         // As we're loading the data asynchronously, we don't know what order it will arrive. So
         // we keep a counter and create the chart when all the data is loaded.
         seriesCounter += 1;
-
         if (seriesCounter === names.length) {
             createChart();
         }
