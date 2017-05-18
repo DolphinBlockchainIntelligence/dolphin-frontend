@@ -14,6 +14,4 @@ new Vue({
   components: { App }
 })
 
-import {ServerTable, ClientTable, Event} from 'vue-tables-2'
-
 Vue.use(ClientTable)
