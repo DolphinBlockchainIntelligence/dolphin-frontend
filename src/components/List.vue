@@ -1,8 +1,6 @@
 <template>
 <div class="container">
   <h3>Listing</h3>
-  <router-link :to="about"></router-link>
-  <!-- :options="options" -->
   <v-client-table :data="coinsList" :columns="columns">
     <template slot="edit" scope="props">
       <edit></edit>
@@ -16,8 +14,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import {ClientTable, Event} from 'vue-tables-2'
 import Edit from './Edit.vue'
-// import router from '../router'
-import router from 'vue-router'
+import routes from '../router'
 Vue.use(ClientTable)
 export default {
   name: 'list',
@@ -39,17 +36,14 @@ export default {
       this.errors.push(e)
     })
     Event.$on('vue-tables.row-click', function (data) {
-      // console.log(data.row.topicId)
-      // router.push({ name: 'Coin', params: { id: 1014145 }})
-      this.$router.push('about')
-      console.log(this)
+      // let id = data.row.topicId
+      routes.push({ name: 'Coin', params: { id: 1014145 }})
     })
   },
-  methods: {
-    tableOnLoaded: function () {
-      console.log('hi liveedu')
-    }
-  },
+  // methods: {
+  //   tableOnLoaded: function () {
+  //   }
+  // },
   components: {
     'edit': Edit
   }
@@ -57,12 +51,15 @@ export default {
 </script>
 
 <style lang="sass">
-.VueTables .col-md-6
-  &:nth-child(2) > div
-    display: flex
-    justify-content: flex-end
-  label
-    margin-right: 7px
+.VueTables
+  tr
+    cursor: pointer
+  .col-md-6
+    &:nth-child(2) > div
+      display: flex
+      justify-content: flex-end
+    label
+      margin-right: 7px
 .VuePagination__pagination
   justify-content: center
 .VuePagination__count
