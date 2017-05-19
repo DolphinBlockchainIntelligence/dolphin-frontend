@@ -1,15 +1,14 @@
 <template>
-  <div class="coin">
-    <h1>{{ $route.params.id }}</h1>
-    <h3>[ANN] [TOR] Torcoin - X11 PoW - Tor Integrated Crypto - Torcoin.org</h3>
-    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-  </div>
+<div class="coin">
+  <h1>{{ $route.params.id }}</h1>
+  <h3>[ANN] [TOR] Torcoin - X11 PoW - Tor Integrated Crypto - Torcoin.org</h3>
+  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
 </template>
 
 <script>
 import axios from 'axios'
 let Highcharts = require('highcharts/highstock')
-
 export default {
   name: 'coin',
   created () {
