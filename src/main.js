@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueAnalytics from 'vue-analytics'
 // import Vuex from 'vuex'
 
 Vue.config.productionTip = false
@@ -14,4 +15,9 @@ new Vue({
   router,
   template: '<App/>',
   components: { App }
+})
+
+Vue.use(VueAnalytics, {
+  id: 'UA-99587385-1',
+  router
 })
