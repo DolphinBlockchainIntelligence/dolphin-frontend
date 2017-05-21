@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueAnalytics from 'vue-analytics'
 import Hello from '@/components/Hello'
 import About from '@/components/About'
 import List from '@/components/List'
 import Coin from '@/components/Coin'
 
 Vue.use(Router)
-
-export default new Router({
+export default const router = new Router({
   routes: [
     {
       path: '/hello',
@@ -30,4 +30,9 @@ export default new Router({
       component: Coin
     }
   ]
+})
+
+Vue.use(VueAnalytics, {
+  id: 'UA-99587385-1',
+  router
 })

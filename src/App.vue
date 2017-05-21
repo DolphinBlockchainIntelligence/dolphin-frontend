@@ -39,13 +39,9 @@
 <script>
 import Vue from 'vue'
 import Vuex from 'vuex'
-import VueAnalytics from 'vue-analytics'
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(Vuex)
 Vue.use(BootstrapVue)
-Vue.use(VueAnalytics, {
-  id: 'UA-99587385-1'
-})
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 export default {
