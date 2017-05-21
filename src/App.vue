@@ -16,7 +16,7 @@
         <b-nav is-nav-bar class="ml-auto">
           <b-nav-item-dropdown text="Lang" right-alignment right>
             <b-dropdown-item to="#">EN</b-dropdown-item>
-            <b-dropdown-item to="#">CH</b-dropdown-item>
+            <b-dropdown-item to="#">中国</b-dropdown-item>
             <b-dropdown-item to="#">RU</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown right-alignment right>
@@ -38,8 +38,14 @@
 
 <script>
 import Vue from 'vue'
+import Vuex from 'vuex'
+import VueAnalytics from 'vue-analytics'
 import BootstrapVue from 'bootstrap-vue'
+Vue.use(Vuex)
 Vue.use(BootstrapVue)
+Vue.use(VueAnalytics, {
+  id: 'UA-99587385-1'
+})
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 export default {
