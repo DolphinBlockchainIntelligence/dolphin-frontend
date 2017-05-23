@@ -8,15 +8,16 @@
       </b-link>
       <b-collapse is-nav id="nav_collapse">
         <b-nav is-nav-bar>
-          <b-nav-item>Features</b-nav-item>
-          <b-nav-item>Team</b-nav-item>
-          <b-nav-item>Subscription</b-nav-item>
-          <b-nav-item>ICO</b-nav-item>
+          <b-nav-item to="/list">Coins list</b-nav-item>
+          <b-nav-item to="#">Features</b-nav-item>
+          <b-nav-item to="#">Team</b-nav-item>
+          <b-nav-item to="#">Subscription</b-nav-item>
+          <b-nav-item to="#">ICO</b-nav-item>
         </b-nav>
         <b-nav is-nav-bar class="ml-auto">
           <b-nav-item-dropdown text="Lang" right-alignment right>
             <b-dropdown-item to="#">EN</b-dropdown-item>
-            <b-dropdown-item to="#">中国</b-dropdown-item>
+            <b-dropdown-item to="#">中文</b-dropdown-item>
             <b-dropdown-item to="#">RU</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown right-alignment right>
