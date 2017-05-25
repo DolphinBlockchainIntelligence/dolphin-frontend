@@ -1,15 +1,13 @@
-<template>
-<div class="container list">
-  <h3>Coins list</h3>
-  <v-client-table :data="coinsList" :columns="columns" :options="options">
-    <template slot="links" scope="props">
-      <div class="links">
-        <a v-on:click="dataHref(props.row.topicUrl, $event)"><i class="material-icons">account_circle</i></a>
-        <a v-on:click="dataHref(props.row.topicUrl, $event)"><i class="material-icons">assignment</i></a>
-      </div>
-    </template>
-  </v-client-table>
-</div>
+<template lang="pug">
+  .container.list
+    h3 Coins list
+    v-client-table(:data='coinsList', :columns='columns', :options='options')
+      template(slot='links', scope='props')
+        .links
+          a(v-on:click='dataHref(props.row.topicUrl, $event)')
+            i.material-icons account_circle
+          a(v-on:click='dataHref(props.row.topicUrl, $event)')
+            i.material-icons assignment
 </template>
 
 <script>
