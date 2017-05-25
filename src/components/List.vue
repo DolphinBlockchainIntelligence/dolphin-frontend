@@ -3,7 +3,7 @@
   <h3>Listing</h3>
   <v-client-table :data="coinsList" :columns="columns" :options="options">
     <template slot="edit" scope="props">
-      <edit></edit>
+      <edit topicUrl="foo" topicStarterUrl="bar"></edit>
     </template>
   </v-client-table>
 </div>

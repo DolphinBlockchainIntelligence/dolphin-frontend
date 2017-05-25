@@ -1,9 +1,7 @@
-<template>
-<div class="coin container">
-  <h1>{{ $route.params.id }}</h1>
-  <h3>[ANN] [TOR] Torcoin - X11 PoW - Tor Integrated Crypto - Torcoin.org</h3>
-  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-</div>
+<template lang="pug">
+.coin.container
+  h3 {{ heading}}
+  #container(style='min-width: 310px; height: 400px; margin: 0 auto')
 </template>
 
 <script>
@@ -11,10 +9,12 @@ import axios from 'axios'
 let Highcharts = require('highcharts/highstock')
 export default {
   name: 'coin',
+  data: () => ({
+    heading: ''
+  }),
   created () {
     let seriesOptions = []
     let seriesCounter = 0
-    let names = ['positive', 'neutral', 'negative']
     function createChart () {
       Highcharts.stockChart('container', {
         rangeSelector: {
@@ -47,25 +47,25 @@ export default {
       })
     }
     const coinId = this.$route.params.id
-    names.forEach(function (name, i) {
-      axios.get('/static/coin/' + coinId + '/' + name + '.json')
-      .then(response => {
+
+    let names = ['positive', 'neutral', 'negative']
+    axios.get('/static/coin/' + coinId + '.json')
+    .then(response => {
+      this.heading = response.data.heading
+      names.forEach(function (name, i) {
         seriesOptions[i] = {
           name: name,
-          data: response.data,
+          data: response.data.btt[name],
           pointStart: Date.UTC(2016, 1, 30),
           pointInterval: 3600 * 1000 * 24 // one hour
         }
-        // As we're loading the data asynchronously, we don't know what order it will arrive. So
-        // we keep a counter and create the chart when all the data is loaded.
         seriesCounter += 1
         if (seriesCounter === names.length) {
           createChart()
         }
       })
-      .catch(e => {
-        this.errors.push(e)
-      })
+    }).catch(e => {
+      this.errors.push(e)
     })
   }
 }

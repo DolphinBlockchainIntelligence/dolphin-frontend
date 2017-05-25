@@ -1,9 +1,11 @@
 <template>
-    <!-- <a class="fa fa-edit" :href="edit(data.id)">Edit</a> -->
-    <a href="#">Edit</a>
+  <div  id="row.id">
+    <a v-bind:href="topicUrl">{{topicUrl}}</a>
+    <a v-bind:href="topicStarterUrl">{{topicStarterUrl}}</a>
+  </div>
 </template>
 <script>
-    export default {
-        props:['data'],
-    }
+  export default {
+    props:['topicUrl', 'topicStarterUrl']
+  }
 </script>
