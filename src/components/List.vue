@@ -1,9 +1,12 @@
 <template>
-<div class="container">
-  <h3>Listing</h3>
+<div class="container list">
+  <h3>Coins list</h3>
   <v-client-table :data="coinsList" :columns="columns" :options="options">
-    <template slot="edit" scope="props">
-      <edit topicUrl="foo" topicStarterUrl="bar"></edit>
+    <template slot="links" scope="props">
+      <div class="links">
+        <a v-on:click="dataHref(props.row.topicUrl, $event)"><i class="material-icons">account_circle</i></a>
+        <a v-on:click="dataHref(props.row.topicUrl, $event)"><i class="material-icons">assignment</i></a>
+      </div>
     </template>
   </v-client-table>
 </div>
@@ -20,26 +23,16 @@ export default {
   name: 'list',
   data: () => ({
     coinsList: [],
-    columns: ['announce', 'NumReplies', 'NumViews', 'edit'],
+    columns: ['announce', 'NumReplies', 'NumViews', 'links'],
     options: {
-      // columnsClasses: {
-      //   NumReplies: 'Replies'
-      // },
       headings: {
         announce: 'Announce',
         NumReplies: 'Replies',
         NumViews: 'Views',
-        edit: ''
+        links: ''
       }
-      // ['Announce', 'Num replies', 'Num views', 'Edit']
     }
   }),
-  // options: {
-  //   headings: ['Announce', 'Num replies', 'Num views', 'Edit']
-  //   // templates:{
-  //   //    edit
-  //   // }
-  // },
   created () {
     axios.get('/static/data/coinsList.json')
     .then(response => {
@@ -49,15 +42,16 @@ export default {
       this.errors.push(e)
     })
     Event.$on('vue-tables.row-click', function (data) {
-      // let id = data.row.topicId
-      // routes.push({ name: 'Coin', params: { id: 1014145 }})
       routes.push({ name: 'Coin', params: { id: data.row.topicId }})
     })
   },
-  // methods: {
-  //   tableOnLoaded: function () {
-  //   }
-  // },
+  methods: {
+    dataHref: function (url, event) {
+      event.preventDefault()
+      event.stopPropagation()
+      window.open(url, '_blank')
+    }
+  },
   components: {
     'edit': Edit
   }
@@ -74,6 +68,8 @@ export default {
       justify-content: flex-end
     label
       margin-right: 7px
+  .links
+    white-space: nowrap
 .VuePagination__pagination
   justify-content: center
 .VuePagination__count
