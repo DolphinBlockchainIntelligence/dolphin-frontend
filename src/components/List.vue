@@ -17,22 +17,6 @@ import {ClientTable, Event} from 'vue-tables-2'
 import Edit from './Edit.vue'
 import routes from '../router'
 Vue.use(ClientTable)
-// import Polyglot from 'vue-polyglot'
-// Vue.use(Polyglot, {
-//   defaultLanguage: 'en',
-//   languagesAvailable: ['en', 'ru', 'zh']
-// })
-// Vue.locales({
-//   'en': {
-//     'title': 'Coins list'
-//   },
-//   'ru': {
-//     'title': 'Список монет'
-//   },
-//   'zh': {
-//     'title': '資產'
-//   }
-// })
 export default {
   name: 'list',
   data: () => ({
@@ -66,22 +50,6 @@ export default {
       window.open(url, '_blank')
     }
   }
-  // components: {
-  //   'edit': Edit
-  // },
-//   i18n: {
-//     messages: {
-//       'en': {
-//         'title': 'Coins list'
-//       },
-//       'ru': {
-//         'title': 'Список монет'
-//       },
-//       'zh': {
-//         'title': '資產'
-//       }
-//     }
-//   }
 }
 </script>
 
