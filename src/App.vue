@@ -4,7 +4,7 @@
     .container
       b-nav-toggle(target='nav_collapse')
       b-link.navbar-brand(to='/')
-        span Dolphin BI
+        span Dolphin BI - <small>ICO Sentiment Analysis [alpha]</small>
       b-collapse#nav_collapse(is-nav='')
         b-nav(is-nav-bar='')
           b-nav-item(to='/list') {{$t('coinsList')}}
@@ -22,7 +22,6 @@
               span(style='font-weight: bold;') UserName
             b-dropdown-item(to='#') {{$t('profile')}}
             b-dropdown-item(to='#') {{$t('signOut')}}
-  br
   router-view
   br
 </template>
@@ -38,6 +37,7 @@ Vue.use(Polyglot, {
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'roboto-fontface'
 import 'material-design-icons-iconfont'
 window.App = {
   name: 'app',
@@ -53,3 +53,15 @@ window.App = {
 }
 export default window.App
 </script>
+
+
+<style lang="sass">
+#app
+  font-family: 'Roboto', sans-serif
+  .navbar
+    background-color: #3B1D7C !important
+    position: relative
+    z-index: 2
+    &+div
+      margin-top: 20px
+</style>

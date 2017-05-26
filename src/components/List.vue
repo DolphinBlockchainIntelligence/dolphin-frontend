@@ -14,7 +14,6 @@
 import Vue from 'vue'
 import axios from 'axios'
 import {ClientTable, Event} from 'vue-tables-2'
-import Edit from './Edit.vue'
 import routes from '../router'
 Vue.use(ClientTable)
 export default {

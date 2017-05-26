@@ -19,6 +19,7 @@
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "pug": "^2.0.0-rc.1",
+    "roboto-fontface": "^0.7.0",
     "vue": "^2.2.6",
     "vue-analytics": "^4.1.2",
     "vue-i18n": "^6.1.3",
