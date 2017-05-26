@@ -4,14 +4,21 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueAnalytics from 'vue-analytics'
-// import Vuex from 'vuex'
+
+// import VueI18n from 'vue-i18n'
+// Vue.use(VueI18n)
+// const i18n = new VueI18n({
+//   locale: 'zh',
+//   messages: {
+//   }
+// })
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  // vuex,
+  // i18n,
   router,
   template: '<App/>',
   components: { App }

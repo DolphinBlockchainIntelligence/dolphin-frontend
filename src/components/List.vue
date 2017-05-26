@@ -1,6 +1,6 @@
 <template lang="pug">
   .container.list
-    h3 Coins list
+    h3 {{$t('coinsList')}}
     v-client-table(:data='coinsList', :columns='columns', :options='options')
       template(slot='links', scope='props')
         .links
@@ -17,6 +17,22 @@ import {ClientTable, Event} from 'vue-tables-2'
 import Edit from './Edit.vue'
 import routes from '../router'
 Vue.use(ClientTable)
+// import Polyglot from 'vue-polyglot'
+// Vue.use(Polyglot, {
+//   defaultLanguage: 'en',
+//   languagesAvailable: ['en', 'ru', 'zh']
+// })
+// Vue.locales({
+//   'en': {
+//     'title': 'Coins list'
+//   },
+//   'ru': {
+//     'title': 'Список монет'
+//   },
+//   'zh': {
+//     'title': '資產'
+//   }
+// })
 export default {
   name: 'list',
   data: () => ({
@@ -49,10 +65,23 @@ export default {
       event.stopPropagation()
       window.open(url, '_blank')
     }
-  },
-  components: {
-    'edit': Edit
   }
+  // components: {
+  //   'edit': Edit
+  // },
+//   i18n: {
+//     messages: {
+//       'en': {
+//         'title': 'Coins list'
+//       },
+//       'ru': {
+//         'title': 'Список монет'
+//       },
+//       'zh': {
+//         'title': '資產'
+//       }
+//     }
+//   }
 }
 </script>
 

@@ -1,9 +1,9 @@
 <template lang="pug">
   .landing.container
     section.intro
-      h1 {{ intro.title }}
-      h3 {{ intro.subtitle }}
-      h4 {{ intro.description }}
+      h1 {{ $t('landingIntroTitle') }}
+      h3 {{ $t('landingIntroSubtitle') }}
+      h4 {{ $t('landingIntroDescription') }}
     section.about
       h1 {{ about.title }}
       h4 {{ about.description }}

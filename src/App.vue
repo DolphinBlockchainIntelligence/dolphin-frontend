@@ -7,21 +7,21 @@
         span Dolphin BI
       b-collapse#nav_collapse(is-nav='')
         b-nav(is-nav-bar='')
-          b-nav-item(to='/list') Coins list
-          b-nav-item(to='#') Features
-          b-nav-item(to='#') Team
-          b-nav-item(to='#') Subscription
+          b-nav-item(to='/list') {{$t('coinsList')}}
+          b-nav-item(to='#') {{$t('features')}}
+          b-nav-item(to='#') {{$t('team')}}
+          b-nav-item(to='#') {{$t('subscription')}}
           b-nav-item(to='#') ICO
         b-nav.ml-auto(is-nav-bar='')
           b-nav-item-dropdown(text='Lang', right-alignment='', right='')
-            b-dropdown-item(to='#') EN
-            b-dropdown-item(to='#') 中文
-            b-dropdown-item(to='#') RU
+            b-dropdown-item(v-on:click='showAppIn("en")') EN
+            b-dropdown-item(v-on:click='showAppIn("zh")') 中文
+            b-dropdown-item(v-on:click='showAppIn("ru")') RU
           b-nav-item-dropdown(right-alignment='', right='')
             template(slot='text')
-              span(style='font-weight: bold;') User
-            b-dropdown-item(to='#') Profile
-            b-dropdown-item(to='#') Signout
+              span(style='font-weight: bold;') UserName
+            b-dropdown-item(to='#') {{$t('profile')}}
+            b-dropdown-item(to='#') {{$t('signOut')}}
   br
   router-view
   br
@@ -29,24 +29,27 @@
 
 <script>
 import Vue from 'vue'
-import Vuex from 'vuex'
 import BootstrapVue from 'bootstrap-vue'
-Vue.use(Vuex)
 Vue.use(BootstrapVue)
+import Polyglot from 'vue-polyglot'
+Vue.use(Polyglot, {
+  languagesAvailable: ['en', 'ru', 'zh']
+})
+
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'material-design-icons-iconfont'
-export default {
-  name: 'app'
+window.App = {
+  name: 'app',
+  methods: {
+    showAppIn: function(lang) {
+      this.$polyglot.getLocale({baseURL: '/static/i18n', lang: lang})
+      this.$polyglot.setLang({lang: lang})
+    }
+  },
+  beforeCreate() {
+    this.$polyglot.getLocale({baseURL: '/static/i18n', lang: 'en'})
+  }
 }
+export default window.App
 </script>
-
-<style lang="sass">
-// #app
-//   font-family: 'Avenir', Helvetica, Arial, sans-serif
-//   -webkit-font-smoothing: antialiased
-//   -moz-osx-font-smoothing: grayscale
-//   text-align: center
-//   color: #2c3e50
-//   margin-top: 60px
-</style>
