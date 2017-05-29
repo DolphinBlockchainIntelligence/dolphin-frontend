@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import firebase from '../firebase'
 import axios from 'axios'
 let Highcharts = require('highcharts/highstock')
 export default {
@@ -49,13 +50,32 @@ export default {
     const coinId = this.$route.params.id
 
     let names = ['positive', 'neutral', 'negative']
-    axios.get('/static/coin/' + coinId + '.json')
-    .then(response => {
-      this.heading = response.data.heading
+    // axios.get('/static/coin/' + coinId + '.json')
+    // .then(response => {
+    //   this.heading = response.data.heading
+    //   names.forEach(function (name, i) {
+    //     seriesOptions[i] = {
+    //       name: name,
+    //       data: response.data.btt[name],
+    //       pointStart: Date.UTC(2016, 1, 30),
+    //       pointInterval: 3600 * 1000 * 24 // one hour
+    //     }
+    //     seriesCounter += 1
+    //     if (seriesCounter === names.length) {
+    //       createChart()
+    //     }
+    //   })
+    // }).catch(e => {
+    //   this.errors.push(e)
+    // })
+    let component = this
+    firebase.database().ref('/coin/' + coinId).once('value').then(function(snapshot) {
+      let data = snapshot.val()
+      component.heading = data.heading
       names.forEach(function (name, i) {
         seriesOptions[i] = {
           name: name,
-          data: response.data.btt[name],
+          data: data.btt[name],
           pointStart: Date.UTC(2016, 1, 30),
           pointInterval: 3600 * 1000 * 24 // one hour
         }
@@ -64,8 +84,6 @@ export default {
           createChart()
         }
       })
-    }).catch(e => {
-      this.errors.push(e)
     })
   }
 }

@@ -16,6 +16,9 @@ import axios from 'axios'
 import {ClientTable, Event} from 'vue-tables-2'
 import routes from '../router'
 Vue.use(ClientTable)
+
+import firebase from '../firebase'
+
 export default {
   name: 'list',
   data: () => ({
@@ -31,13 +34,21 @@ export default {
     }
   }),
   created () {
-    axios.get('/static/data/coinsList.json')
-    .then(response => {
-      this.coinsList = response.data
+    let component = this
+    firebase.database().ref('/coinsList/').once('value').then(function(snapshot) {
+      component.coinsList = snapshot.val()
     })
-    .catch(e => {
-      this.errors.push(e)
-    })
+    // .then(function(){
+    //   console.log(component.coinsList)
+    // })
+
+    // axios.get('/static/data/coinsList.json')
+    // .then(response => {
+    //   this.coinsList = response.data
+    // })
+    // .catch(e => {
+    //   this.errors.push(e)
+    // })
     Event.$on('vue-tables.row-click', function (data) {
       routes.push({ name: 'Coin', params: { id: data.row.topicId }})
     })
