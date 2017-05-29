@@ -47,7 +47,7 @@
 	"screenshots": {
 		"title": "Dashboards and widgets",
 		"subtitle": "Investors receive powerful tools packed into widgets to support analysis of crypto-assets in every stage (presale, ICO, post-ICO)",
-		"imgs": []
+		"imgs": ["/static/img/dashboard.jpg"]
 	},
 	"roadmap": {
 		"title": "Roadmap",
@@ -100,9 +100,12 @@
 		"subtitle": "Our core team",
 		"members": [
 			{
+				"img": "/static/img/team/pavel.jpg",
 				"name": "Pavel Sidorov",
 				"role": "CEO and project manager",
-				"description": "An experienced IT architect with a background in development and implementing of large scale information systems (BI, ERP, EPM)",
+				"description": [
+					"An experienced IT architect with a background in development and implementing of large scale information systems (BI, ERP, EPM)"
+				],
 				"links": [
 					{
 						"name": "LinkedIn",
@@ -115,9 +118,15 @@
 				]
 			},
 			{
+				"img": "/static/img/team/andy.jpg",
 				"name": "Andy Varns",
 				"role": "Blockchain researcher",
-				"description": "PhD, associate professor of Finance University (Russia)</br>Entrepreneur</br>Financial consultant",
+				"description": [
+					"PhD",
+					"associate professor of Finance University (Russia)",
+					"Entrepreneur",
+					"Financial consultant"
+				],
 				"links": [
 					{
 						"name": "LinkedIn",
@@ -130,9 +139,14 @@
 				]
 			},
 			{
+				"img": "/static/img/team/alex.jpg",
 				"name": "Alex Nikolaev",
 				"role": "CTO & smart-contract developer",
-				"description": "Blockchain Enthusiast</br>Python and Solidity developer</br>Bachelor of Science in Computer Science Degree",
+				"description": [
+					"Blockchain Enthusiast",
+					"Python and Solidity developer",
+					"Bachelor of Science in Computer Science Degree"
+				],
 				"links": [
 					{
 						"name": "Facebook",
@@ -141,9 +155,14 @@
 				]
 			},
 			{
+				"img": "/static/img/team/ivan.jpg",
 				"name": "Ivan Kamakin",
 				"role": "Chief data scientist",
-				"description": "Machine learning guru</br>R & Python developer</br>Business Informatics at Higher School of Econimics",
+				"description": [
+					"Machine learning guru",
+					"R & Python developer",
+					"Business Informatics at Higher School of Econimics"
+				],
 				"links": [
 					{
 						"name": "Facebook",
@@ -157,17 +176,17 @@
 		"title": "Mentions",
 		"items": [
 			{
-				"img": "bit-news.png",
+				"img": "/static/img/mention/bit-news.png",
 				"title": "bit.news",
 				"url": "https://bit.news/eng/marina-guriev-hse-hackathon-perfect-opportunity-start-business/"
 			},
 			{
-				"img": "forklog.png",
+				"img": "/static/img/mention/forklog.svg",
 				"title": "forklog.com",
 				"url": "https://translate.google.com/translate?hl=en&sl=ru&tl=en&u=http%3A%2F%2Fforklog.com%2Fstartap-dolphin-blockchain-intelligence-sozdaet-metod-proverki-ico-na-skam%2F"
 			},
 			{
-				"img": "hse.png",
+				"img": "/static/img/mention/hse.gif",
 				"title": "hse.ru",
 				"url": "https://bm.hse.ru/en/news/197062169.html"
 			}
