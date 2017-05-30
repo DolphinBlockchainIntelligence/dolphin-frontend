@@ -34,15 +34,16 @@
       .heading
         h3.title {{ team.title }}
         h4.subtitle {{ team.subtitle }}
-      ul.row: li.col-xs-12.col-md-6.col-lg-3(v-for="member in team.members")
-        b-card.mb-2
-          //- div.item-img(:style="'background-image: url(' + member.img + ')'")
-          img(:src="member.img" :alt="member.name")
-          h5 {{ member.name }}
-          div {{ member.role }}
-          ul: li(v-for="description in member.description") {{ description }}
-          ul: li(v-for="link in member.links")
-            a(:href="link.url") {{ link.name }}
+      ul.row
+        li.mb-2.col-xs-12.col-md-6.col-lg-3(v-for="member in team.members")
+          b-card.card(show-footer)
+            img(:src="member.img" :alt="member.name")
+            h5 {{ member.name }}
+            div {{ member.role }}
+            ul: li(v-for="description in member.description") {{ description }}
+            div(slot="footer")
+              .card-block
+                a.card-link(v-for="link in member.links" :href="link.url") {{ link.name }}
     section.section.mentions: .container
       .heading
         h3.title {{ mentions.title }}
@@ -181,12 +182,18 @@ export default {
   img
     width: 100%
 .team
-  ul
-    li
+  .row
+    &>li
       list-style: none
       opacity: 0.7
       &:hover
         opacity: 1
+    .card
+      ul
+        padding: 0
+        list-style: none
+      .card-footer .card-block
+        padding: 7px 0px
   img
     margin: -20px 0 20px -20px
     width: 100%
