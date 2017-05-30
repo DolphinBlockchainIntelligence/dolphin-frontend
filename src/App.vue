@@ -35,7 +35,7 @@ Vue.use(Polyglot, {
 })
 Vue.locales({
   'en': {
-    "coinsList": "BTT santiments (alpha)",
+    "coinsList": "BTT sentiments (alpha)",
     "features": "Features",
     "team": "Team",
     "subscription": "Subscription",
@@ -57,7 +57,7 @@ Vue.locales({
     "landingIntroDescription": "open source платформа для совместного управления и анализа криптосистем"
   },
   'zh': {
-    "coinsList": "硬幣列表",
+    "coinsList": "BTT sentiments (alpha)",
     "features": "特徵",
     "team": "球隊",
     "subscription": "訂閱",
