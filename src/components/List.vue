@@ -1,12 +1,13 @@
 <template lang="pug">
   .container.list
-    h3 {{$t('coinsList')}}
-    v-client-table(:data='coinsList', :columns='columns', :options='options')
-      template(slot='links', scope='props')
+    h3 {{$t("coinsList")}}
+    //-  @row-click="rowCLick(data)"
+    v-client-table(:data="coinsList", :columns="columns", :options="options")
+      template(slot="links", scope="props")
         .links
-          a(v-on:click='dataHref(props.row.topicUrl, $event)')
+          a(v-on:click="dataHref(props.row.topicStarterUrl, $event)")
             i.material-icons account_circle
-          a(v-on:click='dataHref(props.row.topicUrl, $event)')
+          a(v-on:click="dataHref(props.row.topicUrl, $event)")
             i.material-icons assignment
 </template>
 
@@ -50,6 +51,7 @@ export default {
     //   this.errors.push(e)
     // })
     Event.$on('vue-tables.row-click', function (data) {
+      console.log('FIREFOX')
       routes.push({ name: 'Coin', params: { id: data.row.topicId }})
     })
   },
@@ -58,7 +60,12 @@ export default {
       event.preventDefault()
       event.stopPropagation()
       window.open(url, '_blank')
-    }
+    },
+    // rowCLick: function (data) {
+    //   // event.preventDefault()
+    //   // console.log('TEST')
+    //   routes.push({ name: 'Coin', params: { id: data.row.topicId }})
+    // }
   }
 }
 </script>

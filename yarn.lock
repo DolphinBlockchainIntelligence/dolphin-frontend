@@ -5134,9 +5134,9 @@ vue-svg-loader@^0.1.2:
   dependencies:
     svgo "^0.7.1"
 
-vue-tables-2@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/vue-tables-2/-/vue-tables-2-0.6.2.tgz#0b67349b4e321459e12138905275045f9351fd8f"
+vue-tables-2@^0.6.23:
+  version "0.6.23"
+  resolved "https://registry.yarnpkg.com/vue-tables-2/-/vue-tables-2-0.6.23.tgz#ed72b1640dc58bfda9c7d17b29f3ffd5c07344e8"
   dependencies:
     array-intersection "^0.1.2"
     clone "^2.1.0"
