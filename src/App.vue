@@ -4,7 +4,7 @@
     .container
       b-nav-toggle(target='nav_collapse')
       b-link.navbar-brand(to='/')
-        span Dolphin BI - <small>ICO Sentiment Analysis [alpha]</small>
+        span Dolphin BI
       b-collapse#nav_collapse(is-nav='')
         b-nav(is-nav-bar='')
           b-nav-item(to='/list') {{$t('coinsList')}}
@@ -36,7 +36,7 @@ Vue.use(Polyglot, {
 })
 Vue.locales({
   'en': {
-    "coinsList": "Coins list",
+    "coinsList": "BTT santiments (alpha)",
     "features": "Features",
     "team": "Team",
     "subscription": "Subscription",
@@ -47,7 +47,7 @@ Vue.locales({
     "landingIntroDescription": "an open-source platform for collaborative crypto-asset investment analysis"
   },
   'ru': {
-    "coinsList": "Список монет",
+    "coinsList": "BTT сантименты (альфа)",
     "features": "Преимущества",
     "team": "Команда",
     "subscription": "Подписка",
