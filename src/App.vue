@@ -23,7 +23,6 @@
             b-dropdown-item(to='#') {{$t('profile')}}
             b-dropdown-item(to='#') {{$t('signOut')}}
   router-view
-  br
 </template>
 
 <script>

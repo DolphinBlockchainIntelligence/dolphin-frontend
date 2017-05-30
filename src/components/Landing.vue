@@ -48,14 +48,15 @@
         h3.title {{ mentions.title }}
       ul.items: li(v-for="mention in mentions.items")
         a(:href="mention.url"): img(:src="mention.img" :alt="mention.title")
-    sections.section.subscription: .container
-      p.text-center: b-button(:size="'lg'" :variant="'outline-success'" href="http://eepurl.com/cQEwDT" target="_blank") Subscribe us
+    //- sections.section.subscription: .container
+    //-   p.text-center: b-button(:size="'lg'" :variant="'outline-success'" href="http://eepurl.com/cQEwDT" target="_blank") Subscribe us
     section.section.socials: .container
       //- ul: li(v-for="social in socials"): a(:href="social.url") {{ social.title }}
       ul
         li: a(href="https://www.facebook.com/groups/dolphinblockchainintelligence/" target="_blank"): SocialFb
         li: a(href="https://twitter.com/dolphin_bi" target="_blank"): SocialTw
         li: a(href="https://www.linkedin.com/company/dolphin-blockchain-intelligence" target="_blank"): SocialLn
+        li: a(href="http://eepurl.com/cQEwDT" target="_blank"): SocialEmail
         li: a(href="https://github.com/DolphinBlockchainIntelligence" target="_blank"): SocialGh
         li: a(href="https://t.me/joinchat/AAAAAArUuUw5_lK-v9Vw7A" target="_blank"): SocialTg
         li: a(href="#" target="_blank"): SocialVk
@@ -68,6 +69,7 @@ import SocialLn from '../assets/img/socials/ln.svg'
 import SocialTg from '../assets/img/socials/tg.svg'
 import SocialTw from '../assets/img/socials/tw.svg'
 import SocialVk from '../assets/img/socials/vk.svg'
+import SocialEmail from '../assets/img/socials/email.svg'
 import axios from 'axios'
 export default {
   name: 'landing',
@@ -87,7 +89,8 @@ export default {
     SocialLn,
     SocialTg,
     SocialTw,
-    SocialVk
+    SocialVk,
+    SocialEmail
   },
   created () {
     axios.get('/static/data/landing.json')
@@ -120,6 +123,8 @@ export default {
       text-align: center
     .subtitle
       text-align: center
+  &:nth-child(even)
+    background-color: #f0f0f0
 .intro
   min-width: 100vw
   min-height: 100vh
@@ -144,7 +149,6 @@ export default {
     font-size: 18px
     font-weight: 100
 .about
-  background-color: #f0f0f0
   display: flex
   justify-content: center
   align-items: center
@@ -178,10 +182,11 @@ export default {
     width: 100%
 .team
   ul
-    // display: flex
     li
       list-style: none
-      // padding: 0
+      opacity: 0.7
+      &:hover
+        opacity: 1
   img
     margin: -20px 0 20px -20px
     width: 100%
@@ -204,11 +209,16 @@ export default {
     align-items: center
     img
       height: 75px
+      opacity: 0.7
+      &:hover
+        opacity: 1
 .socials
   ul
     list-style: none
     display: flex
     justify-content: center
+    margin: 0
+    padding: 0
     li
       margin: 0 20px
   .social
