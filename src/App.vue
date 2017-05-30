@@ -92,9 +92,9 @@ export default window.App
     background-color: #3B1D7C !important
     position: relative
     z-index: 2
-    .navbar-nav .nav-link
-      position: relative
-      top: 2px
+    // .navbar-nav .nav-link
+    //   position: relative
+    //   top: 2px
     &+div
       margin-top: 20px
 </style>
