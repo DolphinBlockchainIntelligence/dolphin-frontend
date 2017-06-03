@@ -1,17 +1,29 @@
 <template lang="pug">
   .container.list
     h3 {{$t("coinsList")}}
-    //-  @row-click="rowCLick(data)"
-    v-client-table(:data="coinsList", :columns="columns", :options="options")
-      template(slot="links", scope="props")
-        .links
-          a(v-on:click="dataHref(props.row.topicStarterUrl, $event)")
-            i.material-icons account_circle
-          a(v-on:click="dataHref(props.row.topicUrl, $event)")
-            i.material-icons assignment
+    button(v-on:click="shuffle") Shuffle
+    input(v-model="query")
+    table.table.table-hover.table-striped
+      thead
+        tr
+          td: strong Announce
+          td: strong Replies
+          td: strong Views
+          td
+      tbody(name="table-row")
+        tr(v-for="coin in computedList" key="tr" class="table-row-item")
+          td(key="announce") {{ coin.announce }}
+          td(key="replies") {{ coin.NumReplies }}
+          td(key="links") {{ coin.NumReplies }}
+          td.links(key="links")
+            a(v-on:click="dataHref(props.row.topicStarterUrl, $event)")
+              i.material-icons account_circle
+            a(v-on:click="dataHref(props.row.topicUrl, $event)")
+              i.material-icons assignment
 </template>
 
 <script>
+import _ from 'lodash'
 import Vue from 'vue'
 import axios from 'axios'
 import {ClientTable, Event} from 'vue-tables-2'
@@ -23,6 +35,7 @@ import firebase from '../firebase'
 export default {
   name: 'list',
   data: () => ({
+    query: '',
     coinsList: [],
     columns: ['announce', 'NumReplies', 'NumViews', 'links'],
     options: {
@@ -39,17 +52,6 @@ export default {
     firebase.database().ref('/coinsList/').once('value').then(function(snapshot) {
       component.coinsList = snapshot.val()
     })
-    // .then(function(){
-    //   console.log(component.coinsList)
-    // })
-
-    // axios.get('/static/data/coinsList.json')
-    // .then(response => {
-    //   this.coinsList = response.data
-    // })
-    // .catch(e => {
-    //   this.errors.push(e)
-    // })
     Event.$on('vue-tables.row-click', function (data) {
       console.log('FIREFOX')
       routes.push({ name: 'Coin', params: { id: data.row.topicId }})
@@ -61,11 +63,17 @@ export default {
       event.stopPropagation()
       window.open(url, '_blank')
     },
-    // rowCLick: function (data) {
-    //   // event.preventDefault()
-    //   // console.log('TEST')
-    //   routes.push({ name: 'Coin', params: { id: data.row.topicId }})
-    // }
+    shuffle: function () {
+      this.coinsList = _.shuffle(this.coinsList)
+    }
+  },
+  computed: {
+    computedList: function () {
+      var vm = this
+      return this.coinsList.filter(function (item) {
+        return item.announce.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
+      })
+    }
   }
 }
 </script>
@@ -86,4 +94,11 @@ export default {
   justify-content: center
 .VuePagination__count
   display: none
+
+.table-row-enter,
+.table-row-leave-active,
+.table-row-move
+  transition: transform 3s
+.table-row-item-move
+  backface-visibility: hidden
 </style>
