@@ -59,4 +59,11 @@
     border-color: #ffe484
     &:hover
       background-color: #ffe484
+      color: #3A0767
+    &:active
+      color: #3A0767
+      background-color: rgb(255, 232, 151)
+    &:focus
+      background-color: #ffe484
+      color: #3A0767
 </style>
