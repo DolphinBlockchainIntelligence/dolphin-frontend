@@ -65,12 +65,8 @@ export default {
       })
       if (this.sortOrder == 'asc') {
         this.sortOrder = 'desc'
-        // console.log(event.currentTarget)
         classList.remove('down')
         classList.add('up')
-        // .forEach(function(item) {
-          // item.classList.toggle('up')
-        // })
       } else if (this.sortOrder == 'desc') {
         this.sortOrder = 'asc'
         classList.remove('up')
@@ -114,4 +110,6 @@ export default {
         content: 'arrow_upward'
   tbody tr
     cursor: pointer
+    .links
+      white-space: nowrap
 </style>
