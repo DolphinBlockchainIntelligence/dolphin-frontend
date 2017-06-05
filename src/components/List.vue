@@ -19,6 +19,7 @@
           td
       tbody(name="table-row")
         tr(v-for="coin in computedList" key="tr" class="table-row-item" :to="'/coin/' + coin.topicId" v-on:click="goToCoin(coin.topicId)")
+          td(key="order") {{ coin.order }}
           td(key="announce") {{ coin.announce }}
           td(key="replies") {{ coin.NumReplies }}
           td(key="views") {{ coin.NumViews }}
@@ -80,13 +81,18 @@ export default {
     computedList: function () {
       let vm = this
       let list = this.coinsList.filter(function (item) {
-        return item.announce.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
+        return list = item.announce.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
       })
       if (this.sortBy) {
-        return _.orderBy(list, [this.sortBy], [this.sortOrder])
+        list = _.orderBy(list, [this.sortBy], [this.sortOrder])
       } else {
-        return _.orderBy(list, ['NumReplies', 'NumViews', 'announce'], ['desc', 'desc', 'asc'])
+        list = _.orderBy(list, ['NumReplies', 'NumViews', 'announce'], ['desc', 'desc', 'asc'])
       }
+      list = list.map((currElement, index) => {
+        currElement['order'] = ++index
+        return currElement
+      })
+      return list
     }
   }
 }
