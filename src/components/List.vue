@@ -1,10 +1,12 @@
 <template lang="pug">
   .container.list
-    h3 {{$t("coinsList")}}
-    b-form-input(v-model="query")
+    h3.page-title {{$t("coinsList")}}
+    .datatable-options
+      b-form-input(v-model="query" placeholder="Search")
     table.table.table-hover.table-striped
       thead
         tr
+          td #
           td(v-on:click="sort('announce')")
             span Announce
             i.material-icons
@@ -65,10 +67,6 @@ export default {
       })
       if (this.sortOrder == 'asc') {
         this.sortOrder = 'desc'
-        classList.remove('down')
-        classList.add('up')
-      } else if (this.sortOrder == 'desc') {
-        this.sortOrder = 'asc'
         classList.remove('up')
         classList.add('down')
       } else {
@@ -95,10 +93,24 @@ export default {
 </script>
 
 <style lang="sass">
+.datatable-options
+  padding: 0.75rem 1rem
+  background-color: #FAFAFC
+  border: 1px solid #DDDDEE
+  border-bottom: 0
 .table
+  border: 1px solid #DDDDEE
+  tr
+    td
+      border-right-color: #DDDDEE
+      background-color: #fff
+      border-radius: 0
+    &:nth-child(even) > td
+      background-color: #FAFAFA
   thead tr td
     user-select: none
     font-weight: bold
+    background-color: #FAFAFC
     span
       vertical-align: middle
     .material-icons

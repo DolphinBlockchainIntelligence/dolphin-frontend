@@ -1,63 +1,63 @@
 <template lang="pug">
-  .landing
-    section.section.intro: .container
-      img(:src="intro.logo" class="logo")
-      .heading
-        h1.title {{ intro.title }}
-        h3.subtitle {{ intro.subtitle }}
-      p.description {{ intro.description }}
-    section.section.about: .container
-      .heading
-        h3.title {{ about.title }}
-      p.description {{ about.description }}
-      p.text-center: b-button(:size="'lg'" :variant="'outline-success'" href="https://goo.gl/fuMCKU") Read the whitepaper
-    section.section.features: .container
-      .heading
-        h3.title {{ features.title }}
-      ul.list: li.item(v-for="feature in features.items")
-        div.item-img(:style="'background-image: url(' + feature.img + ')'")
-        h4.item-title {{ feature.title }}
-        p.item-description {{ feature.description }}
-    section.section.screenshots: .container
-      .heading
-        h3.title {{ screenshots.title }}
-        h4.subtitle {{ screenshots.subtitle }}
-      img(:src="screenshots.imgs[0]")
-    section.section.roadmap: .container
-      .heading
-        h3.title {{ roadmap.title }}
-        h4.subtitle {{ roadmap.subtitle }}
-      ul: li(v-for="stage in roadmap.stages")
-        h5 {{ stage.title }}
-        ul: li(v-for="goal in stage.goals") {{ goal }}
-    section.section.team: .container
-      .heading
-        h3.title {{ team.title }}
-        h4.subtitle {{ team.subtitle }}
-      ul.row
-        li.mb-2.col-xs-12.col-md-6.col-lg-3(v-for="member in team.members")
-          b-card.card(show-footer)
-            img(:src="member.img" :alt="member.name")
-            h5 {{ member.name }}
-            div {{ member.role }}
-            ul: li(v-for="description in member.description") {{ description }}
-            div(slot="footer")
-              .card-block
-                a.card-link(v-for="link in member.links" :href="link.url") {{ link.name }}
-    section.section.mentions: .container
-      .heading
-        h3.title {{ mentions.title }}
-      ul.items: li(v-for="mention in mentions.items")
-        a(:href="mention.url"): img(:src="mention.img" :alt="mention.title")
-    section.section.socials: .container
-      ul
-        li: a(href="https://www.facebook.com/groups/dolphinblockchainintelligence/" target="_blank"): SocialFb
-        li: a(href="https://twitter.com/dolphin_bi" target="_blank"): SocialTw
-        li: a(href="https://www.linkedin.com/company/dolphin-blockchain-intelligence" target="_blank"): SocialLn
-        li: a(href="http://eepurl.com/cQEwDT" target="_blank"): SocialEmail
-        li: a(href="https://github.com/DolphinBlockchainIntelligence" target="_blank"): SocialGh
-        li: a(href="https://t.me/joinchat/AAAAAArUuUw5_lK-v9Vw7A" target="_blank"): SocialTg
-        li: a(href="#" target="_blank"): SocialVk
+.landing
+  section.section.intro: .container
+    img(:src="intro.logo" class="logo")
+    .heading
+      h1.title {{ intro.title }}
+      h3.subtitle {{ intro.subtitle }}
+    p.description {{ intro.description }}
+  section.section.about: .container
+    .heading
+      h3.title {{ about.title }}
+    p.description {{ about.description }}
+    p.text-center: b-button(:size="'lg'" :variant="'outline-success'" href="https://goo.gl/fuMCKU") Read the whitepaper
+  section.section.features: .container
+    .heading
+      h3.title {{ features.title }}
+    ul.list: li.item(v-for="feature in features.items")
+      div.item-img(:style="'background-image: url(' + feature.img + ')'")
+      h4.item-title {{ feature.title }}
+      p.item-description {{ feature.description }}
+  section.section.screenshots: .container
+    .heading
+      h3.title {{ screenshots.title }}
+      h4.subtitle {{ screenshots.subtitle }}
+    img(:src="screenshots.imgs[0]")
+  section.section.roadmap: .container
+    .heading
+      h3.title {{ roadmap.title }}
+      h4.subtitle {{ roadmap.subtitle }}
+    ul: li(v-for="stage in roadmap.stages")
+      h5 {{ stage.title }}
+      ul: li(v-for="goal in stage.goals") {{ goal }}
+  section.section.team: .container
+    .heading
+      h3.title {{ team.title }}
+      h4.subtitle {{ team.subtitle }}
+    ul.row
+      li.mb-2.col-xs-12.col-md-6.col-lg-3(v-for="member in team.members")
+        b-card.card(show-footer)
+          img(:src="member.img" :alt="member.name")
+          h5 {{ member.name }}
+          div {{ member.role }}
+          ul: li(v-for="description in member.description") {{ description }}
+          div(slot="footer")
+            .card-block
+              a.card-link(v-for="link in member.links" :href="link.url") {{ link.name }}
+  section.section.mentions: .container
+    .heading
+      h3.title {{ mentions.title }}
+    ul.items: li(v-for="mention in mentions.items")
+      a(:href="mention.url"): img(:src="mention.img" :alt="mention.title")
+  section.section.socials: .container
+    ul
+      li: a(href="https://www.facebook.com/groups/dolphinblockchainintelligence/" target="_blank"): SocialFb
+      li: a(href="https://twitter.com/dolphin_bi" target="_blank"): SocialTw
+      li: a(href="https://www.linkedin.com/company/dolphin-blockchain-intelligence" target="_blank"): SocialLn
+      li: a(href="http://eepurl.com/cQEwDT" target="_blank"): SocialEmail
+      li: a(href="https://github.com/DolphinBlockchainIntelligence" target="_blank"): SocialGh
+      li: a(href="https://t.me/joinchat/AAAAAArUuUw5_lK-v9Vw7A" target="_blank"): SocialTg
+      li: a(href="#" target="_blank"): SocialVk
 </template>
 
 <script>

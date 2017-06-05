@@ -13,12 +13,15 @@
 
 <script>
 import Vue from 'vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'roboto-fontface'
+import 'material-design-icons-iconfont'
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 import Polyglot from 'vue-polyglot'
 Vue.use(Polyglot, {
   languagesAvailable: ['en']
-  // languagesAvailable: ['en', 'ru', 'zh']
 })
 Vue.locales({
   'en': {
@@ -31,35 +34,9 @@ Vue.locales({
     "landingIntroTitle": "Dolphin",
     "landingIntroSubtitle": "blockchain intelligence",
     "landingIntroDescription": "an open-source platform for collaborative crypto-asset investment analysis"
-  },
-  // 'ru': {
-  //   "coinsList": "BTT сантименты (альфа)",
-  //   "features": "Преимущества",
-  //   "team": "Команда",
-  //   "subscription": "Подписка",
-  //   "profile": "Профиль",
-  //   "signOut": "Выход",
-  //   "landingIntroTitle": "Dolphin",
-  //   "landingIntroSubtitle": "blockchain intelligence",
-  //   "landingIntroDescription": "open source платформа для совместного управления и анализа криптосистем"
-  // },
-  // 'zh': {
-  //   "coinsList": "BTT sentiments (alpha)",
-  //   "features": "特徵",
-  //   "team": "球隊",
-  //   "subscription": "訂閱",
-  //   "profile": "輪廓",
-  //   "signOut": "登出",
-  //   "landingIntroTitle": "Dolphin",
-  //   "landingIntroSubtitle": "blockchain intelligence",
-  //   "landingIntroDescription": "一個用於協作加密資產投資分析的開源平台"
-  // }
+  }
 });
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import 'roboto-fontface'
-import 'material-design-icons-iconfont'
 window.App = {
   name: 'app',
   methods: {
@@ -71,7 +48,6 @@ window.App = {
 export default window.App
 </script>
 
-
 <style lang="sass">
 #app
   font-family: 'Roboto', sans-serif
@@ -79,9 +55,8 @@ export default window.App
     background-color: #3B1D7C !important
     position: relative
     z-index: 2
-    // .navbar-nav .nav-link
-    //   position: relative
-    //   top: 2px
     &+div
       margin-top: 20px
+.page-title
+  margin-bottom: 20px
 </style>

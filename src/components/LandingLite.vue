@@ -1,12 +1,12 @@
 <template lang="pug">
-  .landing
-    section.section.intro: .container
-      img(:src="intro.logo" class="logo")
-      .heading
-        h1.title Dolphin
-        h3.subtitle blockchain intelligence
-        p.description an open-source platform for collaborative crypto-asset investment analysis
-      p.text-center: b-button(:size="'lg'" :variant="'outline'" href="http://presale.dolphin.bi/") Read more
+.landing
+  section.section.intro: .container
+    img(src="/static/img/dolphin.png" class="logo")
+    .heading
+      h1.title Dolphin
+      h3.subtitle blockchain intelligence
+      p.description an open-source platform for collaborative crypto-asset investment analysis
+    p.text-center: b-button(:size="'lg'" :variant="'outline'" href="http://presale.dolphin.bi/") Read more
 </template>
 
 <style lang="sass">

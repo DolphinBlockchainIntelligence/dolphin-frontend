@@ -1,6 +1,6 @@
 <template lang="pug">
 .coin.container
-  h3 {{ heading}}
+  h3.page-title {{ heading}}
   #container(style='min-width: 310px; height: 400px; margin: 0 auto')
 </template>
 
@@ -18,6 +18,16 @@ export default {
     let seriesCounter = 0
     function createChart () {
       Highcharts.stockChart('container', {
+        chart: {
+          spacingBottom: 60
+        },
+        legend: {
+          enabled: true,
+          floating: true,
+          verticalAlign: 'bottom',
+          align:'right',
+          y:40
+        },
         rangeSelector: {
           selected: 4
         },
@@ -37,7 +47,7 @@ export default {
           series: {
             compare: 'percent',
             showInNavigator: true
-          }
+          },
         },
         tooltip: {
           pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
@@ -50,24 +60,6 @@ export default {
     const coinId = this.$route.params.id
 
     let names = ['positive', 'neutral', 'negative']
-    // axios.get('/static/coin/' + coinId + '.json')
-    // .then(response => {
-    //   this.heading = response.data.heading
-    //   names.forEach(function (name, i) {
-    //     seriesOptions[i] = {
-    //       name: name,
-    //       data: response.data.btt[name],
-    //       pointStart: Date.UTC(2016, 1, 30),
-    //       pointInterval: 3600 * 1000 * 24 // one hour
-    //     }
-    //     seriesCounter += 1
-    //     if (seriesCounter === names.length) {
-    //       createChart()
-    //     }
-    //   })
-    // }).catch(e => {
-    //   this.errors.push(e)
-    // })
     let component = this
     firebase.database().ref('/coin/' + coinId).once('value').then(function(snapshot) {
       let data = snapshot.val()
@@ -77,7 +69,7 @@ export default {
           name: name,
           data: data.btt[name],
           pointStart: Date.UTC(2016, 1, 30),
-          pointInterval: 3600 * 1000 * 24 // one hour
+          pointInterval: 3600 * 1000 * 24
         }
         seriesCounter += 1
         if (seriesCounter === names.length) {
