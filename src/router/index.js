@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Landing from '@/components/Landing'
+import LandingLite from '@/components/LandingLite'
 import List from '@/components/List'
 import Coin from '@/components/Coin'
 
@@ -8,9 +9,14 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/landing',
       name: 'Landing',
       component: Landing
+    },
+    {
+      path: '/',
+      name: 'LandingLite',
+      component: LandingLite
     },
     {
       path: '/list',

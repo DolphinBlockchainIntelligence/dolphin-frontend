@@ -1,4 +1,4 @@
-# vue-webpack
+# Dolphin BI frontend
 
 > A Vue.js project
 

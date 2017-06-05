@@ -49,10 +49,7 @@
         h3.title {{ mentions.title }}
       ul.items: li(v-for="mention in mentions.items")
         a(:href="mention.url"): img(:src="mention.img" :alt="mention.title")
-    //- sections.section.subscription: .container
-    //-   p.text-center: b-button(:size="'lg'" :variant="'outline-success'" href="http://eepurl.com/cQEwDT" target="_blank") Subscribe us
     section.section.socials: .container
-      //- ul: li(v-for="social in socials"): a(:href="social.url") {{ social.title }}
       ul
         li: a(href="https://www.facebook.com/groups/dolphinblockchainintelligence/" target="_blank"): SocialFb
         li: a(href="https://twitter.com/dolphin_bi" target="_blank"): SocialTw
@@ -130,12 +127,15 @@ export default {
   min-width: 100vw
   min-height: 100vh
   background: url('/static/img/background.png') center
-  background-size: cover
   color: #fff
   display: flex
   justify-content: center
   align-items: center
   flex-direction: column
+  background-attachment: fixed
+  background-position: center
+  background-repeat: no-repeat
+  background-size: cover
   .container
     text-align: center
   .logo
@@ -198,15 +198,6 @@ export default {
     margin: -20px 0 20px -20px
     width: 100%
     width: calc(100% + 40px)
-    // +media-breakpoint-down(sm)
-  // .item-img
-  //   width: 100%
-  //   height: 203px
-  //   background-size: cover
-  //   margin-bottom: 30px
-  //   +media-breakpoint-only(xs)
-  //     height: auto
-  //     width: auto
 .mentions
   .items
     list-style: none
