@@ -28,7 +28,7 @@
 .intro
   min-width: 100vw
   min-height: 100vh
-  background: url('/static/img/background.png') center
+  background: #3A0767 url('/static/img/background.png') center
   color: #fff
   display: flex
   justify-content: center
