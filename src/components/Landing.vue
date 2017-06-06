@@ -164,23 +164,23 @@ export default {
 .features
   .list
     display: flex
-    flex-wrap: wrap
     list-style: none
     padding: 0
     justify-content: space-between
     .item
       width: 400px
       display: flex
-      justify-content: center
-      align-items: center
       flex-direction: column
+      align-items: center
+      justify-content: flex-start
       .item-img
-        width: 150px
-        height: 150px
+        width: 100px
+        height: 100px
         background-size: cover
-        margin-bottom: 30px
+        margin: 0 auto 30px
       .item-title
         text-align: center
+        font-size: 1.3rem
       .item-description
         text-align: center
 .screenshots
