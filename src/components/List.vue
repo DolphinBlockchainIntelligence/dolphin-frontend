@@ -100,7 +100,7 @@ export default {
 
 <style lang="sass">
 .datatable-options
-  padding: 0.75rem 1rem
+  padding: .75rem 1rem
   background-color: #FAFAFC
   border: 1px solid #DDDDEE
   border-bottom: 0
@@ -130,4 +130,8 @@ export default {
     cursor: pointer
     .links
       white-space: nowrap
+      .material-icons
+        opacity: .7
+        &:hover
+          opacity: 1
 </style>

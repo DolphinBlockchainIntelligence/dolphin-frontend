@@ -1,5 +1,5 @@
 <template lang="pug">
-.landing
+.landing-lite
   section.section.intro: .container
     img(src="/static/img/dolphin.png" class="logo")
     .heading
@@ -11,7 +11,7 @@
 
 <style lang="sass">
 @import '../assets/grid-breakpoints.scss'
-.landing
+.landing-lite
   margin-top: -56px !important
 .section
   padding: 50px 0
@@ -26,8 +26,8 @@
   &:nth-child(even)
     background-color: #f0f0f0
 .intro
-  min-width: 100vw
-  min-height: 100vh
+  width: 100vw
+  height: 100vh
   background: #3A0767 url('/static/img/background.png') center
   color: #fff
   display: flex
@@ -42,6 +42,8 @@
     text-align: center
   .logo
     margin-bottom: 30px
+    @media(max-height: 720px)
+      height: 170px
   .title
     font-weight: 600
     letter-spacing: .5px
@@ -51,19 +53,19 @@
   .subtitle, .description
     font-size: 18px
     font-weight: 100
-.btn
-    padding: 1rem 2rem
-    font-size: 1.25rem
-    font-weight: 500
-    color: #ffe484
-    border-color: #ffe484
-    &:hover
-      background-color: #ffe484
-      color: #3A0767
-    &:active
-      color: #3A0767
-      background-color: rgb(255, 232, 151)
-    &:focus
-      background-color: #ffe484
-      color: #3A0767
+  .btn
+      padding: 1rem 2rem
+      font-size: 1.25rem
+      font-weight: 500
+      color: #fff
+      border-color: #fff
+      &:hover
+        background-color: #fff
+        color: #3A0767
+      &:active
+        color: #3A0767
+        background-color: rgb(255, 232, 151)
+      &:focus
+        background-color: #fff
+        color: #3A0767
 </style>

@@ -124,8 +124,8 @@ export default {
   &:nth-child(even)
     background-color: #f0f0f0
 .intro
-  min-width: 100vw
-  min-height: 100vh
+  width: 100vw
+  height: 100vh
   background: #3A0767 url('/static/img/background.png') center
   color: #fff
   display: flex
@@ -140,6 +140,8 @@ export default {
     text-align: center
   .logo
     margin-bottom: 30px
+    @media(max-height: 720px)
+      height: 170px
   .title
     font-weight: 600
     letter-spacing: .5px
@@ -156,6 +158,9 @@ export default {
   flex-direction: column
   .description
     font-size: 18px
+    max-width: 760px
+    text-align: center
+    margin: 0 auto 30px
 .features
   .list
     display: flex
@@ -185,7 +190,7 @@ export default {
   .row
     &>li
       list-style: none
-      opacity: 0.7
+      opacity: .7
       &:hover
         opacity: 1
     .card
@@ -207,7 +212,7 @@ export default {
     align-items: center
     img
       height: 75px
-      opacity: 0.7
+      opacity: .7
       &:hover
         opacity: 1
 .socials
@@ -222,7 +227,7 @@ export default {
   .social
     height: 80px
     width: 80px
-    opacity: 0.7
+    opacity: .7
     &:hover
       opacity: 1
 </style>

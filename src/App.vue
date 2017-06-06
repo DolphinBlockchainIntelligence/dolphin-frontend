@@ -49,6 +49,8 @@ export default window.App
 </script>
 
 <style lang="sass">
+body
+  overflow-x: hidden
 #app
   font-family: 'Roboto', sans-serif
   .navbar
