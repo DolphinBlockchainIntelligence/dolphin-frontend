@@ -2,6 +2,12 @@
 .coin.container
   h3.page-title {{ heading}}
   #container(style='min-width: 310px; height: 400px; margin: 0 auto')
+  //- br
+  //- ul: li(v-for="comment in comments")
+  //-   div {{ comment[0] }}
+  //-   div {{ comment[1] }}
+  //-   div {{ comment[2] }}
+  //-   div {{ comment[3] }}
 </template>
 
 <script>
@@ -11,7 +17,8 @@ let Highcharts = require('highcharts/highstock')
 export default {
   name: 'coin',
   data: () => ({
-    heading: ''
+    heading: '',
+    comments: []
   }),
   created () {
     let seriesOptions = []
@@ -58,11 +65,11 @@ export default {
       })
     }
     const coinId = this.$route.params.id
-
     let names = ['positive', 'neutral', 'negative']
     let component = this
-    firebase.database().ref('/coin/' + coinId).once('value').then(function(snapshot) {
-      let data = snapshot.val()
+    axios.get('/static/data/btt-sentiments-chart/'+ coinId +'.json')
+    .then(response => {
+      let data = response.data
       component.heading = data.heading
       names.forEach(function (name, i) {
         seriesOptions[i] = {
@@ -77,6 +84,17 @@ export default {
         }
       })
     })
+    .catch(e => {
+      this.errors.push(e)
+    })
+
+    // axios.get('/static/data/btt-sentiments-comments/'+ coinId +'.json')
+    // .then(response => {
+    //   this.comments = response.data
+    // })
+    // .catch(e => {
+    //   this.errors.push(e)
+    // })
   }
 }
 </script>

@@ -32,6 +32,7 @@
 
 <script>
 import _ from 'lodash'
+import axios from 'axios'
 import Vue from 'vue'
 import routes from '../router'
 import firebase from '../firebase'
@@ -46,9 +47,14 @@ export default {
   }),
   created () {
     let component = this
-    firebase.database().ref('/coinsList/').once('value').then(function(snapshot) {
-      component.coinsList = snapshot.val()
+    axios.get('/static/data/assets.json')
+    .then(response => {
+      this.coinsList = response.data
     })
+    .catch(e => {
+      this.errors.push(e)
+    })
+
   },
   methods: {
     dataHref: function (url, event) {
