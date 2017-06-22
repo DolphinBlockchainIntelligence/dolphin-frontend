@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import firebase from '../firebase'
 import axios from 'axios'
 let Highcharts = require('highcharts/highstock')
 export default {

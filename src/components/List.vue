@@ -1,6 +1,6 @@
 <template lang="pug">
   .container.list
-    h3.page-title {{$t("coinsList")}}
+    h3.page-title BTT sentiments (alpha)
     .datatable-options
       b-form-input(v-model="query" placeholder="Search")
     table.table.table-hover.table-striped
@@ -35,8 +35,6 @@ import _ from 'lodash'
 import axios from 'axios'
 import Vue from 'vue'
 import routes from '../router'
-import firebase from '../firebase'
-
 export default {
   name: 'list',
   data: () => ({
@@ -54,7 +52,6 @@ export default {
     .catch(e => {
       this.errors.push(e)
     })
-
   },
   methods: {
     dataHref: function (url, event) {
