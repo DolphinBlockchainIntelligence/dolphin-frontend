@@ -20,6 +20,7 @@ export default {
     comments: []
   }),
   created () {
+    document.querySelector('body').classList.remove('body-landing-lite')
     let seriesOptions = []
     let seriesCounter = 0
     function createChart () {

@@ -9,6 +9,17 @@
     p.text-center: b-button(:size="'lg'" :variant="'outline'" href="http://presale.dolphin.bi/") Read more
 </template>
 
+<script>
+import axios from 'axios'
+let Highcharts = require('highcharts/highstock')
+export default {
+  name: 'landing-lite',
+  created () {
+    document.querySelector('body').classList.add('body-landing-lite')
+  }
+}
+</script>
+
 <style lang="sass">
 @import '../assets/grid-breakpoints.scss'
 .landing-lite
@@ -68,4 +79,7 @@
       &:focus
         background-color: #fff
         color: #3A0767
+body.body-landing-lite
+  .footer
+    display: none
 </style>

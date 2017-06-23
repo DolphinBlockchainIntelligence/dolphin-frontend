@@ -44,6 +44,7 @@ export default {
     coinsList: []
   }),
   created () {
+    document.querySelector('body').classList.remove('body-landing-lite')
     let component = this
     axios.get('/static/data/assets.json')
     .then(response => {
