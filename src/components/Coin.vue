@@ -112,9 +112,9 @@ export default {
       .text
         padding: 20px
   .sentiment-1 .text
-    background: #ffb1ac
+    border: 2px solid #ffb1ac
   .sentiment0 .text
-    background: #ddd
+    border: 2px solid #ddd
   .sentiment1 .text
-    background: #b0f5f7
+    border: 2px solid #b0f5f7
 </style>
