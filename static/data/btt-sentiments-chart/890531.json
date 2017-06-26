@@ -1,9 +1,0 @@
-{
-	"heading": "ChronoBank",
-	"chart": {
-		"negative": [6, 15, 12],
-		"neutral": [7, 4, 9],
-		"positive": [7, 4, 9]
-	},
-	"pointStart": 1456790400000
-}

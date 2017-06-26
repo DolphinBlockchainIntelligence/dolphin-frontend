@@ -46,7 +46,7 @@ export default {
   created () {
     document.querySelector('body').classList.remove('body-landing-lite')
     let component = this
-    axios.get('/static/data/assets.json')
+    axios.get('/static/data/announceList.json')
     .then(response => {
       this.coinsList = response.data
     })
