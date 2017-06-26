@@ -10,7 +10,7 @@
           b-nav(is-nav-bar='')
             b-nav-item(to='/list') BTT sentiments (alpha)
     router-view
-  footer.footer
+  //footer.footer
     .container
       .left
         span © 2017 Dolphin BI | <a href="https://docs.google.com/forms/d/e/1FAIpQLSd6mlhhRCTuMIsdi2kYZP8RjEO4w2ytpcVFtDnNXyLusfcnMA/viewform?fbzx=-2801639494221500400">Request Form</a> | <a href="#">BitcoinTalk</a>

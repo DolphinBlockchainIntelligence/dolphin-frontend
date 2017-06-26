@@ -3,16 +3,18 @@
   h3.page-title {{ heading}}
   #container(style='min-width: 310px; height: 400px; margin: 0 auto')
   br
-  ul.comments: li.comment(v-for="comment in comments" :class="'sentiment'+comment.sentiment")
+  h4 Comments:
+  ul.comments: li.comment(v-for="(comment, key) in comments" :class="'sentiment'+comment.Sentiment")
     .heading
-      .author {{ comment.author }}:
+      .author {{ comment.user }}:
       .date {{ comment.date }}
-    .text {{ comment.text }}
+    a.text(:href="'https://bitcointalk.org/index.php?topic='+comment.topicId+'.msg'+key+'#msg'+key" target="_blank") {{ comment.text }}
 </template>
 
 <script>
 import axios from 'axios'
 let Highcharts = require('highcharts/highstock')
+const colors = ['#f98a83', '#989898', '#85f77e']
 export default {
   name: 'coin',
   data: () => ({
@@ -20,6 +22,14 @@ export default {
     comments: []
   }),
   created () {
+    // axios.get('/static/data/btt-sentiments/S'+ coinId +'.json')
+    // .then(response => {
+    //   this.comments = response.data
+    // })
+    // .catch(e => {
+    //   this.errors.push(e)
+    // })
+
     document.querySelector('body').classList.remove('body-landing-lite')
     let seriesOptions = []
     let seriesCounter = 0
@@ -33,33 +43,15 @@ export default {
           floating: true,
           verticalAlign: 'bottom',
           align:'right',
-          y:40
+          y: 0
         },
         rangeSelector: {
           selected: 4
         },
-        yAxis: {
-          labels: {
-            formatter: function () {
-              return (this.value > 0 ? ' + ' : '') + this.value + '%'
-            }
-          },
-          plotLines: [{
-            value: 0,
-            width: 2,
-            color: 'silver'
-          }]
-        },
         plotOptions: {
           series: {
-            compare: 'percent',
             showInNavigator: true
           },
-        },
-        tooltip: {
-          pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
-          valueDecimals: 2,
-          split: true
         },
         series: seriesOptions
       })
@@ -74,9 +66,10 @@ export default {
       names.forEach(function (name, i) {
         seriesOptions[i] = {
           name: name,
-          data: data.btt[name],
+          data: data.chart[name],
           pointStart: Date.UTC(2016, 1, 30),
-          pointInterval: 3600 * 1000 * 24
+          pointInterval: 3600 * 1000 * 24,
+          color: colors[i]
         }
         seriesCounter += 1
         if (seriesCounter === names.length) {
@@ -88,7 +81,7 @@ export default {
       this.errors.push(e)
     })
 
-    axios.get('/static/data/btt-sentiments-comments/'+ coinId +'.json')
+    axios.get('/static/data/btt-sentiments/D'+ coinId +'.json')
     .then(response => {
       this.comments = response.data
     })
@@ -111,10 +104,17 @@ export default {
         color: #999
       .text
         padding: 20px
-  .sentiment-1 .text
-    border: 2px solid #ffb1ac
+        display: block
+        color: #292b2c
+        text-decoration: none
+        cursor: pointer
+        opacity: .8
+        &:hover
+          opacity: 1
   .sentiment0 .text
-    border: 2px solid #ddd
+    background: #f98a83
   .sentiment1 .text
-    border: 2px solid #b0f5f7
+    background: #dddddd
+  .sentiment2 .text
+    background: #85f77e
 </style>
