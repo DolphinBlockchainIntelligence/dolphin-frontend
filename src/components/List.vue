@@ -18,15 +18,15 @@
             i.material-icons
           td
       tbody(name="table-row")
-        tr(v-for="coin in computedList" key="tr" class="table-row-item" :to="'/coin/' + coin.topicId" v-on:click="goToCoin(coin.topicId)")
-          td(key="order") {{ coin.order }}
-          td(key="announce") {{ coin.announce }}
-          td(key="replies") {{ coin.NumReplies }}
-          td(key="views") {{ coin.NumViews }}
+        tr(v-for="post in computedList" key="tr" class="table-row-item" :to="'/post/' + post.topicId" v-on:click="goToPost(post.topicId)")
+          td(key="order") {{ post.order }}
+          td(key="announce") {{ post.announce }}
+          td(key="replies") {{ post.NumReplies }}
+          td(key="views") {{ post.NumViews }}
           td.links(key="links")
-            a(v-on:click="dataHref(coin.topicStarterUrl, $event)")
+            a(v-on:click="dataHref(post.topicStarterUrl, $event)")
               i.material-icons account_circle
-            a(v-on:click="dataHref(coin.topicUrl, $event)")
+            a(v-on:click="dataHref(post.topicUrl, $event)")
               i.material-icons assignment
 </template>
 
@@ -41,14 +41,14 @@ export default {
     query: '',
     sortBy: '',
     sortOrder: '',
-    coinsList: []
+    postsList: []
   }),
   created () {
     // document.querySelector('body').classList.remove('body-landing-lite')
     let component = this
     axios.get('/static/data/announceList.json')
     .then(response => {
-      this.coinsList = Object.values(response.data)
+      this.postsList = Object.values(response.data)
     })
     .catch(e => {
       this.errors.push(e)
@@ -60,8 +60,8 @@ export default {
       event.stopPropagation()
       window.open(url, '_blank')
     },
-    goToCoin(url) {
-      routes.push({ name: 'Coin', params: { id: url }})
+    goToPost(url) {
+      routes.push({ name: 'Post', params: { id: url }})
     },
     sort: function (sortBy) {
       this.sortBy = sortBy
@@ -84,7 +84,7 @@ export default {
   computed: {
     computedList: function () {
       let vm = this
-      let list = this.coinsList.filter(function (item) {
+      let list = this.postsList.filter(function (item) {
         return list = item.announce.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
       })
       if (this.sortBy) {

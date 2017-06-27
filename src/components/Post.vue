@@ -1,5 +1,5 @@
 <template lang="pug">
-.coin.container
+.post.container
   h3.page-title {{ heading}}
   #container(style='min-width: 310px; height: 400px; margin: 0 auto')
   br
@@ -16,7 +16,7 @@ import axios from 'axios'
 const Highcharts = require('highcharts/highstock')
 const colors = ['#f98a83', '#989898', '#85f77e']
 export default {
-  name: 'coin',
+  name: 'post',
   data: () => ({
     heading: '',
     comments: []
@@ -60,10 +60,10 @@ export default {
         series: seriesOptions
       })
     }
-    const coinId = this.$route.params.id
+    const postId = this.$route.params.id
     let names = ['positive', 'neutral', 'negative']
     let component = this
-    axios.get('/static/data/btt-sentiments/S'+ coinId +'.json')
+    axios.get('/static/data/btt-sentiments/S'+ postId +'.json')
     .then(response => {
       let data = response.data
       let chartData = {
@@ -95,7 +95,7 @@ export default {
       this.errors.push(e)
     })
 
-    axios.get('/static/data/btt-sentiments/D'+ coinId +'.json')
+    axios.get('/static/data/btt-sentiments/D'+ postId +'.json')
     .then(response => {
       this.comments = response.data
     })

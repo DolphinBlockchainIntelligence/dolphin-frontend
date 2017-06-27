@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Landing from '@/components/Landing'
 import LandingLite from '@/components/LandingLite'
 import List from '@/components/List'
-import Coin from '@/components/Coin'
+import Post from '@/components/Post'
 
 Vue.use(Router)
 export default new Router({
@@ -24,9 +24,9 @@ export default new Router({
       component: List
     },
     {
-      path: '/coin/:id',
-      name: 'Coin',
-      component: Coin
+      path: '/post/:id',
+      name: 'Post',
+      component: Post
     }
   ]
 })
