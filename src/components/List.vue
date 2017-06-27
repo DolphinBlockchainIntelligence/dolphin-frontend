@@ -13,8 +13,8 @@
           td(v-on:click="sort('NumReplies')")
             span Replies
             i.material-icons
-          td(v-on:click="sort('NumViews')")
-            span Views
+          td(v-on:click="sort('DateTimeLastPost')")
+            span Last comment
             i.material-icons
           td
       tbody(name="table-row")
@@ -22,7 +22,7 @@
           td(key="order") {{ post.order }}
           td(key="announce") {{ post.announce }}
           td(key="replies") {{ post.NumReplies }}
-          td(key="views") {{ post.NumViews }}
+          td(key="views") {{ post.DateTimeLastPost }}
           td.links(key="links")
             a(v-on:click="dataHref(post.topicStarterUrl, $event)")
               i.material-icons account_circle
@@ -90,7 +90,7 @@ export default {
       if (this.sortBy) {
         list = _.orderBy(list, [this.sortBy], [this.sortOrder])
       } else {
-        list = _.orderBy(list, ['NumReplies', 'NumViews', 'announce'], ['desc', 'desc', 'asc'])
+        list = _.orderBy(list, ['NumReplies', 'DateTimeLastPost', 'announce'], ['desc', 'desc', 'asc'])
       }
       list = list.map((currElement, index) => {
         currElement['order'] = ++index
