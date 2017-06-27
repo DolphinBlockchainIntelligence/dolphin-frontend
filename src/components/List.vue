@@ -44,11 +44,11 @@ export default {
     coinsList: []
   }),
   created () {
-    document.querySelector('body').classList.remove('body-landing-lite')
+    // document.querySelector('body').classList.remove('body-landing-lite')
     let component = this
     axios.get('/static/data/announceList.json')
     .then(response => {
-      this.coinsList = response.data
+      this.coinsList = Object.values(response.data)
     })
     .catch(e => {
       this.errors.push(e)

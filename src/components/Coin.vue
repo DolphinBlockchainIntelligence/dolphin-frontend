@@ -1,7 +1,6 @@
 <template lang="pug">
 .coin.container
-  //h3.page-title {{ heading}}
-  h3.page-title Coin
+  h3.page-title {{ heading}}
   #container(style='min-width: 310px; height: 400px; margin: 0 auto')
   br
   h4 Comments:
@@ -14,7 +13,7 @@
 
 <script>
 import axios from 'axios'
-let Highcharts = require('highcharts/highstock')
+const Highcharts = require('highcharts/highstock')
 const colors = ['#f98a83', '#989898', '#85f77e']
 export default {
   name: 'coin',
@@ -23,7 +22,19 @@ export default {
     comments: []
   }),
   created () {
-    document.querySelector('body').classList.remove('body-landing-lite')
+    axios.get('/static/data/announceList.json')
+    .then(response => {
+      let headings = Object.values(response.data)
+      for (var i in headings) {
+        if (this.$route.params.id == headings[i].topicId) {
+          this.heading = headings[i].announce
+        }
+      }
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+    // document.querySelector('body').classList.remove('body-landing-lite')
     let seriesOptions = []
     let seriesCounter = 0
     function createChart () {

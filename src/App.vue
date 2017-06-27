@@ -35,7 +35,7 @@ export default window.App
 </script>
 
 <style lang="sass">
-@import './assets/sticky-footer.sass'
+// @import './assets/sticky-footer.sass'
 body
   overflow-x: hidden
 #app
@@ -49,16 +49,16 @@ body
 .page-title
   margin-bottom: 20px
 
-.footer
-  padding: 10px 0
-  margin-top: 10px
-  font-size: 13px
-  border-top: 1px solid #DDDDEE
-  .container
-    display: flex
-    align-items: center
-    .left
-      flex: 1 0 auto
-    .right
-      text-align: right
+// .footer
+//   padding: 10px 0
+//   margin-top: 10px
+//   font-size: 13px
+//   border-top: 1px solid #DDDDEE
+//   .container
+//     display: flex
+//     align-items: center
+//     .left
+//       flex: 1 0 auto
+//     .right
+//       text-align: right
 </style>
