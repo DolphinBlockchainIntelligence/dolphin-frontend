@@ -6,17 +6,17 @@
     table.table.table-hover.table-striped
       thead
         tr
-          td #
-          td(v-on:click="sort('announce')")
+          th #
+          th(v-on:click="sort('announce')")
             span Announce
             i.material-icons
-          td(v-on:click="sort('NumReplies')")
+          th(v-on:click="sort('NumReplies')")
             span Replies
             i.material-icons
-          td(v-on:click="sort('DateTimeLastPost')")
+          th(v-on:click="sort('DateTimeLastPost')")
             span Last comment
             i.material-icons
-          td
+          th
       tbody(name="table-row")
         tr(v-for="post in computedList" key="tr" class="table-row-item" :to="'/post/' + post.topicId" v-on:click="goToPost(post.topicId)")
           td(key="order") {{ post.order }}
@@ -35,6 +35,7 @@ import _ from 'lodash'
 import axios from 'axios'
 import Vue from 'vue'
 import routes from '../router'
+import moment from 'moment'
 export default {
   name: 'list',
   data: () => ({
@@ -49,6 +50,9 @@ export default {
     axios.get('/static/data/announceList.json')
     .then(response => {
       this.postsList = Object.values(response.data)
+      this.postsList.map((currElement, index) => {
+        currElement.DateTimeLastPost = moment(currElement.DateTimeLastPost).calendar()
+      })
     })
     .catch(e => {
       this.errors.push(e)
@@ -82,6 +86,12 @@ export default {
     }
   },
   computed: {
+    // momentList: function () {
+    //   let list = this.postsList.map((currElement, index) => {
+    //     currElement.DateTimeLastPost = moment(currElement.DateTimeLastPost).calendar()
+    //   })
+    //   return list
+    // },
     computedList: function () {
       let vm = this
       let list = this.postsList.filter(function (item) {
@@ -111,13 +121,15 @@ export default {
 .table
   border: 1px solid #DDDDEE
   tr
+    th
+      white-space: nowrap
     td
       border-right-color: #DDDDEE
       background-color: #fff
       border-radius: 0
     &:nth-child(even) > td
       background-color: #FAFAFA
-  thead tr td
+  thead tr th
     user-select: none
     font-weight: bold
     background-color: #FAFAFC

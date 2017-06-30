@@ -1,14 +1,19 @@
 <template lang="pug">
 .post.container
-  h3.page-title {{ heading}}
-  #container(style='min-width: 310px; height: 400px; margin: 0 auto')
-  br
-  h4 Comments:
-  ul.comments: li.comment(v-for="(comment, key) in comments" :class="'sentiment'+comment.Sentiment")
-    .heading
-      .author {{ comment.user }}:
-      .date {{ comment.date }}
-    a.text(:href="'https://bitcointalk.org/index.php?topic='+comment.topicId+'.msg'+key+'#msg'+key" target="_blank") {{ comment.text }}
+  h3.page-title {{ heading }}
+  div(v-if="!chartError")
+    #container(style='min-width: 310px; height: 400px; margin: 0 auto')
+    br
+  div(v-if="!commentsError")
+    h4 Comments:
+    ul.comments: li.comment(v-for="(comment, key) in comments" :class="'sentiment'+comment.Sentiment")
+      .heading
+        .author {{ comment.user }}:
+        .date {{ comment.date }}
+      a.text(:href="'https://bitcointalk.org/index.php?topic='+comment.topicId+'.msg'+key+'#msg'+key" target="_blank") {{ comment.text }}
+  .nodata(v-if="chartError && commentsError")
+    p Data not find
+
 </template>
 
 <script>
@@ -19,7 +24,9 @@ export default {
   name: 'post',
   data: () => ({
     heading: '',
-    comments: []
+    comments: [],
+    chartError: false,
+    commentsError: false
   }),
   created () {
     axios.get('/static/data/announceList.json')
@@ -78,7 +85,6 @@ export default {
       chartData.neutral = data.chart.neutral
       chartData.positive = data.chart.positive
       chartData.pointStart = data.pointStart
-      console.log(chartData.pointStart)
       names.forEach(function (name, i) {
         seriesOptions[i] = {
           name: name,
@@ -94,6 +100,7 @@ export default {
       })
     })
     .catch(e => {
+      this.chartError = true
       this.errors.push(e)
     })
 
@@ -102,6 +109,7 @@ export default {
       this.comments = response.data
     })
     .catch(e => {
+      this.commentsError = true
       this.errors.push(e)
     })
   }
@@ -133,4 +141,11 @@ export default {
     background: #dddddd
   .sentiment2 .text
     background: #85f77e
+  .nodata
+    width: 100%
+    height: 400px
+    display: flex
+    justify-content: center
+    align-items: center
+    border: 1px solid #ccc
 </style>
