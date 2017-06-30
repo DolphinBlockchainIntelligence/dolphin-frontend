@@ -70,20 +70,22 @@ export default {
         negative: [],
         neutral: [],
         positive: [],
+        pointStart: ''
       }
       let dates = []
       let names = ['negative', 'neutral', 'positive']
-      for (var item in data) {
-        let date = new Date( item ).getTime()
-        chartData.negative.push([date, data[item].negative])
-        chartData.neutral.push([date, data[item].neutral])
-        chartData.positive.push([date, data[item].positive])
-      }
+      chartData.negative = data.chart.negative
+      chartData.neutral = data.chart.neutral
+      chartData.positive = data.chart.positive
+      chartData.pointStart = data.pointStart
+      console.log(chartData.pointStart)
       names.forEach(function (name, i) {
         seriesOptions[i] = {
           name: name,
           data: chartData[name],
-          color: colors[i]
+          color: colors[i],
+          pointStart: chartData.pointStart * 10,
+          pointInterval: 3600 * 1000 * 24
         }
         seriesCounter += 1
         if (seriesCounter === names.length) {
