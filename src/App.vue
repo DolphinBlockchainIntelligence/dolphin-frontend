@@ -1,31 +1,42 @@
-<template lang="pug">
-#app
-  main.main
-    b-navbar(toggleable='', type='inverse', variant='success')
-      .container
-        b-nav-toggle(target='nav_collapse')
-        b-link.navbar-brand(to='/')
-          span Dolphin BI
-        b-collapse#nav_collapse(is-nav='')
-          b-nav(is-nav-bar='')
-            b-nav-item(to='/list') BTT sentiments (alpha)
-    router-view
-  //footer.footer
-    .container
-      .left
-        span © 2017 Dolphin BI | <a href="https://docs.google.com/forms/d/e/1FAIpQLSd6mlhhRCTuMIsdi2kYZP8RjEO4w2ytpcVFtDnNXyLusfcnMA/viewform?fbzx=-2801639494221500400">Request Form</a> | <a href="#">BitcoinTalk</a>
-      .right
-        span Donate BTC: <a href="#">0000000000000000000000000000000000</a>
-        br
-        span Donate ETH: <a href="#">0x0000000000000000000000000000000000000000</a>
+<template>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
+              mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">Coin</span>
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                    mdl-textfield--floating-label mdl-textfield--align-right">
+          <label class="mdl-button mdl-js-button mdl-button--icon"
+                 for="fixed-header-drawer-exp">
+            <i class="material-icons">search</i>
+          </label>
+          <div class="mdl-textfield__expandable-holder">
+            <input class="mdl-textfield__input" type="text" name="sample"
+                   id="fixed-header-drawer-exp">
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">Title</span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="/#/list">Dashboard</a>
+        <a class="mdl-navigation__link" href="/#/list">Crypto-assets</a>
+        <a class="mdl-navigation__link" href="/#/list">Store</a>
+        <a class="mdl-navigation__link" href="/#/list">Settings</a>
+      </nav>
+    </div>
+    <router-view/>
+  </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'roboto-fontface'
 import 'material-design-icons-iconfont'
+import "material-design-lite/material.min.css"
+import "material-design-lite/material.min.js"
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 window.App = {

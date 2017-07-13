@@ -1,5 +1,5 @@
 <template lang="pug">
-.landing-lite
+.mdl-layout__content
   section.section.intro: .container
     img(src="/static/img/dolphin.png" class="logo")
     .heading
@@ -22,8 +22,8 @@ export default {
 
 <style lang="sass">
 @import '../assets/grid-breakpoints.scss'
-.landing-lite
-  margin-top: -56px !important
+// .landing-lite
+  // margin-top: -56px !important
 .section
   padding: 50px 0
   .heading

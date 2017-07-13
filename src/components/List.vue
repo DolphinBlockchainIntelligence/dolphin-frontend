@@ -1,33 +1,37 @@
 <template lang="pug">
-  .container.list
-    h3.page-title BTT sentiments (alpha)
-    .datatable-options
-      b-form-input(v-model="query" placeholder="Search")
-    table.table.table-hover.table-striped
-      thead
-        tr
-          th #
-          th(v-on:click="sort('announce')")
-            span Announce
-            i.material-icons
-          th(v-on:click="sort('NumReplies')")
-            span Replies
-            i.material-icons
-          th(v-on:click="sort('DateTimeLastPost')")
-            span Last comment
-            i.material-icons
-          th
-      tbody(name="table-row")
-        tr(v-for="post in computedList" key="tr" class="table-row-item" :to="'/post/' + post.topicId" v-on:click="goToPost(post.topicId)")
-          td(key="order") {{ post.order }}
-          td(key="announce") {{ post.announce }}
-          td(key="replies") {{ post.NumReplies }}
-          td(key="views") {{ post.DateTimeLastPost }}
-          td.links(key="links")
-            a(v-on:click="dataHref(post.topicStarterUrl, $event)")
-              i.material-icons account_circle
-            a(v-on:click="dataHref(post.topicUrl, $event)")
-              i.material-icons assignment
+  .mdl-layout__content
+    .mdl-grid
+      .mdl-cell.mdl-cell--12-col
+        .list
+          h3.page-title BTT sentiments (alpha)
+          .datatable-options.mdl-textfield.mdl-js-textfield
+            input.mdl-textfield__input(v-model="query" placeholder="Search")
+            //- label.mdl-textfield__label Search
+          table.table.mdl-data-table.mdl-js-data-table.mdl-data-table--selectable.mdl-shadow--2dp
+            thead
+              tr
+                th #
+                th(v-on:click="sort('announce')")
+                  span Announce
+                  i.material-icons
+                th(v-on:click="sort('NumReplies')")
+                  span Replies
+                  i.material-icons
+                th(v-on:click="sort('DateTimeLastPost')")
+                  span Last comment
+                  i.material-icons
+                th
+            tbody(name="table-row")
+              tr(v-for="post in computedList" key="tr" class="table-row-item" :to="'/post/' + post.topicId" v-on:click="goToPost(post.topicId)")
+                td(key="order") {{ post.order }}
+                td(key="announce") {{ post.announce }}
+                td(key="replies") {{ post.NumReplies }}
+                td(key="views") {{ post.DateTimeLastPost }}
+                td.links(key="links")
+                  a(v-on:click="dataHref(post.topicStarterUrl, $event)")
+                    i.material-icons account_circle
+                  a(v-on:click="dataHref(post.topicUrl, $event)")
+                    i.material-icons assignment
 </template>
 
 <script>
@@ -118,8 +122,11 @@ export default {
   background-color: #FAFAFC
   border: 1px solid #DDDDEE
   border-bottom: 0
+  width: 100%
 .table
   border: 1px solid #DDDDEE
+  width: 100%
+  white-space: normal
   tr
     th
       white-space: nowrap
@@ -135,19 +142,22 @@ export default {
     background-color: #FAFAFC
     span
       vertical-align: middle
-    .material-icons
-      vertical-align: middle
-      font-size: 16px
-      &.down::after
-        content: 'arrow_downward'
-      &.up::after
-        content: 'arrow_upward'
+    // .material-icons
+    //   vertical-align: middle
+    //   font-size: 16px
+    //   &.down
+    //     &::after
+    //     content: 'arrow_downward'
+    //   &.up
+    //     &::after
+    //     content: 'arrow_upward'
   tbody tr
     cursor: pointer
     .links
       white-space: nowrap
       .material-icons
         opacity: .7
+        color: rgb(63, 81, 181) !important
         &:hover
           opacity: 1
 </style>

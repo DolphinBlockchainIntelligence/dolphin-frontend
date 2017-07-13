@@ -1,19 +1,31 @@
-<template lang="pug">
-.post.container
-  h3.page-title {{ heading }}
-  div(v-if="!chartError")
-    #container(style='min-width: 310px; height: 400px; margin: 0 auto')
-    br
-  div(v-if="!commentsError")
-    h4 Comments:
-    ul.comments: li.comment(v-for="(comment, key) in comments" :class="'sentiment'+comment.Sentiment")
-      .heading
-        .author {{ comment.user }}:
-        .date {{ comment.date }}
-      a.text(:href="'https://bitcointalk.org/index.php?topic='+comment.topicId+'.msg'+key+'#msg'+key" target="_blank") {{ comment.text }}
-  .nodata(v-if="chartError && commentsError")
-    p Data not find
-
+<template>
+  <main class="mdl-layout__content">
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--12-col">
+        <div class="page-content">
+          <div v-if="!chartError">
+            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto" />
+            <br/>
+          </div>
+          <div v-if="!commentsError">
+            <h4>Comments:</h4>
+            <ul class="comments">
+              <li v-for="(comment, key) in comments" :class="'comment sentiment'+comment.Sentiment">
+                <div class="heading">
+                  <div class="author">{{ comment.user }}:</div>
+                  <div class="date">{{ comment.date }}:</div>
+                </div>
+                <a :href="'https://bitcointalk.org/index.php?topic='+comment.topicId+'.msg'+key+'#msg'+key" target="_blank" class="text">{{ comment.text }}:</a>
+              </li>
+            </ul>
+          </div>
+          <div class="nodata" v-if="chartError && commentsError">
+            <p>Data not find</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </template>
 
 <script>
