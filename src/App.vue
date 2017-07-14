@@ -19,6 +19,7 @@
       </div>
     </header>
     <div class="mdl-layout__drawer">
+      <img src="/static/img/dolphin.png" alt="">
       <span class="mdl-layout-title">Title</span>
       <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="/#/list">Dashboard</a>
@@ -59,7 +60,6 @@ body
       margin-top: 20px
 .page-title
   margin-bottom: 20px
-
 // .footer
 //   padding: 10px 0
 //   margin-top: 10px
@@ -72,4 +72,12 @@ body
 //       flex: 1 0 auto
 //     .right
 //       text-align: right
+.mdl-layout__drawer
+  background: #212E51 !important
+.mdl-layout-title
+  color: #fff
+.mdl-navigation a
+  color: #fff !important
+  &:hover
+    background: #1A2543 !important
 </style>
