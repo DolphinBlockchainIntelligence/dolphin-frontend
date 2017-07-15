@@ -2,12 +2,12 @@
   <div class="">
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
-        <a href="/#/list" class="logo">
+        <a href="/#/" class="logo">
           <img src="/static/img/dolphin.png" class="logo-img">
           <span class="mdl-layout-title">Dolphin BI</span>
         </a>
         <div class="search-bar">
-            <input class="mdl-textfield__input" type="text" name="sample">
+            <input class="mdl-textfield__input" type="text" name="sample" placeholder="Search coin">
             <i class="material-icons">search</i>
         </div>
         <div class="mdl-layout-spacer"></div>
@@ -20,7 +20,7 @@
     </header>
     <div class="mdl-layout mdl-js-layout">
       <div class="mdl-layout__drawer">
-        <!-- <span class="mdl-layout-title">Widgets</span> -->
+        <span class="mdl-layout-title">Widgets</span>
         <!-- <nav class="mdl-navigation">
           <a class="mdl-navigation__link" href="/#/list">Dashboard</a>
           <a class="mdl-navigation__link" href="/#/list">Crypto-assets</a>
@@ -29,70 +29,84 @@
         </nav> -->
         <div class="mdl-list__item">
           <span class="mdl-list__item-primary-content">
-            <i class="material-icons mdl-list__item-avatar">person</i>
+            <img class="widget-img" src="/static/img/widgets/sentiments.svg" alt="">
             <span>Sentiments</span>
           </span>
-          <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box</i></a>
+          <span class="mdl-list__item-secondary-action">
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
+              <input type="checkbox" id="list-switch-1" class="mdl-switch__input" checked />
+            </label>
+          </span>
         </div>
         <div class="mdl-list__item">
           <span class="mdl-list__item-primary-content">
-            <i class="material-icons mdl-list__item-avatar">person</i>
+            <img class="widget-img" src="/static/img/widgets/faces.svg" alt="">
             <span>Faces</span>
           </span>
-          <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box</i></a>
+          <span class="mdl-list__item-secondary-action">
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-2">
+              <input type="checkbox" id="list-switch-2" class="mdl-switch__input" checked />
+            </label>
+          </span>
         </div>
         <div class="mdl-list__item">
           <span class="mdl-list__item-primary-content">
-            <i class="material-icons mdl-list__item-avatar">person</i>
+            <img class="widget-img" src="/static/img/widgets/funds-raised.svg" alt="">
             <span>Funds raised</span>
           </span>
-          <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box_outline_blank</i></a>
+          <span class="mdl-list__item-secondary-action">
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-3">
+              <input type="checkbox" id="list-switch-3" class="mdl-switch__input" checked />
+            </label>
           </span>
         </div>
         <div class="mdl-list__item">
           <span class="mdl-list__item-primary-content">
-            <i class="material-icons mdl-list__item-avatar">person</i>
+            <img class="widget-img" src="/static/img/widgets/funding-amounts.svg" alt="">
             <span>Funding amounts</span>
           </span>
-          <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box_outline_blank</i></a>
+          <span class="mdl-list__item-secondary-action">
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-4">
+              <input type="checkbox" id="list-switch-4" class="mdl-switch__input" checked />
+            </label>
           </span>
         </div>
         <div class="mdl-list__item">
           <span class="mdl-list__item-primary-content">
-            <i class="material-icons mdl-list__item-avatar">person</i>
+            <img class="widget-img" src="/static/img/widgets/funds-raised.svg" alt="">
             <span>Experts evaluations</span>
           </span>
-          <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box_outline_blank</i></a>
+          <span class="mdl-list__item-secondary-action">
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-5">
+              <input type="checkbox" id="list-switch-5" class="mdl-switch__input" checked />
+            </label>
           </span>
         </div>
         <div class="mdl-list__item">
           <span class="mdl-list__item-primary-content">
-            <i class="material-icons mdl-list__item-avatar">person</i>
-            <span>Code audit</span>
-          </span>
-          <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box_outline_blank</i></a>
-          </span>
-        </div>
-        <div class="mdl-list__item">
-          <span class="mdl-list__item-primary-content">
-            <i class="material-icons mdl-list__item-avatar">person</i>
+            <img class="widget-img" src="/static/img/widgets/description.svg" alt="">
             <span>Description</span>
           </span>
-          <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box_outline_blank</i></a>
+          <span class="mdl-list__item-secondary-action">
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-7">
+              <input type="checkbox" id="list-switch-7" class="mdl-switch__input" checked />
+            </label>
           </span>
         </div>
         <div class="mdl-list__item">
           <span class="mdl-list__item-primary-content">
-            <i class="material-icons mdl-list__item-avatar">person</i>
+            <img class="widget-img" src="/static/img/widgets/code.svg" alt="">
+            <span>Code audit</span>
+          </span>
+          <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">attach_money</i></a>
+        </div>
+        <div class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            <img class="widget-img" src="/static/img/widgets/likes.svg" alt="">
             <span>Likes</span>
           </span>
           <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box_outline_blank</i></a>
+            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">attach_money</i></a>
           </span>
         </div>
       </div>
@@ -168,7 +182,11 @@ body
 .mdl-layout__header
   background: #212E51 !important
 
-// .mdl-layout__drawer
+.mdl-layout__drawer
+  .widget-img
+    width: 40px
+    height: 40px
+    margin-right: 16px
 //   background: #212E51 !important
 // .mdl-layout-title
 //   color: #fff
