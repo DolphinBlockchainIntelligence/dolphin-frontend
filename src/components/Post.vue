@@ -8,7 +8,7 @@
       </div>
     </div>
     <div v-model="widgets" class="mdl-grid draggable-container" id="draggable-container" :options="{draggable:'.draggable'}">
-      <div class="mdl-cell mdl-cell--6-col draggable" key="sentimentsChart">
+      <div class="mdl-cell mdl-cell--6-col draggable" key="sentimentsLineChart">
         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
           <div class="mdl-card__title">
             <h4 class="mdl-card__title-text">Sentiments: chart</h4>
@@ -19,7 +19,7 @@
             </button>
           </div>
           <div v-if="!chartError">
-            <div id="sentimentsChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <div id="sentimentsLineChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             <!-- <div v-else class="nodata">
               <p>Data not find</p>
             </div> -->
@@ -65,7 +65,8 @@
           </div>
         </div>
       </div>
-      <div class="mdl-cell mdl-cell--6-col draggable" key="Faces">
+
+      <div class="mdl-cell mdl-cell--6-col draggable" key="faces">
         <div class="demo-card-wide mdl-card mdl-shadow--2dp widget-faces widget">
           <div class="mdl-card__title">
             <h2 class="mdl-card__title-text">Faces</h2>
@@ -126,6 +127,22 @@
           </ul>
         </div>
       </div>
+
+      <div class="mdl-cell mdl-cell--6-col draggable widget-faces-search" key="faces-search">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp widget-faces widget">
+          <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">Faces: search</h2>
+          </div>
+          <div class="search-bar">
+            <input type="text" name="" value="" class="bootstrap-input">
+            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Name</button>
+            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Role</button>
+            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Team</button>
+            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Photo</button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </main>
 </template>
@@ -145,7 +162,7 @@ export default {
     chartError: false,
     commentsError: false,
     widgets: [
-      'sentimentsChart', 'sentimentsComments', 'sentimentsStatistics', 'Faces'
+      'sentimentsLineChart', 'sentimentsComments', 'sentimentsStatistics', 'Faces'
     ]
   }),
   components: {
@@ -154,7 +171,7 @@ export default {
   mounted () {
     document.querySelector('.mdl-layout').classList.add('mdl-layout--fixed-drawer')
     this.sentimentsPieChart()
-    this.sentimentsChart()
+    this.sentimentsLineChart()
     this.sentimentsComments()
     this.getHeading()
     const el = document.getElementById('draggable-container')
@@ -217,11 +234,11 @@ export default {
         this.errors.push(e)
       })
     },
-    sentimentsChart: function () {
+    sentimentsLineChart: function () {
       let seriesOptions = []
       let seriesCounter = 0
       function createChart () {
-        Highstock.stockChart('sentimentsChart', {
+        Highstock.stockChart('sentimentsLineChart', {
           chart: {
             spacingBottom: 60
           },
@@ -299,6 +316,17 @@ export default {
 </script>
 
 <style lang="sass">
+  .widget-faces-search
+    .search-bar
+      display: flex
+      input
+        flex: 1 0 auto
+    .bootstrap-input
+      padding: .5rem .75rem
+      font-size: 1rem
+      line-height: 1.25
+      border: 1px solid rgba(0,0,0,.15)
+      border-radius: 2px
   .widget
     height: 460px
     overflow-y: scroll

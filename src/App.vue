@@ -21,12 +21,6 @@
     <div class="mdl-layout mdl-js-layout">
       <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Widgets</span>
-        <!-- <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="/#/list">Dashboard</a>
-          <a class="mdl-navigation__link" href="/#/list">Crypto-assets</a>
-          <a class="mdl-navigation__link" href="/#/list">Store</a>
-          <a class="mdl-navigation__link" href="/#/list">Settings</a>
-        </nav> -->
         <div class="mdl-list__item">
           <span class="mdl-list__item-primary-content">
             <img class="widget-img" src="/static/img/widgets/sentiments.svg" alt="">
@@ -56,7 +50,7 @@
           </span>
           <span class="mdl-list__item-secondary-action">
             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-3">
-              <input type="checkbox" id="list-switch-3" class="mdl-switch__input" checked />
+              <input type="checkbox" id="list-switch-3" class="mdl-switch__input" />
             </label>
           </span>
         </div>
@@ -67,7 +61,7 @@
           </span>
           <span class="mdl-list__item-secondary-action">
             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-4">
-              <input type="checkbox" id="list-switch-4" class="mdl-switch__input" checked />
+              <input type="checkbox" id="list-switch-4" class="mdl-switch__input" />
             </label>
           </span>
         </div>
@@ -78,7 +72,7 @@
           </span>
           <span class="mdl-list__item-secondary-action">
             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-5">
-              <input type="checkbox" id="list-switch-5" class="mdl-switch__input" checked />
+              <input type="checkbox" id="list-switch-5" class="mdl-switch__input" />
             </label>
           </span>
         </div>
@@ -89,7 +83,7 @@
           </span>
           <span class="mdl-list__item-secondary-action">
             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-7">
-              <input type="checkbox" id="list-switch-7" class="mdl-switch__input" checked />
+              <input type="checkbox" id="list-switch-7" class="mdl-switch__input" />
             </label>
           </span>
         </div>
@@ -98,7 +92,7 @@
             <img class="widget-img" src="/static/img/widgets/code.svg" alt="">
             <span>Code audit</span>
           </span>
-          <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">attach_money</i></a>
+          <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">attach_money</i></a>
         </div>
         <div class="mdl-list__item">
           <span class="mdl-list__item-primary-content">
@@ -106,7 +100,7 @@
             <span>Likes</span>
           </span>
           <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">attach_money</i></a>
+            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">attach_money</i></a>
           </span>
         </div>
       </div>
@@ -130,30 +124,31 @@ export default window.App
 </script>
 
 <style lang="sass">
-.search-bar
-  background: rgba(0, 0, 0, 0.22)
-  border-radius: 2px
-  display: flex
-  flex: 1 0 286px
-  width: auto !important
-  align-items: center
-  margin-left: 23px
-  .material-icons
-    margin: 0 10px
-  input
-    padding: 10px
-.logo
-  text-decoration: none
-  color: #fff
-  white-space: nowrap
-  .logo-img
-    width: 30px
-    margin-right: 10px
-    vertical-align: middle
-    display: inline-block
-  .mdl-layout-title
-    vertical-align: middle
-    display: inline-block
+.mdl-layout__header
+  .search-bar
+    background: rgba(0, 0, 0, 0.22)
+    border-radius: 2px
+    display: flex
+    flex: 1 0 286px
+    width: auto !important
+    align-items: center
+    margin-left: 23px
+    .material-icons
+      margin: 0 10px
+    input
+      padding: 10px
+  .logo
+    text-decoration: none
+    color: #fff
+    white-space: nowrap
+    .logo-img
+      width: 30px
+      margin-right: 10px
+      vertical-align: middle
+      display: inline-block
+    .mdl-layout-title
+      vertical-align: middle
+      display: inline-block
 // @import './assets/sticky-footer.sass'
 body
   overflow-x: hidden
