@@ -1,34 +1,103 @@
 <template>
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
-              mdl-layout--fixed-header">
+  <div class="">
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
-        <span class="mdl-layout-title">Coin</span>
-        <div class="mdl-layout-spacer"></div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
-                    mdl-textfield--floating-label mdl-textfield--align-right">
-          <label class="mdl-button mdl-js-button mdl-button--icon"
-                 for="fixed-header-drawer-exp">
+        <a href="/#/list" class="logo">
+          <img src="/static/img/dolphin.png" class="logo-img">
+          <span class="mdl-layout-title">Dolphin BI</span>
+        </a>
+        <div class="search-bar">
+            <input class="mdl-textfield__input" type="text" name="sample">
             <i class="material-icons">search</i>
-          </label>
-          <div class="mdl-textfield__expandable-holder">
-            <input class="mdl-textfield__input" type="text" name="sample"
-                   id="fixed-header-drawer-exp">
-          </div>
         </div>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="/#/dashboard">Dashboard</a>
+          <a class="mdl-navigation__link" href="http://presale.dolphin.bi/" target="_blank">ICO</a>
+          <a class="mdl-navigation__link" href="/#/profile"><i class="material-icons mdl-list__item-avatar">person</i></a>
+        </nav>
       </div>
     </header>
-    <div class="mdl-layout__drawer">
-      <img src="/static/img/dolphin.png" alt="">
-      <span class="mdl-layout-title">Title</span>
-      <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="/#/list">Dashboard</a>
-        <a class="mdl-navigation__link" href="/#/list">Crypto-assets</a>
-        <a class="mdl-navigation__link" href="/#/list">Store</a>
-        <a class="mdl-navigation__link" href="/#/list">Settings</a>
-      </nav>
+    <div class="mdl-layout mdl-js-layout">
+      <div class="mdl-layout__drawer">
+        <!-- <span class="mdl-layout-title">Widgets</span> -->
+        <!-- <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="/#/list">Dashboard</a>
+          <a class="mdl-navigation__link" href="/#/list">Crypto-assets</a>
+          <a class="mdl-navigation__link" href="/#/list">Store</a>
+          <a class="mdl-navigation__link" href="/#/list">Settings</a>
+        </nav> -->
+        <div class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-avatar">person</i>
+            <span>Sentiments</span>
+          </span>
+          <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box</i></a>
+        </div>
+        <div class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-avatar">person</i>
+            <span>Faces</span>
+          </span>
+          <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box</i></a>
+        </div>
+        <div class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-avatar">person</i>
+            <span>Funds raised</span>
+          </span>
+          <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box_outline_blank</i></a>
+          </span>
+        </div>
+        <div class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-avatar">person</i>
+            <span>Funding amounts</span>
+          </span>
+          <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box_outline_blank</i></a>
+          </span>
+        </div>
+        <div class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-avatar">person</i>
+            <span>Experts evaluations</span>
+          </span>
+          <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box_outline_blank</i></a>
+          </span>
+        </div>
+        <div class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-avatar">person</i>
+            <span>Code audit</span>
+          </span>
+          <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box_outline_blank</i></a>
+          </span>
+        </div>
+        <div class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-avatar">person</i>
+            <span>Description</span>
+          </span>
+          <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box_outline_blank</i></a>
+          </span>
+        </div>
+        <div class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-avatar">person</i>
+            <span>Likes</span>
+          </span>
+          <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">check_box_outline_blank</i></a>
+          </span>
+        </div>
+      </div>
+      <router-view/>
     </div>
-    <router-view/>
   </div>
 </template>
 
@@ -47,6 +116,30 @@ export default window.App
 </script>
 
 <style lang="sass">
+.search-bar
+  background: rgba(0, 0, 0, 0.22)
+  border-radius: 2px
+  display: flex
+  flex: 1 0 286px
+  width: auto !important
+  align-items: center
+  margin-left: 23px
+  .material-icons
+    margin: 0 10px
+  input
+    padding: 10px
+.logo
+  text-decoration: none
+  color: #fff
+  white-space: nowrap
+  .logo-img
+    width: 30px
+    margin-right: 10px
+    vertical-align: middle
+    display: inline-block
+  .mdl-layout-title
+    vertical-align: middle
+    display: inline-block
 // @import './assets/sticky-footer.sass'
 body
   overflow-x: hidden
@@ -72,12 +165,15 @@ body
 //       flex: 1 0 auto
 //     .right
 //       text-align: right
-.mdl-layout__drawer
+.mdl-layout__header
   background: #212E51 !important
-.mdl-layout-title
-  color: #fff
-.mdl-navigation a
-  color: #fff !important
-  &:hover
-    background: #1A2543 !important
+
+// .mdl-layout__drawer
+//   background: #212E51 !important
+// .mdl-layout-title
+//   color: #fff
+// .mdl-navigation a
+//   color: #fff !important
+//   &:hover
+//     background: #1A2543 !important
 </style>

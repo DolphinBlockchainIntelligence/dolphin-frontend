@@ -110,124 +110,124 @@ export default {
 </script>
 
 <style lang="sass">
-@import '../assets/grid-breakpoints.scss'
-.landing
-  margin-top: -56px !important
-.section
-  padding: 50px 0
-  .heading
-    margin-bottom: 30px
-    .title
-      text-align: center
-    .subtitle
-      text-align: center
-  &:nth-child(even)
-    background-color: #f0f0f0
-.intro
-  width: 100vw
-  height: 100vh
-  background: #3A0767 url('/static/img/background.png') center
-  color: #fff
-  display: flex
-  justify-content: center
-  align-items: center
-  flex-direction: column
-  background-attachment: fixed
-  background-position: center
-  background-repeat: no-repeat
-  background-size: cover
-  .container
-    text-align: center
-  .logo
-    margin-bottom: 30px
-    @media(max-height: 720px)
-      height: 170px
-  .title
-    font-weight: 600
-    letter-spacing: .5px
-    font-size: 68px
-  .subtitle
-    padding-bottom: 40px
-  .subtitle, .description
-    font-size: 18px
-    font-weight: 100
-.about
-  display: flex
-  justify-content: center
-  align-items: center
-  flex-direction: column
-  .description
-    font-size: 18px
-    max-width: 760px
-    text-align: center
-    margin: 0 auto 30px
-.features
-  .list
-    display: flex
-    list-style: none
-    padding: 0
-    justify-content: space-between
-    .item
-      width: 400px
-      display: flex
-      flex-direction: column
-      align-items: center
-      justify-content: flex-start
-      .item-img
-        width: 100px
-        height: 100px
-        background-size: cover
-        margin: 0 auto 30px
-      .item-title
-        text-align: center
-        font-size: 1.3rem
-      .item-description
-        text-align: center
-.screenshots
-  img
-    width: 100%
-.team
-  .row
-    &>li
-      list-style: none
-      opacity: .7
-      &:hover
-        opacity: 1
-    .card
-      ul
-        padding: 0
-        list-style: none
-      .card-footer .card-block
-        padding: 7px 0px
-  img
-    margin: -20px 0 20px -20px
-    width: 100%
-    width: calc(100% + 40px)
-.mentions
-  .items
-    list-style: none
-    padding: 0
-    display: flex
-    justify-content: space-between
-    align-items: center
-    img
-      height: 75px
-      opacity: .7
-      &:hover
-        opacity: 1
-.socials
-  ul
-    list-style: none
-    display: flex
-    justify-content: center
-    margin: 0
-    padding: 0
-    li
-      margin: 0 20px
-  .social
-    height: 80px
-    width: 80px
-    opacity: .7
-    &:hover
-      opacity: 1
+// @import '../assets/grid-breakpoints.scss'
+// .landing
+//   margin-top: -56px !important
+// .section
+//   padding: 50px 0
+//   .heading
+//     margin-bottom: 30px
+//     .title
+//       text-align: center
+//     .subtitle
+//       text-align: center
+//   &:nth-child(even)
+//     background-color: #f0f0f0
+// .intro
+//   width: 100vw
+//   height: 100vh
+//   background: #3A0767 url('/static/img/background.png') center
+//   color: #fff
+//   display: flex
+//   justify-content: center
+//   align-items: center
+//   flex-direction: column
+//   background-attachment: fixed
+//   background-position: center
+//   background-repeat: no-repeat
+//   background-size: cover
+//   .container
+//     text-align: center
+//   .logo
+//     margin-bottom: 30px
+//     @media(max-height: 720px)
+//       height: 170px
+//   .title
+//     font-weight: 600
+//     letter-spacing: .5px
+//     font-size: 68px
+//   .subtitle
+//     padding-bottom: 40px
+//   .subtitle, .description
+//     font-size: 18px
+//     font-weight: 100
+// .about
+//   display: flex
+//   justify-content: center
+//   align-items: center
+//   flex-direction: column
+//   .description
+//     font-size: 18px
+//     max-width: 760px
+//     text-align: center
+//     margin: 0 auto 30px
+// .features
+//   .list
+//     display: flex
+//     list-style: none
+//     padding: 0
+//     justify-content: space-between
+//     .item
+//       width: 400px
+//       display: flex
+//       flex-direction: column
+//       align-items: center
+//       justify-content: flex-start
+//       .item-img
+//         width: 100px
+//         height: 100px
+//         background-size: cover
+//         margin: 0 auto 30px
+//       .item-title
+//         text-align: center
+//         font-size: 1.3rem
+//       .item-description
+//         text-align: center
+// .screenshots
+//   img
+//     width: 100%
+// .team
+//   .row
+//     &>li
+//       list-style: none
+//       opacity: .7
+//       &:hover
+//         opacity: 1
+//     .card
+//       ul
+//         padding: 0
+//         list-style: none
+//       .card-footer .card-block
+//         padding: 7px 0px
+//   img
+//     margin: -20px 0 20px -20px
+//     width: 100%
+//     width: calc(100% + 40px)
+// .mentions
+//   .items
+//     list-style: none
+//     padding: 0
+//     display: flex
+//     justify-content: space-between
+//     align-items: center
+//     img
+//       height: 75px
+//       opacity: .7
+//       &:hover
+//         opacity: 1
+// .socials
+//   ul
+//     list-style: none
+//     display: flex
+//     justify-content: center
+//     margin: 0
+//     padding: 0
+//     li
+//       margin: 0 20px
+//   .social
+//     height: 80px
+//     width: 80px
+//     opacity: .7
+//     &:hover
+//       opacity: 1
 </style>

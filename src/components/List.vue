@@ -48,6 +48,9 @@ export default {
     sortOrder: '',
     postsList: []
   }),
+  mounted () {
+    document.querySelector('.mdl-layout').classList.remove('mdl-layout--fixed-drawer')
+  },
   created () {
     // document.querySelector('body').classList.remove('body-landing-lite')
     let component = this
@@ -142,15 +145,6 @@ export default {
     background-color: #FAFAFC
     span
       vertical-align: middle
-    // .material-icons
-    //   vertical-align: middle
-    //   font-size: 16px
-    //   &.down
-    //     &::after
-    //     content: 'arrow_downward'
-    //   &.up
-    //     &::after
-    //     content: 'arrow_upward'
   tbody tr
     cursor: pointer
     .links
