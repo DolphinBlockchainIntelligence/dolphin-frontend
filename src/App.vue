@@ -93,6 +93,15 @@
             <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">attach_money</i></a>
           </span>
         </div>
+        <div class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            <img class="widget-img" src="/static/img/widgets/portfolio.svg" alt="">
+            <span>Portfolio</span>
+          </span>
+          <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">attach_money</i></a>
+          </span>
+        </div>
       </div>
       <router-view/>
     </div>
