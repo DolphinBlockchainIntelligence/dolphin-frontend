@@ -26,10 +26,8 @@
             <img class="widget-img" src="/static/img/widgets/sentiments.svg" alt="">
             <span>Sentiments</span>
           </span>
-          <span class="mdl-list__item-secondary-action">
-            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
-              <input type="checkbox" id="list-switch-1" class="mdl-switch__input" checked />
-            </label>
+          <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">add</i></a>
           </span>
         </div>
         <div class="mdl-list__item">
@@ -37,10 +35,8 @@
             <img class="widget-img" src="/static/img/widgets/faces.svg" alt="">
             <span>Faces</span>
           </span>
-          <span class="mdl-list__item-secondary-action">
-            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-2">
-              <input type="checkbox" id="list-switch-2" class="mdl-switch__input" checked />
-            </label>
+          <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">add</i></a>
           </span>
         </div>
         <div class="mdl-list__item">
@@ -48,10 +44,8 @@
             <img class="widget-img" src="/static/img/widgets/funds-raised.svg" alt="">
             <span>Funds raised</span>
           </span>
-          <span class="mdl-list__item-secondary-action">
-            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-3">
-              <input type="checkbox" id="list-switch-3" class="mdl-switch__input" />
-            </label>
+          <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">add</i></a>
           </span>
         </div>
         <div class="mdl-list__item">
@@ -59,10 +53,8 @@
             <img class="widget-img" src="/static/img/widgets/funding-amounts.svg" alt="">
             <span>Funding amounts</span>
           </span>
-          <span class="mdl-list__item-secondary-action">
-            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-4">
-              <input type="checkbox" id="list-switch-4" class="mdl-switch__input" />
-            </label>
+          <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">add</i></a>
           </span>
         </div>
         <div class="mdl-list__item">
@@ -70,10 +62,8 @@
             <img class="widget-img" src="/static/img/widgets/funds-raised.svg" alt="">
             <span>Experts evaluations</span>
           </span>
-          <span class="mdl-list__item-secondary-action">
-            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-5">
-              <input type="checkbox" id="list-switch-5" class="mdl-switch__input" />
-            </label>
+          <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">add</i></a>
           </span>
         </div>
         <div class="mdl-list__item">
@@ -81,10 +71,8 @@
             <img class="widget-img" src="/static/img/widgets/description.svg" alt="">
             <span>Description</span>
           </span>
-          <span class="mdl-list__item-secondary-action">
-            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-7">
-              <input type="checkbox" id="list-switch-7" class="mdl-switch__input" />
-            </label>
+          <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">add</i></a>
           </span>
         </div>
         <div class="mdl-list__item">
@@ -92,7 +80,9 @@
             <img class="widget-img" src="/static/img/widgets/code.svg" alt="">
             <span>Code audit</span>
           </span>
-          <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">attach_money</i></a>
+          <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">attach_money</i></a>
+          </span>
         </div>
         <div class="mdl-list__item">
           <span class="mdl-list__item-primary-content">
