@@ -27,7 +27,8 @@
             <span>Sentiments</span>
           </span>
           <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#" @click.prevent="widgets.push('SentimentsLineChart')"><i class="material-icons">add</i></a>
+            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">add</i></a>
+            <!-- <a class="mdl-list__item-secondary-action" href="#" @click.prevent="addWidget('SentimentsLineChart')"><i class="material-icons">add</i></a> -->
           </span>
         </div>
         <div class="mdl-list__item">
@@ -103,7 +104,7 @@
           </span>
         </div>
       </div>
-      <router-view :widgets.sync="widgets"/>
+      <router-view/>
     </div>
   </div>
 </template>
@@ -116,10 +117,22 @@ import "material-design-lite/material.min.css"
 import "material-design-lite/material.min.js"
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue)
-window.App = {
-  name: 'app'
+export default {
+  name: "app",
+  data: function data() {
+    return {
+
+    }
+  },
+  methods: {
+    addWidget (widgetName) {
+      store.dispatch({
+        type: 'addWidget',
+        widgetName: widgetName
+      })
+    }
+  }
 }
-export default window.App
 </script>
 
 <style lang="sass">
