@@ -30,7 +30,7 @@
         </button>
       </div>
       <div v-if="!chartError">
-        <div id="sentimentsLineChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        <div :id="'sentimentsLineChart'+id" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
       </div>
     </div>
   </div>
@@ -57,10 +57,11 @@ export default {
   },
   methods: {
     sentimentsLineChart: function () {
+      let highchartContainer = 'sentimentsLineChart'+this.id
       let seriesOptions = []
       let seriesCounter = 0
       function createChart () {
-        Highstock.stockChart('sentimentsLineChart', {
+        Highstock.stockChart(highchartContainer, {
           chart: {
             spacingBottom: 60
           },

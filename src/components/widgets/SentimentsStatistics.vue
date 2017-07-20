@@ -4,7 +4,7 @@
       <div class="mdl-card__title">
         <h2 class="mdl-card__title-text">Sentiments: statistic</h2>
       </div>
-      <div id="sentimentsPieChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+      <div :id="'sentimentsPieChart'+id" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
       <div class="mdl-card__menu">
         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
           <i class="material-icons">info</i>
@@ -55,7 +55,8 @@ export default {
   },
   methods: {
     sentimentsStatistics: function () {
-      Highchart.chart('sentimentsPieChart', {
+      let highchartContainer = 'sentimentsPieChart'+this.id
+      Highchart.chart(highchartContainer, {
           chart: {
               plotBackgroundColor: null,
               plotBorderWidth: null,
