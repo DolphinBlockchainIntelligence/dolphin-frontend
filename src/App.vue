@@ -27,7 +27,7 @@
             <span>Sentiments</span>
           </span>
           <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">add</i></a>
+            <a class="mdl-list__item-secondary-action" href="#" @click.prevent="widgets.push('SentimentsLineChart')"><i class="material-icons">add</i></a>
           </span>
         </div>
         <div class="mdl-list__item">
@@ -103,7 +103,7 @@
           </span>
         </div>
       </div>
-      <router-view/>
+      <router-view :widgets.sync="widgets"/>
     </div>
   </div>
 </template>

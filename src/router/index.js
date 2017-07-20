@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import List from '@/components/List'
 import Post from '@/components/Post'
 import Store from '@/components/Store'
+import Dashboard from '@/components/Dashboard'
 
 Vue.use(Router)
 export default new Router({
@@ -21,6 +22,11 @@ export default new Router({
       path: '/store/',
       name: 'Store',
       component: Store
+    },
+    {
+      path: '/dashboard/',
+      name: 'Dashboard',
+      component: Dashboard
     }
   ]
 })
