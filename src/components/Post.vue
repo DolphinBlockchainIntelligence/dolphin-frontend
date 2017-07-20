@@ -18,12 +18,13 @@ import SentimentsLineChart from './widgets/SentimentsLineChart.vue'
 import SentimentsComments from './widgets/SentimentsComments.vue'
 import FacesSearch from './widgets/FacesSearch.vue'
 import FacesProject from './widgets/FacesProject.vue'
+import ExpertsEvaluations from './widgets/ExpertsEvaluations.vue'
 
 export default {
   name: 'post',
   data: () => ({
     heading: '',
-    widgets: [{'id': 1, 'name': 'FacesProject'}]
+    widgets: [{'id': 1, 'name': 'ExpertsEvaluations'}]
     // widgets: ['SentimentsLineChart', 'SentimentsStatistics', 'SentimentsComments', 'FacesProject', 'FacesSearch']
   }),
   // computed: {
@@ -36,7 +37,8 @@ export default {
     SentimentsStatistics,
     SentimentsComments,
     FacesSearch,
-    FacesProject
+    FacesProject,
+    ExpertsEvaluations
   },
   mounted () {
     document.querySelector('.mdl-layout').classList.add('mdl-layout--fixed-drawer')
