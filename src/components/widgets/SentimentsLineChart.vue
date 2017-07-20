@@ -25,6 +25,9 @@
           <li disabled class="mdl-menu__item">Disabled Action</li>
           <li class="mdl-menu__item">Yet Another Action</li>
         </ul>
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" @click="removeWidget()">
+          <i class="material-icons">delete</i>
+        </button>
       </div>
       <div v-if="!chartError">
         <div id="sentimentsLineChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
@@ -43,6 +46,7 @@ import draggable from 'vuedraggable'
 const colors = ['#f98a83', '#989898', '#85f77e']
 export default {
   name: "sentimentsLineChart",
+  props: ['id'],
   data: function data() {
     return {
       chartError: false
@@ -114,7 +118,13 @@ export default {
         this.chartError = true
         this.errors.push(e)
       })
+    },
+    removeWidget: function () {
+      this.$root.$emit('removeWidget', this.id)
     }
+  },
+  removeWidget: function () {
+    this.$root.$emit('removeWidget', this.id)
   }
 }
 </script>

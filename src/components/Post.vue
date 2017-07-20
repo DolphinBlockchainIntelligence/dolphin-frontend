@@ -5,7 +5,7 @@
         <h4>{{ heading }}</h4>
       </div>
       <template v-for="(child, index) in widgets">
-        <component :is="child" :key="child.name"></component>
+        <component :is="child.name" :key="child.name" :id="child.id"></component>
       </template>
     </div>
   </main>
@@ -23,9 +23,14 @@ export default {
   name: 'post',
   data: () => ({
     heading: '',
-    widgets: ['FacesProject']
+    widgets: [{'id': 1, 'name': 'FacesProject'}]
     // widgets: ['SentimentsLineChart', 'SentimentsStatistics', 'SentimentsComments', 'FacesProject', 'FacesSearch']
   }),
+  // computed: {
+  //   idCounter: function () {
+  //     return this.widgets.length
+  //   }
+  // }
   components: {
     SentimentsLineChart,
     SentimentsStatistics,
@@ -36,6 +41,15 @@ export default {
   mounted () {
     document.querySelector('.mdl-layout').classList.add('mdl-layout--fixed-drawer')
     this.getHeading()
+    // let widgets = this.widgets
+    this.$root.$on('addWidget', (widgetName) => {
+      console.log(this.widgets)
+      this.widgets.push({'id': this.widgets.length+1, 'name': widgetName})
+    })
+    this.$root.$on('removeWidget', (id) => {
+      console.log(this.widgets)
+      this.widgets = _.reject(this.widgets, { 'id': id })
+    })
   },
   methods: {
     getHeading: function () {

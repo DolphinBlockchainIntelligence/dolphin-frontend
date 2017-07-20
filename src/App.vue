@@ -21,88 +21,21 @@
     <div class="mdl-layout mdl-js-layout">
       <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Widgets</span>
-        <div class="mdl-list__item">
-          <span class="mdl-list__item-primary-content">
-            <img class="widget-img" src="/static/img/widgets/sentiments.svg" alt="">
-            <span>Sentiments</span>
-          </span>
-          <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">add</i></a>
-            <!-- <a class="mdl-list__item-secondary-action" href="#" @click.prevent="addWidget('SentimentsLineChart')"><i class="material-icons">add</i></a> -->
-          </span>
-        </div>
-        <div class="mdl-list__item">
-          <span class="mdl-list__item-primary-content">
-            <img class="widget-img" src="/static/img/widgets/faces.svg" alt="">
-            <span>Faces</span>
-          </span>
-          <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">add</i></a>
-          </span>
-        </div>
-        <div class="mdl-list__item">
-          <span class="mdl-list__item-primary-content">
-            <img class="widget-img" src="/static/img/widgets/funds-raised.svg" alt="">
-            <span>Funds raised</span>
-          </span>
-          <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">add</i></a>
-          </span>
-        </div>
-        <div class="mdl-list__item">
-          <span class="mdl-list__item-primary-content">
-            <img class="widget-img" src="/static/img/widgets/funding-amounts.svg" alt="">
-            <span>Funding amounts</span>
-          </span>
-          <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">add</i></a>
-          </span>
-        </div>
-        <div class="mdl-list__item">
-          <span class="mdl-list__item-primary-content">
-            <img class="widget-img" src="/static/img/widgets/experts.svg" alt="">
-            <span>Experts evaluations</span>
-          </span>
-          <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">add</i></a>
-          </span>
-        </div>
-        <div class="mdl-list__item">
-          <span class="mdl-list__item-primary-content">
-            <img class="widget-img" src="/static/img/widgets/description.svg" alt="">
-            <span>Description</span>
-          </span>
-          <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">add</i></a>
-          </span>
-        </div>
-        <div class="mdl-list__item">
-          <span class="mdl-list__item-primary-content">
-            <img class="widget-img" src="/static/img/widgets/code.svg" alt="">
-            <span>Code audit</span>
-          </span>
-          <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">attach_money</i></a>
-          </span>
-        </div>
-        <div class="mdl-list__item">
-          <span class="mdl-list__item-primary-content">
-            <img class="widget-img" src="/static/img/widgets/likes.svg" alt="">
-            <span>Likes</span>
-          </span>
-          <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">attach_money</i></a>
-          </span>
-        </div>
-        <div class="mdl-list__item">
-          <span class="mdl-list__item-primary-content">
-            <img class="widget-img" src="/static/img/widgets/portfolio.svg" alt="">
-            <span>Portfolio</span>
-          </span>
-          <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">attach_money</i></a>
-          </span>
-        </div>
+        <ul class="mdl-list">
+          <li class="mdl-list__item mdl-list__item--two-line" v-for="widget in widgetsBar">
+            <span class="mdl-list__item-primary-content">
+              <img class="widget-img" :src="widget.icon" alt="">
+              <span>{{ widget.name }}</span>
+              <span class="mdl-list__item-sub-title">{{ widget.subName }}</span>
+            </span>
+            <span v-if="widget.subscribe" class="mdl-list__item-secondary-content">
+              <a class="mdl-list__item-secondary-action" href="#" @click.prevent="addWidget(widget.component)"><i class="material-icons">add</i></a>
+            </span>
+            <span v-else class="mdl-list__item-secondary-content">
+              <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">attach_money</i></a>
+            </span>
+          </li>
+        </ul>
       </div>
       <router-view/>
     </div>
@@ -119,17 +52,25 @@ import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 export default {
   name: "app",
-  data: function data() {
-    return {
-
-    }
-  },
+  data: () => ({
+    widgetsBar: [
+      { name: 'Sentiments', subName: 'comments', component: 'SentimentsComments', icon: '/static/img/widgets/sentiments.svg', subscribe: true },
+      { name: 'Sentiments', subName: 'chart', component: 'SentimentsLineChart', icon: '/static/img/widgets/sentiments.svg', subscribe: true },
+      { name: 'Sentiments', subName: 'pie chart', component: 'SentimentsStatistics', icon: '/static/img/widgets/sentiments.svg', subscribe: true },
+      { name: 'Faces', subName: 'project', component: 'FacesProject', icon: '/static/img/widgets/faces.svg', subscribe: true },
+      { name: 'Faces', subName: 'search', component: 'FacesSearch', icon: '/static/img/widgets/faces.svg', subscribe: true },
+      { name: 'Funds raised', subName: '', component: '', icon: '/static/img/widgets/funds-raised.svg', subscribe: false },
+      { name: 'Funding amounts', subName: '', component: '', icon: '/static/img/widgets/funding-amounts.svg', subscribe: false },
+      { name: 'Experts evaluations', subName: '', component: '', icon: '/static/img/widgets/experts.svg', subscribe: false },
+      { name: 'Description', subName: '', component: '', icon: '/static/img/widgets/description.svg', subscribe: false },
+      { name: 'Code audit', subName: '', component: '', icon: '/static/img/widgets/code.svg', subscribe: false },
+      { name: 'Likes', subName: '', component: '', icon: '/static/img/widgets/likes.svg', subscribe: false },
+      { name: 'Portfolio', subName: '', component: '', icon: '/static/img/widgets/portfolio.svg', subscribe: false },
+    ]
+  }),
   methods: {
     addWidget (widgetName) {
-      store.dispatch({
-        type: 'addWidget',
-        widgetName: widgetName
-      })
+      this.$root.$emit('addWidget', widgetName)
     }
   }
 }
@@ -194,6 +135,7 @@ body
     width: 40px
     height: 40px
     margin-right: 16px
+    float: left
 //   background: #212E51 !important
 // .mdl-layout-title
 //   color: #fff

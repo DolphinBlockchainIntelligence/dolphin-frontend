@@ -25,6 +25,9 @@
           <li disabled class="mdl-menu__item">Disabled Action</li>
           <li class="mdl-menu__item">Yet Another Action</li>
         </ul>
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" @click="removeWidget()">
+          <i class="material-icons">delete</i>
+        </button>
       </div>
       <ul>
         <li class="mdl-list__item mdl-list__item--two-line">
@@ -67,32 +70,18 @@
 import axios from 'axios'
 export default {
   name: "faces-project",
+  props: ['id'],
   data: function data() {
     return {
 
     }
   },
   mounted () {
-    // document.querySelector('.mdl-layout').classList.add('mdl-layout--fixed-drawer')
-    // this.sentimentsPieChart()
-    // this.sentimentsLineChart()
-    this.sentimentsComments()
-    // this.getHeading()
-    // const el = document.getElementById('draggable-container')
-    // const sortable = Sortable.create(el)
   },
   methods: {
-    sentimentsComments: function () {
-      const postId = this.$route.params.id
-      axios.get('/static/data/btt-sentiments/D'+ postId +'.json')
-      .then(response => {
-        this.comments = response.data
-      })
-      .catch(e => {
-        this.commentsError = true
-        this.errors.push(e)
-      })
-    },
+    removeWidget: function () {
+      this.$root.$emit('removeWidget', this.id)
+    }
   }
 }
 </script>

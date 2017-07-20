@@ -26,6 +26,9 @@
           <li disabled class="mdl-menu__item">Disabled Action</li>
           <li class="mdl-menu__item">Yet Another Action</li>
         </ul>
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" @click="removeWidget()">
+          <i class="material-icons">delete</i>
+        </button>
       </div>
     </div>
   </div>
@@ -41,6 +44,7 @@ import draggable from 'vuedraggable'
 const colors = ['#f98a83', '#989898', '#85f77e']
 export default {
   name: "sentimentsStatistics",
+  props: ['id'],
   data: function data() {
     return {
 
@@ -92,6 +96,9 @@ export default {
               }]
           }]
       })
+    },
+    removeWidget: function () {
+      this.$root.$emit('removeWidget', this.id)
     }
   }
 }
