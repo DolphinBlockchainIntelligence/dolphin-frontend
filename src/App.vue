@@ -7,8 +7,8 @@
           <span class="mdl-layout-title">Dolphin BI</span>
         </a>
         <div class="search-bar">
-            <input class="mdl-textfield__input" type="text" name="sample" placeholder="Search coin">
-            <i class="material-icons">search</i>
+            <input class="mdl-textfield__input" type="text" name="sample" placeholder="Search coin" autofocus>
+            <a href="#" class="material-icons" @click="search()">search</a>
         </div>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -18,7 +18,7 @@
         </nav>
       </div>
     </header>
-    <div class="mdl-layout mdl-js-layout">
+    <div class="mdl-layout mdl-layout--fixed-drawer">
       <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Widgets</span>
         <ul class="mdl-list">
@@ -71,13 +71,26 @@ export default {
   methods: {
     addWidget (widgetName) {
       this.$root.$emit('addWidget', widgetName)
+    },
+    search () {
+
     }
   }
 }
 </script>
 
 <style lang="sass">
+.mdl-layout
+    min-height: calc(100vh - 64px)
+    // &.mdl-layout--fixed-drawer
+    //   .mdl-layout__drawer
+    //     left: auto
+    //     right: 0
+    //   .mdl-layout__content
+    //     margin-left: 0
+    //     margin-right: 240px
 .mdl-layout__header
+  background: #212E51 !important
   .search-bar
     background: rgba(0, 0, 0, 0.22)
     border-radius: 2px
@@ -88,8 +101,11 @@ export default {
     margin-left: 23px
     .material-icons
       margin: 0 10px
+      color: #fff
+      text-decoration: none
     input
       padding: 10px
+      outline: none
   .logo
     text-decoration: none
     color: #fff
@@ -102,7 +118,6 @@ export default {
     .mdl-layout-title
       vertical-align: middle
       display: inline-block
-// @import './assets/sticky-footer.sass'
 body
   overflow-x: hidden
 #app
@@ -115,32 +130,14 @@ body
       margin-top: 20px
 .page-title
   margin-bottom: 20px
-// .footer
-//   padding: 10px 0
-//   margin-top: 10px
-//   font-size: 13px
-//   border-top: 1px solid #DDDDEE
-//   .container
-//     display: flex
-//     align-items: center
-//     .left
-//       flex: 1 0 auto
-//     .right
-//       text-align: right
-.mdl-layout__header
-  background: #212E51 !important
 
 .mdl-layout__drawer
+  ul
+    margin-top: 0
+    padding-top: 0
   .widget-img
     width: 40px
     height: 40px
     margin-right: 16px
     float: left
-//   background: #212E51 !important
-// .mdl-layout-title
-//   color: #fff
-// .mdl-navigation a
-//   color: #fff !important
-//   &:hover
-//     background: #1A2543 !important
 </style>

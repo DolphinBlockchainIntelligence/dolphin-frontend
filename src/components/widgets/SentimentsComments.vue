@@ -47,10 +47,6 @@
 
 <script>
 import axios from 'axios'
-const Highchart = require('highcharts')
-const Highstock = require('highcharts/highstock')
-const Sortable = require('sortablejs')
-import draggable from 'vuedraggable'
 const colors = ['#f98a83', '#989898', '#85f77e']
 export default {
   name: "sentimentsComments",

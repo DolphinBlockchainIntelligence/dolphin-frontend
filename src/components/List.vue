@@ -5,9 +5,8 @@
         .list
           h3.page-title BTT sentiments (alpha)
           .datatable-options.mdl-textfield.mdl-js-textfield
-            input.mdl-textfield__input(v-model="query" placeholder="Search")
-            //- label.mdl-textfield__label Search
-          table.table.mdl-data-table.mdl-js-data-table.mdl-data-table--selectable.mdl-shadow--2dp
+            input.mdl-textfield__input(v-model="query" placeholder="Search post")
+          table.table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
             thead
               tr
                 th #
@@ -52,7 +51,6 @@ export default {
     document.querySelector('.mdl-layout').classList.remove('mdl-layout--fixed-drawer')
   },
   created () {
-    // document.querySelector('body').classList.remove('body-landing-lite')
     let component = this
     axios.get('/static/data/announceList.json')
     .then(response => {
@@ -93,12 +91,6 @@ export default {
     }
   },
   computed: {
-    // momentList: function () {
-    //   let list = this.postsList.map((currElement, index) => {
-    //     currElement.DateTimeLastPost = moment(currElement.DateTimeLastPost).calendar()
-    //   })
-    //   return list
-    // },
     computedList: function () {
       let vm = this
       let list = this.postsList.filter(function (item) {
@@ -126,6 +118,10 @@ export default {
   border: 1px solid #DDDDEE
   border-bottom: 0
   width: 100%
+  input
+    width: calc(100% - 14px)
+    border: 1px solid #ccc
+    padding: 7px
 .table
   border: 1px solid #DDDDEE
   width: 100%
@@ -139,12 +135,15 @@ export default {
       border-radius: 0
     &:nth-child(even) > td
       background-color: #FAFAFA
-  thead tr th
-    user-select: none
-    font-weight: bold
-    background-color: #FAFAFC
-    span
-      vertical-align: middle
+  thead tr
+    th
+      user-select: none
+      font-weight: bold
+      background-color: #FAFAFC
+      span
+        vertical-align: middle
+      &:nth-child(2)
+        text-align: left
   tbody tr
     cursor: pointer
     .links
@@ -154,4 +153,7 @@ export default {
         color: rgb(63, 81, 181) !important
         &:hover
           opacity: 1
+    td
+      &:nth-child(2)
+        text-align: left
 </style>

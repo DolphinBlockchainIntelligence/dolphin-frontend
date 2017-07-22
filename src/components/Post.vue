@@ -2,8 +2,15 @@
   <main class="mdl-layout__content">
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell--12-col">
-        <h4>{{ heading }}</h4>
+        <div class="heading-box">
+          <h4 class="left">{{ heading }}</h4>
+          <div class="right">
+            <a href="#" @click.prevent="toggleNav()"><i class="material-icons">settings</i></a>
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="mdl-grid" id="draggable-container">
       <template v-for="(child, index) in widgets">
         <component :is="child.name" :key="child.name" :id="child.id"></component>
       </template>
@@ -13,6 +20,8 @@
 
 <script>
 import axios from 'axios'
+const Sortable = require('sortablejs')
+
 import SentimentsStatistics from './widgets/SentimentsStatistics.vue'
 import SentimentsLineChart from './widgets/SentimentsLineChart.vue'
 import SentimentsComments from './widgets/SentimentsComments.vue'
@@ -24,14 +33,8 @@ export default {
   name: 'post',
   data: () => ({
     heading: '',
-    widgets: [{'id': 1, 'name': 'ExpertsEvaluations'}]
-    // widgets: ['SentimentsLineChart', 'SentimentsStatistics', 'SentimentsComments', 'FacesProject', 'FacesSearch']
+    widgets: [{'id': 1, 'name': 'SentimentsLineChart'}, {'id': 2, 'name': 'SentimentsComments'}]
   }),
-  // computed: {
-  //   idCounter: function () {
-  //     return this.widgets.length
-  //   }
-  // }
   components: {
     SentimentsLineChart,
     SentimentsStatistics,
@@ -41,9 +44,9 @@ export default {
     ExpertsEvaluations
   },
   mounted () {
-    document.querySelector('.mdl-layout').classList.add('mdl-layout--fixed-drawer')
+    // TODO: getHeading
     this.getHeading()
-    // let widgets = this.widgets
+    // TODO: Add and remove widget
     this.$root.$on('addWidget', (widgetName) => {
       console.log(this.widgets)
       this.widgets.push({'id': this.widgets.length+1, 'name': widgetName})
@@ -52,6 +55,9 @@ export default {
       console.log(this.widgets)
       this.widgets = _.reject(this.widgets, { 'id': id })
     })
+    // TODO: Sortable
+    const el = document.getElementById('draggable-container')
+    const sortable = Sortable.create(el)
   },
   methods: {
     getHeading: function () {
@@ -67,12 +73,25 @@ export default {
       .catch(e => {
         this.errors.push(e)
       })
+    },
+    toggleNav: function () {
+      document.querySelector('.mdl-layout').classList.toggle('mdl-layout--fixed-drawer')
     }
   }
 }
 </script>
 
 <style lang="sass">
+  .heading-box
+    display: flex
+    align-items: center
+    .left
+      flex: 1 0 auto
+    .right a
+      color: #3f51b5
+      opacity: .7
+      &:hover
+        opacity: 1
   .widget-faces-search
     .search-bar
       display: flex
