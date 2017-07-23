@@ -76,6 +76,7 @@
 
 <script>
 import Vue from 'vue'
+import _ from 'lodash'
 import 'roboto-fontface'
 import 'material-design-icons-iconfont'
 import "material-design-lite/material.min.css"
@@ -85,6 +86,7 @@ Vue.use(BootstrapVue)
 export default {
   name: "app",
   data: () => ({
+    coinsList: [],
     widgetsBar: [
       { name: 'Sentiments', subName: 'comments', component: 'SentimentsComments', icon: '/static/img/widgets/sentiments.svg', subscribe: true },
       { name: 'Sentiments', subName: 'chart', component: 'SentimentsLineChart', icon: '/static/img/widgets/sentiments.svg', subscribe: true },
@@ -99,19 +101,31 @@ export default {
       { name: 'Likes', subName: '', component: '', icon: '/static/img/widgets/likes.svg', subscribe: false },
       { name: 'Portfolio', subName: '', component: '', icon: '/static/img/widgets/portfolio.svg', subscribe: false },
     ],
-    favoritesCoins: [
-      {
-        name: '[ANN][ACP]|ANARCHISTSPRIME |OFFICIAL|0 PREMINE|EST 2015|SHA256|DIGISHIELD|GAMING',
-        id: '1001407'
-      },
-      {
-        name: 'Moon',
-        id: '1237881'
-      }
-    ]
+    favoritesCoins: []
   }),
+  created () {
+    let component = this
+    axios.get('/static/data/announceList.json')
+    .then(response => {
+      this.coinsList = Object.values(response.data)
+      this.coinsList.map((currElement, index) => {
+        currElement.DateTimeLastPost = moment(currElement.DateTimeLastPost).calendar()
+      })
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+  },
+  mounted () {
+    this.$root.$on('addFavoriteCoins', (coin) => {
+      this.favoritesCoins.push(coin)
+    })
+    this.$root.$on('removeFavoriteCoins', (id) => {
+      this.favoritesCoins = _.reject(this.favoritesCoins, { 'id': id })
+    })
+  },
   methods: {
-    addWidget (widgetName) {
+    favoritesCoins (widgetName) {
       this.$root.$emit('addWidget', widgetName)
     },
     search () {
@@ -136,17 +150,19 @@ export default {
     .favourites-coins
       list-style: none
       padding-left: 14px
-      margin-top: 7px
-      li a
-        text-decoration: none
-        display: flex
-        align-items: center
-        i
-          margin-right: 7px
-        .name
-          text-overflow: ellipsis
-          white-space: nowrap
-          overflow: hidden
+      li
+        &:first-child
+          margin-top: 7px
+        a
+          text-decoration: none
+          display: flex
+          align-items: center
+          i
+            margin-right: 7px
+          .name
+            text-overflow: ellipsis
+            white-space: nowrap
+            overflow: hidden
 
 .mdl-layout
     min-height: calc(100vh - 64px)

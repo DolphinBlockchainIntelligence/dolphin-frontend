@@ -5,7 +5,7 @@
         <div class="heading-box">
           <h4 class="left">{{ heading }}</h4>
           <div class="right">
-            <a href="#"><i class="material-icons">star</i></a>
+            <a href="#" @click.prevent="toggleFavorite($event)"><i class="material-icons">star_border</i></a>
             <a href="#" @click.prevent="toggleSettings()"><i class="material-icons">settings</i></a>
           </div>
         </div>
@@ -33,6 +33,7 @@ import ExpertsEvaluations from './widgets/ExpertsEvaluations.vue'
 export default {
   name: 'post',
   data: () => ({
+    id: '',
     heading: '',
     widgets: [{'id': 1, 'name': 'SentimentsLineChart'}, {'id': 2, 'name': 'SentimentsComments'}]
   }),
@@ -68,6 +69,7 @@ export default {
         for (var i in headings) {
           if (this.$route.params.id == headings[i].topicId) {
             this.heading = headings[i].announce
+            this.id = headings[i].topicId
           }
         }
       })
@@ -77,6 +79,16 @@ export default {
     },
     toggleSettings: function () {
       document.querySelector('.mdl-layout').classList.toggle('mdl-layout--fixed-right-drawer')
+    },
+    toggleFavorite: function (event) {
+      let icon = event.target.innerHTML
+      if (icon == 'star') {
+        this.$root.$emit('removeFavoriteCoins', this.id)
+        event.target.innerHTML = 'star_border'
+      } else {
+        this.$root.$emit('addFavoriteCoins', { id: this.id, name: this.heading })
+        event.target.innerHTML = 'star'
+      }
     }
   }
 }
