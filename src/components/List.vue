@@ -4,7 +4,7 @@
       .mdl-cell.mdl-cell--12-col
         .list
           h3.page-title BTT sentiments (alpha)
-          .datatable-options.mdl-textfield.mdl-js-textfield
+          .datatable-options.mdl-textfield.mdl-js-textfield.mdl-shadow--2dp
             input.mdl-textfield__input(v-model="query" placeholder="Search post")
           table.table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
             thead
@@ -122,6 +122,7 @@ export default {
     width: calc(100% - 14px)
     border: 1px solid #ccc
     padding: 7px
+    background: #fff
 .table
   border: 1px solid #DDDDEE
   width: 100%

@@ -13,7 +13,7 @@
         </div>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="/#/dashboard">Dashboard</a>
+          <!-- <a class="mdl-navigation__link" href="/#/dashboard">Dashboard</a> -->
           <a class="mdl-navigation__link" href="http://presale.dolphin.bi/" target="_blank">ICO</a>
           <a class="mdl-navigation__link" href="/#/profile"><i class="material-icons mdl-list__item-avatar">person</i></a>
         </nav>
@@ -31,23 +31,11 @@
             <a href="#" class="mdl-list__item-primary-content">
               ICO view
             </a>
-            <ul>
-              <li>
-                <a href="#">
+            <ul class="favourites-coins">
+              <li v-for="coin in favoritesCoins">
+                <a :href="'/#/post/'+coin.id">
                   <i class="material-icons">keyboard_arrow_right</i>
-                  IOTA
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="material-icons">star</i>
-                  DOBI
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="material-icons">star</i>
-                  Ethereum
+                  <span class="name">{{ coin.name }}</span>
                 </a>
               </li>
             </ul>
@@ -110,6 +98,16 @@ export default {
       { name: 'Code audit', subName: '', component: '', icon: '/static/img/widgets/code.svg', subscribe: false },
       { name: 'Likes', subName: '', component: '', icon: '/static/img/widgets/likes.svg', subscribe: false },
       { name: 'Portfolio', subName: '', component: '', icon: '/static/img/widgets/portfolio.svg', subscribe: false },
+    ],
+    favoritesCoins: [
+      {
+        name: '[ANN][ACP]|ANARCHISTSPRIME |OFFICIAL|0 PREMINE|EST 2015|SHA256|DIGISHIELD|GAMING',
+        id: '1001407'
+      },
+      {
+        name: 'Moon',
+        id: '1237881'
+      }
     ]
   }),
   methods: {
@@ -135,7 +133,7 @@ export default {
       color: rgb(63, 81, 181) !important
       &:hover
         opacity: 1
-    &> ul
+    .favourites-coins
       list-style: none
       padding-left: 14px
       margin-top: 7px
@@ -145,6 +143,10 @@ export default {
         align-items: center
         i
           margin-right: 7px
+        .name
+          text-overflow: ellipsis
+          white-space: nowrap
+          overflow: hidden
 
 .mdl-layout
     min-height: calc(100vh - 64px)

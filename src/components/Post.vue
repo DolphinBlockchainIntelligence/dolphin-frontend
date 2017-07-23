@@ -1,23 +1,22 @@
 <template>
-  <!-- <div> -->
-    <main class="mdl-layout__content">
-      <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--12-col">
-          <div class="heading-box">
-            <h4 class="left">{{ heading }}</h4>
-            <div class="right">
-              <a href="#" @click.prevent="toggleSettings()"><i class="material-icons">settings</i></a>
-            </div>
+  <main class="mdl-layout__content">
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--12-col">
+        <div class="heading-box">
+          <h4 class="left">{{ heading }}</h4>
+          <div class="right">
+            <a href="#"><i class="material-icons">star</i></a>
+            <a href="#" @click.prevent="toggleSettings()"><i class="material-icons">settings</i></a>
           </div>
         </div>
       </div>
-      <div class="mdl-grid" id="draggable-container">
-        <template v-for="(child, index) in widgets">
-          <component :is="child.name" :key="child.name" :id="child.id"></component>
-        </template>
-      </div>
-    </main>
-  <!-- </div> -->
+    </div>
+    <div class="mdl-grid" id="draggable-container">
+      <template v-for="(child, index) in widgets">
+        <component :is="child.name" :key="child.name" :id="child.id"></component>
+      </template>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -87,13 +86,15 @@ export default {
   .heading-box
     display: flex
     align-items: center
-    .left
-      flex: 1 0 auto
-    .right a
-      color: #3f51b5
-      opacity: .7
-      &:hover
-        opacity: 1
+    .right
+      display: flex
+      a
+        color: #3f51b5
+        margin: 24px 0 16px
+        opacity: .7
+        margin-left: 7px
+        &:hover
+          opacity: 1
   .widget-faces-search
     .search-bar
       display: flex
