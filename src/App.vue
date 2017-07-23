@@ -9,6 +9,7 @@
         b-collapse#nav_collapse(is-nav='')
           b-nav(is-nav-bar='')
             b-nav-item(to='/list') BTT sentiments (alpha)
+            b-nav-item(href='/icoface') ICOface
     router-view
   //footer.footer
     .container
