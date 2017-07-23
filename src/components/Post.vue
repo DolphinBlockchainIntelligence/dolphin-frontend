@@ -5,6 +5,8 @@
         <div class="heading-box">
           <h4 class="left">{{ heading }}</h4>
           <div class="right">
+            <a :href="topicStarterUrl" target="_blank"><i class="material-icons">account_circle</i></a>
+            <a :href="topicUrl" target="_blank"><i class="material-icons">assignment</i></a>
             <a href="#" @click.prevent="toggleFavorite($event)"><i class="material-icons">star_border</i></a>
             <a href="#" @click.prevent="toggleSettings()"><i class="material-icons">settings</i></a>
           </div>
@@ -35,7 +37,9 @@ export default {
   data: () => ({
     id: '',
     heading: '',
-    widgets: [{'id': 1, 'name': 'SentimentsLineChart'}, {'id': 2, 'name': 'SentimentsComments'}]
+    widgets: [{'id': 1, 'name': 'SentimentsLineChart'}, {'id': 2, 'name': 'SentimentsComments'}],
+    topicStarterUrl: '',
+    topicUrl: ''
   }),
   components: {
     SentimentsLineChart,
@@ -70,6 +74,8 @@ export default {
           if (this.$route.params.id == headings[i].topicId) {
             this.heading = headings[i].announce
             this.id = headings[i].topicId
+            this.topicStarterUrl = headings[i].topicStarterUrl
+            this.topicUrl = headings[i].topicUrl
           }
         }
       })
@@ -98,6 +104,8 @@ export default {
   .heading-box
     display: flex
     align-items: center
+    .left
+      flex: 1 1 auto
     .right
       display: flex
       a

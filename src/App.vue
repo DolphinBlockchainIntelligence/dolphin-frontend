@@ -8,8 +8,15 @@
           <span class="mdl-layout-title">Dolphin BI</span>
         </a>
         <div class="search-bar">
-            <input class="mdl-textfield__input" type="text" name="sample" placeholder="Search coin" autofocus>
+            <input class="mdl-textfield__input" type="text" name="sample" placeholder="Search coin" v-model="query" autofocus>
             <a href="#" class="material-icons" @click="search()">search</a>
+            <ul class="mdl-list search-result mdl-shadow--2dp">
+              <li class="mdl-list__item" v-for="coin in computedList">
+                <a :href="'/post/' + post.topicId" class="mdl-list__item-primary-content">
+                  {{ coin.announce }}
+                </a>
+              </li>
+            </ul>
         </div>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -34,7 +41,7 @@
             <ul class="favourites-coins">
               <li v-for="coin in favoritesCoins">
                 <a :href="'/#/post/'+coin.id">
-                  <i class="material-icons">keyboard_arrow_right</i>
+                  <i class="material-icons">stars</i>
                   <span class="name">{{ coin.name }}</span>
                 </a>
               </li>
@@ -86,6 +93,7 @@ Vue.use(BootstrapVue)
 export default {
   name: "app",
   data: () => ({
+    query: '',
     coinsList: [],
     widgetsBar: [
       { name: 'Sentiments', subName: 'comments', component: 'SentimentsComments', icon: '/static/img/widgets/sentiments.svg', subscribe: true },
@@ -103,6 +111,24 @@ export default {
     ],
     favoritesCoins: []
   }),
+  computed: {
+    computedList: function () {
+      let vm = this
+      let list = this.coinsList.filter(function (item) {
+        return list = item.announce.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
+      })
+      if (this.sortBy) {
+        list = _.orderBy(list, [this.sortBy], [this.sortOrder])
+      } else {
+        list = _.orderBy(list, ['NumReplies', 'DateTimeLastPost', 'announce'], ['desc', 'desc', 'asc'])
+      }
+      list = list.map((currElement, index) => {
+        currElement['order'] = ++index
+        return currElement
+      })
+      return list
+    }
+  },
   created () {
     let component = this
     axios.get('/static/data/announceList.json')
@@ -139,6 +165,16 @@ export default {
 </script>
 
 <style lang="sass">
+.search-result
+  position: absolute
+  top: 64px
+  left: 315px
+  margin: 0
+  width: 41%
+  z-index: 10
+  background: #fff
+.hide
+  display: none
 .mdl-layout__drawer
   .mdl-list__item
     display: block
@@ -199,11 +235,15 @@ export default {
         height: 40px
         margin-right: 16px
         float: left
+    .btn-remove, .btn-drag
+      display: none
     &.mdl-layout--fixed-right-drawer
       .mdl-layout__right-drawer
         transform: translateX(0)
       .mdl-layout__content
         margin-right: 240px
+      .btn-remove, .btn-drag
+        display: inline-block
 .mdl-layout__header
   background: #212E51 !important
   .search-bar

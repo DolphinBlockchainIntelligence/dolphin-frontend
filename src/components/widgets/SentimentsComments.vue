@@ -5,17 +5,16 @@
         <h4 class="mdl-card__title-text">Sentiments: comments</h4>
       </div>
       <div class="mdl-card__menu">
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect btn-info">
           <i class="material-icons">info</i>
         </button>
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect btn-drag">
           <i class="material-icons">pan_tool</i>
         </button>
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+<!--         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect btn-filter">
           <i class="material-icons">filter_list</i>
         </button>
-        <button id="demo-menu-lower-right"
-                class="mdl-button mdl-js-button mdl-button--icon">
+        <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon btn-more">
           <i class="material-icons">more_vert</i>
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
@@ -24,8 +23,8 @@
           <li class="mdl-menu__item">Another Action</li>
           <li disabled class="mdl-menu__item">Disabled Action</li>
           <li class="mdl-menu__item">Yet Another Action</li>
-        </ul>
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" @click="removeWidget()">
+        </ul> -->
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect btn-remove" @click="removeWidget()">
           <i class="material-icons">delete</i>
         </button>
       </div>

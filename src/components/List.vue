@@ -10,26 +10,26 @@
             thead
               tr
                 th #
-                th(v-on:click="sort('announce')")
+                th(@click="sort('announce')")
                   span Announce
                   i.material-icons
-                th(v-on:click="sort('NumReplies')")
+                th(@click="sort('NumReplies')")
                   span Replies
                   i.material-icons
-                th(v-on:click="sort('DateTimeLastPost')")
+                th(@click="sort('DateTimeLastPost')")
                   span Last comment
                   i.material-icons
                 th
             tbody(name="table-row")
-              tr(v-for="post in computedList" key="tr" class="table-row-item" :to="'/post/' + post.topicId" v-on:click="goToPost(post.topicId)")
+              tr(v-for="post in computedList" key="tr" class="table-row-item" :to="'/post/' + post.topicId" @click="goToPost(post.topicId)")
                 td(key="order") {{ post.order }}
                 td(key="announce") {{ post.announce }}
                 td(key="replies") {{ post.NumReplies }}
                 td(key="views") {{ post.DateTimeLastPost }}
                 td.links(key="links")
-                  a(v-on:click="dataHref(post.topicStarterUrl, $event)")
+                  a(@click="dataHref(post.topicStarterUrl, $event)")
                     i.material-icons account_circle
-                  a(v-on:click="dataHref(post.topicUrl, $event)")
+                  a(@click="dataHref(post.topicUrl, $event)")
                     i.material-icons assignment
 </template>
 
