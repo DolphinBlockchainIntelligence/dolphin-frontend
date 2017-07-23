@@ -34,7 +34,7 @@
             <ul>
               <li>
                 <a href="#">
-                  <i class="material-icons">star_border</i>
+                  <i class="material-icons">keyboard_arrow_right</i>
                   IOTA
                 </a>
               </li>
@@ -128,11 +128,18 @@ export default {
     a
       opacity: .7
       color: rgb(63, 81, 181) !important
+      &:hover
+        opacity: 1
     &> ul
       list-style: none
-      padding-left: 10px
+      padding-left: 14px
+      margin-top: 7px
       li a
         text-decoration: none
+        display: flex
+        align-items: center
+        i
+          margin-right: 7px
 
 .mdl-layout
     min-height: calc(100vh - 64px)
