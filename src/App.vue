@@ -57,6 +57,11 @@
               Widget market
             </a>
           </li>
+          <li class="mdl-list__item">
+            <a href="#" class="mdl-list__item-primary-content">
+              ICO faces
+            </a>
+          </li>
         </ul>
       </div>
       <router-view/>
