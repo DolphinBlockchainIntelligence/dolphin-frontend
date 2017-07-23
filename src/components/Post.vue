@@ -1,21 +1,23 @@
 <template>
-  <main class="mdl-layout__content">
-    <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--12-col">
-        <div class="heading-box">
-          <h4 class="left">{{ heading }}</h4>
-          <div class="right">
-            <a href="#" @click.prevent="toggleNav()"><i class="material-icons">settings</i></a>
+  <!-- <div> -->
+    <main class="mdl-layout__content">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <div class="heading-box">
+            <h4 class="left">{{ heading }}</h4>
+            <div class="right">
+              <a href="#" @click.prevent="toggleSettings()"><i class="material-icons">settings</i></a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="mdl-grid" id="draggable-container">
-      <template v-for="(child, index) in widgets">
-        <component :is="child.name" :key="child.name" :id="child.id"></component>
-      </template>
-    </div>
-  </main>
+      <div class="mdl-grid" id="draggable-container">
+        <template v-for="(child, index) in widgets">
+          <component :is="child.name" :key="child.name" :id="child.id"></component>
+        </template>
+      </div>
+    </main>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -74,8 +76,8 @@ export default {
         this.errors.push(e)
       })
     },
-    toggleNav: function () {
-      document.querySelector('.mdl-layout').classList.toggle('mdl-layout--fixed-drawer')
+    toggleSettings: function () {
+      document.querySelector('.mdl-layout').classList.toggle('mdl-layout--fixed-right-drawer')
     }
   }
 }

@@ -2,6 +2,7 @@
   <div class="">
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
+        <a class="mdl-navigation__link" href="#" @click.prevent="toggleMenu()"><i class="material-icons">menu</i></a>
         <a href="/#/" class="logo">
           <img src="/static/img/dolphin.png" class="logo-img">
           <span class="mdl-layout-title">Dolphin BI</span>
@@ -20,7 +21,46 @@
     </header>
     <div class="mdl-layout mdl-layout--fixed-drawer">
       <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Widgets</span>
+        <ul class="mdl-list">
+          <li class="mdl-list__item">
+            <a href="#" class="mdl-list__item-primary-content">
+              Market overview
+            </a>
+          </li>
+          <li class="mdl-list__item">
+            <a href="#" class="mdl-list__item-primary-content">
+              ICO view
+            </a>
+            <ul>
+              <li>
+                <a href="#">
+                  <i class="material-icons">star_border</i>
+                  IOTA
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="material-icons">star</i>
+                  DOBI
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="material-icons">star</i>
+                  Ethereum
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="mdl-list__item">
+            <a href="#" class="mdl-list__item-primary-content">
+              Widget market
+            </a>
+          </li>
+        </ul>
+      </div>
+      <router-view/>
+      <div class="mdl-layout__right-drawer">
         <ul class="mdl-list">
           <li class="mdl-list__item mdl-list__item--two-line" v-for="widget in widgetsBar">
             <span class="mdl-list__item-primary-content">
@@ -37,7 +77,6 @@
           </li>
         </ul>
       </div>
-      <router-view/>
     </div>
   </div>
 </template>
@@ -74,21 +113,67 @@ export default {
     },
     search () {
 
+    },
+    toggleMenu () {
+      document.querySelector('.mdl-layout').classList.toggle('mdl-layout--fixed-drawer')
     }
   }
 }
 </script>
 
 <style lang="sass">
+.mdl-layout__drawer
+  .mdl-list__item
+    display: block
+    a
+      opacity: .7
+      color: rgb(63, 81, 181) !important
+    &> ul
+      list-style: none
+      padding-left: 10px
+      li a
+        text-decoration: none
+
 .mdl-layout
     min-height: calc(100vh - 64px)
-    // &.mdl-layout--fixed-drawer
-    //   .mdl-layout__drawer
-    //     left: auto
-    //     right: 0
-    //   .mdl-layout__content
-    //     margin-left: 0
-    //     margin-right: 240px
+    .mdl-layout__right-drawer
+      transform: translateX(250px)
+      transform-style: preserve-3d
+      will-change: transform
+      transition-duration: .2s
+      transition-timing-function: cubic-bezier(.4,0,.2,1)
+      transition-property: transform
+      transition-property: transform,-webkit-transform
+      background: #fafafa
+      left: auto
+      right: 0
+      position: absolute
+      top: 0
+      right: 0
+      width: 240px
+      height: 100%
+      z-index: 1
+      box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 3px -2px rgba(0,0,0,.2), 0 5px 1px 0 rgba(0,0,0,.12)
+      box-sizing: border-box
+      border-left: 1px solid #e0e0e0
+      height: 100%
+      max-height: 100%
+      overflow: visible
+      overflow-y: auto
+      z-index: 5
+      ul
+        margin-top: 0
+        padding-top: 0
+      .widget-img
+        width: 40px
+        height: 40px
+        margin-right: 16px
+        float: left
+    &.mdl-layout--fixed-right-drawer
+      .mdl-layout__right-drawer
+        transform: translateX(0)
+      .mdl-layout__content
+        margin-right: 240px
 .mdl-layout__header
   background: #212E51 !important
   .search-bar
@@ -130,14 +215,4 @@ body
       margin-top: 20px
 .page-title
   margin-bottom: 20px
-
-.mdl-layout__drawer
-  ul
-    margin-top: 0
-    padding-top: 0
-  .widget-img
-    width: 40px
-    height: 40px
-    margin-right: 16px
-    float: left
 </style>

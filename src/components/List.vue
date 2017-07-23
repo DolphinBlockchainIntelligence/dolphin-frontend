@@ -48,7 +48,7 @@ export default {
     postsList: []
   }),
   mounted () {
-    document.querySelector('.mdl-layout').classList.remove('mdl-layout--fixed-drawer')
+    document.querySelector('.mdl-layout').classList.remove('mdl-layout--fixed-right-drawer')
   },
   created () {
     let component = this
