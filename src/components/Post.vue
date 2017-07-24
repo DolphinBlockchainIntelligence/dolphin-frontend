@@ -54,7 +54,7 @@ export default {
     this.getHeading()
     // TODO: Add and remove widget
     this.$root.$on('addWidget', (widgetName) => {
-      console.log(this.widgets)
+      console.log('TEST: ' + this.widgets)
       this.widgets.push({'id': this.widgets.length+1, 'name': widgetName})
     })
     this.$root.$on('removeWidget', (id) => {

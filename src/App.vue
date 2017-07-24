@@ -1,86 +1,86 @@
-  <template>
-    <div class="">
-      <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-          <a class="mdl-navigation__link" href="#" @click.prevent="toggleMenu()"><i class="material-icons">menu</i></a>
-          <a href="/#/" class="logo">
-            <img src="/static/img/dolphin.png" class="logo-img">
-            <span class="mdl-layout-title">Dolphin BI</span>
-          </a>
-          <div class="search-bar">
-              <input id="search" class="mdl-textfield__input" type="text" name="sample" placeholder="Search coin" v-model="query" autofocus>
-              <a href="#" class="material-icons" @click="search()">search</a>
-              <ul id="search-result" class="mdl-list search-result mdl-shadow--2dp hide">
-                <li class="mdl-list__item" v-for="coin in computedList">
-                  <a :href="'/post/' + coin.topicId" class="mdl-list__item-primary-content">
-                    {{ coin.announce }}
-                  </a>
-                </li>
-              </ul>
-          </div>
-          <div class="mdl-layout-spacer"></div>
-          <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="http://presale.dolphin.bi/" target="_blank">ICO</a>
-            <a class="mdl-navigation__link" href="/#/profile"><i class="material-icons mdl-list__item-avatar">person</i></a>
-          </nav>
+<template>
+  <div class="">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <a class="mdl-navigation__link" href="#" @click.prevent="toggleMenu()"><i class="material-icons">menu</i></a>
+        <a href="/#/" class="logo">
+          <img src="/static/img/dolphin.png" class="logo-img">
+          <span class="mdl-layout-title">Dolphin BI</span>
+        </a>
+        <div class="search-bar">
+            <input id="search" class="mdl-textfield__input" type="text" name="sample" placeholder="Search coin" v-model="query" autofocus>
+            <a href="#" class="material-icons" @click="search()">search</a>
+            <ul id="search-result" class="mdl-list search-result mdl-shadow--2dp hide">
+              <li class="mdl-list__item" v-for="coin in computedList">
+                <a :href="'/post/' + coin.topicId" class="mdl-list__item-primary-content">
+                  {{ coin.announce }}
+                </a>
+              </li>
+            </ul>
         </div>
-      </header>
-      <div class="mdl-layout mdl-layout--fixed-drawer">
-        <div class="mdl-layout__drawer">
-          <ul class="mdl-list">
-            <li class="mdl-list__item">
-              <a href="#" class="mdl-list__item-primary-content">
-                Market overview
-              </a>
-            </li>
-            <li class="mdl-list__item">
-              <a href="#" class="mdl-list__item-primary-content">
-                ICO view
-              </a>
-              <ul class="favourites-coins">
-                <li v-for="coin in favoritesCoins">
-                  <a :href="'/#/post/'+coin.id">
-                    <i class="material-icons">stars</i>
-                    <span class="name">{{ coin.name }}</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="mdl-list__item">
-              <a href="#" class="mdl-list__item-primary-content">
-                Widget market
-              </a>
-            </li>
-            <li class="mdl-list__item">
-              <a href="#" class="mdl-list__item-primary-content">
-                ICO faces
-              </a>
-            </li>
-          </ul>
-        </div>
-        <router-view/>
-        <div class="mdl-layout__right-drawer">
-          <ul class="mdl-list">
-            <li class="mdl-list__item mdl-list__item--two-line" v-for="widget in widgetsBar">
-              <span class="mdl-list__item-primary-content">
-                <img class="widget-img" :src="widget.icon" alt="">
-                <span>{{ widget.name }}</span>
-                <span class="mdl-list__item-sub-title">{{ widget.subName }}</span>
-              </span>
-              <span v-if="widget.subscribe" class="mdl-list__item-secondary-content">
-                <a class="mdl-list__item-secondary-action" href="#" @click.prevent="addWidget(widget.component)"><i class="material-icons">add</i></a>
-              </span>
-              <span v-else class="mdl-list__item-secondary-content">
-                <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">attach_money</i></a>
-              </span>
-            </li>
-          </ul>
-        </div>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="http://presale.dolphin.bi/" target="_blank">ICO</a>
+          <a class="mdl-navigation__link" href="/#/profile"><i class="material-icons mdl-list__item-avatar">person</i></a>
+        </nav>
+      </div>
+    </header>
+    <div class="mdl-layout mdl-layout--fixed-drawer">
+      <div class="mdl-layout__drawer">
+        <ul class="mdl-list">
+          <li class="mdl-list__item">
+            <a href="#" class="mdl-list__item-primary-content">
+              Market overview
+            </a>
+          </li>
+          <li class="mdl-list__item">
+            <a href="#" class="mdl-list__item-primary-content">
+              ICO view
+            </a>
+            <ul class="favourites-coins">
+              <li v-for="coin in favoritesCoins">
+                <a :href="'/#/post/'+coin.id">
+                  <i class="material-icons">stars</i>
+                  <span class="name">{{ coin.name }}</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="mdl-list__item">
+            <a href="#" class="mdl-list__item-primary-content">
+              Widget market
+            </a>
+          </li>
+          <li class="mdl-list__item">
+            <a href="#" class="mdl-list__item-primary-content">
+              ICO faces
+            </a>
+          </li>
+        </ul>
+      </div>
+      <router-view/>
+      <div class="mdl-layout__right-drawer">
+        <ul class="mdl-list">
+          <li class="mdl-list__item mdl-list__item--two-line" v-for="widget in widgetsBar">
+            <span class="mdl-list__item-primary-content">
+              <img class="widget-img" :src="widget.icon" alt="">
+              <span>{{ widget.name }}</span>
+              <span class="mdl-list__item-sub-title">{{ widget.subName }}</span>
+            </span>
+            <span v-if="widget.subscribe" class="mdl-list__item-secondary-content">
+              <a class="mdl-list__item-secondary-action" href="#" @click.prevent="addWidget(widget.component)"><i class="material-icons">add</i></a>
+            </span>
+            <span v-else class="mdl-list__item-secondary-content">
+              <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">attach_money</i></a>
+            </span>
+          </li>
+        </ul>
       </div>
     </div>
-  </template>
+  </div>
+</template>
 
-  <script>
+<script>
   import Vue from 'vue'
   import _ from 'lodash'
   import axios from 'axios'
@@ -151,7 +151,7 @@
       })
     },
     methods: {
-      favoritesCoins (widgetName) {
+      addWidget (widgetName) {
         this.$root.$emit('addWidget', widgetName)
       },
       toggleMenu () {
@@ -159,9 +159,9 @@
       }
     }
   }
-  </script>
+</script>
 
-  <style lang="sass">
+<style lang="sass">
   .search-result
     position: absolute
     top: 64px
@@ -284,4 +284,4 @@
         margin-top: 20px
   .page-title
     margin-bottom: 20px
-  </style>
+</style>
