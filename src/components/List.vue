@@ -47,7 +47,9 @@ export default {
   created () {
     // document.querySelector('body').classList.remove('body-landing-lite')
     let component = this
-    axios.get('/static/data/announceList.json')
+    axios.get('/static/data/announceList.json', {
+      headers: {'Cache-Control': 'private, max-age=0, no-cache'}
+    })
     .then(response => {
       this.postsList = Object.values(response.data)
       this.postsList.map((currElement, index) => {

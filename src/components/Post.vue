@@ -12,7 +12,7 @@
         .date {{ comment.date }}
       a.text(:href="'https://bitcointalk.org/index.php?topic='+comment.topicId+'.msg'+key+'#msg'+key" target="_blank") {{ comment.text }}
   .nodata(v-if="chartError && commentsError")
-    p Data not find
+    p Data not found
 
 </template>
 
