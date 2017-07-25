@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import {$,jQuery} from 'jquery'
 import Vue from 'vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
