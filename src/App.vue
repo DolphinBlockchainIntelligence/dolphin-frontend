@@ -22,9 +22,12 @@
 </template>
 
 <script>
-import {$,jQuery} from 'jquery'
+import $ from 'jquery'
+// let $ = jQuery = require('jquery');
 import Vue from 'vue'
+// import 'bootstrap/dist/js/bootstrap.js'
 import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.js'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'roboto-fontface'
 import 'material-design-icons-iconfont'

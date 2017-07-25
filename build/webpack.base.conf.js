@@ -23,6 +23,8 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src')
+      // 'jQuery': 'jquery',
+      // '$': 'jquery'
     }
   },
   module: {
@@ -66,6 +68,10 @@ module.exports = {
         test: /\.svg$/,
         loader: 'vue-svg-loader'
       }
+      // {
+      //   test: /jquery-plugin/,
+      //   loader: 'imports?jQuery=jquery,$=jquery,this=>window'
+      // }
     ]
   }
 }
