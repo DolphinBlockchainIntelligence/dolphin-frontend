@@ -2,65 +2,59 @@
   <div id="Face">
     <div class="container">
       <div class="row" style="margin-top: 50px; margin-bottom: 30px; text-align: center">
-        <form class="form-inline">
+        <form id="searchByPhoto" class="form-inline" @submit.prevent="searchByPhoto()">
           <label for="exampleInputName2" style="margin-right: 20px">Search by picture</label>
             <span class="btn btn-primary btn-file">
-              Upload picture <input type="file" id="searchphoto">
+              Upload picture <input id="searchByPhotoInput" type="file" onchange="document.getElementById('searchByPhoto').submit()">
             </span>
         </form>
       </div>
       <hr>
       <div id="faces" class="row">
-        <div v-for="face in faces" class="col-xs-6 col-md-3">
-          <a href="#" :data-id="face.id" class="thumbnail card" @click.prevent="faceClick()">
-            <img :src="'https://s3.amazonaws.com/icofaces/'+ face.id + '.jpg'" :alt="face.name" />
-          </a>
-        </div>
+        <template v-if="notFound">
+          <h3 style="margin: 0 auto">Not found any similar faces</h3>
+          </br>
+        </template>
+        <template v-else>
+          <div v-for="face in faces" class="col-xs-6 col-md-3">
+            <a href="#" :data-id="face.id" class="thumbnail card" @click.prevent="faceClick($event)">
+              <img :src="'https://s3.amazonaws.com/icofaces/'+ face.id + '.jpg'" :alt="face.name" :data-id="face.id"/>
+            </a>
+          </div>
+        </template>
       </div>
     </div>
-    <b-modal id="myModal" title="Submit your name" ref="my_modal">
+    <b-modal id="myModal" title="Submit your name" ref="my_modal" :hide-footer="true">
       <template slot="modal-title" name="modal-footer">
-        <button id="similar" type="button" class="btn btn-warning" style="float: left; padding: 5px 50px">Find similar faces</button>
+        <button :data-face="modal.face" @click.prevent="similarClick($event)" id="similar" type="button" class="btn btn-warning" style="float: left; padding: 5px 50px">Find similar faces</button>
       </template>
-      <img src="" style="max-width: 300px; max-height: 300px; margin: 10px;" align="left">
-      <h3></h3>
-      <p></p>
-      <template slot="modal-footer" name="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </template>
+      <img class="img-thumbnail" :src="'https://s3.amazonaws.com/icofaces/' + modal.id + '.jpg'" style="max-width: 300px; max-height: 300px; margin: 10px;" align="left">
+      <h3><a :href="modal.url" target="_blank">{{ modal.name }}</a></h3>
+      <p>
+        {{ modal.role }} of </b>
+        <a :href="modal.site" target="_blank"> {{ modal.project }}</a>
+      </p>
     </b-modal>
-    <!-- <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <button id="similar" type="button" class="btn btn-warning" style="float: left; padding: 5px 50px">Find similar faces</button>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              </div>
-              <div class="modal-body">
-                  <img src="" style="max-width: 300px; max-height: 300px; margin: 10px;" align="left">
-                  <h3></h3>
-                  <p></p>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-          </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
 
 <script>
-import $ from 'jquery'
 import axios from 'axios'
 import AWS from 'aws-sdk'
+AWS.config.update({
+    accessKeyId: 'AKIAIACAV2QTUVXMA2UA',
+    secretAccessKey: ''
+})
+let s3 = new AWS.S3({region: 'us-east-1'})
+let rekognition = new AWS.Rekognition({region: 'us-east-1'})
 export default {
-  name: "Face",
+  name: 'Face',
   data: function data() {
     return {
       faces: {},
-      modal: {}
+      modal: {},
+      notFound: false
     }
   },
   created: function () {
@@ -76,9 +70,49 @@ export default {
 
   },
   methods: {
-    faceClick: function () {
-      console.log(this.modal)
+    faceClick: function (event) {
+      this.modal = this.faces[event.currentTarget.dataset.id]
       this.$refs.my_modal.show()
+    },
+    similarClick: function (event) {
+      rekognition.searchFaces({
+          CollectionId: "icofaces",
+          FaceId: event.currentTarget.dataset.face,
+          FaceMatchThreshold: 70,
+          MaxFaces: 10
+      }, function(err, data) {
+          if(err) return alert('Error');
+          if(data && data.FaceMatches) {
+              this.faces = data.FaceMatches
+          }
+      });
+    },
+    searchByPhoto: function (event) {
+      let file = document.getElementById('searchByPhotoInput').files[0]
+      s3.upload({
+          Bucket: 'icosearch',
+          Key: file.name,
+          Body: file,
+          ACL: 'public-read'
+      }, function(err, data) {
+          if(err) return alert('Error')
+          rekognition.searchFacesByImage({
+              CollectionId: "icofaces",
+              FaceMatchThreshold: 70,
+              MaxFaces: 10,
+              Image: {
+                  S3Object: {
+                      Bucket: data.Bucket,
+                      Name: data.Key
+                  }
+              }
+          }, function(err, data) {
+              if(err) return alert('Error')
+              if(data && data.FaceMatches) {
+                  this.faces = data.FaceMatches
+              }
+          })
+      })
     }
   }
 }
@@ -93,7 +127,6 @@ export default {
   margin-bottom: 30px
 .thumbnail
   display: block !important
-  // z-index: 1500
   &:hover
     border-color: #0275d8
     cursor: pointer
@@ -117,8 +150,5 @@ export default {
   background: white
   cursor: inherit
   display: block
-  // z-index: 1500
   cursor: pointer
-// .modal
-//   z-index: 2000
 </style>
