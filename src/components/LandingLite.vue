@@ -14,9 +14,6 @@ import axios from 'axios'
 let Highcharts = require('highcharts/highstock')
 export default {
   name: 'landing-lite',
-  // created () {
-  //   document.querySelector('body').classList.add('body-landing-lite')
-  // }
 }
 </script>
 
@@ -79,7 +76,4 @@ export default {
       &:focus
         background-color: #fff
         color: #3A0767
-// body.body-landing-lite
-//   .footer
-//     display: none
 </style>

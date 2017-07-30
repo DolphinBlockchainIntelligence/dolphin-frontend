@@ -1,6 +1,6 @@
 <template lang="pug">
   .container.list
-    h3.page-title BTT sentiments (alpha)
+    h3.page-title Bitcointalk.org sentiments
     .datatable-options
       b-form-input(v-model="query" placeholder="Search")
     table.table.table-hover.table-striped
@@ -45,7 +45,6 @@ export default {
     postsList: []
   }),
   created () {
-    // document.querySelector('body').classList.remove('body-landing-lite')
     let component = this
     axios.get('/static/data/announceList.json', {
       headers: {'Cache-Control': 'private, max-age=0, no-cache'}
@@ -88,12 +87,6 @@ export default {
     }
   },
   computed: {
-    // momentList: function () {
-    //   let list = this.postsList.map((currElement, index) => {
-    //     currElement.DateTimeLastPost = moment(currElement.DateTimeLastPost).calendar()
-    //   })
-    //   return list
-    // },
     computedList: function () {
       let vm = this
       let list = this.postsList.filter(function (item) {
