@@ -28,7 +28,7 @@
       <template slot="modal-title" name="modal-footer">
         <button :data-face="modal.face" @click.prevent="similarClick($event)" id="similar" type="button" class="btn btn-warning" style="float: left; padding: 5px 50px">Find similar faces</button>
       </template>
-      <img class="img-thumbnail" :src="'https://s3.amazonaws.com/icofaces/' + modal.id + '.jpg'" style="max-width: 300px; max-height: 300px; margin: 10px;" align="left">
+      <img class="img-thumbnail" :src="'https://s3.amazonaws.com/icofaces/' + modal.id + '.jpg'" style="max-width: 217px; max-height: 300px; margin: 10px;" align="left">
       <h3><a :href="modal.url" target="_blank">{{ modal.name }}</a></h3>
       <p>
         {{ modal.role }} of </b>

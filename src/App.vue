@@ -1,15 +1,15 @@
 <template lang="pug">
 #app
   main.main
-    b-navbar(toggleable='', type='inverse', variant='success')
+    b-navbar(toggleable="", type="inverse", variant="success")
       .container
-        b-nav-toggle(target='nav_collapse')
-        b-link.navbar-brand(to='/')
+        b-nav-toggle(target="nav_collapse")
+        b-link.navbar-brand(to="/")
           span Dolphin BI
-        b-collapse#nav_collapse(is-nav='')
-          b-nav(is-nav-bar='')
-            b-nav-item(to='/#/list') BTT sentiments
-            b-nav-item(href='/#/icoface') ICOface
+        b-collapse#nav_collapse(is-nav="")
+          b-nav(is-nav-bar="")
+            b-nav-item(to="/list") BTT sentiments
+            b-nav-item(href="/icoface") ICOface
     router-view
 </template>
 

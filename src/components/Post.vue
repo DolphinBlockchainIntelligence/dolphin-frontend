@@ -88,7 +88,8 @@ export default {
           name: name,
           data: chartData[name],
           color: colors[i],
-          pointStart: chartData.pointStart * 10,
+          // pointStart: chartData.pointStart * 10,
+          pointStart: chartData.pointStart,
           pointInterval: 3600 * 1000 * 24
         }
         seriesCounter += 1
