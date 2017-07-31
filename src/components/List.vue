@@ -48,7 +48,7 @@ export default {
   }),
   created () {
     let component = this
-    axios.get('/static/data/announceList.json', {
+    axios.get('/data/announceList.json', {
       headers: {'Cache-Control': 'private, max-age=0, no-cache'}
     })
     .then(response => {

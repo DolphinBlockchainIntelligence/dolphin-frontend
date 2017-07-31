@@ -28,7 +28,7 @@ export default {
     commentsError: false
   }),
   created () {
-    axios.get('/static/data/announceList.json')
+    axios.get('/data/announceList.json')
     .then(response => {
       let headings = Object.values(response.data)
       for (var i in headings) {
@@ -68,7 +68,7 @@ export default {
     const postId = this.$route.params.id
     let names = ['positive', 'neutral', 'negative']
     let component = this
-    axios.get('/static/data/btt-sentiments/S'+ postId +'.json')
+    axios.get('/data/btt-sentiments/S'+ postId +'.json')
     .then(response => {
       let data = response.data
       let chartData = {
@@ -103,7 +103,7 @@ export default {
       this.errors.push(e)
     })
 
-    axios.get('/static/data/btt-sentiments/D'+ postId +'.json')
+    axios.get('/data/btt-sentiments/D'+ postId +'.json')
     .then(response => {
       this.comments = response.data
     })

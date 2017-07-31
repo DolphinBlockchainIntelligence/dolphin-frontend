@@ -91,7 +91,7 @@ export default {
     SocialEmail
   },
   created () {
-    axios.get('/static/data/landing.json')
+    axios.get('/data/landing.json')
     .then(response => {
       this.intro = response.data.intro
       this.about = response.data.about
