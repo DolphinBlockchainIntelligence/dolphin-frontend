@@ -108,7 +108,6 @@ export default {
     .then(response => {
       _.forEach(response.data, function(item, i) {
         item.date = moment(item.date).calendar()
-        console.log(item)
       })
       this.comments = response.data
     })
