@@ -6,21 +6,49 @@
         "sourceJson": "1001407.json",
         "dateTimeParsing": "2017-06-25 23:06",
         "announce": "[ANN][ACP]|ANARCHISTSPRIME |OFFICIAL|0 PREMINE|EST 2015|SHA256|DIGISHIELD|GAMING",
-        "NumReplies": "361",
-        "NumViews": "49741",
+        "NumReplies": 361,
+        "NumViews": 49741,
         "DateTimeLastPost": "September 24, 2015, 02:00:02 PM",
         "topicStarter": "ACP"
     },
     "1237881": {
         "topicUrl": "https://bitcointalk.org/index.php?topic=1237881.0",
         "topicId": "1237881",
-        "NumReplies": "990",
+        "NumReplies": 990,
         "topicStarterUrl": "https://bitcointalk.org/index.php?action=profile;u=393842",
         "sourceJson": "1237881.json",
         "announce": "\ud83d\udd04\ud83d\udd04\ud83d\udd04\ud83d\udd04 \u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015 \u25b2  MOIN  \u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015 \ud83d\udd04\ud83d\udd04\ud83d\udd04\ud83d\udd04",
         "dateTimeParsing": "2017-06-25 19:47",
-        "NumViews": "71655",
+        "NumViews": 1655,
         "DateTimeLastPost": "March 26, 2015, 02:00:02 PM",
         "topicStarter": "KingCaper"
+    },
+    "1237882": {
+        "topicUrl": "https://bitcointalk.org/index.php?topic=1237881.0",
+        "topicId": "1237882",
+        "NumReplies": 991,
+        "topicStarterUrl": "https://bitcointalk.org/index.php?action=profile;u=393842",
+        "sourceJson": "1237881.json",
+        "announce": "Ethereum",
+        "dateTimeParsing": "2017-06-25 19:47",
+        "NumViews": 71654,
+        "DateTimeLastPost": "March 26, 2015, 02:00:02 PM",
+        "topicStarter": "KingCaper",
+        "hasRank": true,
+        "rank": 2
+    },
+    "1237883": {
+        "topicUrl": "https://bitcointalk.org/index.php?topic=1237881.0",
+        "topicId": "1237883",
+        "NumReplies": 990,
+        "topicStarterUrl": "https://bitcointalk.org/index.php?action=profile;u=393842",
+        "sourceJson": "1237881.json",
+        "announce": "Bitcoin",
+        "dateTimeParsing": "2017-06-25 19:47",
+        "NumViews": 71655,
+        "DateTimeLastPost": "March 26, 2015, 02:00:02 PM",
+        "topicStarter": "KingCaper",
+        "hasRank": true,
+        "rank": 1
     }
 }
