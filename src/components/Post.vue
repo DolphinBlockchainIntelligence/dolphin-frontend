@@ -17,6 +17,8 @@
 
 <script>
 import axios from 'axios'
+import moment from 'moment'
+import _ from 'lodash'
 const Highcharts = require('highcharts/highstock')
 const colors = ['#f98a83', '#989898', '#85f77e']
 export default {
@@ -88,8 +90,7 @@ export default {
           name: name,
           data: chartData[name],
           color: colors[i],
-          // pointStart: chartData.pointStart * 10,
-          pointStart: chartData.pointStart,
+          pointStart: chartData.pointStart * 10,
           pointInterval: 3600 * 1000 * 24
         }
         seriesCounter += 1
@@ -105,6 +106,10 @@ export default {
 
     axios.get('/static/data/btt-sentiments/D'+ postId +'.json')
     .then(response => {
+      _.forEach(response.data, function(item, i) {
+        item.date = moment(item.date).calendar()
+        console.log(item)
+      })
       this.comments = response.data
     })
     .catch(e => {
