@@ -83,7 +83,7 @@ export default {
       const postId = this.$route.params.id
       let names = ['positive', 'neutral', 'negative']
       let component = this
-      axios.get('/static/data/btt-sentiments/S'+ postId +'.json')
+      axios.get('http://beta.dolphin.bi/static/data/btt-sentiments/S'+ postId +'.json')
       .then(response => {
         let data = response.data
         let chartData = {

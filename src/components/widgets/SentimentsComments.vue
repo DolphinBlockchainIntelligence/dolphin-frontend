@@ -62,7 +62,7 @@ export default {
   methods: {
     sentimentsComments: function () {
       const postId = this.$route.params.id
-      axios.get('/static/data/btt-sentiments/D'+ postId +'.json')
+      axios.get('http://beta.dolphin.bi/static/data/btt-sentiments/D'+ postId +'.json')
       .then(response => {
         this.comments = response.data
       })

@@ -52,7 +52,7 @@ export default {
   },
   created () {
     let component = this
-    axios.get('/static/data/announceList.json')
+    axios.get('http://beta.dolphin.bi/static/data/announceList.json')
     .then(response => {
       this.postsList = Object.values(response.data)
       this.postsList.map((currElement, index) => {
@@ -112,49 +112,49 @@ export default {
 </script>
 
 <style lang="sass">
-.datatable-options
-  padding: .75rem 1rem
-  background-color: #FAFAFC
-  border: 1px solid #DDDDEE
-  border-bottom: 0
-  width: 100%
-  input
-    width: calc(100% - 14px)
-    border: 1px solid #ccc
-    padding: 7px
-    background: #fff
-.table
-  border: 1px solid #DDDDEE
-  width: 100%
-  white-space: normal
-  tr
-    th
-      white-space: nowrap
-    td
-      border-right-color: #DDDDEE
-      background-color: #fff
-      border-radius: 0
-    &:nth-child(even) > td
-      background-color: #FAFAFA
-  thead tr
-    th
-      user-select: none
-      font-weight: bold
-      background-color: #FAFAFC
-      span
-        vertical-align: middle
-      &:nth-child(2)
-        text-align: left
-  tbody tr
-    cursor: pointer
-    .links
-      white-space: nowrap
-      .material-icons
-        opacity: .7
-        color: rgb(63, 81, 181) !important
-        &:hover
-          opacity: 1
-    td
-      &:nth-child(2)
-        text-align: left
+  .datatable-options
+    padding: .75rem 1rem !important
+    background-color: #FAFAFC
+    border: 1px solid #DDDDEE
+    border-bottom: 0
+    width: 100% !important
+    input
+      width: calc(100% - 14px)
+      border: 1px solid #ccc
+      padding: 7px
+      background: #fff
+  .table
+    border: 1px solid #DDDDEE
+    width: 100% !important
+    white-space: normal !important
+    tr
+      th
+        white-space: nowrap
+      td
+        border-right-color: #DDDDEE
+        background-color: #fff
+        border-radius: 0
+      &:nth-child(even) > td
+        background-color: #FAFAFA
+    thead tr
+      th
+        user-select: none
+        font-weight: bold
+        background-color: #FAFAFC
+        span
+          vertical-align: middle
+        &:nth-child(2)
+          text-align: left
+    tbody tr
+      cursor: pointer
+      .links
+        white-space: nowrap
+        .material-icons
+          opacity: .7
+          color: rgb(63, 81, 181) !important
+          &:hover
+            opacity: 1
+      td
+        &:nth-child(2)
+          text-align: left
 </style>

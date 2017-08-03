@@ -12,7 +12,7 @@
             <a href="#" class="material-icons" @click="search()">search</a>
             <ul id="search-result" class="mdl-list search-result mdl-shadow--2dp hide">
               <li class="mdl-list__item" v-for="coin in computedList">
-                <a :href="'/post/' + coin.topicId" class="mdl-list__item-primary-content">
+                <a :href="'/#/post/' + coin.topicId" :id="coin.topicId" class="mdl-list__item-primary-content" @click="hideSearchResults()">
                   {{ coin.announce }}
                 </a>
               </li>
@@ -58,7 +58,7 @@
           </li>
         </ul>
       </div>
-      <router-view/>
+      <router-view :key="$route.path" />
       <div class="mdl-layout__right-drawer">
         <ul class="mdl-list">
           <li class="mdl-list__item mdl-list__item--two-line" v-for="widget in widgetsBar">
@@ -85,6 +85,7 @@
   import _ from 'lodash'
   import axios from 'axios'
   import moment from 'moment'
+  import routes from './router'
   import 'roboto-fontface'
   import 'material-design-icons-iconfont'
   import "material-design-lite/material.min.css"
@@ -112,12 +113,9 @@
     }),
     computed: {
       computedList: function () {
-        let vm = this
-        let list = []
-          list = this.coinsList.filter(function (item) {
-            return list = item.announce.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
-          })
-        return list
+        return this.coinsList.filter((item) => {
+          return item.announce.toLowerCase().indexOf(this.query.toLowerCase()) !== -1
+        }).slice(0, 10)
       }
     },
     watch: {
@@ -130,8 +128,7 @@
       }
     },
     created () {
-      let component = this
-      axios.get('/static/data/announceList.json')
+      axios.get('http://beta.dolphin.bi/static/data/announceList.json')
       .then(response => {
         this.coinsList = Object.values(response.data)
         this.coinsList.map((currElement, index) => {
@@ -156,6 +153,14 @@
       },
       toggleMenu () {
         document.querySelector('.mdl-layout').classList.toggle('mdl-layout--fixed-drawer')
+      },
+      hideSearchResults(topicId) {
+        // console.log(topicId)
+        document.getElementById('search-result').classList.add('hide')
+        // routes.go({
+        //   path: '/post/' + topicId,
+        //   // force: true
+        // })
       }
     }
   }
@@ -170,8 +175,15 @@
     width: calc(100% - 240px)
     z-index: 10
     background: #fff
+    padding: 0 !important
+    li
+      border-top: 1px solid rgba(0,0,0,.1)
+      padding: 0
     a
+      padding: 16px
       color: rgba(0,0,0,.87)
+      &:hover
+          background: rgba(0,0,0,.12)
   .hide
     display: none !important
   .mdl-layout__drawer

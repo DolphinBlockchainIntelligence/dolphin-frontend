@@ -17,7 +17,8 @@ export default new Router({
       path: '/post/:id',
       name: 'Post',
       component: Post,
-      props: true
+      props: true,
+      meta: { reuse: false }
     },
     {
       path: '/store/',

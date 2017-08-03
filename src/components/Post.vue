@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     getHeading: function () {
-      axios.get('/static/data/announceList.json')
+      axios.get('http://beta.dolphin.bi/static/data/announceList.json')
       .then(response => {
         let headings = Object.values(response.data)
         for (var i in headings) {
@@ -138,7 +138,7 @@ export default {
     overflow-y: scroll
     padding-top: 28px
   .mdl-card
-    width: 100%
+    width: 100% !important
   .comments
     list-style: none
     padding: 0
