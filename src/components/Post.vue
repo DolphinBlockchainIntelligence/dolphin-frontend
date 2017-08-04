@@ -3,7 +3,7 @@
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell--12-col">
         <div class="heading-box">
-          <h4 class="left">{{ heading }}</h4>
+          <h4 class="left">{{ announce }}</h4>
           <div class="right">
             <a :href="topicStarterUrl" target="_blank"><i class="material-icons">account_circle</i></a>
             <a :href="topicUrl" target="_blank"><i class="material-icons">assignment</i></a>
@@ -23,6 +23,7 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 const Sortable = require('sortablejs')
 
 import SentimentsStatistics from './widgets/SentimentsStatistics.vue'
@@ -36,7 +37,6 @@ export default {
   name: 'post',
   data: () => ({
     id: '',
-    heading: '',
     widgets: [{'id': 1, 'name': 'SentimentsLineChart'}, {'id': 2, 'name': 'SentimentsComments'}],
     topicStarterUrl: '',
     topicUrl: ''
@@ -50,39 +50,51 @@ export default {
     ExpertsEvaluations
   },
   mounted () {
-    // TODO: getHeading
-    this.getHeading()
     // TODO: Add and remove widget
     this.$root.$on('addWidget', (widgetName) => {
-      console.log('TEST: ' + this.widgets)
       this.widgets.push({'id': this.widgets.length+1, 'name': widgetName})
     })
     this.$root.$on('removeWidget', (id) => {
-      console.log(this.widgets)
       this.widgets = _.reject(this.widgets, { 'id': id })
     })
     // TODO: Sortable
     const el = document.getElementById('draggable-container')
     const sortable = Sortable.create(el)
   },
-  methods: {
-    getHeading: function () {
-      axios.get('http://beta.dolphin.bi/static/data/announceList.json')
-      .then(response => {
-        let headings = Object.values(response.data)
-        for (var i in headings) {
-          if (this.$route.params.id == headings[i].topicId) {
-            this.heading = headings[i].announce
-            this.id = headings[i].topicId
-            this.topicStarterUrl = headings[i].topicStarterUrl
-            this.topicUrl = headings[i].topicUrl
+  computed: {
+    announce (state) {
+      if (this.$route.params.announce) {
+        return this.$route.params.announce
+      } else {
+        for (var i in this.assets) {
+          if (this.$route.params.id == this.assets[i].topicId) {
+            return this.assets[i].announce
           }
         }
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
+      }
     },
+    ...mapState([
+      'assets'
+    ])
+  },
+  methods: {
+    // getHeading: function () {
+    //   axios.get('http://beta.dolphin.bi/static/data/announceList.json')
+    //   .then(response => {
+    //     let headings = Object.values(response.data)
+    //     for (var i in headings) {
+    //       if (this.$route.params.id == headings[i].topicId) {
+    //         this.heading = headings[i].announce
+    //         this.id = headings[i].topicId
+    //         this.topicStarterUrl = headings[i].topicStarterUrl
+    //         this.topicUrl = headings[i].topicUrl
+    //       }
+    //     }
+    //   })
+    //   .catch(e => {
+    //     this.errors.push(e)
+    //   })
+    // },
     toggleSettings: function () {
       document.querySelector('.mdl-layout').classList.toggle('mdl-layout--fixed-right-drawer')
     },
@@ -150,7 +162,7 @@ export default {
         justify-content: space-between
         color: #999
       .text
-        padding: 7px 20px
+        padding: 7px 14px
         border-radius: 2px
         display: block
         color: #292b2c

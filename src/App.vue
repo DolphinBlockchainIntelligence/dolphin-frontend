@@ -90,11 +90,12 @@
   import 'material-design-icons-iconfont'
   import "material-design-lite/material.min.css"
   import "material-design-lite/material.min.js"
+  import { mapState } from 'vuex'
   export default {
     name: "app",
     data: () => ({
       query: '',
-      coinsList: [],
+      // coinsList: [],
       widgetsBar: [
         { name: 'Sentiments', subName: 'comments', component: 'SentimentsComments', icon: '/static/img/widgets/sentiments.svg', subscribe: true },
         { name: 'Sentiments', subName: 'chart', component: 'SentimentsLineChart', icon: '/static/img/widgets/sentiments.svg', subscribe: true },
@@ -113,10 +114,13 @@
     }),
     computed: {
       computedList: function () {
-        return this.coinsList.filter((item) => {
+        return this.assets.filter((item) => {
           return item.announce.toLowerCase().indexOf(this.query.toLowerCase()) !== -1
         }).slice(0, 10)
-      }
+      },
+      ...mapState([
+        'assets'
+      ])
     },
     watch: {
       query: function () {
@@ -127,19 +131,8 @@
         }
       }
     },
-    created () {
-      axios.get('http://beta.dolphin.bi/static/data/announceList.json')
-      .then(response => {
-        this.coinsList = Object.values(response.data)
-        this.coinsList.map((currElement, index) => {
-          currElement.DateTimeLastPost = moment(currElement.DateTimeLastPost).calendar()
-        })
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
-    },
-    mounted () {
+    mounted: function() {
+      this.$store.dispatch('LOAD_ASSETS_LIST')
       this.$root.$on('addFavoriteCoins', (coin) => {
         this.favoritesCoins.push(coin)
       })
@@ -147,6 +140,18 @@
         this.favoritesCoins = _.reject(this.favoritesCoins, { 'id': id })
       })
     },
+    // created () {
+    //   axios.get('http://beta.dolphin.bi/static/data/announceList.json')
+    //   .then(response => {
+    //     this.coinsList = Object.values(response.data)
+    //     this.coinsList.map((currElement, index) => {
+    //       currElement.DateTimeLastPost = moment(currElement.DateTimeLastPost).calendar()
+    //     })
+    //   })
+    //   .catch(e => {
+    //     this.errors.push(e)
+    //   })
+    // },
     methods: {
       addWidget (widgetName) {
         this.$root.$emit('addWidget', widgetName)
@@ -155,12 +160,7 @@
         document.querySelector('.mdl-layout').classList.toggle('mdl-layout--fixed-drawer')
       },
       hideSearchResults(topicId) {
-        // console.log(topicId)
         document.getElementById('search-result').classList.add('hide')
-        // routes.go({
-        //   path: '/post/' + topicId,
-        //   // force: true
-        // })
       }
     }
   }

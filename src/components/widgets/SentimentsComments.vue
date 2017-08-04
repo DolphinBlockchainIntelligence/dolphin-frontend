@@ -46,6 +46,8 @@
 
 <script>
 import axios from 'axios'
+import moment from 'moment'
+import _ from 'lodash'
 const colors = ['#f98a83', '#989898', '#85f77e']
 export default {
   name: "sentimentsComments",
@@ -64,6 +66,9 @@ export default {
       const postId = this.$route.params.id
       axios.get('http://beta.dolphin.bi/static/data/btt-sentiments/D'+ postId +'.json')
       .then(response => {
+        _.forEach(response.data, function(item, i) {
+          item.date = moment(item.date).calendar()
+        })
         this.comments = response.data
       })
       .catch(e => {
