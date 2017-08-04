@@ -1,6 +1,6 @@
 <template lang="pug">
 .post.container
-  h3.page-title {{ heading }}
+  h3.page-title {{ announce }}
   div(v-if="!chartError")
     #container(style='min-width: 310px; height: 400px; margin: 0 auto')
     br
@@ -19,29 +19,33 @@
 import axios from 'axios'
 import moment from 'moment'
 import _ from 'lodash'
+import { mapState } from 'vuex'
 const Highcharts = require('highcharts/highstock')
 const colors = ['#f98a83', '#989898', '#85f77e']
 export default {
   name: 'post',
   data: () => ({
-    heading: '',
     comments: [],
     chartError: false,
     commentsError: false
   }),
-  created () {
-    axios.get('/static/data/announceList.json')
-    .then(response => {
-      let headings = Object.values(response.data)
-      for (var i in headings) {
-        if (this.$route.params.id == headings[i].topicId) {
-          this.heading = headings[i].announce
+  computed: {
+    announce (state) {
+      if (this.$route.params.announce) {
+        return this.$route.params.announce
+      } else {
+        for (var i in this.assets) {
+          if (this.$route.params.id == this.assets[i].topicId) {
+            return this.assets[i].announce
+          }
         }
       }
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
+    },
+    ...mapState([
+      'assets'
+    ])
+  },
+  created () {
     let seriesOptions = []
     let seriesCounter = 0
     function createChart () {

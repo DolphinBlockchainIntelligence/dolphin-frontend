@@ -24,7 +24,10 @@ import 'material-design-icons-iconfont'
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 window.App = {
-  name: 'app'
+  name: 'app',
+  mounted: function() {
+    this.$store.dispatch('LOAD_ASSETS_LIST')
+  }
 }
 export default window.App
 </script>

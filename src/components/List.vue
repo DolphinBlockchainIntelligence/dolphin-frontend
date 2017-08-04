@@ -20,7 +20,7 @@
             i.material-icons
           th
       tbody(name="table-row")
-        tr(v-for="post in computedList" key="tr" class="table-row-item" :to="'/post/' + post.topicId" v-on:click="goToPost(post.topicId)")
+        tr(v-for="post in computedList" key="tr" class="table-row-item" :to="'/post/' + post.topicId" v-on:click="goToPost(post.topicId, post.announce)")
           td(key="announce") {{ post.announce }}
           td(key="replies") {{ post.NumReplies }}
           td(key="views") {{ post.DateTimeLastPost }}
@@ -38,37 +38,22 @@ import axios from 'axios'
 import Vue from 'vue'
 import routes from '../router'
 import moment from 'moment'
+import { mapGetters } from 'vuex'
 export default {
   name: 'list',
   data: () => ({
     query: '',
     sortBy: '',
-    sortOrder: '',
-    postsList: []
+    sortOrder: ''
   }),
-  created () {
-    let component = this
-    axios.get('/static/data/announceList.json', {
-      headers: {'Cache-Control': 'private, max-age=0, no-cache'}
-    })
-    .then(response => {
-      this.postsList = Object.values(response.data)
-      this.postsList.map((currElement, index) => {
-        currElement.DateTimeLastPost = moment(currElement.DateTimeLastPost).calendar()
-      })
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
-  },
   methods: {
     dataHref: function (url, event) {
       event.preventDefault()
       event.stopPropagation()
       window.open(url, '_blank')
     },
-    goToPost(url) {
-      routes.push({ name: 'Post', params: { id: url }})
+    goToPost(topicId, announce) {
+      routes.push({ name: 'Post', params: { id: topicId, announce: announce }})
     },
     sort: function (sortBy) {
       this.sortBy = sortBy
@@ -89,11 +74,8 @@ export default {
     }
   },
   computed: {
-    computedList: function () {
-      let vm = this
-      let list = this.postsList.filter(function (item) {
-        return list = item.announce.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
-      })
+    computedList (state) {
+      let list = this.$store.getters.fullAssetsList(this.query)
       if (this.sortBy) {
         list = _.orderBy(list, ['hasRank', this.sortBy], ['asc', this.sortOrder])
       } else {
@@ -104,7 +86,10 @@ export default {
         return currElement
       })
       return list
-    }
+    },
+    ...mapGetters([
+      'fullAssetsList'
+    ])
   }
 }
 </script>
