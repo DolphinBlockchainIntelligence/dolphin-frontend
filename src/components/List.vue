@@ -23,7 +23,7 @@
         tr(v-for="post in computedList" key="tr" class="table-row-item" :to="'/post/' + post.topicId" v-on:click="goToPost(post.topicId, post.announce)")
           td(key="announce") {{ post.announce }}
           td(key="replies") {{ post.NumReplies }}
-          td(key="views") {{ post.DateTimeLastPost }}
+          td(key="lastComment") {{ post.DateTimeLastPost }}
           td(key="rank") {{ post.rank }}
           td.links(key="links")
             a(v-on:click="dataHref(post.topicStarterUrl, $event)")
