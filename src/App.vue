@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
         <a class="mdl-navigation__link" href="#" @click.prevent="toggleMenu()"><i class="material-icons">menu</i></a>
@@ -8,15 +8,8 @@
           <span class="mdl-layout-title">Dolphin BI</span>
         </a>
         <div class="search-bar">
-            <input id="search" class="mdl-textfield__input" type="text" name="sample" placeholder="Search coin" v-model="query" autofocus>
-            <a href="#" class="material-icons" @click="search()">search</a>
-            <ul id="search-result" class="mdl-list search-result mdl-shadow--2dp hide">
-              <li class="mdl-list__item" v-for="coin in computedList">
-                <a :href="'/#/post/' + coin.topicId" :id="coin.topicId" class="mdl-list__item-primary-content" @click="hideSearchResults()">
-                  {{ coin.announce }}
-                </a>
-              </li>
-            </ul>
+            <input id="search" class="mdl-textfield__input" type="text" name="sample" placeholder="Search coin" v-model="query" autofocus @keyup.up="searchUp()" @keyup.down="searchDown()" @keyup.enter.prevent="searchEnter()" @keyup.esc.prevent="searchEsc()">
+            <i class="material-icons">search</i>
         </div>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -26,6 +19,15 @@
       </div>
     </header>
     <div class="mdl-layout mdl-layout--fixed-drawer">
+      <click-outside :handler="handleClickOutside">
+        <ul id="search-result" class="mdl-list search-result mdl-shadow--2dp hide">
+          <li class="mdl-list__item" v-for="coin in computedList">
+            <a :href="'/#/post/' + coin.topicId" :id="coin.topicId" class="mdl-list__item-primary-content">
+              {{ coin.announce }}
+            </a>
+          </li>
+        </ul>
+      </click-outside>
       <div class="mdl-layout__drawer">
         <ul class="mdl-list">
           <li class="mdl-list__item">
@@ -91,11 +93,11 @@
   import "material-design-lite/material.min.css"
   import "material-design-lite/material.min.js"
   import { mapState } from 'vuex'
+  import ClickOutside from 'onclick-outside'
   export default {
     name: "app",
     data: () => ({
       query: '',
-      // coinsList: [],
       widgetsBar: [
         { name: 'Sentiments', subName: 'comments', component: 'SentimentsComments', icon: '/static/img/widgets/sentiments.svg', subscribe: true },
         { name: 'Sentiments', subName: 'chart', component: 'SentimentsLineChart', icon: '/static/img/widgets/sentiments.svg', subscribe: true },
@@ -110,7 +112,8 @@
         { name: 'Likes', subName: '', component: '', icon: '/static/img/widgets/likes.svg', subscribe: false },
         { name: 'Portfolio', subName: '', component: '', icon: '/static/img/widgets/portfolio.svg', subscribe: false },
       ],
-      favoritesCoins: []
+      favoritesCoins: [],
+      searchActiveResult: 0
     }),
     computed: {
       computedList: function () {
@@ -131,7 +134,7 @@
         }
       }
     },
-    mounted: function() {
+    mounted: function () {
       this.$store.dispatch('LOAD_ASSETS_LIST')
       this.$root.$on('addFavoriteCoins', (coin) => {
         this.favoritesCoins.push(coin)
@@ -140,18 +143,8 @@
         this.favoritesCoins = _.reject(this.favoritesCoins, { 'id': id })
       })
     },
-    // created () {
-    //   axios.get('http://beta.dolphin.bi/static/data/announceList.json')
-    //   .then(response => {
-    //     this.coinsList = Object.values(response.data)
-    //     this.coinsList.map((currElement, index) => {
-    //       currElement.DateTimeLastPost = moment(currElement.DateTimeLastPost).calendar()
-    //     })
-    //   })
-    //   .catch(e => {
-    //     this.errors.push(e)
-    //   })
-    // },
+    created: function () {
+    },
     methods: {
       addWidget (widgetName) {
         this.$root.$emit('addWidget', widgetName)
@@ -159,141 +152,187 @@
       toggleMenu () {
         document.querySelector('.mdl-layout').classList.toggle('mdl-layout--fixed-drawer')
       },
-      hideSearchResults(topicId) {
+      searchUp () {
+        if (this.searchActiveResult > 0) {
+          this.searchActiveResult--
+          document.querySelectorAll('#search-result li').forEach(function(item){
+            item.classList.remove('active')
+          })
+          document.querySelector('#search-result li:nth-child(' + this.searchActiveResult + ')').classList.add('active')
+        }
+        console.log(this.searchActiveResult)
+      },
+      searchDown () {
+        if (this.searchActiveResult < 10 ) {
+          this.searchActiveResult++
+          document.querySelectorAll('#search-result li').forEach(function(item){
+            item.classList.remove('active')
+          })
+          document.querySelector('#search-result li:nth-child(' + this.searchActiveResult + ')').classList.add('active')
+        }
+      },
+      searchEsc () {
+        document.querySelectorAll('#search-result li').forEach(function(item){
+          item.classList.remove('active')
+        })
         document.getElementById('search-result').classList.add('hide')
+        this.searchActiveResult = 0
+        // TODO
+        // this.query = ''
+      },
+      searchEnter () {
+        let topicId = document.querySelector('#search-result li:nth-child(' + this.searchActiveResult + ') a').getAttribute('href').substr(8)
+        this.searchEsc()
+        routes.push({ name: 'Post', params: { id: topicId }})
+      },
+      handleClickOutside(e) {
+        this.searchEsc() 
       }
+    },
+    components: {
+      ClickOutside
     }
   }
 </script>
 
 <style lang="sass">
-  .search-result
-    position: absolute
-    top: 64px
-    left: 241px
-    margin: 0
-    width: calc(100% - 240px)
-    z-index: 10
-    background: #fff
-    padding: 0 !important
-    li
-      border-top: 1px solid rgba(0,0,0,.1)
-      padding: 0
-    a
-      padding: 16px
-      color: rgba(0,0,0,.87)
-      &:hover
-          background: rgba(0,0,0,.12)
-  .hide
-    display: none !important
-  .mdl-layout__drawer
-    .mdl-list__item
-      display: block
-      a
-        opacity: .7
-        color: rgb(63, 81, 181) !important
-        &:hover
-          opacity: 1
-      .favourites-coins
-        list-style: none
-        padding-left: 14px
-        li
-          &:first-child
-            margin-top: 7px
-          a
-            text-decoration: none
-            display: flex
-            align-items: center
-            i
-              margin-right: 7px
-            .name
-              text-overflow: ellipsis
-              white-space: nowrap
-              overflow: hidden
+.search-result
+  position: absolute
+  top: 0
+  left: 0px
+  margin: 0
+  width: 100%
+  z-index: 10
+  background: #fff
+  padding: 0 !important
+  li
+    border-top: 1px solid rgba(0,0,0,.1)
+    padding: 0
+    &.active
+      background: rgba(0,0,0,.12) 
+  a
+    padding: 16px
+    color: rgba(0,0,0,.87)
+    &:hover
+        background: rgba(0,0,0,.12)
+.mdl-layout--fixed-drawer .search-result
+  left: 241px
+  width: calc(100% - 240px)
+.mdl-layout--fixed-right-drawer .search-result
+  right: 241px
+  width: calc(100% - 482px)
 
-  .mdl-layout
-      min-height: calc(100vh - 64px)
+.hide
+  display: none !important
+
+.mdl-layout__drawer
+  .mdl-list__item
+    display: block
+    a
+      opacity: .7
+      color: rgb(63, 81, 181) !important
+      &:hover
+        opacity: 1
+    .favourites-coins
+      list-style: none
+      padding-left: 14px
+      li
+        &:first-child
+          margin-top: 7px
+        a
+          text-decoration: none
+          display: flex
+          align-items: center
+          i
+            margin-right: 7px
+          .name
+            text-overflow: ellipsis
+            white-space: nowrap
+            overflow: hidden
+
+.mdl-layout
+    min-height: calc(100vh - 64px)
+    .mdl-layout__right-drawer
+      transform: translateX(250px)
+      transform-style: preserve-3d
+      will-change: transform
+      transition-duration: .2s
+      transition-timing-function: cubic-bezier(.4,0,.2,1)
+      transition-property: transform
+      transition-property: transform,-webkit-transform
+      background: #fafafa
+      left: auto
+      right: 0
+      position: absolute
+      top: 0
+      right: 0
+      width: 240px
+      height: 100%
+      z-index: 1
+      box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 3px -2px rgba(0,0,0,.2), 0 5px 1px 0 rgba(0,0,0,.12)
+      box-sizing: border-box
+      border-left: 1px solid #e0e0e0
+      height: 100%
+      max-height: 100%
+      overflow: visible
+      overflow-y: auto
+      z-index: 5
+      ul
+        margin-top: 0
+        padding-top: 0
+      .widget-img
+        width: 40px
+        height: 40px
+        margin-right: 16px
+        float: left
+    .btn-remove, .btn-drag
+      display: none
+    &.mdl-layout--fixed-right-drawer
       .mdl-layout__right-drawer
-        transform: translateX(250px)
-        transform-style: preserve-3d
-        will-change: transform
-        transition-duration: .2s
-        transition-timing-function: cubic-bezier(.4,0,.2,1)
-        transition-property: transform
-        transition-property: transform,-webkit-transform
-        background: #fafafa
-        left: auto
-        right: 0
-        position: absolute
-        top: 0
-        right: 0
-        width: 240px
-        height: 100%
-        z-index: 1
-        box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 3px -2px rgba(0,0,0,.2), 0 5px 1px 0 rgba(0,0,0,.12)
-        box-sizing: border-box
-        border-left: 1px solid #e0e0e0
-        height: 100%
-        max-height: 100%
-        overflow: visible
-        overflow-y: auto
-        z-index: 5
-        ul
-          margin-top: 0
-          padding-top: 0
-        .widget-img
-          width: 40px
-          height: 40px
-          margin-right: 16px
-          float: left
+        transform: translateX(0)
+      .mdl-layout__content
+        margin-right: 240px
       .btn-remove, .btn-drag
-        display: none
-      &.mdl-layout--fixed-right-drawer
-        .mdl-layout__right-drawer
-          transform: translateX(0)
-        .mdl-layout__content
-          margin-right: 240px
-        .btn-remove, .btn-drag
-          display: inline-block
-  .mdl-layout__header
-    background: #212E51 !important
-    .search-bar
-      background: rgba(0, 0, 0, 0.22)
-      border-radius: 2px
-      display: flex
-      flex: 1 0 286px
-      width: auto !important
-      align-items: center
-      margin-left: 23px
-      .material-icons
-        margin: 0 10px
-        color: #fff
-        text-decoration: none
-      input
-        padding: 10px
-        outline: none
-    .logo
-      text-decoration: none
+        display: inline-block
+.mdl-layout__header
+  background: #212E51 !important
+  .search-bar
+    background: rgba(0, 0, 0, 0.22)
+    border-radius: 2px
+    display: flex
+    flex: 1 0 286px
+    width: auto !important
+    align-items: center
+    margin-left: 23px
+    .material-icons
+      margin: 0 10px
       color: #fff
-      white-space: nowrap
-      .logo-img
-        width: 30px
-        margin-right: 10px
-        vertical-align: middle
-        display: inline-block
-      .mdl-layout-title
-        vertical-align: middle
-        display: inline-block
-  body
-    overflow-x: hidden
-  #app
-    font-family: 'Roboto', sans-serif
-    .navbar
-      background-color: #3B1D7C !important
-      position: relative
-      z-index: 2
-      &+div
-        margin-top: 20px
-  .page-title
-    margin-bottom: 20px
+      text-decoration: none
+    input
+      padding: 10px
+      outline: none
+  .logo
+    text-decoration: none
+    color: #fff
+    white-space: nowrap
+    .logo-img
+      width: 30px
+      margin-right: 10px
+      vertical-align: middle
+      display: inline-block
+    .mdl-layout-title
+      vertical-align: middle
+      display: inline-block
+body
+  overflow-x: hidden
+#app
+  font-family: 'Roboto', sans-serif
+  .navbar
+    background-color: #3B1D7C !important
+    position: relative
+    z-index: 2
+    &+div
+      margin-top: 20px
+.page-title
+  margin-bottom: 20px
 </style>

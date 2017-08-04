@@ -3,7 +3,7 @@
     .mdl-grid
       .mdl-cell.mdl-cell--12-col
         .list
-          h3.page-title BTT sentiments (alpha)
+          h3.page-title Bitcointalk.org sentiments
           .datatable-options.mdl-textfield.mdl-js-textfield.mdl-shadow--2dp
             input.mdl-textfield__input(v-model="query" placeholder="Search post")
           table.table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp

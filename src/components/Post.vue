@@ -49,6 +49,9 @@ export default {
     FacesProject,
     ExpertsEvaluations
   },
+  created () {
+    this.searchEsc()
+  },
   mounted () {
     // TODO: Add and remove widget
     this.$root.$on('addWidget', (widgetName) => {
@@ -78,23 +81,12 @@ export default {
     ])
   },
   methods: {
-    // getHeading: function () {
-    //   axios.get('http://beta.dolphin.bi/static/data/announceList.json')
-    //   .then(response => {
-    //     let headings = Object.values(response.data)
-    //     for (var i in headings) {
-    //       if (this.$route.params.id == headings[i].topicId) {
-    //         this.heading = headings[i].announce
-    //         this.id = headings[i].topicId
-    //         this.topicStarterUrl = headings[i].topicStarterUrl
-    //         this.topicUrl = headings[i].topicUrl
-    //       }
-    //     }
-    //   })
-    //   .catch(e => {
-    //     this.errors.push(e)
-    //   })
-    // },
+    searchEsc () {
+      document.querySelectorAll('#search-result li').forEach(function(item){
+        item.classList.remove('active')
+      })
+      document.getElementById('search-result').classList.add('hide')
+    },
     toggleSettings: function () {
       document.querySelector('.mdl-layout').classList.toggle('mdl-layout--fixed-right-drawer')
     },
