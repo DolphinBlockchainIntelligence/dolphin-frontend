@@ -5,16 +5,17 @@
         <h2 class="mdl-card__title-text">Faces: search</h2>
       </div>
       <div class="mdl-card__menu">
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect btn-info">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
           <i class="material-icons">info</i>
         </button>
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect btn-drag">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
           <i class="material-icons">pan_tool</i>
         </button>
-<!--         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect btn-filter">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
           <i class="material-icons">filter_list</i>
         </button>
-        <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon btn-more">
+        <button id="demo-menu-lower-right"
+                class="mdl-button mdl-js-button mdl-button--icon">
           <i class="material-icons">more_vert</i>
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
@@ -23,17 +24,10 @@
           <li class="mdl-menu__item">Another Action</li>
           <li disabled class="mdl-menu__item">Disabled Action</li>
           <li class="mdl-menu__item">Yet Another Action</li>
-        </ul> -->
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect btn-remove" @click="removeWidget()">
+        </ul>
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" @click="removeWidget()">
           <i class="material-icons">delete</i>
         </button>
-      </div>
-      <div class="search-bar">
-        <input type="text" name="" value="" class="bootstrap-input">
-        <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Name</button>
-        <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Role</button>
-        <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Team</button>
-        <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Photo</button>
       </div>
     </div>
   </div>
@@ -43,7 +37,7 @@
 <script>
 import axios from 'axios'
 export default {
-  name: "faces-search",
+  name: "funds-raised",
   props: ['id'],
   data: function data() {
     return {

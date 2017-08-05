@@ -2,8 +2,18 @@
   <main class="mdl-layout__content">
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell--12-col">
-        <h4>{{ heading }}</h4>
+        <div class="heading-box">
+          <h4 class="left">{{ announce }}</h4>
+          <div class="right">
+            <a :href="topicStarterUrl" target="_blank"><i class="material-icons">account_circle</i></a>
+            <a :href="topicUrl" target="_blank"><i class="material-icons">assignment</i></a>
+            <a href="#" @click.prevent="toggleFavorite($event)"><i class="material-icons">star_border</i></a>
+            <a href="#" @click.prevent="toggleSettings()"><i class="material-icons">settings</i></a>
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="mdl-grid" id="draggable-container">
       <template v-for="(child, index) in widgets">
         <component :is="child.name" :key="child.name" :id="child.id"></component>
       </template>
@@ -13,64 +23,102 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
+const Sortable = require('sortablejs')
+
 import SentimentsStatistics from './widgets/SentimentsStatistics.vue'
 import SentimentsLineChart from './widgets/SentimentsLineChart.vue'
 import SentimentsComments from './widgets/SentimentsComments.vue'
 import FacesSearch from './widgets/FacesSearch.vue'
 import FacesProject from './widgets/FacesProject.vue'
+import ExpertsEvaluations from './widgets/ExpertsEvaluations.vue'
 
 export default {
   name: 'post',
   data: () => ({
-    heading: '',
-    widgets: [{'id': 1, 'name': 'FacesProject'}]
-    // widgets: ['SentimentsLineChart', 'SentimentsStatistics', 'SentimentsComments', 'FacesProject', 'FacesSearch']
+    id: '',
+    widgets: [{'id': 1, 'name': 'SentimentsLineChart'}, {'id': 2, 'name': 'SentimentsComments'}],
+    topicStarterUrl: '',
+    topicUrl: ''
   }),
-  // computed: {
-  //   idCounter: function () {
-  //     return this.widgets.length
-  //   }
-  // }
   components: {
     SentimentsLineChart,
     SentimentsStatistics,
     SentimentsComments,
     FacesSearch,
-    FacesProject
+    FacesProject,
+    ExpertsEvaluations
+  },
+  created () {
+    this.searchEsc()
   },
   mounted () {
-    document.querySelector('.mdl-layout').classList.add('mdl-layout--fixed-drawer')
-    this.getHeading()
-    // let widgets = this.widgets
+    // TODO: Add and remove widget
     this.$root.$on('addWidget', (widgetName) => {
-      console.log(this.widgets)
       this.widgets.push({'id': this.widgets.length+1, 'name': widgetName})
     })
     this.$root.$on('removeWidget', (id) => {
-      console.log(this.widgets)
       this.widgets = _.reject(this.widgets, { 'id': id })
     })
+    // TODO: Sortable
+    const el = document.getElementById('draggable-container')
+    const sortable = Sortable.create(el)
   },
-  methods: {
-    getHeading: function () {
-      axios.get('/static/data/announceList.json')
-      .then(response => {
-        let headings = Object.values(response.data)
-        for (var i in headings) {
-          if (this.$route.params.id == headings[i].topicId) {
-            this.heading = headings[i].announce
+  computed: {
+    announce (state) {
+      if (this.$route.params.announce) {
+        return this.$route.params.announce
+      } else {
+        for (var i in this.assets) {
+          if (this.$route.params.id == this.assets[i].topicId) {
+            return this.assets[i].announce
           }
         }
+      }
+    },
+    ...mapState([
+      'assets'
+    ])
+  },
+  methods: {
+    searchEsc () {
+      document.querySelectorAll('#search-result li').forEach(function(item){
+        item.classList.remove('active')
       })
-      .catch(e => {
-        this.errors.push(e)
-      })
+      document.getElementById('search-result').classList.add('hide')
+    },
+    toggleSettings: function () {
+      document.querySelector('.mdl-layout').classList.toggle('mdl-layout--fixed-right-drawer')
+    },
+    toggleFavorite: function (event) {
+      let icon = event.target.innerHTML
+      if (icon == 'star') {
+        this.$root.$emit('removeFavoriteCoins', this.id)
+        event.target.innerHTML = 'star_border'
+      } else {
+        this.$root.$emit('addFavoriteCoins', { id: this.id, name: this.announce })
+        event.target.innerHTML = 'star'
+      }
     }
   }
 }
 </script>
 
 <style lang="sass">
+  .heading-box
+    display: flex
+    align-items: center
+    .left
+      flex: 1 1 auto
+    .right
+      display: flex
+      a
+        color: #3f51b5
+        margin: 24px 0 16px
+        opacity: .7
+        margin-left: 7px
+        &:hover
+          opacity: 1
   .widget-faces-search
     .search-bar
       display: flex
@@ -94,7 +142,7 @@ export default {
     overflow-y: scroll
     padding-top: 28px
   .mdl-card
-    width: 100%
+    width: 100% !important
   .comments
     list-style: none
     padding: 0
@@ -106,7 +154,7 @@ export default {
         justify-content: space-between
         color: #999
       .text
-        padding: 7px 20px
+        padding: 7px 14px
         border-radius: 2px
         display: block
         color: #292b2c
