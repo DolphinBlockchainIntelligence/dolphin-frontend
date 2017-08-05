@@ -96,7 +96,7 @@ export default {
         this.$root.$emit('removeFavoriteCoins', this.id)
         event.target.innerHTML = 'star_border'
       } else {
-        this.$root.$emit('addFavoriteCoins', { id: this.id, name: this.heading })
+        this.$root.$emit('addFavoriteCoins', { id: this.id, name: this.announce })
         event.target.innerHTML = 'star'
       }
     }
