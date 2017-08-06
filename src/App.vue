@@ -70,10 +70,10 @@
               <span class="mdl-list__item-sub-title">{{ widget.subName }}</span>
             </span>
             <span v-if="widget.subscribe" class="mdl-list__item-secondary-content">
-              <a class="mdl-list__item-secondary-action" href="#" @click.prevent="addWidget(widget.component)"><i class="material-icons">add</i></a>
+              <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" @click.prevent="addWidget(widget.component)"><i class="material-icons">add</i></button>              
             </span>
             <span v-else class="mdl-list__item-secondary-content">
-              <a class="mdl-list__item-secondary-action" href="#" @click.prevent=""><i class="material-icons">attach_money</i></a>
+              <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" @click.prevent=""><i class="material-icons">attach_money</i></button>
             </span>
           </li>
         </ul>
@@ -106,7 +106,7 @@
         { name: 'Faces', subName: 'search', component: 'FacesSearch', icon: '/static/img/widgets/faces.svg', subscribe: true },
         { name: 'Funds raised', subName: '', component: '', icon: '/static/img/widgets/funds-raised.svg', subscribe: false },
         { name: 'Funding amounts', subName: '', component: '', icon: '/static/img/widgets/funding-amounts.svg', subscribe: false },
-        { name: 'Experts evaluations', subName: '', component: '', icon: '/static/img/widgets/experts.svg', subscribe: false },
+        { name: 'Experts evaluations', subName: '', component: 'ExpertsEvaluations', icon: '/static/img/widgets/experts.svg', subscribe: true },
         { name: 'Description', subName: '', component: '', icon: '/static/img/widgets/description.svg', subscribe: false },
         { name: 'Code audit', subName: '', component: '', icon: '/static/img/widgets/code.svg', subscribe: false },
         { name: 'Likes', subName: '', component: '', icon: '/static/img/widgets/likes.svg', subscribe: false },
