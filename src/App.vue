@@ -186,7 +186,7 @@
         routes.push({ name: 'Post', params: { id: topicId }})
       },
       handleClickOutside(e) {
-        this.searchEsc() 
+        this.searchEsc()
       }
     },
     components: {
@@ -209,7 +209,7 @@
     border-top: 1px solid rgba(0,0,0,.1)
     padding: 0
     &.active
-      background: rgba(0,0,0,.12) 
+      background: rgba(0,0,0,.12)
   a
     padding: 16px
     color: rgba(0,0,0,.87)

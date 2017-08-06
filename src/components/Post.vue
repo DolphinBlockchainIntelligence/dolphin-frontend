@@ -13,6 +13,7 @@
         </div>
       </div>
     </div>
+    <!-- <div class="mdl-grid" id="draggable-container"> -->
     <div class="mdl-grid" id="draggable-container">
       <template v-for="(child, index) in widgets">
         <component :is="child.name" :key="child.name" :id="child.id"></component>
@@ -37,7 +38,7 @@ export default {
   name: 'post',
   data: () => ({
     id: '',
-    widgets: [{'id': 1, 'name': 'SentimentsLineChart'}, {'id': 2, 'name': 'SentimentsComments'}],
+    widgets: [{'id': 3, 'name': 'ExpertsEvaluations'}, {'id': 1, 'name': 'SentimentsLineChart'}, {'id': 2, 'name': 'SentimentsComments'}],
     topicStarterUrl: '',
     topicUrl: ''
   }),
