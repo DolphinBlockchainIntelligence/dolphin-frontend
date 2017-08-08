@@ -135,7 +135,6 @@
       }
     },
     mounted: function () {
-      this.$store.dispatch('LOAD_ASSETS_LIST')
       this.$root.$on('addFavoriteCoins', (coin) => {
         this.favoritesCoins.push(coin)
       })
@@ -143,7 +142,8 @@
         this.favoritesCoins = _.reject(this.favoritesCoins, { 'id': id })
       })
     },
-    created: function () {
+    beforeCreate: function () {
+      this.$store.dispatch('LOAD_ASSETS_LIST')
     },
     methods: {
       addWidget (widgetName) {
