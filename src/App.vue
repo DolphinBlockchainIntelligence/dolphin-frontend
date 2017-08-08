@@ -9,7 +9,8 @@
         </a>
         <div class="search-bar">
           <input id="search" class="mdl-textfield__input" type="text" name="sample" placeholder="Search coin" v-model="query" autofocus @keyup.up="searchUp()" @keyup.down="searchDown()" @keyup.enter.prevent="searchEnter()" @keyup.esc.prevent="searchEsc()">
-          <i class="material-icons">search</i>
+          <i id="search-icon" class="material-icons">search</i>
+          <i id="search-icon-clear" class="search-icon-clear material-icons hide" @click="searchEsc()">clear</i>
         </div>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -22,7 +23,6 @@
       <click-outside :handler="handleClickOutside">
         <ul id="search-result" class="mdl-list search-result mdl-shadow--2dp hide">
           <li class="mdl-list__item" v-for="coin in computedList">
-            <!-- <a href="#" :id="coin.topicId" class="mdl-list__item-primary-content" @click.prevent="searchClick(coin.topicId)"> -->
             <a href="#" :id="coin.topicId" class="mdl-list__item-primary-content" @click.prevent="searchClick(coin.topicId)">
               {{ coin.announce }}
             </a>
@@ -132,8 +132,12 @@
       query: () => {
         if (document.getElementById('search').value) {
           document.getElementById('search-result').classList.remove('hide')
+          document.getElementById('search-icon').classList.add('hide')
+          document.getElementById('search-icon-clear').classList.remove('hide')
         } else {
           document.getElementById('search-result').classList.add('hide')
+          document.getElementById('search-icon-clear').classList.add('hide')
+          document.getElementById('search-icon').classList.remove('hide')
         }
       }
     },
@@ -181,7 +185,9 @@
         })
         this.searchActiveResult = 0
         this.query = ''
-        document.getElementById('search-result').classList.add('hide')
+        // document.getElementById('search-result').classList.add('hide')
+        // document.getElementById('search-icon-clear').classList.add('hide')
+        // document.getElementById('search-icon').classList.remove('hide')
       },
       searchEnter () {
         let topicId = document.querySelector('#search-result li:nth-child(' + this.searchActiveResult + ') a').getAttribute('id')
@@ -315,6 +321,8 @@
       margin: 0 10px
       color: #fff
       text-decoration: none
+    .search-icon-clear
+      cursor: pointer
     input
       padding: 10px
       outline: none

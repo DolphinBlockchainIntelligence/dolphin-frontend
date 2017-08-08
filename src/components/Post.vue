@@ -62,6 +62,7 @@ export default {
     })
     //
     this.initSortable()
+    this.clearSearchResults()
   },
   computed: {
     announce (state) {
@@ -104,6 +105,10 @@ export default {
       const sortable = Sortable.create(el, {
         handle: ".btn-drag"
       })
+    },
+    clearSearchResults: () => {
+      document.getElementById('search-icon-clear').classList.add('hide')
+      document.getElementById('search-icon').classList.remove('hide')
     }
   }
 }
