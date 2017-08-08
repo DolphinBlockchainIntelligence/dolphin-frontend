@@ -15,6 +15,18 @@
           <i class="material-icons">delete</i>
         </button>
       </div>
+      <dialog class="mdl-dialog customDialog">
+        <h4 class="mdl-dialog__title">Allow data collection?</h4>
+        <div class="mdl-dialog__content">
+          <p>
+            Таким образом начало повседневной работы по формированию позиции позволяет выполнять важные задания по разработке систем массового участия. Товарищи! новая модель организационной деятельности играет важную роль в формировании дальнейших направлений развития. Идейные соображения высшего порядка, а также сложившаяся структура организации обеспечивает широкому кругу (специалистов) участие в формировании систем массового участия. Значимость этих проблем настолько очевидна, что укрепление и развитие структуры влечет за собой процесс внедрения и модернизации системы обучения кадров, соответствует насущным потребностям. Не следует, однако забывать, что начало повседневной работы по формированию позиции позволяет выполнять важные задания по разработке систем массового участия.
+          </p>
+        </div>
+        <div class="mdl-dialog__actions">
+          <button type="button" class="mdl-button">Agree</button>
+          <button type="button" class="mdl-button close">Disagree</button>
+        </div>
+      </dialog>
       <div class="widget-content">
         <div class="scrollBlock">
           <div class="scrollBlock__el expertsCard" v-for="n in 10">
@@ -73,10 +85,7 @@
               </table>
             </div>
             <div class="expertsCard__footer">
-              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                Rate
-              </a>
-              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              <a id="show-dialog" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                 Review
               </a>
             </div>
@@ -101,15 +110,28 @@ export default {
     }
   },
   mounted () {
+    var dialog = document.querySelector('dialog')
+    var showDialogButton = document.querySelector('#show-dialog')
+    if (!dialog.showModal) {
+      dialogPolyfill.registerDialog(dialog)
+    }
+    showDialogButton.addEventListener('click', () => {
+      dialog.showModal()
+    })
+    dialog.querySelector('.close').addEventListener('click', () => {
+      dialog.close()
+    })
   },
   created () {
   },
   methods: {
-    removeWidget: function () {
+    removeWidget: () => {
       this.$root.$emit('removeWidget', this.id)
     }
   }
 }
+
+
 </script>
 <style lang="sass" scoped>
 .scrollBlock
@@ -117,7 +139,7 @@ export default {
   white-space: nowrap
   overflow-y: hidden
   overflow-x: auto
-  padding-bottom: 10px
+  padding: 10px
   -webkit-overflow-scrolling: touch
   &__el
     display: inline-block
@@ -143,7 +165,7 @@ export default {
       display: table-cell
       vertical-align: top
       i
-        color: blue
+        color: rgba(0,0,0,.87)
         font-size: 18px
       .expertsCard__ratio_count
         color: #ddd
@@ -151,10 +173,12 @@ export default {
   .expertsCard__body
     table
       td
-        font-siae: 16px
+        font-size: 16px
         color: #ccc
         padding: 4px
         i
           font-size: 20px
-          color: blue
+          color: rgba(0,0,0,.87)
+.customDialog
+  width: 80%
 </style>
