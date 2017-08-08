@@ -104,11 +104,8 @@ import {lory} from 'lory.js'
 export default {
   name: "experts-evaluations",
   props: ['id'],
-  data: function data() {
-    return {
-
-    }
-  },
+  data: () => ({
+  }),
   mounted () {
     var dialog = document.querySelector('dialog')
     var showDialogButton = document.querySelector('#show-dialog')

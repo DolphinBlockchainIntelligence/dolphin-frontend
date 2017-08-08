@@ -50,7 +50,7 @@ export default {
     ExpertsEvaluations
   },
   created () {
-    this.searchEsc()
+    // this.searchEsc()
   },
   mounted () {
     // TODO: Add and remove widget

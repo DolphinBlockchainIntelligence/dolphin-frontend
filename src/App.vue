@@ -8,8 +8,8 @@
           <span class="mdl-layout-title">Dolphin BI</span>
         </a>
         <div class="search-bar">
-            <input id="search" class="mdl-textfield__input" type="text" name="sample" placeholder="Search coin" v-model="query" autofocus @keyup.up="searchUp()" @keyup.down="searchDown()" @keyup.enter.prevent="searchEnter()" @keyup.esc.prevent="searchEsc()">
-            <i class="material-icons">search</i>
+          <input id="search" class="mdl-textfield__input" type="text" name="sample" placeholder="Search coin" v-model="query" autofocus @keyup.up="searchUp()" @keyup.down="searchDown()" @keyup.enter.prevent="searchEnter()" @keyup.esc.prevent="searchEsc()">
+          <i class="material-icons">search</i>
         </div>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -22,7 +22,8 @@
       <click-outside :handler="handleClickOutside">
         <ul id="search-result" class="mdl-list search-result mdl-shadow--2dp hide">
           <li class="mdl-list__item" v-for="coin in computedList">
-            <a :href="'/#/post/' + coin.topicId" :id="coin.topicId" class="mdl-list__item-primary-content">
+            <!-- <a href="#" :id="coin.topicId" class="mdl-list__item-primary-content" @click.prevent="searchClick(coin.topicId)"> -->
+            <a href="#" :id="coin.topicId" class="mdl-list__item-primary-content" @click.prevent="searchClick(coin.topicId)">
               {{ coin.announce }}
             </a>
           </li>
@@ -117,16 +118,18 @@
     }),
     computed: {
       computedList: function () {
-        return this.assets.filter((item) => {
-          return item.announce.toLowerCase().indexOf(this.query.toLowerCase()) !== -1
-        }).slice(0, 10)
+        if (this.query) {
+          return this.assets.filter((item) => {
+            return item.announce.toLowerCase().indexOf(this.query.toLowerCase()) !== -1
+          }).slice(0, 10)
+        }
       },
       ...mapState([
         'assets'
       ])
     },
     watch: {
-      query: function () {
+      query: () => {
         if (document.getElementById('search').value) {
           document.getElementById('search-result').classList.remove('hide')
         } else {
@@ -172,21 +175,25 @@
         }
       },
       searchEsc () {
-        document.querySelectorAll('#search-result li').forEach(function(item){
+        this.searchActiveResult = 0
+        document.querySelectorAll('#search-result li').forEach((item) => {
           item.classList.remove('active')
         })
-        document.getElementById('search-result').classList.add('hide')
         this.searchActiveResult = 0
-        // TODO
-        // this.query = ''
+        this.query = ''
+        document.getElementById('search-result').classList.add('hide')
       },
       searchEnter () {
-        let topicId = document.querySelector('#search-result li:nth-child(' + this.searchActiveResult + ') a').getAttribute('href').substr(8)
+        let topicId = document.querySelector('#search-result li:nth-child(' + this.searchActiveResult + ') a').getAttribute('id')
         this.searchEsc()
         routes.push({ name: 'Post', params: { id: topicId }})
       },
-      handleClickOutside(e) {
+      handleClickOutside () {
         this.searchEsc()
+      },
+      searchClick (topicId) {
+        this.searchEsc()
+        routes.push({ name: 'Post', params: { id: topicId }})
       }
     },
     components: {
