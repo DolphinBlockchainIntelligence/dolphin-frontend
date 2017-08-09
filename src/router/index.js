@@ -4,6 +4,7 @@ import List from '@/components/List'
 import Post from '@/components/Post'
 import Store from '@/components/Store'
 import Dashboard from '@/components/Dashboard'
+import ICOFace from '@/components/ICOFace'
 
 Vue.use(Router)
 export default new Router({
@@ -29,6 +30,16 @@ export default new Router({
       path: '/dashboard/',
       name: 'Dashboard',
       component: Dashboard
+    },
+    {
+      path: '/icoface/',
+      name: 'ICOFace',
+      component: ICOFace
+    },
+    {
+      path: '/store/',
+      name: 'Store',
+      component: Store
     }
   ]
 })

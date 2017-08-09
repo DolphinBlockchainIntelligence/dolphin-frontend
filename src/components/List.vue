@@ -3,7 +3,8 @@
     .mdl-grid
       .mdl-cell.mdl-cell--12-col
         .list
-          h3.page-title Bitcointalk.org sentiments
+          .title-box
+            h3.page-title Bitcointalk.org sentiments
           .datatable-options.mdl-textfield.mdl-js-textfield.mdl-shadow--2dp
             input.mdl-textfield__input(v-model="query" placeholder="Search post")
           table.table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
@@ -41,6 +42,7 @@ import axios from 'axios'
 import Vue from 'vue'
 import routes from '../router'
 import moment from 'moment'
+// import MdlSelect from './blocks/MdlSelect'
 import { mapState } from 'vuex'
 export default {
   name: 'list',
@@ -107,9 +109,26 @@ export default {
     ...mapState([
       'assets'
     ])
+  },
+  components: {
+    // MdlSelect
   }
 }
 </script>
+
+<style lang="sass" scoped>
+.title-box
+  display: flex
+  .page-title
+    flex: 1 0 auto
+  .select
+    position: relative
+    top: 11px
+    border: 1px solid #ccc
+    padding: 7px
+    background: #fff
+</style>
+
 
 <style lang="sass">
   .datatable-options
