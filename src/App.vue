@@ -8,8 +8,9 @@
           <span class="mdl-layout-title">Dolphin BI</span>
         </a>
         <div class="search-bar">
-            <input id="search" class="mdl-textfield__input" type="text" name="sample" placeholder="Search coin" v-model="query" autofocus @keyup.up="searchUp()" @keyup.down="searchDown()" @keyup.enter.prevent="searchEnter()" @keyup.esc.prevent="searchEsc()">
-            <i class="material-icons">search</i>
+          <input id="search" class="mdl-textfield__input" type="text" name="sample" placeholder="Search coin" v-model="query" autofocus @keyup.up="searchUp()" @keyup.down="searchDown()" @keyup.enter.prevent="searchEnter()" @keyup.esc.prevent="searchEsc()">
+          <i id="search-icon" class="material-icons">search</i>
+          <i id="search-icon-clear" class="search-icon-clear material-icons hide" @click="searchEsc()">clear</i>
         </div>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -22,7 +23,7 @@
       <click-outside :handler="handleClickOutside">
         <ul id="search-result" class="mdl-list search-result mdl-shadow--2dp hide">
           <li class="mdl-list__item" v-for="coin in computedList">
-            <a :href="'/#/post/' + coin.topicId" :id="coin.topicId" class="mdl-list__item-primary-content">
+            <a href="#" :id="coin.topicId" class="mdl-list__item-primary-content" @click.prevent="searchClick(coin.topicId)">
               {{ coin.announce }}
             </a>
           </li>
@@ -117,25 +118,30 @@
     }),
     computed: {
       computedList: function () {
-        return this.assets.filter((item) => {
-          return item.announce.toLowerCase().indexOf(this.query.toLowerCase()) !== -1
-        }).slice(0, 10)
+        if (this.query) {
+          return this.assets.filter((item) => {
+            return item.announce.toLowerCase().indexOf(this.query.toLowerCase()) !== -1
+          }).slice(0, 10)
+        }
       },
       ...mapState([
         'assets'
       ])
     },
     watch: {
-      query: function () {
+      query: () => {
         if (document.getElementById('search').value) {
           document.getElementById('search-result').classList.remove('hide')
+          document.getElementById('search-icon').classList.add('hide')
+          document.getElementById('search-icon-clear').classList.remove('hide')
         } else {
           document.getElementById('search-result').classList.add('hide')
+          document.getElementById('search-icon-clear').classList.add('hide')
+          document.getElementById('search-icon').classList.remove('hide')
         }
       }
     },
     mounted: function () {
-      this.$store.dispatch('LOAD_ASSETS_LIST')
       this.$root.$on('addFavoriteCoins', (coin) => {
         this.favoritesCoins.push(coin)
       })
@@ -143,7 +149,8 @@
         this.favoritesCoins = _.reject(this.favoritesCoins, { 'id': id })
       })
     },
-    created: function () {
+    beforeCreate: function () {
+      this.$store.dispatch('LOAD_ASSETS_LIST')
     },
     methods: {
       addWidget (widgetName) {
@@ -172,21 +179,27 @@
         }
       },
       searchEsc () {
-        document.querySelectorAll('#search-result li').forEach(function(item){
+        this.searchActiveResult = 0
+        document.querySelectorAll('#search-result li').forEach((item) => {
           item.classList.remove('active')
         })
-        document.getElementById('search-result').classList.add('hide')
         this.searchActiveResult = 0
-        // TODO
-        // this.query = ''
+        this.query = ''
+        // document.getElementById('search-result').classList.add('hide')
+        // document.getElementById('search-icon-clear').classList.add('hide')
+        // document.getElementById('search-icon').classList.remove('hide')
       },
       searchEnter () {
-        let topicId = document.querySelector('#search-result li:nth-child(' + this.searchActiveResult + ') a').getAttribute('href').substr(8)
+        let topicId = document.querySelector('#search-result li:nth-child(' + this.searchActiveResult + ') a').getAttribute('id')
         this.searchEsc()
         routes.push({ name: 'Post', params: { id: topicId }})
       },
-      handleClickOutside(e) {
+      handleClickOutside () {
         this.searchEsc()
+      },
+      searchClick (topicId) {
+        this.searchEsc()
+        routes.push({ name: 'Post', params: { id: topicId }})
       }
     },
     components: {
@@ -308,6 +321,8 @@
       margin: 0 10px
       color: #fff
       text-decoration: none
+    .search-icon-clear
+      cursor: pointer
     input
       padding: 10px
       outline: none

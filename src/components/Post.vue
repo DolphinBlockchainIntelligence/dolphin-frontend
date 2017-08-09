@@ -50,7 +50,7 @@ export default {
     ExpertsEvaluations
   },
   created () {
-    this.searchEsc()
+    // this.searchEsc()
   },
   mounted () {
     // TODO: Add and remove widget
@@ -60,9 +60,9 @@ export default {
     this.$root.$on('removeWidget', (id) => {
       this.widgets = _.reject(this.widgets, { 'id': id })
     })
-    // TODO: Sortable
-    const el = document.getElementById('draggable-container')
-    const sortable = Sortable.create(el)
+    //
+    this.initSortable()
+    this.clearSearchResults()
   },
   computed: {
     announce (state) {
@@ -87,10 +87,10 @@ export default {
       })
       document.getElementById('search-result').classList.add('hide')
     },
-    toggleSettings: function () {
+    toggleSettings: () => {
       document.querySelector('.mdl-layout').classList.toggle('mdl-layout--fixed-right-drawer')
     },
-    toggleFavorite: function (event) {
+    toggleFavorite: (event) => {
       let icon = event.target.innerHTML
       if (icon == 'star') {
         this.$root.$emit('removeFavoriteCoins', this.id)
@@ -99,6 +99,16 @@ export default {
         this.$root.$emit('addFavoriteCoins', { id: this.id, name: this.announce })
         event.target.innerHTML = 'star'
       }
+    },
+    initSortable: () => {
+      const el = document.getElementById('draggable-container')
+      const sortable = Sortable.create(el, {
+        handle: ".btn-drag"
+      })
+    },
+    clearSearchResults: () => {
+      document.getElementById('search-icon-clear').classList.add('hide')
+      document.getElementById('search-icon').classList.remove('hide')
     }
   }
 }

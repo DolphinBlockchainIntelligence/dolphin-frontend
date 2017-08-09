@@ -104,28 +104,25 @@ import {lory} from 'lory.js'
 export default {
   name: "experts-evaluations",
   props: ['id'],
-  data: function data() {
-    return {
-
-    }
-  },
+  data: () => ({
+  }),
   mounted () {
-    var dialog = document.querySelector('dialog');
-    var showDialogButton = document.querySelector('#show-dialog');
-    if (! dialog.showModal) {
-      dialogPolyfill.registerDialog(dialog);
+    var dialog = document.querySelector('dialog')
+    var showDialogButton = document.querySelector('#show-dialog')
+    if (!dialog.showModal) {
+      dialogPolyfill.registerDialog(dialog)
     }
-    showDialogButton.addEventListener('click', function() {
-      dialog.showModal();
-    });
-    dialog.querySelector('.close').addEventListener('click', function() {
-      dialog.close();
-    });
+    showDialogButton.addEventListener('click', () => {
+      dialog.showModal()
+    })
+    dialog.querySelector('.close').addEventListener('click', () => {
+      dialog.close()
+    })
   },
   created () {
   },
   methods: {
-    removeWidget: function () {
+    removeWidget: () => {
       this.$root.$emit('removeWidget', this.id)
     }
   }
