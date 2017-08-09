@@ -29,66 +29,36 @@
       </dialog>
       <div class="widget-content">
         <div class="scrollBlock">
-          <div class="scrollBlock__el expertsCard" v-for="n in 10">
+          <div class="scrollBlock__el expertsCard" v-for="expert in experts">
             <div class="expertsCard__header">
               <div class="expertsCard__img">
-                <img src="/static/img/widgets/experts.svg"/>
+                <img :src="expert.photo"/>
               </div>
               <div class="expertsCard__ratio">
-                <div class="expertsCard__ratio_name">Edward Umnik</div>
-                  <i class="material-icons">star</i>
-                  <i class="material-icons">star_half</i>
-                  <i class="material-icons">star_border</i>
-                  <i class="material-icons">star_border</i>
-                  <i class="material-icons">star_border</i>
-                  <span class="expertsCard__ratio_count">2,4</span>
+                <div class="expertsCard__ratio_name">{{expert.name}}</div>
+                <star-rating :increment="0.01" :fixed-points="2" star-size="30" border-width="1" border-color="#212E51" inactive-color="#fff" active-color="#212E51"  :rating="expert.rating"></star-rating>
               </div>
             </div>
             <div class="expertsCard__body">
               <table>
                 <tr>
-                  <td>
-                    Idea
-                  </td>
-                  <td>
-                    <i class="material-icons">star</i>
-                    <i class="material-icons">star_half</i>
-                    <i class="material-icons">star_border</i>
-                    <i class="material-icons">star_border</i>
-                    <i class="material-icons">star_border</i>
-                  </td>
+                  <td>{{expert.themeName_1}}</td>
+                  <td><star-rating :increment="0.01" :fixed-points="2" star-size="28" border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="expert.themeCount_1"></star-rating></td>
                 </tr>
                 <tr>
-                  <td>
-                    Idea
-                  </td>
-                  <td>
-                    <i class="material-icons">star</i>
-                    <i class="material-icons">star_half</i>
-                    <i class="material-icons">star_border</i>
-                    <i class="material-icons">star_border</i>
-                    <i class="material-icons">star_border</i>
-                  </td>
+                  <td>{{expert.themeName_2}}</td>
+                  <td><star-rating :increment="0.01" :fixed-points="2" star-size="28" border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="expert.themeCount_2"></star-rating></td>
                 </tr>
                 <tr>
-                  <td>
-                    Idea
-                  </td>
-                  <td>
-                    <i class="material-icons">star</i>
-                    <i class="material-icons">star_half</i>
-                    <i class="material-icons">star_border</i>
-                    <i class="material-icons">star_border</i>
-                    <i class="material-icons">star_border</i>
-                  </td>
+                  <td>{{expert.themeName_3}}</td>
+                  <td><star-rating :increment="0.01" :fixed-points="2" star-size="28" border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="expert.themeCount_3"></star-rating></td>
                 </tr>
               </table>
             </div>
-            <div class="expertsCard__footer">
-              <a id="show-dialog" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                Review
-              </a>
-            </div>
+            <a @click.prevent="showReview($event)" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              Review
+            </a>
+
           </div>
         </div>
       </div>
@@ -99,32 +69,62 @@
 
 <script>
 import axios from 'axios'
-import {lory} from 'lory.js'
+import StarRating from 'vue-star-rating'
+
 
 export default {
   name: "experts-evaluations",
   props: ['id'],
   data: () => ({
+    experts: [
+      {
+        photo: '/static/img/widgets/experts.svg',
+        name: 'Edward Umnik',
+        rating: 2.5,
+        themeName_1: 'Idea',
+        themeCount_1: 2.6,
+        themeName_2: 'Team',
+        themeCount_2: 4.6,
+        themeName_3: 'Model',
+        themeCount_3: 1.4
+      }
+
+    ],
+    reviews: [
+      {
+        id: '',
+        title: '',
+        text: ''
+      }
+    ]
+
   }),
   mounted () {
-    var dialog = document.querySelector('dialog')
-    var showDialogButton = document.querySelector('#show-dialog')
-    if (!dialog.showModal) {
-      dialogPolyfill.registerDialog(dialog)
-    }
-    showDialogButton.addEventListener('click', () => {
-      dialog.showModal()
-    })
-    dialog.querySelector('.close').addEventListener('click', () => {
-      dialog.close()
-    })
+    // var dialog = document.querySelector('dialog')
+    // var showDialogButton = document.querySelector('#show-dialog')
+    // if (!dialog.showModal) {
+    //   dialogPolyfill.registerDialog(dialog)
+    // }
+    // showDialogButton.addEventListener('click', () => {
+    //   dialog.showModal()
+    // })
+    // dialog.querySelector('.close').addEventListener('click', () => {
+    //   dialog.close()
+    // })
   },
   created () {
   },
   methods: {
     removeWidget: () => {
       this.$root.$emit('removeWidget', this.id)
+    },
+    showReview: (event) => {
+      console.log(event.target)
     }
+
+  },
+  components: {
+    StarRating
   }
 }
 
@@ -142,19 +142,26 @@ export default {
     display: inline-block
     margin-right: 10px
     vertical-align: top
-    height: 100%
-    width: 200px
+    height: 340px
+    width: 280px
 .expertsCard
-  padding: 10px
+  padding: 25px 10px 35px
   box-shadow: 0 0 2px #ccc
+  position: relative
+  .mdl-button
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+    padding: 0
   .expertsCard__header
     display: table
     width: 100%
     border-bottom: 1px solid #ddd
-    padding-bottom: 8px
+    padding-bottom: 25px
     .expertsCard__img
-      width: 40px
-      height: 40px
+      width: 50px
+      height: 50px
       display: table-cell
       vertical-align: top
       padding-right: 10px
@@ -167,15 +174,21 @@ export default {
       .expertsCard__ratio_count
         color: #ddd
         font-size: 24px
+    .expertsCard__ratio_name
+      font-size: 24px
   .expertsCard__body
     table
       td
-        font-size: 16px
-        color: #ccc
-        padding: 4px
+        font-size: 20px
+        color: #757575
+        padding: 14px 4px
+        vertical-align: middle
         i
           font-size: 20px
           color: rgba(0,0,0,.87)
+        .star-rating
+          .rating-text
+            margin-top: 0 !important
 .customDialog
   width: 80%
 </style>
