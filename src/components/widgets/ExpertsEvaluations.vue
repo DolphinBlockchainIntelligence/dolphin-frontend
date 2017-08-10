@@ -36,7 +36,7 @@
               </a>
               <div class="expertsCard__ratio">
                 <a class="expertsCard__ratio_name" href="#">{{expert.name}}</a>
-                <star-rating :increment="0.01" :fixed-points="2" :star-size="30" :border-width="1" border-color="#212E51" inactive-color="#fff" active-color="#212E51" :rating="expert.rating"></star-rating>
+                <star-rating :increment="0.01" :fixed-points="2" :star-size="28" :border-width="1" border-color="#212E51" inactive-color="#fff" active-color="#212E51" :rating="expert.rating"></star-rating>
               </div>
             </div>
             <div class="expertsCard__body">
@@ -234,7 +234,7 @@ export default {
     .expertsCard__ratio
       display: table-cell
       vertical-align: top
-      font-size: 22px
+      font-size: 20px
       i
         color: rgba(0,0,0,.87)
         font-size: 18px
@@ -242,7 +242,7 @@ export default {
         color: #ddd
         font-size: 24px
     .expertsCard__ratio_name
-      font-size: 24px
+      font-size: 20px
       text-overflow: ellipsis
       white-space: nowrap
       width: 220px
@@ -261,7 +261,7 @@ export default {
       td
         font-size: 20px
         color: #757575
-        padding: 14px 4px
+        padding: 14px 1px
         vertical-align: middle
         i
           font-size: 20px
