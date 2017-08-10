@@ -155,9 +155,11 @@ export default {
 .widget-comments
   height: 460px
   overflow-y: scroll
-  padding-top: 28px
+  // padding-top: 28px
 .mdl-card
   width: 100% !important
+  .mdl-card__title
+    flex: 0 0 auto
 .comments
   list-style: none
   padding: 0

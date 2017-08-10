@@ -71,7 +71,7 @@
               <span class="mdl-list__item-sub-title">{{ widget.subName }}</span>
             </span>
             <span v-if="widget.subscribe" class="mdl-list__item-secondary-content">
-              <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" @click.prevent="addWidget(widget.component)"><i class="material-icons">add</i></button>              
+              <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" @click.prevent="addWidget(widget.component)"><i class="material-icons">add</i></button>
             </span>
             <span v-else class="mdl-list__item-secondary-content">
               <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" @click.prevent=""><i class="material-icons">attach_money</i></button>
