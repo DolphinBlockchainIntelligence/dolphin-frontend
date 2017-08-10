@@ -35,11 +35,6 @@ export default new Router({
       path: '/icoface/',
       name: 'ICOFace',
       component: ICOFace
-    },
-    {
-      path: '/store/',
-      name: 'Store',
-      component: Store
     }
   ]
 })

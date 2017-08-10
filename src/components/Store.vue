@@ -2,9 +2,7 @@
   <main class="mdl-layout__content">
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell--12-col">
-        <h4>{{ heading }}</h4>
-        <!-- <i class="material-icons">account_circle</i> -->
-        <!-- <i class="material-icons">assignment</i> -->
+        <h4>Widget market</h4>
       </div>
     </div>
     <div v-model="widgets" class="mdl-grid draggable-container" id="draggable-container" :options="{draggable:'.draggable'}">
@@ -13,124 +11,222 @@
           <div class="mdl-card__title">
             <h4 class="mdl-card__title-text">New widgets</h4>
           </div>
-          <div class="mdl-card__menu">
-            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-              <i class="material-icons">info</i>
-            </button>
-            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-              <i class="material-icons">pan_tool</i>
-            </button>
-            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-              <i class="material-icons">filter_list</i>
-            </button>
-            <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
-              <i class="material-icons">more_vert</i>
-            </button>
-            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
-              <li class="mdl-menu__item">Some Action</li>
-              <li class="mdl-menu__item">Another Action</li>
-              <li disabled class="mdl-menu__item">Disabled Action</li>
-              <li class="mdl-menu__item">Yet Another Action</li>
-            </ul>
-          </div>
-          <div v-if="!chartError">
-            <div id="sentimentsLineChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-            <!-- <div v-else class="nodata">
-              <p>Data not find</p>
-            </div> -->
-          </div>
+          <slick ref="slick" :options="slickOptions" height="500">
+            <div><h3>1</h3></div>
+            <div><h3>2</h3></div>
+            <div><h3>3</h3></div>
+            <div><h3>4</h3></div>
+            <div><h3>5</h3></div>
+            <div><h3>6</h3></div>
+          </slick>
         </div>
       </div>
-
     </div>
   </main>
 </template>
 
+
 <script>
-import _ from 'lodash'
-import axios from 'axios'
-import Vue from 'vue'
-import routes from '../router'
-import moment from 'moment'
+import Slick from 'vue-slick'
+
 export default {
-  name: 'list',
+  name: 'store',
   data: () => ({
-    query: '',
-    sortBy: '',
-    sortOrder: '',
-    postsList: []
+    slickOptions: {
+      centerMode: true,
+      centerPadding: '60px',
+      slidesToShow: 3,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 3
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 1
+          }
+        }
+      ]
+    },
   }),
-  mounted () {
-    document.querySelector('.mdl-layout').classList.remove('mdl-layout--fixed-drawer')
+  mounted: () => {
+
   },
-  created () {
-    // document.querySelector('body').classList.remove('body-landing-lite')
-    let component = this
-    axios.get('/static/data/announceList.json')
-    .then(response => {
-      this.postsList = Object.values(response.data)
-      this.postsList.map((currElement, index) => {
-        currElement.DateTimeLastPost = moment(currElement.DateTimeLastPost).calendar()
-      })
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
+  components: {
+    Slick
   },
   methods: {
-    dataHref: function (url, event) {
-      event.preventDefault()
-      event.stopPropagation()
-      window.open(url, '_blank')
+    next() {
+      this.$refs.slick.next();
     },
-    goToPost(url) {
-      routes.push({ name: 'Post', params: { id: url }})
+
+    prev() {
+      this.$refs.slick.prev();
     },
-    sort: function (sortBy) {
-      this.sortBy = sortBy
-      let classList = event.currentTarget.querySelector('i').classList
-      let siblings = document.querySelectorAll('.table thead tr .material-icons').forEach(function(item) {
-        item.classList.remove('up')
-        item.classList.remove('down')
-      })
-      if (this.sortOrder == 'asc') {
-        this.sortOrder = 'desc'
-        classList.remove('up')
-        classList.add('down')
-      } else {
-        this.sortOrder = 'asc'
-        classList.remove('down')
-        classList.add('up')
-      }
-    }
-  },
-  computed: {
-    // momentList: function () {
-    //   let list = this.postsList.map((currElement, index) => {
-    //     currElement.DateTimeLastPost = moment(currElement.DateTimeLastPost).calendar()
-    //   })
-    //   return list
-    // },
-    computedList: function () {
-      let vm = this
-      let list = this.postsList.filter(function (item) {
-        return list = item.announce.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
-      })
-      if (this.sortBy) {
-        list = _.orderBy(list, [this.sortBy], [this.sortOrder])
-      } else {
-        list = _.orderBy(list, ['NumReplies', 'DateTimeLastPost', 'announce'], ['desc', 'desc', 'asc'])
-      }
-      list = list.map((currElement, index) => {
-        currElement['order'] = ++index
-        return currElement
-      })
-      return list
+
+    reInit() {
+    this.$refs.slick.reSlick();
     }
   }
 }
 </script>
 
-<style lang="sass">
+<style scoped>
+.slick-slider
+{
+    position: relative;
 
+    display: block;
+    box-sizing: border-box;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+        touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slick-list
+{
+    position: relative;
+
+    display: block;
+    overflow: hidden;
+
+    margin: 0;
+    padding: 0;
+}
+.slick-list:focus
+{
+    outline: none;
+}
+.slick-list.dragging
+{
+    cursor: pointer;
+    cursor: hand;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list
+{
+    -webkit-transform: translate3d(0, 0, 0);
+       -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+         -o-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+}
+
+.slick-track
+{
+    position: relative;
+    top: 0;
+    left: 0;
+
+    display: block;
+}
+.slick-track:before,
+.slick-track:after
+{
+    display: table;
+
+    content: '';
+}
+.slick-track:after
+{
+    clear: both;
+}
+.slick-loading .slick-track
+{
+    visibility: hidden;
+}
+
+.slick-slide
+{
+    display: none;
+    float: left;
+
+    height: 100%;
+    min-height: 1px;
+}
+[dir='rtl'] .slick-slide
+{
+    float: right;
+}
+.slick-slide img
+{
+    display: block;
+}
+.slick-slide.slick-loading img
+{
+    display: none;
+}
+.slick-slide.dragging img
+{
+    pointer-events: none;
+}
+.slick-initialized .slick-slide
+{
+    display: block;
+}
+.slick-loading .slick-slide
+{
+    visibility: hidden;
+}
+.slick-vertical .slick-slide
+{
+    display: block;
+
+    height: auto;
+
+    border: 1px solid transparent;
+}
+.slick-arrow.slick-hidden {
+    display: none;
+}
+
+</style>
+
+
+<style lang="sass" scoped>
+.frame
+    width: 880px
+    position: relative
+    font-size: 0
+    line-height: 0
+    overflow: hidden
+    white-space: nowrap
+.slides
+    display: inline-block
+    background: red
+li
+    position: relative
+    display: inline-block
+    width: 880px
+    background: green 
+.prev, .next
+    position: absolute
+    top: 50%
+    margin-top: -25px
+    display: block
+    cursor: pointer
+.next
+    right: 0
+.prev
+    left: 0
+.next svg, .prev svg
+    width: 25px
 </style>

@@ -2918,7 +2918,7 @@ joi@^6.10.1:
     moment "2.x.x"
     topo "1.x.x"
 
-jquery@>=1.8.3, jquery@>=1.9.1, jquery@^3.2.1:
+jquery@>=1.7.2, jquery@>=1.8.3, jquery@>=1.9.1, jquery@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
 
@@ -4264,11 +4264,11 @@ pug@^2.0.0-rc.1:
     pug-runtime "^2.0.3"
     pug-strip-comments "^1.0.2"
 
-punycode@1.3.2:
+punycode@1.3.2, punycode@^1.2.4:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
 
-punycode@^1.2.4, punycode@^1.4.1:
+punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
 
@@ -4616,13 +4616,9 @@ sass-loader@^6.0.5:
     lodash.tail "^4.1.1"
     pify "^3.0.0"
 
-sax@1.2.1:
+sax@1.2.1, sax@>=0.6.0, sax@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
-
-sax@>=0.6.0, sax@~1.2.1:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.2.tgz#fd8631a23bc7826bef5d871bdb87378c95647828"
 
 schema-utils@^0.3.0:
   version "0.3.0"
@@ -4722,6 +4718,12 @@ slash@^1.0.0:
 slice-ansi@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/slice-ansi/-/slice-ansi-0.0.4.tgz#edbf8903f66f7ce2f8eafd6ceed65e264c831b35"
+
+slick-carousel@^1.6.0, slick-carousel@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/slick-carousel/-/slick-carousel-1.7.1.tgz#51f5489bbb52212542ccbe9f42689f818bd29ed2"
+  dependencies:
+    jquery ">=1.7.2"
 
 sntp@1.x.x:
   version "1.0.9"
@@ -5228,7 +5230,7 @@ vue-loader@^11.3.4:
     vue-style-loader "^2.0.0"
     vue-template-es2015-compiler "^1.2.2"
 
-vue-lory:
+vue-lory@^0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/vue-lory/-/vue-lory-0.0.5.tgz#7b441932e46a91d42533db201cb88df7d2090fe2"
   dependencies:
@@ -5256,6 +5258,16 @@ vue-router@^2.3.1:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.5.3.tgz#073783f564b6aece6c8a59c63e298dc2aabfb51b"
 
+vue-slick@^1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/vue-slick/-/vue-slick-1.1.9.tgz#b8916c49124f0b17eea6b155a771f3a8a9789fb4"
+  dependencies:
+    slick-carousel "^1.6.0"
+
+vue-star-rating@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/vue-star-rating/-/vue-star-rating-1.4.0.tgz#6352708feaff2669284eea272a2d57c181e26cc8"
+
 vue-style-loader@^2.0.0, vue-style-loader@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-2.0.5.tgz#f0efac992febe3f12e493e334edb13cd235a3d22"
@@ -5268,6 +5280,12 @@ vue-svg-loader@^0.1.2:
   resolved "https://registry.yarnpkg.com/vue-svg-loader/-/vue-svg-loader-0.1.2.tgz#04967ada49643f2f6a7623a521163f2bf938b605"
   dependencies:
     svgo "^0.7.1"
+
+vue-swipe@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/vue-swipe/-/vue-swipe-2.0.3.tgz#03b71d04a819b5f56efa09cd82658c30e8c846c5"
+  dependencies:
+    wind-dom "0.0.3"
 
 vue-tables-2@^0.6.23:
   version "0.6.26"
@@ -5430,6 +5448,10 @@ wide-align@^1.1.0:
   resolved "https://registry.yarnpkg.com/wide-align/-/wide-align-1.1.2.tgz#571e0f1b0604636ebc0dfc21b0339bbe31341710"
   dependencies:
     string-width "^1.0.2"
+
+wind-dom@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/wind-dom/-/wind-dom-0.0.3.tgz#3456e3d959dbebdcbf76ca68c6a4e8142f26360f"
 
 window-size@0.1.0:
   version "0.1.0"
