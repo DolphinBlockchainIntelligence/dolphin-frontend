@@ -32,12 +32,12 @@
       <div class="mdl-layout__drawer">
         <ul class="mdl-list">
           <li class="mdl-list__item">
-            <a href="#" class="mdl-list__item-primary-content">
+            <a href="/#/dashboard" class="mdl-list__item-primary-content">
               Market overview
             </a>
           </li>
           <li class="mdl-list__item">
-            <a href="#" class="mdl-list__item-primary-content">
+            <a href="/#/" class="mdl-list__item-primary-content">
               ICO view
             </a>
             <ul class="favourites-coins">
@@ -50,12 +50,12 @@
             </ul>
           </li>
           <li class="mdl-list__item">
-            <a href="#" class="mdl-list__item-primary-content">
+            <a href="/#/store" class="mdl-list__item-primary-content">
               Widget market
             </a>
           </li>
           <li class="mdl-list__item">
-            <a href="#" class="mdl-list__item-primary-content">
+            <a href="/#/icoface" class="mdl-list__item-primary-content">
               ICO faces
             </a>
           </li>
@@ -91,8 +91,10 @@
   import routes from './router'
   import 'roboto-fontface'
   import 'material-design-icons-iconfont'
-  import "material-design-lite/material.min.css"
-  import "material-design-lite/material.min.js"
+  import 'material-design-lite/material.min.css'
+  import 'material-design-lite/material.min.js'
+  import 'getmdl-select/getmdl-select.min.css'
+  import 'getmdl-select/getmdl-select.min.js'
   import { mapState } from 'vuex'
   import ClickOutside from 'onclick-outside'
   export default {
