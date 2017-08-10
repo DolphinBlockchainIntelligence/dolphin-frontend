@@ -200,7 +200,7 @@ export default {
     margin-right: 10px
     vertical-align: top
     height: 298px
-    width: 280px
+    // width: 280px
 .expertsCard
   padding: 25px 10px 35px
   box-shadow: 0 0 2px #ccc
