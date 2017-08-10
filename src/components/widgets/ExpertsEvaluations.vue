@@ -43,15 +43,15 @@
               <table>
                 <tr>
                   <td>{{expert.themeName_1}}</td>
-                  <td><star-rating :increment="0.01" :fixed-points="2" star-size="28" border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="expert.themeCount_1"></star-rating></td>
+                  <td><star-rating :increment="0.01" :fixed-points="2" read-only="true" star-size="28" border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="expert.themeCount_1"></star-rating></td>
                 </tr>
                 <tr>
                   <td>{{expert.themeName_2}}</td>
-                  <td><star-rating :increment="0.01" :fixed-points="2" star-size="28" border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="expert.themeCount_2"></star-rating></td>
+                  <td><star-rating :increment="0.01" :fixed-points="2" read-only="true" star-size="28" border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="expert.themeCount_2"></star-rating></td>
                 </tr>
                 <tr>
                   <td>{{expert.themeName_3}}</td>
-                  <td><star-rating :increment="0.01" :fixed-points="2" star-size="28" border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="expert.themeCount_3"></star-rating></td>
+                  <td><star-rating :increment="0.01" :fixed-points="2" read-only="true" star-size="28" border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="expert.themeCount_3"></star-rating></td>
                 </tr>
               </table>
             </div>
@@ -142,7 +142,7 @@ export default {
     display: inline-block
     margin-right: 10px
     vertical-align: top
-    height: 340px
+    height: 310px
     width: 280px
 .expertsCard
   padding: 25px 10px 35px
