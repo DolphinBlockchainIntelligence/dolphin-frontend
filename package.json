@@ -29,6 +29,7 @@
     "passport-facebook": "^2.1.1",
     "pug": "^2.0.0-rc.1",
     "roboto-fontface": "^0.7.0",
+    "slick-carousel": "^1.7.1",
     "sortablejs": "^1.6.0",
     "velocity-animate": "^1.5.0",
     "vue": "^2.2.6",
@@ -37,8 +38,10 @@
     "vue-lory": "^0.0.5",
     "vue-polyglot": "^0.1.8",
     "vue-router": "^2.3.1",
+    "vue-slick": "^1.1.9",
     "vue-star-rating": "^1.4.0",
     "vue-svg-loader": "^0.1.2",
+    "vue-swipe": "^2.0.3",
     "vue-tables-2": "^0.6.23",
     "vuedraggable": "^2.14.1",
     "vuex": "^2.3.1"
