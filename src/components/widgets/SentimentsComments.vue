@@ -51,7 +51,7 @@ export default {
   methods: {
     sentimentsComments: function () {
       const postId = this.$route.params.id
-      axios.get('https://beta.dolphin.bi/static/data/btt-sentiments/D'+ postId +'.json')
+      axios.get('http://178.218.115.169:8080/static/data/btt-sentiments/D'+ postId +'.json')
       .then(response => {
         _.forEach(response.data, function(item, i) {
           item.date = moment(item.date).calendar()
