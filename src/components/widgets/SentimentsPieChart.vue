@@ -1,9 +1,7 @@
 <template>
-  <div id="sentiments-line-chart">
-    <h4 class="title">Sentiments: chart</h4>
-    <div v-if="!chartError">
-      <div :id="'sentimentsLineChart'+id" style="min-width: 100%; width: 100%; height: 400px; margin: 0 auto"></div>
-    </div>
+  <div id="sentiments-pie-chart">
+    <h4 class="title">Sentiments: pie chart</h4>
+    <div :id="'sentimentsPieChart'+id" style="width: 100%; height: 400px; margin: 0 auto"></div>
   </div>
 </template>
 
@@ -14,47 +12,18 @@ const Highchart = require('highcharts')
 const Highstock = require('highcharts/highstock')
 const colors = ['#f98a83', '#989898', '#85f77e']
 export default {
-  name: "sentimentsLineChart",
+  name: "sentimentsPieChart",
   props: ['id'],
   data: function data() {
     return {
-      chartError: false
+
     }
   },
   mounted () {
-    this.sentimentsLineChart()
+    this.sentimentsStatistics()
   },
   methods: {
-    sentimentsLineChart: function () {
-      let highchartContainer = 'sentimentsLineChart'+this.id
-      let seriesOptions = []
-      let seriesCounter = 0
-      function createChart () {
-        Highstock.stockChart(highchartContainer, {
-          chart: {
-            spacingBottom: 60
-          },
-          legend: {
-            enabled: true,
-            floating: true,
-            verticalAlign: 'bottom',
-            align:'right',
-            y: 30
-          },
-          rangeSelector: {
-            selected: 4
-          },
-          plotOptions: {
-            series: {
-              showInNavigator: true
-            },
-          },
-          series: seriesOptions
-        })
-      }
-      const postId = this.$route.params.id
-      let names = ['positive', 'neutral', 'negative']
-      let component = this
+    sentimentsStatistics: () => {
       axios.get('http://dolphin.suenot.ru/static/data/btt-sentiments/S'+ postId +'.json')
       .then(response => {
         let data = response.data
@@ -88,13 +57,51 @@ export default {
         this.chartError = true
         this.errors.push(e)
       })
+
+      let highchartContainer = 'sentimentsPieChart'+this.id
+      Highchart.chart(highchartContainer, {
+          chart: {
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false,
+              type: 'pie'
+          },
+          title: {
+              text: false
+          },
+          tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          },
+          plotOptions: {
+              pie: {
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  dataLabels: {
+                      enabled: false
+                  },
+                  showInLegend: true
+              }
+          },
+          series: [{
+              data: [{
+                  name: 'Negative',
+                  y: 56.33,
+                  color: colors[0],
+              }, {
+                  name: 'Neutral',
+                  y: 24.03,
+                  color: colors[1]
+              }, {
+                  name: 'Positive',
+                  y: 10.38,
+                  color: colors[2],
+              }]
+          }]
+      })
     },
     removeWidget: function () {
       this.$root.$emit('removeWidget', this.id)
     }
-  },
-  removeWidget: function () {
-    this.$root.$emit('removeWidget', this.id)
   }
 }
 </script>

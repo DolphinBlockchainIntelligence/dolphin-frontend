@@ -26,7 +26,7 @@ import axios from 'axios'
 import { mapState } from 'vuex'
 const Sortable = require('sortablejs')
 
-import SentimentsStatistics from './widgets/SentimentsStatistics.vue'
+import SentimentsPieChart from './widgets/SentimentsPieChart.vue'
 import SentimentsLineChart from './widgets/SentimentsLineChart.vue'
 import SentimentsComments from './widgets/SentimentsComments.vue'
 import FacesSearch from './widgets/FacesSearch.vue'
@@ -43,7 +43,7 @@ export default {
   }),
   components: {
     SentimentsLineChart,
-    SentimentsStatistics,
+    SentimentsPieChart,
     SentimentsComments,
     FacesSearch,
     FacesProject,

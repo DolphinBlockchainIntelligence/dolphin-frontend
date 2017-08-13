@@ -53,7 +53,7 @@ export default {
     postsList: []
   }),
   mounted () {
-    document.querySelector('.mdl-layout').classList.remove('mdl-layout--fixed-right-drawer')
+    // document.querySelector('.mdl-layout').classList.remove('mdl-layout--fixed-right-drawer')
   },
   methods: {
     dataHref: function (url, event) {
