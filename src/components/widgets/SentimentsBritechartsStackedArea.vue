@@ -8,6 +8,8 @@ import axios from 'axios'
 import _ from 'lodash'
 import moment from 'moment'
 const StackedArea = require('britecharts/dist/umd/stackedArea.min')
+const ChartTooltip = require('britecharts/dist/umd/tooltip.min')
+// const tooltip = require('britecharts/dist/umd/tooltip.min')
 const d3Selection = require('d3-selection')
 import 'britecharts/dist/css/britecharts.min.css'
 const colorSchemas = require('../../assets/colors').colorSchemas
@@ -21,38 +23,6 @@ export default {
       height: 1000,
       margin: 0,
       data: []
-      // testData: [
-      //   {
-      //     "date": "2011-01-05T00:00:00Z",
-      //     "name": "Direct",
-      //     "value": 3
-      //   },
-      //   {
-      //     "date": "2011-01-06T00:00:00Z",
-      //     "name": "Direct",
-      //     "value": 10
-      //   },
-      //   {
-      //     "date": "2011-01-07T00:00:00Z",
-      //     "name": "Direct",
-      //     "value": 5
-      //   },
-      //   {
-      //     "date": "2011-01-05T00:00:00Z",
-      //     "name": "Moscow",
-      //     "value": 5
-      //   },
-      //   {
-      //     "date": "2011-01-06T00:00:00Z",
-      //     "name": "Moscow",
-      //     "value": 5
-      //   },
-      //   {
-      //     "date": "2011-01-07T00:00:00Z",
-      //     "name": "Moscow",
-      //     "value": 5
-      //   }
-      // ]
     }
   },
   created () {
@@ -85,15 +55,24 @@ export default {
 
         var container = d3Selection.select('#sentimentsBritechartsStackedArea'+this.id)
         var stackedArea = new StackedArea()
-        if (container.node()) {
-            stackedArea
-              .isAnimated(true)
-              .tooltipThreshold(600)
-              .width(containerWidth)
-              .height(containerHeight)
-              .colorSchema(colorSchemas.sentiments)
-        }
+        var chartTooltip = new ChartTooltip()
+        stackedArea
+          .isAnimated(true)
+          .tooltipThreshold(600)
+          .width(containerWidth)
+          .height(containerHeight)
+          .colorSchema(colorSchemas.sentimentsStackedArea)
+          .grid('horizontal')
+          .on('customMouseOver', chartTooltip.show)
+          .on('customMouseMove', chartTooltip.update)
+          .on('customMouseOut', chartTooltip.hide)
+        chartTooltip
+          .topicLabel('values')
+          .title('Sentiments')
+          .topicsOrder(['positive', 'neutral', 'negative'])
         container.datum(this.data).call(stackedArea)
+        var tooltipContainer = d3Selection.select('#sentimentsBritechartsStackedArea'+this.id+' .metadata-group .vertical-marker-container')
+        tooltipContainer.datum([]).call(chartTooltip)
       })
       .catch(e => {
         this.chartError = true

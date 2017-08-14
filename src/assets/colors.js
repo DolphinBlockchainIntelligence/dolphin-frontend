@@ -17,6 +17,14 @@ define(function() {
             '#f866b9', //pink
             '#998ce3' //purple
         ];
+    const sentimentsStackedArea = [
+            '#ffce00', //yellow
+            '#6aedc7', //green
+            '#ff938c', // red
+            '#ffa71a', //orange
+            '#f866b9', //pink
+            '#998ce3' //purple
+        ];
 
     // Standard Color Schema for Britecharts
     const britecharts = [
@@ -145,6 +153,7 @@ define(function() {
     return {
         colorSchemas: {
             sentiments,
+            sentimentsStackedArea,
             britecharts,
             grey,
             orange,
@@ -158,6 +167,7 @@ define(function() {
         },
         colorSchemasHuman: {
             'sentiments': 'Sentiments',
+            'sentimentsStackedArea': 'Sentiments stacked area',
             'britecharts': 'Britecharts Default',
             'grey': 'Britecharts Grey',
             'orange': 'Orange',
