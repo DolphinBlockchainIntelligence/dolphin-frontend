@@ -20,43 +20,39 @@ export default {
       width: 1000,
       height: 1000,
       margin: 0,
-      data: {
-        dataByTopic: []
-      },
-      testData: [
-        // 'data': [
-          {
-            "date": "2011-01-05T00:00:00Z",
-            "name": "Direct",
-            "value": 3
-          },
-          {
-            "date": "2011-01-06T00:00:00Z",
-            "name": "Direct",
-            "value": 10
-          },
-          {
-            "date": "2011-01-07T00:00:00Z",
-            "name": "Direct",
-            "value": 5
-          },
-          {
-            "date": "2011-01-05T00:00:00Z",
-            "name": "Moscow",
-            "value": 5
-          },
-          {
-            "date": "2011-01-06T00:00:00Z",
-            "name": "Moscow",
-            "value": 5
-          },
-          {
-            "date": "2011-01-07T00:00:00Z",
-            "name": "Moscow",
-            "value": 5
-          },
-        // ]
-      ]
+      data: []
+      // testData: [
+      //   {
+      //     "date": "2011-01-05T00:00:00Z",
+      //     "name": "Direct",
+      //     "value": 3
+      //   },
+      //   {
+      //     "date": "2011-01-06T00:00:00Z",
+      //     "name": "Direct",
+      //     "value": 10
+      //   },
+      //   {
+      //     "date": "2011-01-07T00:00:00Z",
+      //     "name": "Direct",
+      //     "value": 5
+      //   },
+      //   {
+      //     "date": "2011-01-05T00:00:00Z",
+      //     "name": "Moscow",
+      //     "value": 5
+      //   },
+      //   {
+      //     "date": "2011-01-06T00:00:00Z",
+      //     "name": "Moscow",
+      //     "value": 5
+      //   },
+      //   {
+      //     "date": "2011-01-07T00:00:00Z",
+      //     "name": "Moscow",
+      //     "value": 5
+      //   }
+      // ]
     }
   },
   created () {
@@ -66,57 +62,60 @@ export default {
   },
   methods: {
     sentimentsStatistics: function () {
-    //   axios.get('http://dolphin.suenot.ru/static/data/btt-sentiments/S'+ this.id +'.json')
-    //   .then(response => {
-    //     let chartData = response.data.chart
-    //     let pointStart = response.data.pointStart * 10
-    //     let pointInterval = 86400000 // 3600 * 1000 * 24
-    //     _.forEach(chartData, (sentiment, i) => {
-    //       _.forEach(sentiment, (value, i) => {
-    //         value = {
-    //           date: moment(pointStart+pointInterval*i).format(),
-    //           value: value
-    //         }
-    //         sentiment[i] = value
-    //       })
-    //       let sentimentData = {
-    //         topicName: i,
-    //         topic: i,
-    //         dates: sentiment
-    //       }
-    //       this.data.dataByTopic.push(sentimentData)
-    //     })
+      axios.get('http://dolphin.suenot.ru/static/data/btt-sentiments/S'+ this.id +'.json')
+      .then(response => {
+        let chartData = response.data.chart
+        let pointStart = response.data.pointStart * 10
+        let pointInterval = 86400000 // 3600 * 1000 * 24
+        _.forEach(chartData, (sentiment, i) => {
+          _.forEach(sentiment, (value, j) => {
+            value = {
+              date: moment(pointStart+pointInterval*j).format(),
+              value: value,
+              name: i,
+            }
+            this.data.push(value)
+          })
+        })
 
-    //     var container = d3Selection.select('#sentimentsBritechartsStackedArea'+this.id)
-    //     var stackedArea = new StackedArea()
-    //     if (container.node()) {
-    //         stackedArea
-    //             .isAnimated(true)
-    //             .tooltipThreshold(600)
-    //             .width(containerWidth)
-    //     }
-    //     container.datum(this.testData).call(line)
-    //   })
-    //   .catch(e => {
-    //     this.chartError = true
-    //     this.errors.push(e)
-    //   })
+        // cointainer width/height
+        let containerWidth = document.documentElement.clientWidth
+        let containerHeight = document.documentElement.clientHeight
+        let containerSize = (document.documentElement.clientWidth <= document.documentElement.clientHeight) ? document.documentElement.clientWidth : document.documentElement.clientHeight
 
-      // cointainer width/height
-      let containerWidth = document.documentElement.clientWidth
-      let containerHeight = document.documentElement.clientHeight
-      let containerSize = (document.documentElement.clientWidth <= document.documentElement.clientHeight) ? document.documentElement.clientWidth : document.documentElement.clientHeight
+        var container = d3Selection.select('#sentimentsBritechartsStackedArea'+this.id)
+        var stackedArea = new StackedArea()
+        if (container.node()) {
+            stackedArea
+              .isAnimated(true)
+              .tooltipThreshold(600)
+              .width(containerWidth)
+              .height(containerHeight)
+              .colorSchema(colorSchemas.sentiments)
+        }
+        container.datum(this.data).call(stackedArea)
+      })
+      .catch(e => {
+        this.chartError = true
+        this.errors.push(e)
+      })
 
-      var container = d3Selection.select('#sentimentsBritechartsStackedArea'+this.id)
-      var stackedArea = new StackedArea()
-      if (container.node()) {
-          stackedArea
-            .isAnimated(true)
-            .tooltipThreshold(600)
-            .width(600)
-            .height(600)
-      }
-      container.datum(this.testData).call(stackedArea)
+      // // cointainer width/height
+      // let containerWidth = document.documentElement.clientWidth
+      // let containerHeight = document.documentElement.clientHeight
+      // let containerSize = (document.documentElement.clientWidth <= document.documentElement.clientHeight) ? document.documentElement.clientWidth : document.documentElement.clientHeight
+
+      // var container = d3Selection.select('#sentimentsBritechartsStackedArea'+this.id)
+      // var stackedArea = new StackedArea()
+      // if (container.node()) {
+      //     stackedArea
+      //       .isAnimated(true)
+      //       .tooltipThreshold(600)
+      //       .width(600)
+      //       .height(600)
+      //       .colorSchema(colorSchemas.sentiments)
+      // }
+      // container.datum(this.testData).call(stackedArea)
     }
   }
 }
