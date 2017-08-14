@@ -17,6 +17,7 @@
     "bootstrap-vue": "^0.16.1",
     "britecharts": "^2.0.0",
     "d3-selection": "^1.1.0",
+    "d3-time-format": "^2.0.5",
     "firebase": "^4.0.0",
     "getmdl-select": "^1.1.0",
     "highcharts": "^5.0.11",

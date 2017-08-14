@@ -1,5 +1,8 @@
 <template style="height: 100%">
-  <div :id="'sentimentsBritechartsStackedArea'+id" class="sentimentsBritechartsStackedArea"></div>
+  <div>
+    <div :id="'sentimentsBritechartsStackedArea'+id" class="sentimentsBritechartsStackedArea"></div>
+    <div :id="'sentimentsBritechartsStackedAreaBrush'+id" class="sentimentsBritechartsStackedAreaBrush"></div>
+  </div>
 </template>
 
 
@@ -9,8 +12,9 @@ import _ from 'lodash'
 import moment from 'moment'
 const StackedArea = require('britecharts/dist/umd/stackedArea.min')
 const ChartTooltip = require('britecharts/dist/umd/tooltip.min')
-// const tooltip = require('britecharts/dist/umd/tooltip.min')
+const BrushChart = require('britecharts/dist/umd/brush.min')
 const d3Selection = require('d3-selection')
+// d3TimeFormat = require('d3-time-format')
 import 'britecharts/dist/css/britecharts.min.css'
 const colorSchemas = require('../../assets/colors').colorSchemas
 export default {
@@ -56,11 +60,12 @@ export default {
         var container = d3Selection.select('#sentimentsBritechartsStackedArea'+this.id)
         var stackedArea = new StackedArea()
         var chartTooltip = new ChartTooltip()
+        var brushChart = new BrushChart()
         stackedArea
           .isAnimated(true)
           .tooltipThreshold(600)
           .width(containerWidth)
-          .height(containerHeight)
+          .height(containerHeight - 100)
           .colorSchema(colorSchemas.sentimentsStackedArea)
           .grid('horizontal')
           .on('customMouseOver', chartTooltip.show)
@@ -70,9 +75,24 @@ export default {
           .topicLabel('values')
           .title('Sentiments')
           .topicsOrder(['positive', 'neutral', 'negative'])
+        brushChart
+          .width(containerWidth)
+          .height(100)
+          .on('customBrushStart', function(brushExtent) {
+            console.log('brush start')
+            // var format = d3TimeFormat.timeFormat('%m/%d/%Y');
+            // d3Selection.select('.js-start-date').text(format(brushExtent[0]));
+            // d3Selection.select('.js-end-date').text(format(brushExtent[1]));
+            // d3Selection.select('.js-date-range').classed('is-hidden', false);
+            // // Filter
+            // d3Selection.selectAll('.js-line-chart-container .line-chart').remove();
+            // createLineChart(optionalColorSchema ? optionalColorSchema : null, filterData(brushExtent[0], brushExtent[1]));
+          })
         container.datum(this.data).call(stackedArea)
         var tooltipContainer = d3Selection.select('#sentimentsBritechartsStackedArea'+this.id+' .metadata-group .vertical-marker-container')
+        var brushContainer = d3Selection.select('#sentimentsBritechartsStackedAreaBrush'+this.id)
         tooltipContainer.datum([]).call(chartTooltip)
+        brushContainer.datum(this.data).call(brushChart)
       })
       .catch(e => {
         this.chartError = true
