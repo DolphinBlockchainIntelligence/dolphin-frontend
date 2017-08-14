@@ -9,6 +9,9 @@ import SentimentsLineChart from '@/components/widgets/SentimentsLineChart'
 import SentimentsPieChart from '@/components/widgets/SentimentsPieChart'
 import ExpertsEvaluations from '@/components/widgets/ExpertsEvaluations'
 import SentimentsBritechartsDonut from '@/components/widgets/SentimentsBritechartsDonut'
+import SentimentsBritechartsLine from '@/components/widgets/SentimentsBritechartsLine'
+import SentimentsBritechartsStackedArea from '@/components/widgets/SentimentsBritechartsStackedArea'
+
 
 
 Vue.use(Router)
@@ -51,6 +54,20 @@ export default new Router({
       path: '/sentiments-britechart-donut/:id',
       name: 'SentimentsBritechartsDonut',
       component: SentimentsBritechartsDonut,
+      props: true,
+      meta: { reuse: false }
+    },
+    {
+      path: '/sentiments-britechart-line/:id',
+      name: 'SentimentsBritechartsLine',
+      component: SentimentsBritechartsLine,
+      props: true,
+      meta: { reuse: false }
+    },
+    {
+      path: '/sentiments-britechart-stacked-area/:id',
+      name: 'SentimentsBritechartsStackedArea',
+      component: SentimentsBritechartsStackedArea,
       props: true,
       meta: { reuse: false }
     },
