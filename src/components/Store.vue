@@ -61,9 +61,9 @@ export default {
       },
       {
         img: '/static/img/settings.png',
-        bg: '#fff',
-        autor: 'Elithabeth Nafig',
-        name: 'StupidTrade',
+        bg: 'rgb(255, 232, 232)',
+        autor: 'Elithabeth Inferno',
+        name: 'InvestTrade',
         rating: 4.5,
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.',
         price: 'Free',
