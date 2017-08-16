@@ -1,5 +1,7 @@
 <template>
   <main class="mdl-layout__content">
+    <!-- <Grid></Grid> -->
+    <div id="root"></div>
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell--12-col">
         <div class="heading-box">
@@ -25,13 +27,25 @@
 import axios from 'axios'
 import { mapState } from 'vuex'
 const Sortable = require('sortablejs')
-
 import SentimentsPieChart from './widgets/SentimentsPieChart.vue'
 import SentimentsLineChart from './widgets/SentimentsLineChart.vue'
 import SentimentsComments from './widgets/SentimentsComments.vue'
 import FacesSearch from './widgets/FacesSearch.vue'
 import FacesProject from './widgets/FacesProject.vue'
 import ExpertsEvaluations from './widgets/ExpertsEvaluations.vue'
+import Vue from 'vue'
+
+import React, { Component } from 'react'
+import ReactGridLayout from 'react-grid-layout'
+import 'react-grid-layout/css/styles.css'
+import 'react-resizable/css/styles.css'
+import App from './blocks/App.js'
+
+
+// import VueReact from 'vue-react'
+// Vue.use(VueReact)
+// import App from './blocks/App.js'
+// Vue.react('Grid', App)
 
 export default {
   name: 'post',
@@ -54,15 +68,22 @@ export default {
   },
   mounted () {
     // TODO: Add and remove widget
-    this.$root.$on('addWidget', (widgetName) => {
-      this.widgets.push({'id': this.widgets.length+1, 'name': widgetName})
-    })
-    this.$root.$on('removeWidget', (id) => {
-      this.widgets = _.reject(this.widgets, { 'id': id })
-    })
-    //
-    this.initSortable()
-    this.clearSearchResults()
+    // this.$root.$on('addWidget', (widgetName) => {
+    //   this.widgets.push({'id': this.widgets.length+1, 'name': widgetName})
+    // })
+    // this.$root.$on('removeWidget', (id) => {
+    //   this.widgets = _.reject(this.widgets, { 'id': id })
+    // })
+    // //
+    // this.initSortable()
+    // this.clearSearchResults()
+    // react
+    // console.log(ReactDOM)
+    // ReactDOM.render(
+    //   React.createElement(App, null, null),
+    //   // <App />,
+    //   document.getElementById('root')
+    // )
   },
   computed: {
     announce (state) {

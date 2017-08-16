@@ -6,6 +6,9 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+import VueReact from 'vue-react'
+Vue.use(VueReact)
+
 new Vue({
   el: '#app',
   router,

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Dashboard from '@/components/Dashboard'
 import List from '@/components/List'
 import Post from '@/components/Post'
 import Store from '@/components/Store'
@@ -21,6 +22,11 @@ export default new Router({
       path: '/',
       name: 'List',
       component: List
+    },
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: Dashboard
     },
     {
       path: '/sentiments-comments/:id',
