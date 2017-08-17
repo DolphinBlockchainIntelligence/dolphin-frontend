@@ -9,7 +9,7 @@ const store = new Vuex.Store({
   },
   actions: {
     LOAD_ASSETS_LIST: function ({ commit }) {
-      axios.get('http://dolphin.suenot.ru/static/data/announceList.json', {
+      axios.get('http://178.218.115.169/announceList.json', {
         headers: {'Cache-Control': 'private, max-age=0, no-cache'}
       }).then((response) => {
         commit('SET_ASSETS_LIST', { list: response.data })
