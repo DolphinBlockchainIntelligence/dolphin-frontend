@@ -1,8 +1,8 @@
 <template>
   <main class="mdl-layout__content">
     <h1>test</h1>
-    <!-- <Grid></Grid> -->
-    <div id="root"></div>
+    <Grid></Grid>
+    <!-- <div id="root"></div> -->
   </main>
 </template>
 
@@ -15,6 +15,7 @@ import ReactGridLayout from 'react-grid-layout'
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
+// import App from './blocks/App.js'
 import App from './blocks/App.js'
 
 import VueReact from 'vue-react'
@@ -44,5 +45,8 @@ export default {
 </script>
 
 <style lang="sass">
-
+main
+  width: 100%
+#root
+  width: 100%
 </style>

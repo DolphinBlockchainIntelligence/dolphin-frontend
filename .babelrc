@@ -4,7 +4,7 @@
     "stage-2",
     "es2015"
   ],
-  "plugins": ["transform-runtime", "transform-vue-jsx", "transform-react-jsx"],
+  "plugins": ["transform-runtime", "transform-react-jsx"],
   "comments": false,
   "env": {
     "test": {

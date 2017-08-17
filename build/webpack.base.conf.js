@@ -65,6 +65,14 @@ module.exports = {
       {
         test: /\.svg$/,
         loader: 'vue-svg-loader'
+      },
+      {
+        // Ask webpack to check: If this file ends with .jsx , then apply some transforms
+        test: /\.jsx$/,
+        // Transform it with babel
+        loader: 'babel-loader',
+        // don't transform node_modules folder (which don't need to be compiled)
+        exclude: /node_modules/
       }
     ]
   }
