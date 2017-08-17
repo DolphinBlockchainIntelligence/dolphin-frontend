@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     sentimentsStatistics: function () {
-      axios.get('http://178.218.115.169/btt-sentiments/S'+ this.id +'.json')
+      axios.get('http://178.218.115.169:5000/btt-sentiments/S'+ this.id +'.json')
       .then(response => {
         let chartData = response.data.chart
         let pointStart = response.data.pointStart * 10

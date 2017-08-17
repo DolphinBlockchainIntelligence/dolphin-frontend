@@ -55,7 +55,7 @@ export default {
       const postId = this.$route.params.id
       let names = ['positive', 'neutral', 'negative']
       let component = this
-      axios.get('http://178.218.115.169/btt-sentiments/S'+ postId +'.json')
+      axios.get('http://178.218.115.169:5000/btt-sentiments/S'+ postId +'.json')
       .then(response => {
         let data = response.data
         let chartData = {
