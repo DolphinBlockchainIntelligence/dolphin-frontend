@@ -6,14 +6,14 @@
       </div>
     </div>
     <ul class="widgetsList">
-      <li class="widgetsList__el" v-for="widget in widgets" >
+      <li class="widgetsList__el" v-for="widget in widgets">
         <div class="mdl-card mdl-shadow--2dp">
           <div class="mdl-card__title mdl-card--expand" :style=" {'background':`url('${widget.img}') no-repeat ${widget.bg}` }">
             <star-rating :increment="0.01" :fixed-points="2" :read-only="true" :star-size="10" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="widget.rating"></star-rating>
-            <h2 class="mdl-card__title-text">{{widget.name}}</h2>
+            <a class="author" href="#">{{widget.autor}}</a>
           </div>
           <div class="mdl-card__supporting-text">
-            <h4>{{widget.autor}}</h4>
+            <h4>{{widget.name}}</h4>
             <p>{{widget.text}}</p>
 
           </div>
@@ -44,26 +44,95 @@
 
 <script>
 import StarRating from 'vue-star-rating'
-
 export default {
   name: 'store',
   data: () => ({
     widgets: [
       {
-        img: '/static/img/dolphin.png',
+        img: '/static/img/widgets/sentiments.svg',
         bg: '#fff',
-        autor: 'Machell Jindow',
-        name: 'SmarTrade',
-        rating: 4.5,
+        autor: 'Dolphin BI',
+        name: 'Sentiments',
+        rating: 5,
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.',
         price: '$560',
         purchase: false
       },
       {
-        img: '/static/img/settings.png',
-        bg: 'rgb(255, 232, 232)',
-        autor: 'Elithabeth Inferno',
-        name: 'InvestTrade',
+        img: '/static/img/widgets/faces.svg',
+        bg: '#fff',
+        autor: 'Dolphin BI',
+        name: 'ICOface',
+        rating: 4.5,
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.',
+        price: 'Free',
+        purchase: true
+      },
+      {
+        img: '/static/img/widgets/funds-raised.svg',
+        bg: '#fff',
+        autor: 'Dolphin BI',
+        name: 'Funds raised',
+        rating: 4.5,
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.',
+        price: 'Free',
+        purchase: true
+      },
+      {
+        img: '/static/img/widgets/funding-amounts.svg',
+        bg: '#fff',
+        autor: 'Dolphin BI',
+        name: 'Funding amounts',
+        rating: 4.5,
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.',
+        price: 'Free',
+        purchase: true
+      },
+      {
+        img: '/static/img/widgets/experts.svg',
+        bg: '#fff',
+        autor: 'Dolphin BI',
+        name: 'Experts evaluations',
+        rating: 4.5,
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.',
+        price: 'Free',
+        purchase: true
+      },
+      {
+        img: '/static/img/widgets/code.svg',
+        bg: '#fff',
+        autor: 'Dolphin BI',
+        name: 'Code audit',
+        rating: 4.5,
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.',
+        price: 'Free',
+        purchase: true
+      },
+      {
+        img: '/static/img/widgets/portfolio.svg',
+        bg: '#fff',
+        autor: 'Dolphin BI',
+        name: 'Portfolio',
+        rating: 4.5,
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.',
+        price: 'Free',
+        purchase: true
+      },
+      {
+        img: '/static/img/widgets/likes.svg',
+        bg: '#fff',
+        autor: 'Dolphin BI',
+        name: 'Likes',
+        rating: 4.5,
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.',
+        price: 'Free',
+        purchase: true
+      },
+      {
+        img: '/static/img/widgets/description.svg',
+        bg: '#fff',
+        autor: 'Dolphin BI',
+        name: 'Description',
         rating: 4.5,
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.',
         price: 'Free',
@@ -76,6 +145,7 @@ export default {
   }
 }
 </script>
+
 
 <style lang="sass" scoped>
 .widgetsList
@@ -94,11 +164,18 @@ export default {
       position: relative
       background-size: 90px !important
       background-position: 95% 20% !important
-      .star-rating
-        position: absolute
-        top: 10px
-        left: 10px
-        color: #424242
+    .author
+      font-weight: bold
+      opacity: .7
+      color: #3f51b5 !important
+      font-size: 14px
+      &:hover
+        opacity: 1
+    .star-rating
+      position: absolute
+      top: 10px
+      left: 14px
+      color: #424242
     .mdl-card__supporting-text
       h4
         margin: 0
@@ -115,5 +192,4 @@ export default {
           color: red
       .widgets_action
         flex: 1 0 auto
-
 </style>

@@ -1,5 +1,91 @@
 <template>
-  <router-view :key="$route.path" />
+  <div>
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <a class="mdl-navigation__link" href="#" @click.prevent="toggleMenu()"><i class="material-icons">menu</i></a>
+        <a href="/#/" class="logo">
+          <img src="/static/img/dolphin.png" class="logo-img">
+          <span class="mdl-layout-title">Dolphin BI</span>
+        </a>
+        <div class="search-bar">
+          <input id="search" class="mdl-textfield__input" type="text" name="sample" placeholder="Search coin" v-model="query" autofocus @keyup.up="searchUp()" @keyup.down="searchDown()" @keyup.enter.prevent="searchEnter()" @keyup.esc.prevent="searchEsc()">
+          <i id="search-icon" class="material-icons">search</i>
+          <i id="search-icon-clear" class="search-icon-clear material-icons hide" @click="searchEsc()">clear</i>
+        </div>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="http://presale.dolphin.bi/" target="_blank">ICO</a>
+          <a class="mdl-navigation__link" href="/#/profile"><i class="material-icons mdl-list__item-avatar">person</i></a>
+        </nav>
+      </div>
+    </header>
+    <div class="mdl-layout mdl-layout--fixed-drawer">
+      <click-outside :handler="handleClickOutside">
+        <ul id="search-result" class="mdl-list search-result mdl-shadow--2dp hide">
+          <li class="mdl-list__item" v-for="coin in computedList">
+            <a href="#" :id="coin.topicId" class="mdl-list__item-primary-content" @click.prevent="searchClick(coin.topicId)">
+              {{ coin.announce }}
+            </a>
+          </li>
+        </ul>
+      </click-outside>
+      <div class="mdl-layout__drawer">
+        <ul class="mdl-list">
+          <!-- <li class="mdl-list__item">
+            <a href="/#/dashboard" class="mdl-list__item-primary-content">
+              Market overview
+            </a>
+          </li> -->
+          <li class="mdl-list__item">
+            <a href="/#/post/47417" class="mdl-list__item-primary-content">
+              Dashboard
+            </a>
+          </li>
+          <li class="mdl-list__item">
+            <a href="/#/" class="mdl-list__item-primary-content">
+              ICO view
+            </a>
+            <ul class="favourites-coins">
+              <li v-for="coin in favoritesCoins">
+                <a :href="'/#/post/'+coin.id">
+                  <i class="material-icons">stars</i>
+                  <span class="name">{{ coin.name }}</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- <li class="mdl-list__item">
+            <a href="/#/store" class="mdl-list__item-primary-content">
+              Widget market
+            </a>
+          </li> -->
+          <li class="mdl-list__item">
+            <a href="/#/icoface" class="mdl-list__item-primary-content">
+              ICO faces
+            </a>
+          </li>
+        </ul>
+      </div>
+      <router-view :key="$route.path" />
+      <div class="mdl-layout__right-drawer">
+        <ul class="mdl-list">
+          <li class="mdl-list__item mdl-list__item--two-line" v-for="widget in widgetsBar">
+            <span class="mdl-list__item-primary-content">
+              <img class="widget-img" :src="widget.icon" alt="">
+              <span>{{ widget.name }}</span>
+              <span class="mdl-list__item-sub-title">{{ widget.subName }}</span>
+            </span>
+            <span v-if="widget.subscribe" class="mdl-list__item-secondary-content">
+              <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" @click.prevent="addWidget(widget.component)"><i class="material-icons">add</i></button>
+            </span>
+            <span v-else class="mdl-list__item-secondary-content">
+              <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" @click.prevent=""><i class="material-icons">attach_money</i></button>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -8,14 +94,8 @@
   import axios from 'axios'
   import moment from 'moment'
   import routes from './router'
-  import 'roboto-fontface'
-  import 'material-design-icons-iconfont'
-  import 'material-design-lite/material.min.css'
-  import 'material-design-lite/material.min.js'
-  import 'getmdl-select/getmdl-select.min.css'
-  import 'getmdl-select/getmdl-select.min.js'
   import { mapState } from 'vuex'
-  // import ClickOutside from 'onclick-outside'
+  import ClickOutside from 'onclick-outside'
   export default {
     name: "app",
     data: () => ({
@@ -51,15 +131,15 @@
     },
     watch: {
       query: () => {
-        // if (document.getElementById('search').value) {
-        //   document.getElementById('search-result').classList.remove('hide')
-        //   document.getElementById('search-icon').classList.add('hide')
-        //   document.getElementById('search-icon-clear').classList.remove('hide')
-        // } else {
-        //   document.getElementById('search-result').classList.add('hide')
-        //   document.getElementById('search-icon-clear').classList.add('hide')
-        //   document.getElementById('search-icon').classList.remove('hide')
-        // }
+        if (document.getElementById('search').value) {
+          document.getElementById('search-result').classList.remove('hide')
+          document.getElementById('search-icon').classList.add('hide')
+          document.getElementById('search-icon-clear').classList.remove('hide')
+        } else {
+          document.getElementById('search-result').classList.add('hide')
+          document.getElementById('search-icon-clear').classList.add('hide')
+          document.getElementById('search-icon').classList.remove('hide')
+        }
       }
     },
     mounted: function () {
@@ -80,52 +160,52 @@
       toggleMenu () {
         document.querySelector('.mdl-layout').classList.toggle('mdl-layout--fixed-drawer')
       },
-      // searchUp () {
-      //   if (this.searchActiveResult > 0) {
-      //     this.searchActiveResult--
-      //     document.querySelectorAll('#search-result li').forEach(function(item){
-      //       item.classList.remove('active')
-      //     })
-      //     document.querySelector('#search-result li:nth-child(' + this.searchActiveResult + ')').classList.add('active')
-      //   }
-      //   console.log(this.searchActiveResult)
-      // },
-      // searchDown () {
-      //   if (this.searchActiveResult < 10 ) {
-      //     this.searchActiveResult++
-      //     document.querySelectorAll('#search-result li').forEach(function(item){
-      //       item.classList.remove('active')
-      //     })
-      //     document.querySelector('#search-result li:nth-child(' + this.searchActiveResult + ')').classList.add('active')
-      //   }
-      // },
-      // searchEsc () {
-      //   this.searchActiveResult = 0
-      //   document.querySelectorAll('#search-result li').forEach((item) => {
-      //     item.classList.remove('active')
-      //   })
-      //   this.searchActiveResult = 0
-      //   this.query = ''
-      //   // document.getElementById('search-result').classList.add('hide')
-      //   // document.getElementById('search-icon-clear').classList.add('hide')
-      //   // document.getElementById('search-icon').classList.remove('hide')
-      // },
-      // searchEnter () {
-      //   let topicId = document.querySelector('#search-result li:nth-child(' + this.searchActiveResult + ') a').getAttribute('id')
-      //   this.searchEsc()
-      //   routes.push({ name: 'Post', params: { id: topicId }})
-      // },
-      // handleClickOutside () {
-      //   this.searchEsc()
-      // },
-      // searchClick (topicId) {
-      //   this.searchEsc()
-      //   routes.push({ name: 'Post', params: { id: topicId }})
-      // }
+      searchUp () {
+        if (this.searchActiveResult > 0) {
+          this.searchActiveResult--
+          document.querySelectorAll('#search-result li').forEach(function(item){
+            item.classList.remove('active')
+          })
+          document.querySelector('#search-result li:nth-child(' + this.searchActiveResult + ')').classList.add('active')
+        }
+        console.log(this.searchActiveResult)
+      },
+      searchDown () {
+        if (this.searchActiveResult < 10 ) {
+          this.searchActiveResult++
+          document.querySelectorAll('#search-result li').forEach(function(item){
+            item.classList.remove('active')
+          })
+          document.querySelector('#search-result li:nth-child(' + this.searchActiveResult + ')').classList.add('active')
+        }
+      },
+      searchEsc () {
+        this.searchActiveResult = 0
+        document.querySelectorAll('#search-result li').forEach((item) => {
+          item.classList.remove('active')
+        })
+        this.searchActiveResult = 0
+        this.query = ''
+        // document.getElementById('search-result').classList.add('hide')
+        // document.getElementById('search-icon-clear').classList.add('hide')
+        // document.getElementById('search-icon').classList.remove('hide')
+      },
+      searchEnter () {
+        let topicId = document.querySelector('#search-result li:nth-child(' + this.searchActiveResult + ') a').getAttribute('id')
+        this.searchEsc()
+        routes.push({ name: 'Post', params: { id: topicId }})
+      },
+      handleClickOutside () {
+        this.searchEsc()
+      },
+      searchClick (topicId) {
+        this.searchEsc()
+        routes.push({ name: 'Post', params: { id: topicId }})
+      }
     },
-    // components: {
-    //   ClickOutside
-    // }
+    components: {
+      ClickOutside
+    }
   }
 </script>
 

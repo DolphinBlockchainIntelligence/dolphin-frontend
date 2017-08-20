@@ -1,6 +1,5 @@
 <template>
   <div id="sentiments-line-chart">
-    <h4 class="title">Sentiments: chart</h4>
     <div v-if="!chartError">
       <div :id="'sentimentsLineChart'+id" style="min-width: 100%; width: 100%; height: 400px; margin: 0 auto"></div>
     </div>
@@ -103,4 +102,6 @@ export default {
 <style lang="sass" scoped>
 .title
   margin: 0 10px
+.highcharts-container, .sentimentsLineChartundefined
+  width: 100%
 </style>

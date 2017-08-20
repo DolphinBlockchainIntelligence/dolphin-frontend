@@ -13,44 +13,18 @@
         </div>
       </div>
     </div>
-    <grid-layout
-      :layout="widgets"
-      :col-num="12"
-      :row-height="30"
-      :is-draggable="true"
-      :is-resizable="true"
-      :margin="[10, 10]"
-      :use-css-transforms="true"
-    >
-      <grid-item v-for="item in widgets"
-        :x="item.x"
-        :y="item.y"
-        :w="item.w"
-        :h="item.h"
-        :i="item.i"
-        :key="item.id"
-        @resized="resizedWidget()">
-        <div class="widget">
-          {{item.title}}
-          <component :is="item.name" :key="item.name" :id="item.id"></component>
-        </div>
-      </grid-item>
-    </grid-layout>
+    <div class="mdl-grid" id="draggable-container">
+      <template v-for="(child, index) in widgets">
+        <component :is="child.name" :key="child.name" :id="child.id"></component>
+      </template>
+    </div>
   </main>
 </template>
 
 <script>
-let testLayout = [
-  {'x':0,'y':0,'w':12,'h':10,'i':'0','name': 'SentimentsLineChart', 'title': 'SentimentsLineChart'},
-  {'x':0,'y':10,'w':12,'h':10,'i':'1','name': 'SentimentsComments', 'title': 'SentimentsComments'},
-  {'x':0,'y':20,'w':12,'h':10,'i':'2','name': 'ExpertsEvaluations', 'title': 'ExpertsEvaluations'}
-];
-import VueGridLayout from 'vue-grid-layout'
-let GridLayout = VueGridLayout.GridLayout
-let GridItem = VueGridLayout.GridItem
-
 import axios from 'axios'
 import { mapState } from 'vuex'
+const Sortable = require('sortablejs')
 
 import SentimentsPieChart from './widgets/SentimentsPieChart.vue'
 import SentimentsLineChart from './widgets/SentimentsLineChart.vue'
@@ -63,9 +37,9 @@ export default {
   name: 'post',
   data: () => ({
     id: '',
-    widgets: testLayout,
+    widgets: [{'id': 3, 'name': 'ExpertsEvaluations'}, {'id': 1, 'name': 'SentimentsLineChart'}, {'id': 2, 'name': 'SentimentsComments'}],
     topicStarterUrl: '',
-    topicUrl: '',
+    topicUrl: ''
   }),
   components: {
     SentimentsLineChart,
@@ -73,9 +47,7 @@ export default {
     SentimentsComments,
     FacesSearch,
     FacesProject,
-    ExpertsEvaluations,
-    GridLayout,
-    GridItem
+    ExpertsEvaluations
   },
   created () {
     // this.searchEsc()
@@ -83,11 +55,13 @@ export default {
   mounted () {
     // TODO: Add and remove widget
     this.$root.$on('addWidget', (widgetName) => {
-      this.widgets.push({'i': this.widgets.length+1, 'name': widgetName, 'title': 'Widget name', 'x': 0, 'y': 0, 'w': 12, 'h': 10})
+      this.widgets.push({'id': this.widgets.length+1, 'name': widgetName})
     })
-    this.$root.$on('removeWidget', (i) => {
-      this.widgets = _.reject(this.widgets, { 'i': i })
+    this.$root.$on('removeWidget', (id) => {
+      this.widgets = _.reject(this.widgets, { 'id': id })
     })
+    //
+    this.initSortable()
     this.clearSearchResults()
   },
   computed: {
@@ -126,29 +100,21 @@ export default {
         event.target.innerHTML = 'star'
       }
     },
+    initSortable: () => {
+      const el = document.getElementById('draggable-container')
+      const sortable = Sortable.create(el, {
+        handle: ".btn-drag"
+      })
+    },
     clearSearchResults: () => {
       document.getElementById('search-icon-clear').classList.add('hide')
       document.getElementById('search-icon').classList.remove('hide')
-    },
-    resizedWidget: () => {
-      window.dispatchEvent(new Event('resize'))
     }
   }
 }
 </script>
 
 <style lang="sass">
-// widget
-.widget
-  border: 1px solid #ddd
-
-// grid
-.vue-grid-layout
-  width: 100%
-  
-.vue-grid-item
-  overflow: hidden
-
 // widget
 .widget-content
   padding: 0

@@ -1,6 +1,5 @@
 <template>
   <div id="sentiments-pie-chart">
-    <h4 class="title">Sentiments: pie chart</h4>
     <div :id="'sentimentsPieChart'+id" style="width: 100%; height: 400px; margin: 0 auto"></div>
   </div>
 </template>

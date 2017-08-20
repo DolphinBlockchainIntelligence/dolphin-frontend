@@ -1,6 +1,5 @@
 <template>
   <div id="experts-evaluations">
-    <h4 class="title">Experts evaluations</h4>
     <div class="scrollBlock">
       <div class="scrollBlock__el expertsCard" v-for="expert in experts">
         <div class="expertsCard__header">

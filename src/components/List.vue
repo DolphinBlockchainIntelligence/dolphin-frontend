@@ -1,39 +1,57 @@
-<template lang="pug">
-  .mdl-layout__content
-    .mdl-grid
-      .mdl-cell.mdl-cell--12-col
-        .list
-          .title-box
-            h3.page-title Bitcointalk.org sentiments
-          .datatable-options.mdl-textfield.mdl-js-textfield.mdl-shadow--2dp
-            input.mdl-textfield__input(v-model="query" placeholder="Search post")
-          table.table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
-            thead
-              tr
-                th(v-on:click="sort('announce')")
-                  span Announce
-                  i.material-icons
-                th(v-on:click="sort('NumReplies')")
-                  span Replies
-                  i.material-icons
-                th(v-on:click="sort('DateTimeLastPost')")
-                  span Last comment
-                  i.material-icons
-                th(v-on:click="sort('rank')")
-                  span Rank
-                  i.material-icons
-                th
-            tbody(name="table-row")
-              tr(v-for="post in computedList" key="tr" class="table-row-item" :to="'/post/' + post.topicId" v-on:click="goToPost(post.topicId, post.announce)")
-                td(key="announce") {{ post.announce }}
-                td(key="replies") {{ post.NumReplies }}
-                td(key="lastComment") {{ post.DateTimeLastPost }}
-                td(key="rank") {{ post.rank }}
-                td.links(key="links")
-                  a(v-on:click="dataHref(post.topicStarterUrl, $event)")
-                    i.material-icons account_circle
-                  a(v-on:click="dataHref(post.topicUrl, $event)")
-                    i.material-icons assignment
+<template>
+<div class="mdl-layout__content">
+  <div class="mdl-grid">
+    <div class="mdl-cell.mdl-cell--12-col">
+      <div class="list">
+        <div class="title-box">
+          <h3 class="page-title">Bitcointalk.org sentiments</h3>
+        </div>
+        <div class="datatable-options mdl-textfield mdl-js-textfield mdl-shadow--2dp">
+          <input class="mdl-textfield__input" v-model="query" placeholder="Search post" />
+        </div>
+        <table class="table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+          <thead>
+            <tr>
+              <th @click="sort('announce')">
+                <span>Announce</span>
+                <i class="material-icons">material-icons</i>
+              </th>
+              <th @click="sort('NumReplies')">
+                <span>Replies</span>
+                <i class="material-icons"></i>
+              </th>
+              <th @click="sort('DateTimeLastPost')">
+                <span>Last comment</span>
+                <i class="material-icons"></i>
+              </th>
+              <th @click="sort('rank')">
+                <span>Rank</span>
+                <i class="material-icons"></i>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody name="table-row">
+            <tr v-for="post in computedList" key="tr" class="table-row-item" :to="'/post/' + post.topicId" @click="goToPost(post.topicId, post.announce)">
+              <td key="announce">{{ post.announce }}</td>
+              <td key="replies">{{ post.NumReplies }}</td>
+              <td key="lastComment">{{ post.DateTimeLastPost }}</td>
+              <td key="rank">{{ post.rank }}</td>
+              <td class="links" key="links">
+                <a href="#" @click="dataHref(post.topicStarterUrl, $event)">
+                  <i class="material-icons">account_circle</i>
+                </a>
+                <a href="#" @click="dataHref(post.topicUrl, $event)">
+                  <i class="material-icons">assignment</i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -42,7 +60,6 @@ import axios from 'axios'
 import Vue from 'vue'
 import routes from '../router'
 import moment from 'moment'
-// import MdlSelect from './blocks/MdlSelect'
 import { mapState } from 'vuex'
 export default {
   name: 'list',
@@ -53,7 +70,7 @@ export default {
     postsList: []
   }),
   mounted () {
-    // document.querySelector('.mdl-layout').classList.remove('mdl-layout--fixed-right-drawer')
+    document.querySelector('.mdl-layout').classList.remove('mdl-layout--fixed-right-drawer')
   },
   methods: {
     dataHref: function (url, event) {

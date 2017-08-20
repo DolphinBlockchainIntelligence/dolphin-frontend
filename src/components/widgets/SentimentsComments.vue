@@ -1,6 +1,5 @@
 <template>
   <div id="sentiments-comments">
-    <h4 class="title">Sentiments: comments</h4>
     <div v-if="!commentsError" class="scrolled-y">
       <ul class="comments">
           <li v-for="(comment, key) in comments" :class="'comment sentiment'+comment.Sentiment">
