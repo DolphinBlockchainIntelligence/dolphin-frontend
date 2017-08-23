@@ -5,7 +5,7 @@
     :row-height="30"
     :is-draggable="true"
     :is-resizable="true"
-    :margin="[0, 0]"
+    :margin="[25, 25]"
     :use-css-transforms="true"
   >
     <grid-item v-for="item in widgets"
@@ -14,12 +14,12 @@
       :w="item.w"
       :h="item.h"
       :i="item.i"
-      :key="item.id"
+      :key="item.name"
       @resized="resizedWidget()">
-        <div class="widget" :is="item.name">
+        <div class="widget">
           <!-- <div class="widget-header">{{item.title}}</div> -->
           <div class="iframe-wrapper">
-            <iframe :src="item.src" scrolling="no" />
+            <iframe :src="'https://cloud.petrusenko.pro/apps/'+item.url" scrolling="no" />
           </div>
         </div>
     </grid-item>
@@ -27,82 +27,45 @@
 </template>
 
 <script>
-let testLayout = [
-  {'x':0,'y':0,'w':12,'h':10,'i':'0','name': 'SentimentsLineChart', 'title': 'SentimentsLineChart', 'src': 'http://178.218.115.169:5003/#/experts-evaluations/1'},
-  {'x':0,'y':10,'w':12,'h':10,'i':'1','name': 'SentimentsComments', 'title': 'SentimentsComments', 'src': 'http://178.218.115.169:5003/#/experts-evaluations/1'},
-  {'x':0,'y':20,'w':12,'h':10,'i':'2','name': 'ExpertsEvaluations', 'title': 'ExpertsEvaluations', 'src': 'http://178.218.115.169:5003/#/experts-evaluations/1'}
-];
 import VueGridLayout from 'vue-grid-layout'
 let GridLayout = VueGridLayout.GridLayout
 let GridItem = VueGridLayout.GridItem
 
 import axios from 'axios'
-import { mapState } from 'vuex'
 export default {
   name: 'post',
   data: () => ({
-    id: '',
-    widgets: testLayout,
-    topicStarterUrl: '',
-    topicUrl: '',
+    widgets: [],
+    pages: [], 
   }),
   components: {
     GridLayout,
     GridItem
   },
   created () {
-    // this.searchEsc()
   },
   mounted () {
-    // TODO: Add and remove widget
-    this.$root.$on('addWidget', (widgetName) => {
-      this.widgets.push({'i': this.widgets.length+1, 'name': widgetName, 'title': 'Widget name', 'x': 0, 'y': 0, 'w': 12, 'h': 10})
+    // axios.get('/static/data/dns.json', {
+    axios.get('https://cloud.petrusenko.pro/dashboard/apps', {
+    }).then((response) => {
+      var widgets = response.data.widgets
+      var y = 0
+      widgets.forEach((item, i) => {
+        item.x = 0
+        item.y = 0
+        item.w = 12
+        item.h = 10
+        item.name = item.title.split(' ').join('')
+        item.i = i.toString()
+        y+=10
+      })
+      this.widgets = widgets
+      this.pages = response.data.pages
+    }, (err) => {
+      console.log(err)
     })
-    this.$root.$on('removeWidget', (i) => {
-      this.widgets = _.reject(this.widgets, { 'i': i })
-    })
-    this.clearSearchResults()
-  },
-  computed: {
-    announce (state) {
-      if (this.$route.params.announce) {
-        return this.$route.params.announce
-      } else {
-        for (var i in this.assets) {
-          if (this.$route.params.id == this.assets[i].topicId) {
-            return this.assets[i].announce
-          }
-        }
-      }
-    },
-    ...mapState([
-      'assets'
-    ])
   },
   methods: {
-    searchEsc () {
-      document.querySelectorAll('#search-result li').forEach(function(item){
-        item.classList.remove('active')
-      })
-      document.getElementById('search-result').classList.add('hide')
-    },
-    toggleSettings: () => {
-      document.querySelector('.mdl-layout').classList.toggle('mdl-layout--fixed-right-drawer')
-    },
-    toggleFavorite: (event) => {
-      let icon = event.target.innerHTML
-      if (icon == 'star') {
-        this.$root.$emit('removeFavoriteCoins', this.id)
-        event.target.innerHTML = 'star_border'
-      } else {
-        this.$root.$emit('addFavoriteCoins', { id: this.id, name: this.announce })
-        event.target.innerHTML = 'star'
-      }
-    },
-    clearSearchResults: () => {
-      document.getElementById('search-icon-clear').classList.add('hide')
-      document.getElementById('search-icon').classList.remove('hide')
-    },
     resizedWidget: () => {
       window.dispatchEvent(new Event('resize'))
     }
@@ -119,7 +82,7 @@ export default {
   left: 0
   right: 0
   bottom: 0
-  padding: 0 50px
+  padding: 0 25px
   background: white
   .iframe-wrapper
     overflow: hidden
