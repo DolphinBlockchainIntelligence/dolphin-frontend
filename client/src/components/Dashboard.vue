@@ -1,97 +1,136 @@
 <template>
-  <grid-layout
-    :layout="widgets"
-    :col-num="12"
-    :row-height="30"
-    :is-draggable="true"
-    :is-resizable="true"
-    :margin="[25, 25]"
-    :use-css-transforms="true"
-  >
-    <grid-item v-for="item in widgets"
-      :x="item.x"
-      :y="item.y"
-      :w="item.w"
-      :h="item.h"
-      :i="item.i"
-      :key="item.name"
-      @resized="resizedWidget()">
-        <div class="widget">
-          <!-- <div class="widget-header">{{item.title}}</div> -->
-          <div class="iframe-wrapper">
-            <iframe :src="'https://cloud.petrusenko.pro/apps/'+item.url" scrolling="no" />
+  <div>
+    <p align="right">
+      <a href="#" class="waves-effect waves-light btn" @click="toggleSettings($event)"><i class="material-icons left">settings</i><span>Customize</span></a>      
+    </p>
+    <grid-layout
+      :layout="widgets"
+      :col-num="12"
+      :row-height="30"
+      :is-draggable="isDraggable"
+      :is-resizable="isResizable"
+      :margin="[10, 10]"
+      :use-css-transforms="true"
+    >
+      <grid-item v-for="item in widgets"
+        :x="item.x"
+        :y="item.y"
+        :w="item.w"
+        :h="item.h"
+        :i="item.i"
+        :key="item.id"
+        @resized="resizedWidget()">
+          <div class="widget">
+            <div class="widget-header">{{item.title}}</div>
+            <div class="iframe-mask hide"></div>
+            <div class="iframe-wrapper">
+              <iframe :src="item.url" frameborder="0" />
+            </div>
           </div>
-        </div>
-    </grid-item>
-  </grid-layout>
+      </grid-item>
+    </grid-layout>
+  </div>
 </template>
 
 <script>
 import VueGridLayout from 'vue-grid-layout'
 let GridLayout = VueGridLayout.GridLayout
 let GridItem = VueGridLayout.GridItem
-
-import axios from 'axios'
+import { mapState, mapActions } from 'vuex'
 export default {
-  name: 'post',
+  name: 'dashboard',
   data: () => ({
-    widgets: [],
-    pages: [], 
+    isDraggable: false,
+    isResizable: false,
+    pageTitle: 'Dashboard'
   }),
   components: {
     GridLayout,
     GridItem
   },
-  created () {
+  created: function () {
+    this.TO_SET_PAGE_TITLE(this.pageTitle)
   },
   mounted () {
-    // axios.get('/static/data/dns.json', {
-    axios.get('https://cloud.petrusenko.pro/dashboard/apps', {
-    }).then((response) => {
-      var widgets = response.data.widgets
-      var y = 0
-      widgets.forEach((item, i) => {
-        item.x = 0
-        item.y = 0
-        item.w = 12
-        item.h = 10
-        item.name = item.title.split(' ').join('')
-        item.i = i.toString()
-        y+=10
-      })
-      this.widgets = widgets
-      this.pages = response.data.pages
-    }, (err) => {
-      console.log(err)
-    })
+
+  },
+  computed: {
+    ...mapState([
+      'widgets'
+    ])
   },
   methods: {
+    ...mapActions([
+      'TO_SET_PAGE_TITLE'
+    ]),
     resizedWidget: () => {
       window.dispatchEvent(new Event('resize'))
+    },
+    toggleSettings: function(event) {
+      this.isDraggable = !this.isDraggable
+      this.isResizable = !this.isResizable
+      let btnText = event.currentTarget.querySelector('span').textContent
+      if (btnText == 'Customize') {
+        event.currentTarget.querySelector('span').textContent = 'Cancel'
+      } else {
+        event.currentTarget.querySelector('span').textContent = 'Customize'
+      }
+      document.querySelectorAll('.iframe-mask').forEach(function(item, i){
+        item.classList.toggle('hide')
+      })
     }
   }
 }
 </script>
 
 <style lang="sass">
+// global
+.hide
+  display: none !important
+// heading-box
+.heading-box
+  display: flex
+  align-items: center
+  .left
+    flex: 1 1 auto
+  .right
+    display: flex
+//
+.vue-grid-layout
+  margin: 0 -10px
 .vue-grid-item
   border: 1px solid #ddd
+//
 .widget
   position: absolute
   top: 0
   left: 0
   right: 0
   bottom: 0
-  padding: 0 25px
   background: white
+  overflow: hidden
+  .widget-header
+    border-bottom: 1px solid #ddd
+    height: 30px
+    display: flex
+    align-items: center
+    padding: 0 7px
+  .iframe-mask
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
   .iframe-wrapper
     overflow: hidden
     width: 100%
     height: 100%
+    height: calc(100% - 30px)
+    overflow: hidden
     iframe
       width: 100%
       height: 100%
-      overflow: hidden
-      html, body
-        overflow: hidden !important
+      overflow-y: scroll
+      // html, body
+      //   overflow: hidden !important
 </style>
