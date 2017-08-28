@@ -42,6 +42,9 @@
       </tr>
     </tbody>
   </table>
+  <p align="center">
+    <a class="waves-effect waves-light btn btn-show-all" @click.prevent="toShowAll($event)">Show all</a>
+  </p>
 </div>
 </template>
 
@@ -53,16 +56,17 @@ import routes from '../router'
 import moment from 'moment'
 import { mapState, mapActions } from 'vuex'
 export default {
-  name: 'list',
+  name: 'sentiments',
   data: () => ({
     query: '',
     sortBy: '',
     sortOrder: '',
     postsList: [],
+    showNumber: 100,
+    showAll: false,
     pageTitle: 'Bitcointalk.org sentiments'
   }),
   mounted () {
-    // document.querySelector('.mdl-layout').classList.remove('mdl-layout--fixed-right-drawer')
   },
   methods: {
     ...mapActions([
@@ -74,7 +78,7 @@ export default {
       window.open(url, '_blank')
     },
     goToPost(topicId, announce) {
-      routes.push({ name: 'Post', params: { id: topicId, announce: announce }})
+      routes.push({ name: 'Sentiment', params: { id: topicId, announce: announce }})
     },
     sort: function (sortBy) {
       this.sortBy = sortBy
@@ -92,10 +96,11 @@ export default {
         classList.remove('down')
         classList.add('up')
       }
+    },
+    toShowAll: function (event) {
+      this.showAll = true
+      event.currentTarget.classList.add('hide')
     }
-  },
-  beforeCreate: function () {
-    this.$store.dispatch('LOAD_ASSETS_LIST')
   },
   created: function () {
     this.TO_SET_PAGE_TITLE(this.pageTitle)
@@ -121,7 +126,9 @@ export default {
       //   currElement['DateTimeLastPost'] = moment(currElement.DateTimeLastPost).calendar()
       // })
       // console.log(list)
-      list = list.slice(0, 100)
+      if (!this.showAll) {
+        list = list.slice(0, this.showNumber)
+      }
       return list
     },
     ...mapState([

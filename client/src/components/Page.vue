@@ -25,13 +25,6 @@ export default {
     page (state) {
       for (var i in this.pages) {
         if (this.$route.params.id == this.pages[i].id) {
-          // commit('SET_PAGE_TITLE', { pageTitle: this.pages[i].title })
-          // this.pageTitle = this.pages[i].title
-          // this.$store.dispatch({
-          //   type: 'TO_SET_PAGE_TITLE',
-          //   title: title
-          // })
-          // this.TO_SET_PAGE_TITLE(this.pageTitle)
           return this.pages[i]
         }
       }
@@ -49,10 +42,9 @@ export default {
 </script>
 
 
-<style lang="sass">
+<style lang="sass" scoped>
 .iframe-wrapper
-  // height: calc(100vh - 4px)
-  height: calc(100vh - 92px)
+  height: calc(100vh - 68px)
   margin: 0 -14px
 iframe
   border: none

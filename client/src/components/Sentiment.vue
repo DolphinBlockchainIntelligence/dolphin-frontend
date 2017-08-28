@@ -1,8 +1,8 @@
 <template>
   <div>
-    <p align="right" class="customize-widgets">
+    <!-- <p align="right" class="customize-widgets">
       <a href="#" class="waves-effect waves-light btn" @click.prevent="toggleSettings($event)"><i class="material-icons left">settings</i><span>Customize</span></a>      
-    </p>
+    </p> -->
     <grid-layout
       :layout="widgets"
       :col-num="12"
@@ -38,7 +38,7 @@ let GridLayout = VueGridLayout.GridLayout
 let GridItem = VueGridLayout.GridItem
 import { mapState, mapActions } from 'vuex'
 export default {
-  name: 'dashboard',
+  name: 'sentiment',
   data: () => ({
     isDraggable: false,
     isResizable: false,
@@ -49,14 +49,43 @@ export default {
     GridItem
   },
   created: function () {
-    this.TO_SET_PAGE_TITLE(this.pageTitle)
+    this.TO_SET_PAGE_TITLE(this.asset.announce)
   },
   mounted () {
-
+    console.log(this.asset)
   },
   computed: {
+    asset () {
+      console.log('id: '+ this.$route.params.id)
+      for (var i in this.assets) {
+        if (this.$route.params.id == this.assets[i].topicId) {
+          return this.assets[i]
+        }
+      }
+    },
+    widgets() {
+      var widgets = [
+        {
+          'title': 'Sentiments linechart',
+          'url': 'http://178.218.115.169:5002/#/sentiments-line-chart/'+this.asset.topicId
+        },
+        {
+          'title': 'Sentiments comments',
+          'url': 'http://178.218.115.169:5001/#/sentiments-comments/'+this.asset.topicId
+        }
+      ]
+      widgets.forEach(function(item, i){
+        item.i = i.toString()
+        item.x = 0
+        item.y = i*12
+        item.w = 12
+        item.h = 12
+        item.name = item.title.split(' ').join('')
+      })
+      return widgets
+    },
     ...mapState([
-      'widgets'
+      'assets'
     ])
   },
   methods: {
@@ -83,17 +112,18 @@ export default {
 }
 </script>
 
-
-<<style lang="sass">
-.customize-widgets
-    position: absolute
-    top: -1px
-    right: 14px
-</style>
 <style lang="sass" scoped>
 // global
 .hide
   display: none !important
+// heading-box
+.heading-box
+  display: flex
+  align-items: center
+  .left
+    flex: 1 1 auto
+  .right
+    display: flex
 //
 .vue-grid-layout
   margin: 0 -10px 100px
