@@ -8,7 +8,7 @@
       <tr>
         <th @click="sort('announce')">
           <span>Announce</span>
-          <i class="material-icons"></i>
+          <i class="material-icons">material-icons</i>
         </th>
         <th @click="sort('NumReplies')">
           <span>Replies</span>
@@ -47,7 +47,6 @@
   </p>
 </div>
 </template>
-
 
 <script>
 import _ from 'lodash'
@@ -137,6 +136,7 @@ export default {
     ])
   },
   components: {
+    // MdlSelect
   }
 }
 </script>
@@ -156,27 +156,17 @@ export default {
 
 
 <style lang="sass">
-td, th
-  padding: 4px
-tr:hover
-  td, th
-    background: #eee !important
-</style>
-<style lang="sass">
   .datatable-options
     padding: .75rem 1rem !important
     background-color: #FAFAFC
     border: 1px solid #DDDDEE
     border-bottom: 0
     width: 100% !important
-    margin-top: 10px
     input
+      width: calc(100% - 14px)
       border: 1px solid #ccc
+      padding: 7px
       background: #fff
-      width: calc(100% - 15px)
-      border: 1px solid #ccc
-      padding: 0 7px
-      margin: 0
   .table
     border: 1px solid #DDDDEE
     width: 100% !important

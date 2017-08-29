@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="iframe-wrapper">
-      <iframe id="pages-iframe" :src="'/apps/'+page.url+'/'" width="100%"></iframe>
+      <iframe id="pages-iframe" :src="page.url+'/'" width="100%"></iframe>
     </div>
   </div>
 </template>
@@ -9,7 +9,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import _ from 'lodash'
 export default {
   name: 'page',
   props: ['id'],
@@ -18,14 +17,14 @@ export default {
   components: {
   },
   created () {
+    this.TO_SET_PAGE_TITLE(this.page.title)
   },
   mounted () {
   },
   computed: {
     page (state) {
       for (var i in this.pages) {
-        if (this.id == this.pages[i].id) {
-          this.TO_SET_PAGE_TITLE(this.pages[i].title) 
+        if (this.$route.params.id == this.pages[i].id) {
           return this.pages[i]
         }
       }

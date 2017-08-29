@@ -1,35 +1,31 @@
 <template>
-  <div>
-    <!-- <p align="right" class="customize-widgets">
-      <a href="#" class="waves-effect waves-light btn" @click.prevent="toggleSettings($event)"><i class="material-icons left">settings</i><span>Customize</span></a>      
-    </p> -->
-    <grid-layout
-      :layout="widgets"
-      :col-num="12"
-      :row-height="30"
-      :is-draggable="isDraggable"
-      :is-resizable="isResizable"
-      :margin="[10, 10]"
-      :use-css-transforms="true"
-    >
-      <grid-item v-for="item in widgets"
-        :x="item.x"
-        :y="item.y"
-        :w="item.w"
-        :h="item.h"
-        :i="item.i"
-        :key="item.id"
-        @resized="resizedWidget()">
-          <div class="widget">
-            <div class="widget-header">{{item.title}}</div>
-            <div class="iframe-mask hide"></div>
-            <div class="iframe-wrapper">
-              <iframe :src="item.url" frameborder="0" />
-            </div>
+  <grid-layout
+    :layout="sentimentsWidgets"
+    :col-num="12"
+    :row-height="30"
+    :is-draggable="isDraggable"
+    :is-resizable="isResizable"
+    :margin="[10, 10]"
+    :use-css-transforms="true"
+  >
+    <grid-item v-for="item in sentimentsWidgets"
+      :x="item.x"
+      :y="item.y"
+      :w="item.w"
+      :h="item.h"
+      :i="item.i"
+      :key="item.id"
+      @resized="resizedWidget()">
+        <div class="widget">
+          <div class="widget-header">{{item.title}}</div>
+          <div class="iframe-mask hide"></div>
+          <div class="iframe-wrapper">
+            <iframe v-if="item.defaultId" :src="item.url+item.defaultId" frameborder="0" />
+            <iframe v-else="item.defaultId" :src="item.url" frameborder="0" />
           </div>
-      </grid-item>
-    </grid-layout>
-  </div>
+        </div>
+    </grid-item>
+  </grid-layout>
 </template>
 
 <script>
@@ -39,53 +35,33 @@ let GridItem = VueGridLayout.GridItem
 import { mapState, mapActions } from 'vuex'
 export default {
   name: 'sentiment',
+  props: ['id'],
   data: () => ({
     isDraggable: false,
     isResizable: false,
-    pageTitle: 'Dashboard'
+    pageTitle: 'Dashboard',
+    asset: {}
   }),
   components: {
     GridLayout,
     GridItem
   },
   created: function () {
-    this.TO_SET_PAGE_TITLE(this.asset.announce)
+
   },
   mounted () {
-    console.log(this.asset)
+    for (var i in this.assets) {
+      if (this.id == this.assets[i].topicId) {
+        this.TO_SET_PAGE_TITLE(this.assets[i].announce)
+        this.asset = this.assets[i]
+        return this.assets[i]
+      }
+    }
   },
   computed: {
-    asset () {
-      console.log('id: '+ this.$route.params.id)
-      for (var i in this.assets) {
-        if (this.$route.params.id == this.assets[i].topicId) {
-          return this.assets[i]
-        }
-      }
-    },
-    widgets() {
-      var widgets = [
-        {
-          'title': 'Sentiments linechart',
-          'url': 'http://178.218.115.169:5002/#/sentiments-line-chart/'+this.asset.topicId
-        },
-        {
-          'title': 'Sentiments comments',
-          'url': 'http://178.218.115.169:5001/#/sentiments-comments/'+this.asset.topicId
-        }
-      ]
-      widgets.forEach(function(item, i){
-        item.i = i.toString()
-        item.x = 0
-        item.y = i*12
-        item.w = 12
-        item.h = 12
-        item.name = item.title.split(' ').join('')
-      })
-      return widgets
-    },
     ...mapState([
-      'assets'
+      'assets',
+      'sentimentsWidgets'
     ])
   },
   methods: {

@@ -24,9 +24,7 @@
             <div class="widget-header">{{item.title}}</div>
             <div class="iframe-mask hide"></div>
             <div class="iframe-wrapper">
-              <!-- <iframe :src="'/apps/'+item.url" frameborder="0" /> -->
-              <iframe v-if="item.defaultId" :src="item.url+item.defaultId" frameborder="0" />
-              <iframe v-else="item.defaultId" :src="item.url" frameborder="0" />
+              <iframe :src="item.url" frameborder="0" />
             </div>
           </div>
       </grid-item>
@@ -85,17 +83,23 @@ export default {
 }
 </script>
 
-<style lang="sass">
+
+<<style lang="sass">
 .customize-widgets
     position: absolute
     top: -1px
     right: 14px
+</style>
+<style lang="sass" scoped>
+// global
 .hide
   display: none !important
+//
 .vue-grid-layout
   margin: 0 -10px 100px
 .vue-grid-item
   border: 1px solid #ddd
+//
 .widget
   position: absolute
   top: 0
@@ -126,4 +130,6 @@ export default {
       width: 100%
       height: 100%
       overflow-y: scroll
+      // html, body
+      //   overflow: hidden !important
 </style>
