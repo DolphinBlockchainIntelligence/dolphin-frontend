@@ -14,7 +14,7 @@ const store = new Vuex.Store({
   },
   actions: {
     LOAD_ASSETS_LIST: function ({ commit }) {
-      axios.get('/static/data/announceList.json', {
+      axios.get('/dashboard/static/data/announceList.json', {
         // headers: {'Cache-Control': 'private, max-age=0, no-cache'}
       }).then((response) => {
         commit('SET_ASSETS_LIST', { list: response.data })
