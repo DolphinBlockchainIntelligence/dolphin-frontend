@@ -1,5 +1,8 @@
 <template>
 <div>
+  <Navbar>
+    <span slot="page-title">Bitcointalk.org sentiments</span>
+  </Navbar>
   <div class="datatable-options mdl-textfield mdl-js-textfield mdl-shadow--2dp">
     <input class="mdl-textfield__input" v-model="query" placeholder="Search post" />
   </div>
@@ -56,6 +59,7 @@ import Vue from 'vue'
 import routes from '../router'
 import moment from 'moment'
 import { mapState, mapActions } from 'vuex'
+import Navbar from './blocks/Navbar'
 export default {
   name: 'sentiments',
   data: () => ({
@@ -64,15 +68,12 @@ export default {
     sortOrder: '',
     postsList: [],
     showNumber: 100,
-    showAll: false,
-    pageTitle: 'Bitcointalk.org sentiments'
+    showAll: false
   }),
-  mounted () {
+  components: {
+    Navbar
   },
   methods: {
-    ...mapActions([
-      'TO_SET_PAGE_TITLE'
-    ]),
     dataHref: function (url, event) {
       event.preventDefault()
       event.stopPropagation()
@@ -103,9 +104,6 @@ export default {
       event.currentTarget.classList.add('hide')
     }
   },
-  created: function () {
-    this.TO_SET_PAGE_TITLE(this.pageTitle)
-  },
   computed: {
     computedList: function () {
       let vm = this
@@ -122,11 +120,6 @@ export default {
         currElement['order'] = ++index
         return currElement
       })
-      // TODO: сломал
-      // list = list.map((currElement, index) => {
-      //   currElement['DateTimeLastPost'] = moment(currElement.DateTimeLastPost).calendar()
-      // })
-      // console.log(list)
       if (!this.showAll) {
         list = list.slice(0, this.showNumber)
       }
@@ -135,11 +128,10 @@ export default {
     ...mapState([
       'assets'
     ])
-  },
-  components: {
   }
 }
 </script>
+
 
 <style lang="sass" scoped>
 .title-box
@@ -153,8 +145,6 @@ export default {
     padding: 7px
     background: #fff
 </style>
-
-
 <style lang="sass">
 td, th
   padding: 4px

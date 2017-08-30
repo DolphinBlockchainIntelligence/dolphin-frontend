@@ -8,11 +8,11 @@ const store = new Vuex.Store({
     assets: [],
     widgets: [],
     sentimentsWidgets: [],
-    pages: [],
-    pageTitle: ''
+    pages: []
   },
   actions: {
     LOAD_ASSETS_LIST: function ({ commit }) {
+      // axios.get('http://178.218.115.169:5000/announceList.json', {
       axios.get('/dashboard/data/announceList.json', {
         // headers: {'Cache-Control': 'private, max-age=0, no-cache'}
       }).then((response) => {
@@ -66,9 +66,6 @@ const store = new Vuex.Store({
       }, (err) => {
         console.log(err)
       })
-    },
-    TO_SET_PAGE_TITLE: ({ commit }, pageTitle) => {
-      commit('SET_PAGE_TITLE', { pageTitle: pageTitle })
     }
   },
   mutations: {
@@ -83,9 +80,6 @@ const store = new Vuex.Store({
     },
     SET_PAGES_LIST: (state, { list }) => {
       state.pages = list
-    },
-    SET_PAGE_TITLE: (state, { pageTitle }) => {
-      state.pageTitle = pageTitle
     }
   },
   getters: {

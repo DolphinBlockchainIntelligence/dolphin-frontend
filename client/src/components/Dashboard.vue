@@ -1,43 +1,50 @@
 <template>
   <div>
-    <p align="right" class="customize-widgets">
-      <a href="#" class="waves-effect waves-light btn" @click.prevent="toggleSettings($event)"><i class="material-icons left">settings</i><span>Customize</span></a>      
-    </p>
-    <grid-layout
-      :layout="widgets"
-      :col-num="12"
-      :row-height="30"
-      :is-draggable="isDraggable"
-      :is-resizable="isResizable"
-      :margin="[10, 10]"
-      :use-css-transforms="true"
-    >
-      <grid-item v-for="item in widgets"
-        :x="item.x"
-        :y="item.y"
-        :w="item.w"
-        :h="item.h"
-        :i="item.i"
-        :key="item.id"
-        @resized="resizedWidget()">
-          <div class="widget">
-            <div class="widget-header">{{item.title}}</div>
-            <div class="iframe-mask hide"></div>
-            <div class="iframe-wrapper">
-              <iframe v-if="item.id" :src="'/apps/'+item.url+item.id" frameborder="0" />
-              <iframe v-else :src="'/apps/'+item.url" frameborder="0" />
+    <Navbar>
+      <span slot="page-title">Dashboard</span>
+      <li slot="nav"><a href="#" class="waves-effect waves-light btn" @click.prevent="toggleSettings($event)"><i class="material-icons left">settings</i><span>Customize</span></a></li>
+    </Navbar>
+    <div class="content-wrapper">
+      <grid-layout
+        :layout="widgets"
+        :col-num="12"
+        :row-height="30"
+        :is-draggable="isDraggable"
+        :is-resizable="isResizable"
+        :margin="[10, 10]"
+        :use-css-transforms="true"
+      >
+        <grid-item v-for="item in widgets"
+          :x="item.x"
+          :y="item.y"
+          :w="item.w"
+          :h="item.h"
+          :i="item.i"
+          :key="item.id"
+          @resized="resizedWidget()">
+            <div class="widget">
+              <div class="widget-header">{{item.title}}</div>
+              <div class="iframe-mask hide"></div>
+              <div class="iframe-wrapper">
+                <!-- <iframe v-if="item.id" :src="item.url+item.id" frameborder="0" /> -->
+                <!-- <iframe v-else :src="item.url" frameborder="0" /> -->
+                <iframe v-if="item.id" :src="'/apps/'+item.url+item.id" frameborder="0" />
+                <iframe v-else :src="'/apps/'+item.url" frameborder="0" />
+              </div>
             </div>
-          </div>
-      </grid-item>
-    </grid-layout>
+        </grid-item>
+      </grid-layout>
+    </div>
   </div>
 </template>
 
+
 <script>
 import VueGridLayout from 'vue-grid-layout'
+import Navbar from './blocks/Navbar'
 let GridLayout = VueGridLayout.GridLayout
 let GridItem = VueGridLayout.GridItem
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'dashboard',
   data: () => ({
@@ -47,13 +54,8 @@ export default {
   }),
   components: {
     GridLayout,
-    GridItem
-  },
-  created: function () {
-    this.TO_SET_PAGE_TITLE(this.pageTitle)
-  },
-  mounted () {
-
+    GridItem,
+    Navbar
   },
   computed: {
     ...mapState([
@@ -61,9 +63,6 @@ export default {
     ])
   },
   methods: {
-    ...mapActions([
-      'TO_SET_PAGE_TITLE'
-    ]),
     resizedWidget: () => {
       window.dispatchEvent(new Event('resize'))
     },
@@ -85,12 +84,6 @@ export default {
 </script>
 
 <style lang="sass">
-.customize-widgets
-  position: absolute
-  top: -1px
-  right: 14px
-.hide
-  display: none !important
 .vue-grid-layout
   margin: 0 -10px 100px
 .vue-grid-item

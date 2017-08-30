@@ -1,73 +1,74 @@
 <template>
-  <grid-layout
-    :layout="sentimentsWidgets"
-    :col-num="12"
-    :row-height="30"
-    :is-draggable="isDraggable"
-    :is-resizable="isResizable"
-    :margin="[10, 10]"
-    :use-css-transforms="true"
-  >
-    <grid-item v-for="item in sentimentsWidgets"
-      :x="item.x"
-      :y="item.y"
-      :w="item.w"
-      :h="item.h"
-      :i="item.i"
-      :key="item.id"
-      @resized="resizedWidget()">
-        <div class="widget">
-          <div class="widget-header">{{item.title}}</div>
-          <div class="iframe-mask hide"></div>
-          <div class="iframe-wrapper">
-            <iframe v-if="item.id" :src="'/apps/'+item.url+item.id" frameborder="0" />
-            <iframe v-else :src="'/apps/'+item.url" frameborder="0" />
+  <div>
+    <Navbar>
+      <span slot="page-title">{{asset.announce}}</span>
+    </Navbar>
+    <grid-layout
+      :layout="sentimentsWidgets"
+      :col-num="12"
+      :row-height="30"
+      :is-draggable="isDraggable"
+      :is-resizable="isResizable"
+      :margin="[10, 10]"
+      :use-css-transforms="true"
+    >
+      <grid-item v-for="item in sentimentsWidgets"
+        :x="item.x"
+        :y="item.y"
+        :w="item.w"
+        :h="item.h"
+        :i="item.i"
+        :key="item.id"
+        @resized="resizedWidget()">
+          <div class="widget">
+            <div class="widget-header">{{item.title}}</div>
+            <div class="iframe-mask hide"></div>
+            <div class="iframe-wrapper">
+              <!-- <iframe v-if="item.id" :src="item.url+item.id" frameborder="0" /> -->
+              <!-- <iframe v-else :src="item.url" frameborder="0" /> -->
+              <iframe v-if="item.id" :src="'/apps/'+item.url+item.id" frameborder="0" />
+              <iframe v-else :src="'/apps/'+item.url" frameborder="0" />
+            </div>
           </div>
-        </div>
-    </grid-item>
-  </grid-layout>
+      </grid-item>
+    </grid-layout>
+  </div>
 </template>
 
 <script>
 import VueGridLayout from 'vue-grid-layout'
+import { mapState } from 'vuex'
+import Navbar from './blocks/Navbar'
 let GridLayout = VueGridLayout.GridLayout
 let GridItem = VueGridLayout.GridItem
-import { mapState, mapActions } from 'vuex'
 export default {
   name: 'sentiment',
   props: ['id'],
   data: () => ({
     isDraggable: false,
     isResizable: false,
-    pageTitle: 'Dashboard',
-    asset: {}
+    pageTitle: 'Dashboard'
   }),
   components: {
     GridLayout,
-    GridItem
-  },
-  created: function () {
-
-  },
-  mounted () {
-    for (var i in this.assets) {
-      if (this.id == this.assets[i].topicId) {
-        this.TO_SET_PAGE_TITLE(this.assets[i].announce)
-        this.asset = this.assets[i]
-        return this.assets[i]
-      }
-    }
+    GridItem,
+    Navbar
   },
   computed: {
+    asset: function() {
+      for (var i in this.assets) {
+        if (this.id == this.assets[i].topicId) {
+          this.asset = this.assets[i]
+          return this.assets[i]
+        }
+      }
+    },
     ...mapState([
       'assets',
       'sentimentsWidgets'
     ])
   },
   methods: {
-    ...mapActions([
-      'TO_SET_PAGE_TITLE'
-    ]),
     resizedWidget: () => {
       window.dispatchEvent(new Event('resize'))
     },
@@ -136,6 +137,4 @@ export default {
       width: 100%
       height: 100%
       overflow-y: scroll
-      // html, body
-      //   overflow: hidden !important
 </style>

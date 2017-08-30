@@ -1,5 +1,8 @@
 <template>
   <div>
+    <Navbar>
+      <span slot="page-title">{{page.title}}</span>
+    </Navbar>
     <div class="iframe-wrapper">
       <iframe id="pages-iframe" :src="'/apps/'+page.url+'/'" width="100%"></iframe>
     </div>
@@ -8,35 +11,24 @@
 
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import _ from 'lodash'
+import { mapState } from 'vuex'
+import Navbar from './blocks/Navbar'
 export default {
   name: 'page',
   props: ['id'],
-  data: () => ({
-  }),
   components: {
-  },
-  created () {
-  },
-  mounted () {
+    Navbar
   },
   computed: {
     page (state) {
       for (var i in this.pages) {
         if (this.id == this.pages[i].id) {
-          this.TO_SET_PAGE_TITLE(this.pages[i].title) 
           return this.pages[i]
         }
       }
     },
     ...mapState([
       'pages'
-    ])
-  },
-  methods: {
-    ...mapActions([
-      'TO_SET_PAGE_TITLE'
     ])
   }
 }

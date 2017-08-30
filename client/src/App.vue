@@ -13,21 +13,12 @@
         </ul>
       </aside>
       <main class="main">
-        <nav>
-          <div class="nav-wrapper">
-            <ul class="left hide-on-med-and-down">
-              <li><a href="#" @click.prevent="asideToggle()" class="asideToggle"><i class="material-icons">menu</i></a></li>
-            </ul>
-            <a href="#" class="brand-logo">{{pageTitle}}</a>
-          </div>
-        </nav>
-        <div class="content-wrapper">
-          <router-view :key="$route.path" />
-        </div>
+        <router-view :key="$route.path" />
       </main>
     </div>
   </div>
 </template>
+
 
 <script>
 import { mapState } from 'vuex'
@@ -59,7 +50,14 @@ export default {
 }
 </script>
 
+
 <style lang="sass">
+.hide
+  display: none !important
+.content-wrapper
+  padding: 0 14px
+</style>
+<style lang="sass" scoped>
 .layout
   position: relative
   &.asideOpen
@@ -100,8 +98,4 @@ export default {
     padding-left: 0
     min-height: 100vh
     transition: padding-left 0.3s
-    .content-wrapper
-      padding: 0 14px
-    & > nav
-      background-color: #00bcd4
 </style>
