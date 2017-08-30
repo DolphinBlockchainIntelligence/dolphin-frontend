@@ -2,10 +2,10 @@
   <div class="app" id="app">
     <div class="asideOpen layout" id="layout">
       <aside>
-        <div class="brand">
+        <a href="/dashboard/" class="brand">
           <img src="../static/img/dolphin.png" class="brand-logo" alt="Dolphin BI">
           <span class="brand-name">Dolphin BI</span>
-        </div>
+        </a>
         <ul class="nav collection">
           <li><router-link to="/" class="collection-item waves-effect waves-teal">Dashboard</router-link></li>
           <li><router-link to="/sentiments" class="collection-item waves-effect waves-teal">Sentiments</router-link></li>

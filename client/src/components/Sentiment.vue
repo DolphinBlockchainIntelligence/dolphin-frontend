@@ -20,8 +20,8 @@
           <div class="widget-header">{{item.title}}</div>
           <div class="iframe-mask hide"></div>
           <div class="iframe-wrapper">
-            <iframe v-if="item.defaultId" :src="item.url+item.defaultId" frameborder="0" />
-            <iframe v-else="item.defaultId" :src="item.url" frameborder="0" />
+            <iframe v-if="item.id" :src="'/apps/'+item.url+item.id" frameborder="0" />
+            <iframe v-else :src="'/apps/'+item.url" frameborder="0" />
           </div>
         </div>
     </grid-item>

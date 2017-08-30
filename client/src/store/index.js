@@ -9,12 +9,11 @@ const store = new Vuex.Store({
     widgets: [],
     sentimentsWidgets: [],
     pages: [],
-    pageTitle: '',
-    defaultId: 583449
+    pageTitle: ''
   },
   actions: {
     LOAD_ASSETS_LIST: function ({ commit }) {
-      axios.get('/dashboard/static/data/announceList.json', {
+      axios.get('/dashboard/data/announceList.json', {
         // headers: {'Cache-Control': 'private, max-age=0, no-cache'}
       }).then((response) => {
         commit('SET_ASSETS_LIST', { list: response.data })
@@ -22,10 +21,11 @@ const store = new Vuex.Store({
         console.log(err)
       })
     },
-    LOAD_REGISTER: function ({ commit, state }) {
+    LOAD_REGISTER: function ({ commit }) {
       axios.get('/dashboard/apps', {
       // axios.get('http://178.218.115.169:5000/dns.json', {
       }).then((response) => {
+        const defaultId = 583449
         // widgets
         var widgets = response.data.widgets
         widgets.forEach(function(item, i){
@@ -35,6 +35,11 @@ const store = new Vuex.Store({
           item.w = 6
           item.h = 10
           item.name = item.title.split(' ').join('')
+        })
+        widgets.forEach(function(item, i){
+          if (item.url == '/#/sentiments-comments/' || item.url == '/#/sentiments-line-chart/') {
+            item.id = defaultId
+          }
         })
         commit('SET_WIDGETS_LIST', { list: widgets})
         // pages
@@ -55,7 +60,7 @@ const store = new Vuex.Store({
           item.w = 12
           item.h = 10
           item.name = item.title.split(' ').join('')
-          item.id = state.defaultId
+          item.id = defaultId
         })
         commit('SET_SENTIMENTS_WIDGETS_LIST', { list: sentimentsWidgets})
       }, (err) => {
