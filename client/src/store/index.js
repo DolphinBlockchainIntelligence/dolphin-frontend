@@ -12,7 +12,7 @@ const store = new Vuex.Store({
   },
   actions: {
     LOAD_ASSETS_LIST: function ({ commit }) {
-      // axios.get('http://178.218.115.169:5000/announceList.json', {
+      // axios.get('http://localhost:8000/dashboard/data/announceList.json', {
       axios.get('/dashboard/data/announceList.json', {
         // headers: {'Cache-Control': 'private, max-age=0, no-cache'}
       }).then((response) => {
@@ -23,11 +23,14 @@ const store = new Vuex.Store({
     },
     LOAD_REGISTER: function ({ commit }) {
       axios.get('/dashboard/apps', {
-      // axios.get('http://178.218.115.169:5000/dns.json', {
+      // axios.get('http://localhost:8000/dashboard/apps.json', {
       }).then((response) => {
         const defaultId = 583449
         // widgets
         var widgets = response.data.widgets
+        widgets = _.filter(widgets, (item) => {
+          return (item.url.search(/sentiments/i) < 0)
+        })
         widgets.forEach(function(item, i){
           item.i = i.toString()
           item.x = (i%2)*6
@@ -35,11 +38,6 @@ const store = new Vuex.Store({
           item.w = 6
           item.h = 10
           item.name = item.title.split(' ').join('')
-        })
-        widgets.forEach(function(item, i){
-          if (item.url == '/#/sentiments-comments/' || item.url == '/#/sentiments-line-chart/') {
-            item.id = defaultId
-          }
         })
         commit('SET_WIDGETS_LIST', { list: widgets})
         // pages
@@ -51,9 +49,10 @@ const store = new Vuex.Store({
         // sentiments widgets
         var sentimentsWidgets = response.data.widgets
         sentimentsWidgets = _.filter(sentimentsWidgets, (item) => {
-          return (item.url == '/#/sentiments-comments/' || item.url == '/#/sentiments-line-chart/') 
+          return (item.url.search(/sentiments/i) > 0)
         })
         sentimentsWidgets.forEach(function(item, i){
+          item.url = item.url.slice(0, -11)
           item.i = i.toString()
           item.x = 0
           item.y = i*10

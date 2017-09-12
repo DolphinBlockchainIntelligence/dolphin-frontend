@@ -3,35 +3,37 @@
     <Navbar>
       <span slot="page-title">{{asset.announce}}</span>
     </Navbar>
-    <grid-layout
-      :layout="sentimentsWidgets"
-      :col-num="12"
-      :row-height="30"
-      :is-draggable="isDraggable"
-      :is-resizable="isResizable"
-      :margin="[10, 10]"
-      :use-css-transforms="true"
-    >
-      <grid-item v-for="item in sentimentsWidgets"
-        :x="item.x"
-        :y="item.y"
-        :w="item.w"
-        :h="item.h"
-        :i="item.i"
-        :key="item.id"
-        @resized="resizedWidget()">
-          <div class="widget">
-            <div class="widget-header">{{item.title}}</div>
-            <div class="iframe-mask hide"></div>
-            <div class="iframe-wrapper">
-              <!-- <iframe v-if="item.id" :src="item.url+item.id" frameborder="0" /> -->
-              <!-- <iframe v-else :src="item.url" frameborder="0" /> -->
-              <iframe v-if="item.id" :src="'/apps/'+item.url+item.id" frameborder="0" />
-              <iframe v-else :src="'/apps/'+item.url" frameborder="0" />
+    <div class="content-wrapper">
+      <grid-layout
+        :layout="sentimentsWidgets"
+        :col-num="12"
+        :row-height="30"
+        :is-draggable="isDraggable"
+        :is-resizable="isResizable"
+        :margin="[10, 10]"
+        :use-css-transforms="true"
+      >
+        <grid-item v-for="item in sentimentsWidgets"
+          :x="item.x"
+          :y="item.y"
+          :w="item.w"
+          :h="item.h"
+          :i="item.i"
+          :key="item.id"
+          @resized="resizedWidget()">
+            <div class="widget">
+              <div class="widget-header">{{item.title}}</div>
+              <div class="iframe-mask hide"></div>
+              <div class="iframe-wrapper">
+                <!-- <iframe v-if="item.id" :src="item.url+item.id" frameborder="0" /> -->
+                <!-- <iframe v-else :src="item.url" frameborder="0" /> -->
+                <iframe v-if="item.id" :src="'/apps/'+item.url+'?id='+item.id" frameborder="0" />
+                <iframe v-else :src="'/apps/'+item.url" frameborder="0" />
+              </div>
             </div>
-          </div>
-      </grid-item>
-    </grid-layout>
+        </grid-item>
+      </grid-layout>
+    </div>
   </div>
 </template>
 

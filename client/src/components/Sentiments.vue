@@ -3,51 +3,53 @@
   <Navbar>
     <span slot="page-title">Bitcointalk.org sentiments</span>
   </Navbar>
-  <div class="datatable-options mdl-textfield mdl-js-textfield mdl-shadow--2dp">
-    <input class="mdl-textfield__input" v-model="query" placeholder="Search post" />
+  <div class="content-wrapper">
+    <div class="datatable-options mdl-textfield mdl-js-textfield mdl-shadow--2dp">
+      <input class="mdl-textfield__input" v-model="query" placeholder="Search post" />
+    </div>
+    <table class="table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <thead>
+        <tr>
+          <th @click="sort('announce')">
+            <span>Announce</span>
+            <i class="material-icons"></i>
+          </th>
+          <th @click="sort('NumReplies')">
+            <span>Replies</span>
+            <i class="material-icons"></i>
+          </th>
+          <th @click="sort('DateTimeLastPost')">
+            <span>Last comment</span>
+            <i class="material-icons"></i>
+          </th>
+          <th @click="sort('rank')">
+            <span>Rank</span>
+            <i class="material-icons"></i>
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody name="table-row">
+        <tr v-for="post in computedList" key="tr" class="table-row-item" :to="'/post/' + post.topicId" @click="goToPost(post.topicId, post.announce)">
+          <td key="announce">{{ post.announce }}</td>
+          <td key="replies">{{ post.NumReplies }}</td>
+          <td key="lastComment">{{ post.DateTimeLastPost }}</td>
+          <td key="rank">{{ post.rank }}</td>
+          <td class="links" key="links">
+            <a href="#" @click="dataHref(post.topicStarterUrl, $event)">
+              <i class="material-icons">account_circle</i>
+            </a>
+            <a href="#" @click="dataHref(post.topicUrl, $event)">
+              <i class="material-icons">assignment</i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p align="center">
+      <a class="waves-effect waves-light btn btn-show-all" @click.prevent="toShowAll($event)">Show all</a>
+    </p>
   </div>
-  <table class="table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-    <thead>
-      <tr>
-        <th @click="sort('announce')">
-          <span>Announce</span>
-          <i class="material-icons"></i>
-        </th>
-        <th @click="sort('NumReplies')">
-          <span>Replies</span>
-          <i class="material-icons"></i>
-        </th>
-        <th @click="sort('DateTimeLastPost')">
-          <span>Last comment</span>
-          <i class="material-icons"></i>
-        </th>
-        <th @click="sort('rank')">
-          <span>Rank</span>
-          <i class="material-icons"></i>
-        </th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody name="table-row">
-      <tr v-for="post in computedList" key="tr" class="table-row-item" :to="'/post/' + post.topicId" @click="goToPost(post.topicId, post.announce)">
-        <td key="announce">{{ post.announce }}</td>
-        <td key="replies">{{ post.NumReplies }}</td>
-        <td key="lastComment">{{ post.DateTimeLastPost }}</td>
-        <td key="rank">{{ post.rank }}</td>
-        <td class="links" key="links">
-          <a href="#" @click="dataHref(post.topicStarterUrl, $event)">
-            <i class="material-icons">account_circle</i>
-          </a>
-          <a href="#" @click="dataHref(post.topicUrl, $event)">
-            <i class="material-icons">assignment</i>
-          </a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <p align="center">
-    <a class="waves-effect waves-light btn btn-show-all" @click.prevent="toShowAll($event)">Show all</a>
-  </p>
 </div>
 </template>
 
