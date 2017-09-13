@@ -27,7 +27,7 @@
               <div class="iframe-wrapper">
                 <!-- <iframe v-if="item.id" :src="item.url+item.id" frameborder="0" /> -->
                 <!-- <iframe v-else :src="item.url" frameborder="0" /> -->
-                <iframe v-if="item.id" :src="'/apps/'+item.url+'?id='+item.id" frameborder="0" />
+                <iframe v-if="item.id" :src="'/apps/'+item.url+'?id='+id" frameborder="0" />
                 <iframe v-else :src="'/apps/'+item.url" frameborder="0" />
               </div>
             </div>
