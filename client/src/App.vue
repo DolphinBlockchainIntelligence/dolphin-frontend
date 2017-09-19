@@ -2,7 +2,7 @@
   <div class="app" id="app">
     <div class="asideOpen layout" id="layout">
       <aside>
-        <a href="/dashboard/" class="brand">
+        <a href="https://presale.dolphin.bi/" class="brand">
           <img src="../static/img/dolphin.png" class="brand-logo" alt="Dolphin BI">
           <span class="brand-name">Dolphin BI</span>
         </a>
@@ -10,6 +10,8 @@
           <li><router-link to="/" class="collection-item waves-effect waves-teal">Dashboard</router-link></li>
           <li><router-link to="/sentiments" class="collection-item waves-effect waves-teal">Sentiments</router-link></li>
           <li v-for="page in pages"><a to="#" class="collection-item waves-effect waves-teal" @click.prevent="goToPage(page.id, page.url)">{{page.title}}</a></li>
+          <br/>
+          <li class="text-align: center"><a href="https://presale.dolphin.bi/" class="waves-effect waves-light btn" target="_blank" style="color: #fff">Get presale tokens</a></li>
         </ul>
       </aside>
       <main class="main">
