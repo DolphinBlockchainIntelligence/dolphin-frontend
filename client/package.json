@@ -24,6 +24,7 @@
     "vue": "^2.2.6",
     "vue-analytics": "^4.1.2",
     "vue-grid-layout": "^2.1.9",
+    "vue-materials": "^1.0.7-rc.7",
     "vue-router": "^2.3.1",
     "vue-star-rating": "^1.4.0",
     "vue-svg-loader": "^0.1.2",

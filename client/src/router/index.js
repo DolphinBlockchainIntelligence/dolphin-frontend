@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Dashboard from '@/components/Dashboard'
 import Sentiments from '@/components/Sentiments'
 import Sentiment from '@/components/Sentiment'
+import ExpertsEvaluations from '@/components/ExpertsEvaluations'
+import ExpertsEvaluationsAdd from '@/components/ExpertsEvaluationsAdd'
 import Page from '@/components/Page'
 
 
@@ -18,6 +20,16 @@ export default new Router({
       path: '/sentiments',
       name: 'Sentiments',
       component: Sentiments
+    },
+    {
+      path: '/experts-evaluations',
+      name: 'ExpertsEvaluations',
+      component: ExpertsEvaluations
+    },
+    {
+      path: '/experts-evaluations/add',
+      name: 'ExpertsEvaluationsAdd',
+      component: ExpertsEvaluationsAdd
     },
     {
       path: '/sentiment/:id',

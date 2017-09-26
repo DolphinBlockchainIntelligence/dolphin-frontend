@@ -25,6 +25,7 @@
 <script>
 import { mapState } from 'vuex'
 import routes from './router'
+import Vue from 'vue'
 export default {
   name: 'app',
   data: () => ({
