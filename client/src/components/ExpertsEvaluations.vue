@@ -10,6 +10,10 @@
         <thead>
           <tr>
             <th>
+              <i class="material-icons"></i>
+              <span>Expert</span>
+            </th>
+            <th>
               <span>Idea</span>
               <i class="material-icons"></i>
             </th>
@@ -26,38 +30,27 @@
               <i class="material-icons"></i>
             </th>
             <th>
-              <span>Expert comments</span>
-            </th>
-            <th>
-              <i class="material-icons"></i>
-              <span>Expert</span>
-            </th>
-            <th>
               <i class="material-icons"></i>
               <span>Expert total rating</span>
             </th>
             <th>
-              <i class="material-icons"></i>
-              <span>Rate this analysis</span>
+              <span>Expert comments</span>
             </th>
           </tr>
         </thead>
         <tbody name="table-row">
           <tr v-for="expert in experts" key="tr" class="table-row-item">
-            <td v-for="parameter in expert.parameters">
-              <star-rating :increment="0.01" :fixed-points="2" :read-only="true" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="parameter.rating"></star-rating>
-            </td>
-            <td>
-              <a href="#">Read more</a>
-            </td>
             <td>
               {{ expert.name }}
+            </td>
+            <td v-for="parameter in expert.parameters">
+              <star-rating :increment="0.01" :fixed-points="2" :read-only="true" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="parameter.rating"></star-rating>
             </td>
             <td>
               <star-rating :increment="0.01" :fixed-points="2" :read-only="true" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="expert.rating"></star-rating>
             </td>
             <td>
-              <star-rating :increment="0.01" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="expert.userRating"></star-rating>
+              <a href="#">Read more</a>
             </td>
           </tr>
         </tbody>
