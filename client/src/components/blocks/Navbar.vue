@@ -9,6 +9,9 @@
       </span>
       <ul class="right hide-on-med-and-down">
         <slot name="nav"></slot>
+        <li><a href="#login" class="not-authorized">Login</a></li>
+        <li><a href="#signup" class="not-authorized">Sign up</a></li>
+        <li><a href="#user-menu" class="authorized hide">Ivan Ivanov</a></li>
       </ul>
     </div>
   </nav>
