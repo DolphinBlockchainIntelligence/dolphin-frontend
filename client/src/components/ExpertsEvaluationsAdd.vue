@@ -2,7 +2,6 @@
   <div>
     <Navbar>
       <span slot="page-title">Add evaluation</span>
-      <li slot="nav"><router-link to="/experts-evaluations/add" class="waves-effect waves-light btn"><i class="material-icons left">add</i><span>Add evaluation</span></router-link></li>
     </Navbar>
     <br>
     <div class="content-wrapper">
@@ -10,30 +9,39 @@
         <form class="col s12">
           <table>
             <tr>
-              <td>Idea</td>
-              <td><star-rating :increment="0.01" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="0"></star-rating></td>
-            </tr>
-            <tr>
-              <td>Team</td>
-              <td><star-rating :increment="0.01" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="0"></star-rating></td>
-            </tr>
-            <tr>
-              <td>Business model</td>
-              <td><star-rating :increment="0.01" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="0"></star-rating></td>
-            </tr>
-            <tr>
-              <td>Market</td>
-              <td><star-rating :increment="0.01" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="0"></star-rating></td>
-            </tr>
-            <tr>
-              <td>Comment</td>
               <td>
+                Idea
+                <star-rating :increment="0.01" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="0"></star-rating>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Team
+                <star-rating :increment="0.01" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="0"></star-rating>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Business model
+                <star-rating :increment="0.01" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="0"></star-rating>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Market
+                <star-rating :increment="0.01" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" :rating="0"></star-rating>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Comment
                 <div class="input-field">
                   <v-text-area name="ta" id="ta"></v-text-area>
                 </div>
               </td>
             </tr>
           </table>
+          <button type="submit" class="waves-effect waves-light btn"><i class="material-icons left">add</i><span>Add evaluation</span></button>
         </form>
       </div>
     </div>
