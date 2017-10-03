@@ -41,7 +41,7 @@
               </td>
             </tr>
           </table>
-          <button type="submit" class="waves-effect waves-light btn"><i class="material-icons left">add</i><span>Add evaluation</span></button>
+          <button type="submit" class="waves-effect waves-light btn">Create evaluation</button>
         </form>
       </div>
     </div>
