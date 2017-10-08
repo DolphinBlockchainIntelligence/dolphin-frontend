@@ -28,7 +28,20 @@ module.exports = {
     autoOpenBrowser: false,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/dashboard/',
-    proxyTable: {},
+    proxyTable: {
+      '/dashboard/data': {
+        target: 'https://beta.dolphin.bi',
+        changeOrigin: true
+      },
+      '/dashboard/apps': {
+        target: 'https://beta.dolphin.bi',
+        changeOrigin: true
+      },
+      '/apps': {
+        target: 'https://beta.dolphin.bi',
+        changeOrigin: true
+      }
+    },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)
