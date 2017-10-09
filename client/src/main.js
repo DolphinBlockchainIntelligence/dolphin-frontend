@@ -3,10 +3,6 @@ import App from './App'
 import router from './router'
 import VueAnalytics from 'vue-analytics'
 import store from './store'
-import Materials from 'vue-materials'
-import Vuex from 'vuex'
-Vue.use(Materials)
-Vue.use(Vuex)
 
 Vue.config.productionTip = false
 

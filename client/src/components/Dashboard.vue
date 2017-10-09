@@ -38,10 +38,8 @@
 
 
 <script>
-import VueGridLayout from 'vue-grid-layout'
 import Navbar from './blocks/Navbar'
-let GridLayout = VueGridLayout.GridLayout
-let GridItem = VueGridLayout.GridItem
+import { GridLayout, GridItem } from 'vue-grid-layout'
 import { mapState } from 'vuex'
 export default {
   name: 'dashboard',
