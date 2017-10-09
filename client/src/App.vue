@@ -8,7 +8,6 @@
         </a>
         <ul class="nav collection">
           <li><router-link to="/" class="collection-item waves-effect waves-teal">Dashboard</router-link></li>
-          <li><router-link to="/sentiments" class="collection-item waves-effect waves-teal">Sentiments</router-link></li>
           <li v-for="page in pages"><a to="#" class="collection-item waves-effect waves-teal" @click.prevent="goToPage(page.id, page.url)">{{page.title}}</a></li>
           <br/>
           <li class="text-align: center"><a href="https://presale.dolphin.bi/" class="waves-effect waves-light btn" target="_blank" style="color: #fff">Get presale tokens</a></li>
@@ -25,16 +24,12 @@
 <script>
 import { mapState } from 'vuex'
 import routes from './router'
-import Vue from 'vue'
 export default {
   name: 'app',
   data: () => ({
   }),
   beforeCreate: function () {
     this.$store.dispatch('LOAD_REGISTER')
-  },
-  mounted () {
-    this.$store.dispatch('LOAD_ASSETS_LIST')
   },
   computed: {
     ...mapState([

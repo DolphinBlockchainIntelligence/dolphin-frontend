@@ -1,29 +1,16 @@
-import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-Vue.use(Vuex)
+import _ from 'lodash'
 
 const store = new Vuex.Store({
   state: {
     assets: [],
     widgets: [],
-    sentimentsWidgets: [],
     pages: []
   },
   actions: {
-    LOAD_ASSETS_LIST: function ({ commit }) {
-      // axios.get('http://localhost:8000/dashboard/data/announceList.json', {
-      axios.get('/dashboard/data/announceList.json', {
-        // headers: {'Cache-Control': 'private, max-age=0, no-cache'}
-      }).then((response) => {
-        commit('SET_ASSETS_LIST', { list: response.data })
-      }, (err) => {
-        console.log(err)
-      })
-    },
     LOAD_REGISTER: function ({ commit }) {
       axios.get('/dashboard/apps', {
-      // axios.get('http://localhost:8000/dashboard/apps.json', {
       }).then((response) => {
         const defaultId = 583449
         // widgets
@@ -46,22 +33,6 @@ const store = new Vuex.Store({
           item.id = item.title.toLowerCase().split(' ').join('-')
         })
         commit('SET_PAGES_LIST', { list: pages })
-        // sentiments widgets
-        var sentimentsWidgets = response.data.widgets
-        sentimentsWidgets = _.filter(sentimentsWidgets, (item) => {
-          return (item.url.search(/sentiments/i) > 0)
-        })
-        sentimentsWidgets.forEach(function(item, i){
-          item.url = item.url.slice(0, -11)
-          item.i = i.toString()
-          item.x = 0
-          item.y = i*10
-          item.w = 12
-          item.h = 10
-          item.name = item.title.split(' ').join('')
-          item.id = defaultId
-        })
-        commit('SET_SENTIMENTS_WIDGETS_LIST', { list: sentimentsWidgets})
       }, (err) => {
         console.log(err)
       })
@@ -73,9 +44,6 @@ const store = new Vuex.Store({
     },
     SET_WIDGETS_LIST: (state, { list }) => {
       state.widgets = list
-    },
-    SET_SENTIMENTS_WIDGETS_LIST: (state, { list }) => {
-      state.sentimentsWidgets = list
     },
     SET_PAGES_LIST: (state, { list }) => {
       state.pages = list
