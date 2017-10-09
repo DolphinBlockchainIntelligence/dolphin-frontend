@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import filter from 'lodash/filter'
 
 Vue.use(Vuex)
 
@@ -18,7 +17,7 @@ const store = new Vuex.Store({
         const defaultId = 583449
         // widgets
         var widgets = response.data.widgets
-        widgets = filter(widgets, (item) => {
+        widgets = widgets.filter((item) => {
           return (item.url.search(/sentiments/i) < 0)
         })
         widgets.forEach(function(item, i){
