@@ -38,7 +38,7 @@ export default {
 <style lang="sass" scoped>
 .iframe-wrapper
   height: calc(100vh - 68px)
-  margin: 0 -14px
+  margin: 0
 iframe
   border: none
   height: 100%
