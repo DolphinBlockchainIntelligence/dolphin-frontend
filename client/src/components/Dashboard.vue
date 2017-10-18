@@ -67,7 +67,7 @@ export default {
       this.isResizable = !this.isResizable
       let btnText = event.currentTarget.querySelector('span').textContent
       if (btnText == 'Customize') {
-        event.currentTarget.querySelector('span').textContent = 'Cancel'
+        event.currentTarget.querySelector('span').textContent = 'Save settings'
       } else {
         event.currentTarget.querySelector('span').textContent = 'Customize'
       }

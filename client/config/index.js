@@ -41,6 +41,14 @@ module.exports = {
       '/apps': {
         target: 'https://beta.dolphin.bi',
         changeOrigin: true
+      },
+      '/auth': {
+        target: 'https://beta.dolphin.bi',
+        changeOrigin: true
+      },
+      '/private/user/': {
+        target: 'https://beta.dolphin.bi',
+        changeOrigin: true
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

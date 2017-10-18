@@ -9,7 +9,12 @@
       </span>
       <ul class="right hide-on-med-and-down">
         <slot name="nav"></slot>
-        <li><a href="#user-menu" class="authorized hide">Ivan Ivanov</a></li>
+        <template v-if="!user">
+          <li><a href="/auth/facebook">Sign in via Facebook</a></li>
+        </template>
+        <template v-else>
+          <li><a href="#">{{user._id}}</a></li>
+        </template>
       </ul>
     </div>
   </nav>
@@ -17,10 +22,26 @@
 
 
 <script>
+// const userUrl = '/private/user/'
+import { mapState } from 'vuex'
 export default {
   name: 'Navbar',
-  data: () => ({
-  }),
+  // data: () => ({
+  //   user: undefined
+  // }),
+  // created: function () {
+  //   axios.get(userUrl, {
+  //   }).then((response) => {
+  //     this.user = response.data
+  //   }, (err) => {
+  //     console.log(err)
+  //   })
+  // },
+  computed: {
+    ...mapState([
+      'user'
+    ])
+  },
   methods: {
     asideToggle() {
       document.getElementById('layout').classList.toggle('asideOpen')

@@ -8,7 +8,8 @@ const store = new Vuex.Store({
   state: {
     assets: [],
     widgets: [],
-    pages: []
+    pages: [],
+    user: undefined
   },
   actions: {
     LOAD_REGISTER: function ({ commit }) {
@@ -38,6 +39,14 @@ const store = new Vuex.Store({
       }, (err) => {
         console.log(err)
       })
+    },
+    LOAD_USER: function ({ commit }) {
+      axios.get('/private/user/', {
+      }).then((response) => {
+        commit('SET_USER', { user: response.data })
+      }, (err) => {
+        console.log(err)
+      })
     }
   },
   mutations: {
@@ -49,6 +58,9 @@ const store = new Vuex.Store({
     },
     SET_PAGES_LIST: (state, { list }) => {
       state.pages = list
+    },
+    SET_USER: (state, { user }) => {
+      state.user = user
     }
   },
   getters: {
