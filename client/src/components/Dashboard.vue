@@ -2,7 +2,7 @@
   <div>
     <Navbar>
       <span slot="page-title">Dashboard</span>
-      <li slot="nav"><a href="#" class="waves-effect waves-light btn" @click.prevent="toggleSettings($event)"><i class="material-icons left">settings</i><span>Customize</span></a></li>
+      <li slot="nav" class="menu-button"><a href="#" class="button" @click.prevent="toggleSettings($event)"><i class="material-icons left">settings</i><span>Customize</span></a></li>
     </Navbar>
     <div class="content-wrapper">
       <grid-layout

@@ -2,16 +2,28 @@
   <div class="app" id="app">
     <div class="asideOpen layout" id="layout">
       <aside>
-        <a href="https://presale.dolphin.bi/" class="brand">
-          <img src="../static/img/dolphin.png" class="brand-logo" alt="Dolphin BI">
-          <span class="brand-name">Dolphin BI</span>
-        </a>
-        <ul class="nav collection">
-          <li><router-link to="/" class="collection-item waves-effect waves-teal">Dashboard</router-link></li>
-          <li v-for="page in pages"><a to="#" class="collection-item waves-effect waves-teal" @click.prevent="goToPage(page.id, page.url)">{{page.title}}</a></li>
-          <br/>
-          <li class="text-align: center"><a href="https://presale.dolphin.bi/" class="waves-effect waves-light btn" target="_blank" style="color: #fff">Get presale tokens</a></li>
-        </ul>
+        <div class="aside-header">
+          <a href="https://presale.dolphin.bi/" class="brand">
+            <img src="../static/img/dolphin.png" class="brand-logo" alt="Dolphin BI">
+            <span class="brand-name">Dolphin BI</span>
+          </a>
+        </div>
+        <div class="aside-body">
+          <ul class="vertical menu">
+            <li><router-link to="/" class="collection-item waves-effect waves-teal">Dashboard</router-link></li>
+            <li v-for="page in pages"><a to="#" class="collection-item waves-effect waves-teal" @click.prevent="goToPage(page.id, page.url)">{{page.title}}</a></li>
+            <br/>
+            <li class="text-align: center"><a href="https://presale.dolphin.bi/" class="waves-effect waves-light btn" target="_blank" style="color: #fff">Get presale tokens</a></li>
+          </ul>
+        </div>
+        <div class="aside-footer">
+          <template v-if="!user">
+            <i class="material-icons">perm_identity</i> <a href="/auth/facebook">Sign in via Facebook</a>
+          </template>
+          <template v-else>
+            <i class="material-icons">perm_identity</i> <a href="#">user._id</a>
+          </template>
+        </div>
       </aside>
       <main class="main">
         <router-view :key="$route.path" />
@@ -34,7 +46,8 @@ export default {
   computed: {
     ...mapState([
       'pages',
-      'pageTitle'
+      'pageTitle',
+      'user'
     ])
   },
   methods: {
@@ -65,12 +78,23 @@ export default {
       padding-left: 300px
   aside
     position: fixed
+    display: flex
+    flex-direction: column
     height: 100vh
     width: 300px
     top: 0
     left: -300px
     transition: left 0.3s
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)
+    .aside-body
+      flex: 1 0 auto
+    .aside-footer
+      padding: 21px 14px
+      border-top: 1px solid #eee
+      display: flex
+      align-items: center
+      justify-content: center
+      vertical-align: middle
     .asideToggle
       position: absolute
       right: -28px
