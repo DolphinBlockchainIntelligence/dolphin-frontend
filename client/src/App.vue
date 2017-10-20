@@ -12,16 +12,15 @@
           <ul class="vertical menu">
             <li><router-link to="/" class="collection-item waves-effect waves-teal">Dashboard</router-link></li>
             <li v-for="page in pages"><a to="#" class="collection-item waves-effect waves-teal" @click.prevent="goToPage(page.id, page.url)">{{page.title}}</a></li>
-            <br/>
-            <li class="text-align: center"><a href="https://presale.dolphin.bi/" class="waves-effect waves-light btn" target="_blank" style="color: #fff">Get presale tokens</a></li>
+            <li class="get-tokens"><a href="https://presale.dolphin.bi/" class="waves-effect waves-light btn" target="_blank">Get presale tokens</a></li>
           </ul>
         </div>
         <div class="aside-footer">
           <template v-if="!user">
-            <i class="material-icons">perm_identity</i> <a href="/auth/facebook">Sign in via Facebook</a>
+            <a href="/auth/facebook"><i class="material-icons">perm_identity</i> <span>Sign in via Facebook</span></a>
           </template>
           <template v-else>
-            <i class="material-icons">perm_identity</i> <a href="#">user._id</a>
+            <a href="#"><i class="material-icons">perm_identity</i> <span>user._id</span></a>
           </template>
         </div>
       </aside>
@@ -88,13 +87,31 @@ export default {
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)
     .aside-body
       flex: 1 0 auto
-    .aside-footer
+      ul
+        li
+          border-bottom: 1px solid #eee
+          border-top: 1px solid #eee
+          a
+            padding: 21px 14px
+            &:hover, &:focus
+              background: #f2f2f2
+          &+li
+            border-top: 0px solid #eee
+        .get-tokens
+          a
+            color: #fff
+            background: #1779ba
+            &:hover, &:focus
+              background: #1468a0
+    .aside-footer a
       padding: 21px 14px
       border-top: 1px solid #eee
       display: flex
       align-items: center
       justify-content: center
       vertical-align: middle
+      &:hover, &:focus
+        background: #f2f2f2
     .asideToggle
       position: absolute
       right: -28px
