@@ -17,7 +17,7 @@
         </div>
         <div class="aside-footer">
           <template v-if="!user">
-            <a href="/auth/facebook"><i class="material-icons">perm_identity</i> <span>Sign in via Facebook</span></a>
+            <a href="/auth/facebook"><span>Sign in with</span> <i class="flaticon-facebook-logo"></i></a>
           </template>
           <template v-else>
             <a href="#"><i class="material-icons">perm_identity</i> <span>user._id</span></a>
