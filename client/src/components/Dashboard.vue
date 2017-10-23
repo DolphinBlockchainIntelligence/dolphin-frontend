@@ -23,7 +23,12 @@
           :key="item.id"
           @resized="resizedWidget()">
             <div class="widget">
-              <div class="widget-header">{{item.title}}</div>
+              <div class="widget-header">
+                <div class="title">{{item.title}}</div>
+                <div class="actions">
+                  <a href="#"><i class="material-icons">info_outline</i></a>
+                </div>
+              </div>
               <div class="iframe-mask hide"></div>
               <div class="iframe-wrapper">
                 <iframe v-if="item.id" :src="'/apps/'+item.url+'?id='+item.id" frameborder="0" />
@@ -98,6 +103,18 @@ export default {
     display: flex
     align-items: center
     padding: 0 7px
+    justify-content: center
+    .title
+      flex: 1 0 auto
+    .actions
+      display: flex
+      a
+        color: #bebebe
+        line-height: 1rem
+        &:hover
+          color: #0a0a0a
+      .material-icons
+        font-size: 1rem
   .iframe-mask
     position: absolute
     top: 0
