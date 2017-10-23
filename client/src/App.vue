@@ -17,10 +17,16 @@
         </div>
         <div class="aside-footer">
           <template v-if="!user">
-            <a href="/auth/facebook"><span>Sign in with</span> <i class="flaticon-facebook-logo"></i></a>
+            <div class="not-auth">
+              <div class="not-auth__text">Sign in with</div>
+              <a class="flex-link" href="/auth/facebook"><i class="flaticon-facebook"></i></a>
+              <a class="flex-link" href="/auth/google"><i class="flaticon-google"></i></a>
+            </div>
           </template>
           <template v-else>
-            <a href="#"><i class="material-icons">perm_identity</i> <span>user._id</span></a>
+            <div class="auth">
+              <a href="#"><i class="material-icons">perm_identity</i> <span>user._id</span></a>
+            </div>
           </template>
         </div>
       </aside>
@@ -103,15 +109,23 @@ export default {
             background: #1779ba
             &:hover, &:focus
               background: #1468a0
-    .aside-footer a
-      padding: 21px 14px
-      border-top: 1px solid #eee
-      display: flex
-      align-items: center
-      justify-content: center
-      vertical-align: middle
-      &:hover, &:focus
-        background: #f2f2f2
+    .aside-footer
+      .not-auth__text
+        flex: 1 0 auto
+        padding: 21px 14px
+        text-align: center
+      .not-auth, .auth
+        display: flex
+        align-items: center
+        justify-content: center
+        vertical-align: middle
+        border-top: 1px solid #eee
+        .flex-link
+          padding: 21px 14px
+          flex: 1 0 auto
+          border-left: 1px solid #eee
+          &:hover, &:focus
+            background: #f2f2f2
     .asideToggle
       position: absolute
       right: -28px

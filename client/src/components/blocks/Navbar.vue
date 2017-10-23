@@ -33,11 +33,18 @@ export default {
 
 <style lang="sass" scoped>
 nav
-  background-color: #00bcd4
+  background: white
+  height: 64px
+  max-height: 64px
   .nav-wrapper
+    border-bottom: 1px solid #eee
     display: flex
     .top-bar
+      background: white
       width: 100%
+      padding: 0 7px
+      ul
+        background: white
       .top-bar-left
         .menu
           align-items: center
@@ -49,11 +56,18 @@ nav
 
 .page-title
   padding-left: 0
+  font-size: 2.1rem
+  font-weight: normal
 
 .button-customize
   display: flex
   align-items: center
+  padding: 23px
+  border-left: 1px solid #eee
+  background: none
+  color: rgb(10, 10, 10)
+  font-size: 1rem
   .material-icons
-    font-size: .9rem
+    font-size: 1rem
     margin-right: 7px
 </style>
