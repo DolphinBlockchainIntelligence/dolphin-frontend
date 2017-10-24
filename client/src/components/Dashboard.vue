@@ -26,7 +26,8 @@
               <div class="widget-header">
                 <div class="title">{{item.title}}</div>
                 <div class="actions">
-                  <a href="#"><i class="material-icons">info_outline</i></a>
+                  <a href="#"><i class="material-icons" @click.prevent="showSettings($event)">settings</i></a>
+                  <a href="#"><i class="material-icons" @click.prevent="showHelp($event)">help_outline</i></a>
                 </div>
               </div>
               <div class="iframe-mask hide"></div>
@@ -79,6 +80,15 @@ export default {
       document.querySelectorAll('.iframe-mask').forEach(function(item, i){
         item.classList.toggle('hide')
       })
+    },
+    showSettings: function(event) {
+      var widget = event.currentTarget.parentElement.parentElement.parentElement.parentElement
+      widget.getElementsByTagName('iframe')[0].setAttribute('src', '/settings.html')
+      // console.log(this.widgets)
+    },
+    showHelp: function(event) {
+      var widget = event.currentTarget.parentElement.parentElement.parentElement.parentElement
+      widget.getElementsByTagName('iframe')[0].setAttribute('src', '/help.html')
     }
   }
 }
@@ -111,6 +121,7 @@ export default {
       a
         color: #bebebe
         line-height: 1rem
+        margin-left: 4px
         &:hover
           color: #0a0a0a
       .material-icons
