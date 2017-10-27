@@ -124,6 +124,7 @@ export default {
           padding: 21px 14px
           flex: 1 0 auto
           border-left: 1px solid #eee
+          color: #333
           &:hover, &:focus
             background: #f2f2f2
     .asideToggle
