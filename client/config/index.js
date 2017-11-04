@@ -28,7 +28,7 @@ module.exports = {
     port: 8080,
     autoOpenBrowser: false,
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/dashboard/',
+    assetsPublicPath: '/',
     proxyTable: {
       '/dashboard/data': {
         target: 'https://beta.dolphin.bi',
