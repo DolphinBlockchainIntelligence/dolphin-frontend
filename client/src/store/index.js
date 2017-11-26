@@ -47,6 +47,7 @@ const store = new Vuex.Store({
       }, (err) => {
         console.log(err)
       })
+      // commit('SET_USER', { user: {'_id': 'suenot'} })
     }
   },
   mutations: {

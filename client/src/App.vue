@@ -1,39 +1,85 @@
 <template>
   <div class="app" id="app">
-    <div class="asideOpen layout" id="layout">
-      <aside>
-        <div class="aside-header">
-          <a href="https://presale.dolphin.bi/" class="brand">
-            <img src="../static/img/dolphin.png" class="brand-logo" alt="Dolphin BI">
-            <span class="brand-name">Dolphin BI</span>
-          </a>
-        </div>
-        <div class="aside-body">
-          <ul class="vertical menu">
-            <li><router-link to="/" class="collection-item waves-effect waves-teal">Dashboard</router-link></li>
-            <li v-for="page in pages"><a to="#" class="collection-item waves-effect waves-teal" @click.prevent="goToPage(page.id, page.url)">{{page.title}}</a></li>
-            <li class="get-tokens"><a href="https://presale.dolphin.bi/" class="waves-effect waves-light btn" target="_blank">Get presale tokens</a></li>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+      <router-link to="/" class="navbar-brand">
+        <img src="../static/img/dolphin.png" height="30" class="d-inline-block align-top" alt="">
+        Dolphin BI
+      </router-link>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Listing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Calendar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Add project</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="btn btn-outline-info" href="https://presale.dolphin.bi/orderreport">Order an ICO report</a>
+          </li>
+          <li class="nav-item auth" v-if="user._id">
+            <a href="#"><span>{{user._id}}</span></a>
+            <a href="#"><i class="material-icons">exit_to_app</i></a>
+          </li>
+          <li class="nav-item not-auth" v-else>
+            <router-link to="/auth" class="nav-link" href="#">Log in / Sign up</router-link>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+
+    <main id="main" class="main">
+      <router-view :key="$route.path" />
+    </main>
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="flex-item">
+          <h3>Services</h3>
+          <ul>
+            <li><a href="#">Add project</a></li>
+            <li><a href="#">Get report on your project</a></li>
           </ul>
         </div>
-        <div class="aside-footer">
-          <template v-if="!user">
-            <div class="not-auth">
-              <div class="not-auth__text">Sign in with</div>
-              <a class="flex-link" href="/auth/facebook"><i class="flaticon-facebook"></i></a>
-              <a class="flex-link" href="/auth/google"><i class="flaticon-google"></i></a>
-            </div>
-          </template>
-          <template v-else>
-            <div class="auth">
-              <a href="#"><i class="material-icons">perm_identity</i> <span>user._id</span></a>
-            </div>
-          </template>
+        <div class="flex-item">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">Contacts</a></li>
+          </ul>
         </div>
-      </aside>
-      <main class="main">
-        <router-view :key="$route.path" />
-      </main>
-    </div>
+        <div class="flex-item">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#">Terms of service</a></li>
+          </ul>
+        </div>
+        <div class="flex-item">
+          <h3>Follow us</h3>
+          <ul>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Telegram</a></li>
+            <li><a href="#">Email</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2017 Dolphin Blockchain Intelligence B.V.</p>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -47,6 +93,7 @@ export default {
   }),
   beforeCreate: function () {
     this.$store.dispatch('LOAD_REGISTER')
+    this.$store.dispatch('LOAD_USER')
   },
   computed: {
     ...mapState([
@@ -66,13 +113,73 @@ export default {
 }
 </script>
 
+<style lang="sass" scoped>
+.navbar
+  margin-bottom: 20px
+.brand
+  display: flex
+  justify-content: flex-start
+  align-items: center
+  img
+    width: 40px
+    margin-right: 8px
+  span
+    font-family: "Roboto", sans-serif
+    font-weight: normal
+    font-size: 2.1rem
+    color: #333
+.social img
+  height: 24px
+  width: 24px
+
+.footer
+  border-top: 1px solid #eee
+  .footer-top
+    padding: 20px
+    display: flex
+    justify-content: space-around
+    border-bottom: 1px solid #eee
+    .flex-item
+      ul
+        list-style: none
+        margin: 0
+        padding: 0
+        text-align: left
+  .footer-bottom
+    padding: 20px
+    text-align: center
+    p
+      margin: 0
+</style>
 
 <style lang="sass">
+@import 'src/assets/sticky-footer.sass'
 .hide
   display: none !important
+
 .content-wrapper
-  padding: 0 14px
+  padding: 0 16px
+
+main
+  &.center
+    display: flex
+    justify-content: center
+    align-items: center
+
+.not-auth, .auth
+  margin-left: 16px
+  display: flex
+  align-items: center
+  justify-content: center
+  vertical-align: middle
+  a
+    display: flex
+    align-items: center
+    justify-content: center
+    vertical-align: middle
+    text-decoration: none
 </style>
+
 <style lang="sass" scoped>
 .layout
   position: relative
@@ -131,19 +238,6 @@ export default {
       position: absolute
       right: -28px
       top: 10px
-    .brand
-      display: flex
-      flex-direction: column
-      justify-content: center
-      align-items: center
-      margin: 20px 0
-      img
-        width: 100px
-      span
-        font-family: "Roboto", sans-serif
-        font-weight: normal
-        font-size: 2.1rem
-        color: #333
     & > .nav.collection
       border: 0
       a
@@ -152,4 +246,5 @@ export default {
     padding-left: 0
     min-height: 100vh
     transition: padding-left 0.3s
+
 </style>

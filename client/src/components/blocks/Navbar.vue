@@ -4,7 +4,6 @@
       <div class="top-bar">
         <div class="top-bar-left">
           <ul class="menu">
-            <li><a href="#" @click.prevent="asideToggle()" class="asideToggle"><i class="material-icons">menu</i></a></li>
             <li class="menu-text page-title"><slot name="page-title"></slot></li>
           </ul>
         </div>
@@ -36,16 +35,24 @@ nav
   background: white
   height: 64px
   max-height: 64px
+  // margin-bottom: 20px
   .nav-wrapper
-    border-bottom: 1px solid #eee
-    display: flex
+    // display: flex
+    margin: 0 16px
     .top-bar
       background: white
       width: 100%
-      padding: 0 7px
+      // padding: 0 7px
+      display: flex
+      justify-content: center
+      align-items: center
       ul
         background: white
+        margin: 0
+        padding: 0
+        list-style: none
       .top-bar-left
+        flex: 1 0 auto
         .menu
           align-items: center
 
@@ -60,14 +67,13 @@ nav
   font-weight: normal
 
 .button-customize
-  display: flex
-  align-items: center
-  padding: 23px
-  border-left: 1px solid #eee
-  background: none
-  color: rgb(10, 10, 10)
-  font-size: 1rem
-  .material-icons
-    font-size: 1rem
-    margin-right: 7px
+  line-height: 1em
+  // display: flex
+  // align-items: center
+  // padding: 23px
+  // background: none
+  // color: rgb(10, 10, 10)
+  // font-size: 1rem
+  // .material-icons
+  //   font-size: 1.4rem
 </style>

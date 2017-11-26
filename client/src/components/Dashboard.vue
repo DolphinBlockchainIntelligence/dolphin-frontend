@@ -1,8 +1,17 @@
 <template>
   <div>
+    <div v-if="!user._id" class="not-auth-intro">
+      <img src="../../static/img/dolphin.png" alt="" height="100">
+      <div>
+        <h3>Dolphin Blockchain Intelligence</h3>
+        <p>The first marketplace based on a smart-contract and a platform for collaborative crypto-asset investment analysis</p>
+      </div>
+    </div>
     <Navbar>
       <span slot="page-title">Dashboard</span>
-      <li slot="nav"><a href="#" class="button button-customize" @click.prevent="toggleSettings($event)"><i class="material-icons left">settings</i><span>Customize</span></a></li>
+      <li slot="nav">
+        <a href="#" class="btn btn-outline-info button-customize" @click.prevent="toggleSettings($event)"><i class="material-icons left">settings</i></a>
+      </li>
     </Navbar>
     <div class="content-wrapper">
       <grid-layout
@@ -61,8 +70,12 @@ export default {
   },
   computed: {
     ...mapState([
-      'widgets'
+      'widgets',
+      'user'
     ])
+  },
+  mounted: function() {
+    document.getElementById('main').classList.remove('center')
   },
   methods: {
     resizedWidget: () => {
@@ -95,6 +108,14 @@ export default {
 </script>
 
 <style lang="sass">
+.not-auth-intro
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 16px
+  img
+    margin-right: 30px
+
 .vue-grid-layout
   margin: 0 -10px 100px
 .vue-grid-item
