@@ -9,7 +9,7 @@
     </div>
     <Navbar>
       <span slot="page-title">Dashboard</span>
-      <li slot="nav">
+      <li slot="nav" v-if="user._id">
         <a href="#" class="btn btn-outline-info button-customize" @click.prevent="toggleSettings($event)"><i class="material-icons left">settings</i></a>
       </li>
     </Navbar>
