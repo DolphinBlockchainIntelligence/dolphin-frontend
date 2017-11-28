@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!user._id" class="not-auth-intro">
+    <div v-if="!user" class="not-auth-intro">
       <img src="../../static/img/dolphin.png" alt="" height="100">
       <div>
         <h3>Dolphin Blockchain Intelligence</h3>
@@ -9,7 +9,7 @@
     </div>
     <Navbar>
       <span slot="page-title">Dashboard</span>
-      <li slot="nav" v-if="user._id">
+      <li slot="nav" v-if="user">
         <a href="#" class="btn btn-outline-info button-customize" @click.prevent="toggleSettings($event)"><i class="material-icons left">settings</i></a>
       </li>
     </Navbar>

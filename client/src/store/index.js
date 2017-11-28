@@ -9,7 +9,7 @@ const store = new Vuex.Store({
     assets: [],
     widgets: [],
     pages: [],
-    user: undefined
+    user: false
   },
   actions: {
     LOAD_REGISTER: function ({ commit }) {

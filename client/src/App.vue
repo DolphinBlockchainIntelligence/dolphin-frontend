@@ -11,10 +11,10 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Listing</a>
+            <router-link to="/listing" class="nav-link" href="#">Listing</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Calendar</a>
+            <router-link to="/calendar" class="nav-link" href="#">Calendar</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">About</a>
@@ -27,7 +27,7 @@
           <li class="nav-item">
             <a class="btn btn-outline-info" href="https://presale.dolphin.bi/orderreport">Order an ICO report</a>
           </li>
-          <li class="nav-item auth" v-if="user._id">
+          <li class="nav-item auth" v-if="user">
             <a href="#"><span>{{user._id}}</span></a>
             <a href="#"><i class="material-icons">exit_to_app</i></a>
           </li>

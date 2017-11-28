@@ -3,7 +3,8 @@ import Router from 'vue-router'
 import Dashboard from '@/components/Dashboard'
 import Auth from '@/components/Auth'
 import Page from '@/components/Page'
-
+import Listing from '@/components/Listing'
+import Calendar from '@/components/Calendar'
 
 Vue.use(Router)
 export default new Router({
@@ -22,6 +23,20 @@ export default new Router({
       path: '/page/:id/',
       name: 'Page',
       component: Page,
+      props: true,
+      meta: { reuse: false }
+    },
+    {
+      path: '/listing',
+      name: 'Listing',
+      component: Listing,
+      props: true,
+      meta: { reuse: false }
+    },
+    {
+      path: '/calendar',
+      name: 'Calendar',
+      component: Calendar,
       props: true,
       meta: { reuse: false }
     }
