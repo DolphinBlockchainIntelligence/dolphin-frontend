@@ -1,6 +1,6 @@
 <template>
   <div class="app" id="app">
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <nav class="navbar navbar-expand-lg navbar-light">
       <router-link to="/" class="navbar-brand">
         <img src="../static/img/dolphin.png" height="30" class="d-inline-block align-top" alt="">
         Dolphin BI
@@ -116,6 +116,8 @@ export default {
 <style lang="sass" scoped>
 .navbar
   margin-bottom: 20px
+  background: white
+  border-bottom: 1px solid #eee
 .brand
   display: flex
   justify-content: flex-start

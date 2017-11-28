@@ -27,8 +27,8 @@
             <td>{{project.ticker}}</td>
             <td>{{project.stage}}</td>
             <td>{{project.status}}</td>
-            <td>{{project.startDate}}</td>
-            <td>{{project.endDate}}</td>
+            <td>{{project.start}}</td>
+            <td>{{project.end}}</td>
             <td>{{project.tokenToSell}}</td>
             <td>{{project.totalTokensPercent}}</td>
           </tr>
@@ -50,8 +50,8 @@ export default {
         'ticker': 'DNT',
         'stage': 'Presale',
         'status': 'Ongoing',
-        'startDate': '2017-11-28T11:58:19.870Z',
-        'endDate': '2017-11-28T11:58:19.870Z',
+        'start': '2017-11-12',
+        'end': '2017-11-28',
         'tokenToSell': '1000000',
         'totalTokensPercent': '100%',
       },
@@ -62,8 +62,8 @@ export default {
         'ticker': 'MOD',
         'stage': 'ICO',
         'status': 'Upcoming',
-        'startDate': '2017-11-28T11:58:19.870Z',
-        'endDate': '2017-11-28T11:58:19.870Z',
+        'start': '2017-11-12',
+        'end': '2017-11-28',
         'tokenToSell': '1000000',
         'totalTokensPercent': '100%',
       },
@@ -74,8 +74,8 @@ export default {
         'ticker': 'ADST',
         'stage': 'ICO',
         'status': 'Past',
-        'startDate': '2017-11-28T11:58:19.870Z',
-        'endDate': '2017-11-28T11:58:19.870Z',
+        'start': '2017-11-12',
+        'end': '2017-11-28',
         'tokenToSell': '1000000',
         'totalTokensPercent': '100%',
       }
