@@ -7,7 +7,7 @@
         <a href="/auth/google" class="btn btn-primary btn-lg btn-block" style="background: #d8153b">Google</a>
       </div>
       <br>
-      <div class="alert alert-danger" role="alert">
+      <div class="alert alert-danger hide" role="alert">
         This is a danger alert—check it out!
       </div>
     </div>

@@ -114,10 +114,14 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+body
+  rgba(0, 0, 0, 0.01)
 .navbar
   margin-bottom: 20px
   background: white
   border-bottom: 1px solid #eee
+  box-shadow: 0 0 50px 10px rgba(0,0,0,.05)
+
 .brand
   display: flex
   justify-content: flex-start
@@ -136,6 +140,7 @@ export default {
 
 .footer
   border-top: 1px solid #eee
+  box-shadow: 0 0 50px 10px rgba(0,0,0,.05)
   .footer-top
     padding: 20px
     display: flex

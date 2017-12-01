@@ -128,6 +128,7 @@ export default {
   bottom: 0
   background: white
   overflow: hidden
+  box-shadow: 0 0 50px 10px rgba(0,0,0,.05)
   .widget-header
     border-bottom: 1px solid #ddd
     height: 30px
