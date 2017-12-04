@@ -49,6 +49,10 @@ module.exports = {
       '/private/user/': {
         target: 'https://beta.dolphin.bi',
         changeOrigin: true
+      },
+      '/base': {
+        target: 'http://new.petrusenko.pro',
+        changeOrigin: true
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

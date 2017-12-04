@@ -1,14 +1,36 @@
 <template>
   <div>
     <div v-if="!user" class="not-auth-intro">
-      <img src="../../static/img/dolphin.png" alt="" height="100">
       <div>
-        <h3>Dolphin Blockchain Intelligence</h3>
-        <p>The first marketplace based on a smart-contract and a platform for collaborative crypto-asset investment analysis</p>
+        <h4>The first marketplace based on a smart-contract and a platform for collaborative crypto-asset investment analysis</h4>
+        <br>
       </div>
+      <div class="features">
+        <div class="feature">
+          <img src="/static/img/features/stopwatch.png" alt="">
+          <h3>Enhanced Analysis Speed</h3>
+          <p>The platform combines speed of machine learning algorithms with versatility and depth of expert evaluation to provide subscribers with tools for a swifter and more flexible decision-making process</p>
+        </div>
+        <div class="feature">
+          <img src="/static/img/features/network.png" alt="">
+          <h3>Collaboration</h3>
+          <p>The platform enables collaboration and knowledge sharing between participants, allowing for opinion variety and broadening the scope of analysis</p>
+        </div>
+        <div class="feature">
+          <img src="/static/img/features/customer.png" alt="">
+          <h3>Expert rating system</h3>
+          <p>A transparent and attack-proof rating system allows the experts to make a profit out of their contributions</p>
+        </div>
+        <div class="feature">
+          <img src="/static/img/features/settings.png" alt="">
+          <h3>Custom widgets</h3>
+          <p>Independent authors can create their own widgets and deploy them on the platform, enriching it with new features and simultaneously making profit</p>
+        </div>
+      </div>
+      <a href="https://presale.dolphin.bi/" target="_blank" class="read-more">read more</a>
     </div>
     <Navbar>
-      <span slot="page-title">Dashboard</span>
+      <span slot="page-title">Market overview</span>
       <li slot="nav" v-if="user">
         <a href="#" class="btn btn-outline-info button-customize" @click.prevent="toggleSettings($event)"><i class="material-icons left">settings</i></a>
       </li>
@@ -112,9 +134,32 @@ export default {
   display: flex
   justify-content: center
   align-items: center
-  padding: 16px
-  img
-    margin-right: 30px
+  margin: 16px
+  background: #ddd
+  flex-direction: column
+  margin-bottom: 30px
+  padding: 40px
+  box-shadow: 0 0 20px 5px rgba(0,0,0,.05)
+  .features
+    display: flex
+    justify-content: center
+    align-items: center
+    align-items: left
+    .feature
+      display: flex
+      justify-content: center
+      align-items: center
+      flex-direction: column
+      flex: 1 1 25%
+      &+.feature
+        margin-left: 30px
+    img
+      height: 100px
+      margin-bottom: 30px
+  .read-more
+    display: block
+    text-align: right
+    width: 100%
 
 .vue-grid-layout
   margin: 0 -10px 100px
@@ -128,7 +173,7 @@ export default {
   bottom: 0
   background: white
   overflow: hidden
-  box-shadow: 0 0 50px 10px rgba(0,0,0,.05)
+  box-shadow: 0 0 5px 5px rgba(0,0,0,.05)
   .widget-header
     border-bottom: 1px solid #ddd
     height: 30px

@@ -2,8 +2,13 @@
   <div class="app" id="app">
     <nav class="navbar navbar-expand-lg navbar-light">
       <router-link to="/" class="navbar-brand">
-        <img src="../static/img/dolphin.png" height="30" class="d-inline-block align-top" alt="">
-        Dolphin BI
+        <div class="brand-logo">
+          <img src="../static/img/dolphin.png" height="50" class="d-inline-block align-top" alt="">
+        </div>
+        <div class="brand-names">
+          <div class="brand-name">Dolphin</div>
+          <div class="brand-subname">blockchain intelligence</div>
+        </div>
       </router-link>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -19,12 +24,12 @@
           <li class="nav-item">
             <a class="nav-link" href="#">About</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Add project</a>
-          </li>
         </ul>
         <ul class="navbar-nav">
-          <li class="nav-item">
+          <li class="nav-item nav-btn">
+            <a class="btn btn-outline-info" href="#">Add project</a>
+          </li>
+          <li class="nav-item nav-btn">
             <a class="btn btn-outline-info" href="https://presale.dolphin.bi/orderreport">Order an ICO report</a>
           </li>
           <li class="nav-item auth" v-if="user">
@@ -113,34 +118,53 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 body
-  rgba(0, 0, 0, 0.01)
+  font-family: 'Roboto', sans-serif
+</style>
+
+<style lang="sass" scoped>
 .navbar
   margin-bottom: 20px
   background: white
   border-bottom: 1px solid #eee
-  box-shadow: 0 0 50px 10px rgba(0,0,0,.05)
-
-.brand
+  box-shadow: 0 0 20px 5px rgba(0,0,0,.05)  
+.navbar-brand
   display: flex
-  justify-content: flex-start
+  justify-content: center
   align-items: center
-  img
-    width: 40px
-    margin-right: 8px
-  span
-    font-family: "Roboto", sans-serif
-    font-weight: normal
-    font-size: 2.1rem
-    color: #333
+  .brand-logo
+    margin-right: 16px
+  .brand-names
+    display: flex
+    flex-direction: column
+    justify-content: space-around
+  .brand-name
+    font-size: 36px
+    line-height: 1.1em
+  .brand-subname
+    font-size: 12px
+    line-height: 1em
+
+// .brand
+//   display: flex
+//   justify-content: flex-start
+//   align-items: center
+//   img
+//     width: 40px
+//     margin-right: 16px
+  // span
+  //   font-family: "Roboto", sans-serif
+  //   font-weight: normal
+  //   font-size: 2.1rem
+  //   color: #333
 .social img
   height: 24px
   width: 24px
 
 .footer
   border-top: 1px solid #eee
-  box-shadow: 0 0 50px 10px rgba(0,0,0,.05)
+  box-shadow: 0 0 20px 5px rgba(0,0,0,.05)
   .footer-top
     padding: 20px
     display: flex
@@ -172,6 +196,10 @@ main
     display: flex
     justify-content: center
     align-items: center
+
+.nav-btn
+  &+.nav-btn
+    margin-left: 16px
 
 .not-auth, .auth
   margin-left: 16px

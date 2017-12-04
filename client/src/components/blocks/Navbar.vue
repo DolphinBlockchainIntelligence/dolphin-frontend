@@ -63,7 +63,7 @@ nav
 
 .page-title
   padding-left: 0
-  font-size: 2.1rem
+  font-size: 24px
   font-weight: normal
 
 .button-customize

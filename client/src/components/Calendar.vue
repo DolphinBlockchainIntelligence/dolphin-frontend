@@ -24,8 +24,8 @@
           <tr v-for="project in projects">
             <td><img :src="project.logo" :alt="project.name"></td>
             <td>{{project.name}}</td>
-            <td>{{project.ticker}}</td>
-            <td>{{project.stage}}</td>
+            <td>{{project.symbol}}</td>
+            <td>{{project.saletype}}</td>
             <td>{{project.status}}</td>
             <td>{{project.start}}</td>
             <td>{{project.end}}</td>
@@ -39,50 +39,58 @@
 
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'calendar',
   data: () => ({
     projects: [
-      {
-        '_id': 'sdf8i69',
-        'logo': 'https://www.tokendata.io/assets/logos/district0x.png',
-        'name': 'District0x',
-        'ticker': 'DNT',
-        'stage': 'Presale',
-        'status': 'Ongoing',
-        'start': '2017-11-12',
-        'end': '2017-11-28',
-        'tokenToSell': '1000000',
-        'totalTokensPercent': '100%',
-      },
-      {
-        '_id': 'sdf8i70',
-        'logo': 'https://www.tokendata.io/assets/logos/modum.png',
-        'name': 'Modum',
-        'ticker': 'MOD',
-        'stage': 'ICO',
-        'status': 'Upcoming',
-        'start': '2017-11-12',
-        'end': '2017-11-28',
-        'tokenToSell': '1000000',
-        'totalTokensPercent': '100%',
-      },
-      {
-        '_id': 'sdf8i7sdfhh0',
-        'logo': 'https://www.tokendata.io/assets/logos/adshares.png',
-        'name': 'Adshares',
-        'ticker': 'ADST',
-        'stage': 'ICO',
-        'status': 'Past',
-        'start': '2017-11-12',
-        'end': '2017-11-28',
-        'tokenToSell': '1000000',
-        'totalTokensPercent': '100%',
-      }
+      // {
+      //   '_id': 'sdf8i69',
+      //   'logo': 'https://www.tokendata.io/assets/logos/district0x.png',
+      //   'name': 'District0x',
+      //   'ticker': 'DNT',
+      //   'stage': 'Presale',
+      //   'status': 'Ongoing',
+      //   'start': '2017-11-12',
+      //   'end': '2017-11-28',
+      //   'tokenToSell': '1000000',
+      //   'totalTokensPercent': '100%',
+      // },
+      // {
+      //   '_id': 'sdf8i70',
+      //   'logo': 'https://www.tokendata.io/assets/logos/modum.png',
+      //   'name': 'Modum',
+      //   'ticker': 'MOD',
+      //   'stage': 'ICO',
+      //   'status': 'Upcoming',
+      //   'start': '2017-11-12',
+      //   'end': '2017-11-28',
+      //   'tokenToSell': '1000000',
+      //   'totalTokensPercent': '100%',
+      // },
+      // {
+      //   '_id': 'sdf8i7sdfhh0',
+      //   'logo': 'https://www.tokendata.io/assets/logos/adshares.png',
+      //   'name': 'Adshares',
+      //   'ticker': 'ADST',
+      //   'stage': 'ICO',
+      //   'status': 'Past',
+      //   'start': '2017-11-12',
+      //   'end': '2017-11-28',
+      //   'tokenToSell': '1000000',
+      //   'totalTokensPercent': '100%',
+      // }
     ]
   }),
   mounted: function() {
     document.getElementById('main').classList.remove('center')
+    axios.get('/base/events/json', {
+    }).then((response) => {
+      this.projects = response.data.items
+    }, (err) => {
+      console.log(err)
+    })
   }
 }
 </script>
