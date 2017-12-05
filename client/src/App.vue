@@ -146,30 +146,23 @@ body
     font-size: 12px
     line-height: 1em
 
-// .brand
-//   display: flex
-//   justify-content: flex-start
-//   align-items: center
-//   img
-//     width: 40px
-//     margin-right: 16px
-  // span
-  //   font-family: "Roboto", sans-serif
-  //   font-weight: normal
-  //   font-size: 2.1rem
-  //   color: #333
 .social img
   height: 24px
   width: 24px
 
 .footer
-  border-top: 1px solid #eee
+  // border-top: 1px solid #eee
   box-shadow: 0 0 20px 5px rgba(0,0,0,.05)
+  // background: #ddd
+  background: #5f5f5f
+  color: white
+  a
+    color: white
   .footer-top
     padding: 20px
     display: flex
     justify-content: space-around
-    border-bottom: 1px solid #eee
+    border-bottom: 1px solid #7f7f7f
     .flex-item
       ul
         list-style: none

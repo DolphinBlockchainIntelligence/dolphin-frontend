@@ -2,8 +2,7 @@
   <div>
     <div v-if="!user" class="not-auth-intro">
       <div>
-        <h4>The first marketplace based on a smart-contract and a platform for collaborative crypto-asset investment analysis</h4>
-        <br>
+        <h4 class="title">The first marketplace based on a smart-contract and a platform for collaborative crypto-asset investment analysis</h4>
       </div>
       <div class="features">
         <div class="feature">
@@ -134,12 +133,17 @@ export default {
   display: flex
   justify-content: center
   align-items: center
-  margin: 16px
+  margin: 0
+  margin-top: -20px
   background: #ddd
   flex-direction: column
   margin-bottom: 30px
-  padding: 40px
+  padding: 16px
+  // background: #ffe891
   box-shadow: 0 0 20px 5px rgba(0,0,0,.05)
+  .title
+    font-size: 20px
+    margin-bottom: 18px
   .features
     display: flex
     justify-content: center
@@ -153,9 +157,11 @@ export default {
       flex: 1 1 25%
       &+.feature
         margin-left: 30px
+      h3
+        font-size: 18px
     img
-      height: 100px
-      margin-bottom: 30px
+      height: 60px
+      margin-bottom: 18px
   .read-more
     display: block
     text-align: right
@@ -164,7 +170,7 @@ export default {
 .vue-grid-layout
   margin: 0 -10px 100px
 .vue-grid-item
-  border: 1px solid #ddd
+  // border: 1px solid #ddd
 .widget
   position: absolute
   top: 0
@@ -173,7 +179,7 @@ export default {
   bottom: 0
   background: white
   overflow: hidden
-  box-shadow: 0 0 5px 5px rgba(0,0,0,.05)
+  box-shadow: 0 0 10px 5px rgba(0,0,0,.05)
   .widget-header
     border-bottom: 1px solid #ddd
     height: 30px
