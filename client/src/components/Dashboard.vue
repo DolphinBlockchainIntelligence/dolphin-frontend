@@ -8,22 +8,22 @@
         <div class="feature">
           <img src="/static/img/features/stopwatch.png" alt="">
           <h3>Enhanced Analysis Speed</h3>
-          <p>The platform combines speed of machine learning algorithms with versatility and depth of expert evaluation to provide subscribers with tools for a swifter and more flexible decision-making process</p>
+          <p>The platform combines speed of machine learning algorithms with versatility and depth of expert evaluation to provide subscribers with tools for a swifter and more flexible <nobr>decision-making</nobr> process</p>
         </div>
         <div class="feature">
           <img src="/static/img/features/network.png" alt="">
           <h3>Collaboration</h3>
-          <p>The platform enables collaboration and knowledge sharing between participants, allowing for opinion variety and broadening the scope of analysis</p>
+          <p>The platform enables collaboration and knowledge sharing between participants, allowing for opinion variety and broadening the scope of analysis</p>
         </div>
         <div class="feature">
           <img src="/static/img/features/customer.png" alt="">
           <h3>Expert rating system</h3>
-          <p>A transparent and attack-proof rating system allows the experts to make a profit out of their contributions</p>
+          <p>A transparent and <nobr>attack-proof</nobr> rating system allows the experts to make a profit out of their contributions</p>
         </div>
         <div class="feature">
           <img src="/static/img/features/settings.png" alt="">
           <h3>Custom widgets</h3>
-          <p>Independent authors can create their own widgets and deploy them on the platform, enriching it with new features and simultaneously making profit</p>
+          <p>Independent authors can create their own widgets and deploy them on the platform, enriching it with new features and simultaneously making profit</p>
         </div>
       </div>
       <a href="https://presale.dolphin.bi/" target="_blank" class="read-more">read more</a>
@@ -155,6 +155,7 @@ export default {
       align-items: center
       flex-direction: column
       flex: 1 1 25%
+      text-align: justify
       &+.feature
         margin-left: 30px
       h3

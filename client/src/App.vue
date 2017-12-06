@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-light">
       <router-link to="/" class="navbar-brand">
         <div class="brand-logo">
-          <img src="../static/img/dolphin.png" height="50" class="d-inline-block align-top" alt="">
+          <img src="/static/img/dolphin.png" class="d-inline-block align-top" alt="">
         </div>
         <div class="brand-names">
           <div class="brand-name">Dolphin</div>
@@ -33,8 +33,8 @@
             <a class="btn btn-outline-info" href="https://presale.dolphin.bi/orderreport">Order an ICO report</a>
           </li>
           <li class="nav-item auth" v-if="user">
-            <a href="#"><span>{{user._id}}</span></a>
-            <a href="#"><i class="material-icons">exit_to_app</i></a>
+            <a href="#"><span>{{user.name}}</span></a>
+            <a href="#" @click.prevent="logout()"><i class="material-icons">exit_to_app</i></a>
           </li>
           <li class="nav-item not-auth" v-else>
             <router-link to="/auth" class="nav-link" href="#">Log in / Sign up</router-link>
@@ -113,6 +113,9 @@ export default {
     },
     asideToggle() {
       document.getElementById('layout').classList.toggle('asideOpen')
+    },
+    logout() {
+      
     }
   }
 }
@@ -135,6 +138,8 @@ body
   align-items: center
   .brand-logo
     margin-right: 16px
+    img
+      height: 47px
   .brand-names
     display: flex
     flex-direction: column
@@ -142,9 +147,15 @@ body
   .brand-name
     font-size: 36px
     line-height: 1.1em
+    font-weight: 600
+    position: relative
+    top: -2px
   .brand-subname
-    font-size: 12px
-    line-height: 1em
+    font-size: 11.7px
+    line-height: 1.1em
+    position: relative
+    left: 2px
+    bottom: 0px
 
 .social img
   height: 24px
@@ -209,70 +220,69 @@ main
 </style>
 
 <style lang="sass" scoped>
-.layout
-  position: relative
-  &.asideOpen
-    aside
-      left: 0 !important
-    main
-      padding-left: 300px
-  aside
-    position: fixed
-    display: flex
-    flex-direction: column
-    height: 100vh
-    width: 300px
-    top: 0
-    left: -300px
-    transition: left 0.3s
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)
-    .aside-body
-      flex: 1 0 auto
-      ul
-        li
-          border-bottom: 1px solid #eee
-          border-top: 1px solid #eee
-          a
-            padding: 21px 14px
-            &:hover, &:focus
-              background: #f2f2f2
-          &+li
-            border-top: 0px solid #eee
-        .get-tokens
-          a
-            color: #fff
-            background: #1779ba
-            &:hover, &:focus
-              background: #1468a0
-    .aside-footer
-      .not-auth__text
-        flex: 1 0 auto
-        padding: 21px 14px
-        text-align: center
-      .not-auth, .auth
-        display: flex
-        align-items: center
-        justify-content: center
-        vertical-align: middle
-        border-top: 1px solid #eee
-        .flex-link
-          padding: 21px 14px
-          flex: 1 0 auto
-          border-left: 1px solid #eee
-          color: #333
-          &:hover, &:focus
-            background: #f2f2f2
-    .asideToggle
-      position: absolute
-      right: -28px
-      top: 10px
-    & > .nav.collection
-      border: 0
-      a
-        color: #333
-  main
-    padding-left: 0
-    min-height: 100vh
-    transition: padding-left 0.3s
-
+  // .layout
+  //   position: relative
+  //   &.asideOpen
+  //     aside
+  //       left: 0 !important
+  //     main
+  //       padding-left: 300px
+  //   aside
+  //     position: fixed
+  //     display: flex
+  //     flex-direction: column
+  //     height: 100vh
+  //     width: 300px
+  //     top: 0
+  //     left: -300px
+  //     transition: left 0.3s
+  //     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)
+  //     .aside-body
+  //       flex: 1 0 auto
+  //       ul
+  //         li
+  //           border-bottom: 1px solid #eee
+  //           border-top: 1px solid #eee
+  //           a
+  //             padding: 21px 14px
+  //             &:hover, &:focus
+  //               background: #f2f2f2
+  //           &+li
+  //             border-top: 0px solid #eee
+  //         .get-tokens
+  //           a
+  //             color: #fff
+  //             background: #1779ba
+  //             &:hover, &:focus
+  //               background: #1468a0
+  //     .aside-footer
+  //       .not-auth__text
+  //         flex: 1 0 auto
+  //         padding: 21px 14px
+  //         text-align: center
+  //       .not-auth, .auth
+  //         display: flex
+  //         align-items: center
+  //         justify-content: center
+  //         vertical-align: middle
+  //         border-top: 1px solid #eee
+  //         .flex-link
+  //           padding: 21px 14px
+  //           flex: 1 0 auto
+  //           border-left: 1px solid #eee
+  //           color: #333
+  //           &:hover, &:focus
+  //             background: #f2f2f2
+  //     .asideToggle
+  //       position: absolute
+  //       right: -28px
+  //       top: 10px
+  //     & > .nav.collection
+  //       border: 0
+  //       a
+  //         color: #333
+  //   main
+  //     padding-left: 0
+  //     min-height: 100vh
+  //     transition: padding-left 0.3s
 </style>
