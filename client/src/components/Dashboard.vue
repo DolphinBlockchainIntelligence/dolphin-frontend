@@ -6,22 +6,22 @@
       </div>
       <div class="features">
         <div class="feature">
-          <img src="/static/img/features/stopwatch.png" alt="">
+          <a href="https://presale.dolphin.bi/#keyfeatures" target="_blank"><img src="/static/img/features/stopwatch.png" alt=""></a>
           <h3>Enhanced Analysis Speed</h3>
-          <p>The platform combines speed of machine learning algorithms with versatility and depth of expert evaluation to provide subscribers with tools for a swifter and more flexible <nobr>decision-making</nobr> process</p>
+          <p>We combine speed of machine learning algorithms with versatility and depth of expert knowledge to provide swifter and more flexible <nobr>decision-making</nobr> process</p>
         </div>
         <div class="feature">
-          <img src="/static/img/features/network.png" alt="">
+          <a href="https://presale.dolphin.bi/#keyfeatures" target="_blank"><img src="/static/img/features/network.png" alt=""></a>
           <h3>Collaboration</h3>
-          <p>The platform enables collaboration and knowledge sharing between participants, allowing for opinion variety and broadening the scope of analysis</p>
+          <p>We enables collaboration and knowledge sharing between participants, allowing for opinion variety and broadening the scope of analysis</p>
         </div>
         <div class="feature">
-          <img src="/static/img/features/customer.png" alt="">
+          <a href="https://presale.dolphin.bi/#keyfeatures" target="_blank"><img src="/static/img/features/customer.png" alt=""></a>
           <h3>Expert rating system</h3>
           <p>A transparent and <nobr>attack-proof</nobr> rating system allows the experts to make a profit out of their contributions</p>
         </div>
         <div class="feature">
-          <img src="/static/img/features/settings.png" alt="">
+          <a href="https://presale.dolphin.bi/#keyfeatures" target="_blank"><img src="/static/img/features/settings.png" alt=""></a>
           <h3>Custom widgets</h3>
           <p>Independent authors can create their own widgets and deploy them on the platform, enriching it with new features and simultaneously making profit</p>
         </div>

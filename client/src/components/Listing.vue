@@ -32,9 +32,9 @@
           <tr v-for="project in projects">
             <td><img :src="project.logo" :alt="project.name"></td>
             <td>{{project.name}}</td>
-            <td>{{project.ticker}}</td>
+            <td>{{project.symbol}}</td>
             <td>{{project.stage}}</td>
-            <td>{{project.industry}}</td>
+            <td>{{project.category}}</td>
             <td>{{project.description}}</td>
           </tr>
       </tbody>
@@ -44,32 +44,42 @@
 
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'listing',
   data: () => ({
-    projects: [
-      {
-        '_id': 'sdf8i69',
-        'logo': 'https://www.tokendata.io/assets/logos/district0x.png',
-        'name': 'District0x',
-        'ticker': 'DNT',
-        'stage': 'Died',
-        'industry': 'Platform',
-        'description': 'Network of decentralized markets and communities'
-      },
-      {
-        '_id': 'sdf8i70',
-        'logo': 'https://www.tokendata.io/assets/logos/modum.png',
-        'name': 'Modum',
-        'ticker': 'MOD',
-        'stage': 'Died',
-        'industry': 'Market',
-        'description': 'Data integrity for supply chain operations'
-      }
-    ]
+    projects: []
+    // projects: [
+    //   {
+    //     '_id': 'sdf8i69',
+    //     'logo': 'https://www.tokendata.io/assets/logos/district0x.png',
+    //     'name': 'District0x',
+    //     'ticker': 'DNT',
+    //     'stage': 'Died',
+    //     'industry': 'Platform',
+    //     'description': 'Network of decentralized markets and communities'
+    //   },
+    //   {
+    //     '_id': 'sdf8i70',
+    //     'logo': 'https://www.tokendata.io/assets/logos/modum.png',
+    //     'name': 'Modum',
+    //     'ticker': 'MOD',
+    //     'stage': 'Died',
+    //     'industry': 'Market',
+    //     'description': 'Data integrity for supply chain operations'
+    //   }
+    // ]
   }),
   mounted: function() {
     document.getElementById('main').classList.remove('center')
+    // axios.get('/base/json?page=1', {
+    axios.get('/base/json', {
+    }).then((response) => {
+      this.projects = response.data.items
+    }, (err) => {
+      console.log(err)
+    })
   }
 }
 </script>
