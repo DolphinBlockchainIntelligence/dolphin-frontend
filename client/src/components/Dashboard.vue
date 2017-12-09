@@ -35,6 +35,23 @@
       </li>
     </Navbar>
     <div class="content-wrapper">
+      <!-- <div v-if="!user">
+        <div v-for="widget in widgets" class="widget" :key="widget.id">
+          <div class="widget-header">
+            <div class="title">{{widget.title}}</div>
+            <div class="actions">
+              <a href="#"><i class="material-icons" @click.prevent="showSettings($event)">settings</i></a>
+              <a href="#"><i class="material-icons" @click.prevent="showHelp($event)">help_outline</i></a>
+            </div>
+          </div>
+          <div class="iframe-mask hide"></div>
+          <div class="iframe-wrapper">
+            <iframe v-if="widget.id" :src="'/apps/'+widget.url+'?id='+widget.id" frameborder="0" />
+            <iframe v-else :src="'/apps/'+widget.url" frameborder="0" />
+          </div>
+        </div>
+        <div>пустой виджет</div>
+      </div> -->
       <grid-layout
         :layout="widgets"
         :col-num="12"
@@ -44,17 +61,17 @@
         :margin="[10, 10]"
         :use-css-transforms="true"
       >
-        <grid-item v-for="item in widgets"
-          :x="item.x"
-          :y="item.y"
-          :w="item.w"
-          :h="item.h"
-          :i="item.i"
-          :key="item.id"
+        <grid-item v-for="widget in widgets"
+          :x="widget.x"
+          :y="widget.y"
+          :w="widget.w"
+          :h="widget.h"
+          :i="widget.i"
+          :key="widget.id"
           @resized="resizedWidget()">
             <div class="widget">
               <div class="widget-header">
-                <div class="title">{{item.title}}</div>
+                <div class="title">{{widget.title}}</div>
                 <div class="actions">
                   <a href="#"><i class="material-icons" @click.prevent="showSettings($event)">settings</i></a>
                   <a href="#"><i class="material-icons" @click.prevent="showHelp($event)">help_outline</i></a>
@@ -62,11 +79,14 @@
               </div>
               <div class="iframe-mask hide"></div>
               <div class="iframe-wrapper">
-                <iframe v-if="item.id" :src="'/apps/'+item.url+'?id='+item.id" frameborder="0" />
-                <iframe v-else :src="'/apps/'+item.url" frameborder="0" />
+                <iframe v-if="widget.id" :src="'/apps/'+widget.url+'?id='+widget.id" frameborder="0" />
+                <iframe v-else :src="'/apps/'+widget.url" frameborder="0" />
               </div>
             </div>
         </grid-item>
+        <!-- <grid-item :key="blank" x="4" y="7">
+          <div>hello</div>
+        </grid-item> -->
       </grid-layout>
     </div>
   </div>

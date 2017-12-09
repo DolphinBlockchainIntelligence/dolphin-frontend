@@ -43,11 +43,11 @@ module.exports = {
         changeOrigin: true
       },
       '/auth': {
-        target: 'https://beta.dolphin.bi',
+        target: 'http://new.petrusenko.pro',
         changeOrigin: true
       },
       '/private/user/': {
-        target: 'https://beta.dolphin.bi',
+        target: 'http://new.petrusenko.pro',
         changeOrigin: true
       },
       '/base': {

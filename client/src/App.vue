@@ -92,6 +92,8 @@
 <script>
 import { mapState } from 'vuex'
 import routes from './router'
+import axios from 'axios'
+
 export default {
   name: 'app',
   data: () => ({
@@ -115,7 +117,13 @@ export default {
       document.getElementById('layout').classList.toggle('asideOpen')
     },
     logout() {
-      
+      axios.post('/auth/logout', {
+      }).then((response) => {
+        console.log(resonse.data)
+        this.$store.dispatch('LOAD_USER')
+      }, (err) => {
+        console.log(err)
+      })
     }
   }
 }
@@ -124,6 +132,10 @@ export default {
 <style lang="sass">
 body
   font-family: 'Roboto', sans-serif
+
+// helper
+.pointer
+  cursor: pointer
 </style>
 
 <style lang="sass" scoped>

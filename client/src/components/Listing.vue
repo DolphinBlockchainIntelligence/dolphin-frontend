@@ -3,7 +3,7 @@
     <h3>Listing</h3>
     <br>
     <form class="filters">
-      <input type="text" class="form-control search" id="search" placeholder="Search">
+      <input type="text" class="form-control search" id="search" placeholder="Search" v-model="searchQuery">
       <select name="stage" id="stage" class="form-control stage">
         <option value="All">Stage</option>
         <option value="Development">Development</option>
@@ -19,37 +19,42 @@
     <br>
     <table class="table table-hover">
       <thead class="thead-dark">
-          <tr>
-            <th scope="col">Logo</th>
-            <th scope="col">Name</th>
-            <th scope="col">Ticker</th>
-            <th scope="col">Stage</th>
-            <th scope="col">Industry</th>
-            <th scope="col">Description</th>
-          </tr>
+        <tr>
+          <th scope="col">Logo</th>
+          <th scope="col">Name</th>
+          <th scope="col">Ticker</th>
+          <th scope="col">Stage</th>
+          <th scope="col">Industry</th>
+          <th scope="col">Description</th>
+        </tr>
       </thead>
       <tbody>
-          <tr v-for="project in projects">
-            <td><img :src="project.logo" :alt="project.name"></td>
-            <td>{{project.name}}</td>
-            <td>{{project.symbol}}</td>
-            <td>{{project.stage}}</td>
-            <td>{{project.category}}</td>
-            <td>{{project.description}}</td>
-          </tr>
+        <tr v-for="project in projects" @click="goToPost(project._id, project.name)" :key="project._id" class="pointer">
+          <td><img :src="project.logo" :alt="project.name"></td>
+          <td>{{project.name}}</td>
+          <td>{{project.symbol}}</td>
+          <td>{{project.stage}}</td>
+          <td>{{project.category}}</td>
+          <td>{{project.description}}</td>
+        </tr>
       </tbody>
     </table>
+    <b-pagination size="md" :total-rows="totalRows" v-model="currentPage" :per-page="25" align="center"></b-pagination>
+    <br>
   </div>
 </template>
 
 
 <script>
 import axios from 'axios'
-
+import routes from '../router'
 export default {
   name: 'listing',
   data: () => ({
-    projects: []
+    projects: [],
+    currentPage: 1,
+    totalRows: 0,
+    searchQuery: ''
     // projects: [
     //   {
     //     '_id': 'sdf8i69',
@@ -73,13 +78,31 @@ export default {
   }),
   mounted: function() {
     document.getElementById('main').classList.remove('center')
-    // axios.get('/base/json?page=1', {
-    axios.get('/base/json', {
-    }).then((response) => {
-      this.projects = response.data.items
-    }, (err) => {
-      console.log(err)
-    })
+    this.getListing(1, '')
+  },
+  watch: {
+    searchQuery: function (query) {
+      this.getListing('1', this.searchQuery)
+      this.currentPage = 1
+    },
+    currentPage: function (page) {
+      this.getListing(page, this.searchQuery)
+    }
+  },
+  methods: {
+    goToPost: function(_id, name) {
+      routes.push({ name: 'Project', params: { _id: _id, name: name }})
+    },
+    getListing: function(page, searchQuery) {
+      axios.get('/base/json?page='+page+'&q='+searchQuery, {
+      }).then((response) => {
+        this.totalRows = response.data.info.total
+        this.projects = response.data.items
+        console.log(this.projects)
+      }, (err) => {
+        console.log(err)
+      })
+    }
   }
 }
 </script>

@@ -18,3 +18,6 @@ Vue.use(VueAnalytics, {
   id: 'UA-96940785-3',
   router
 })
+
+import BootstrapVue from 'bootstrap-vue'
+Vue.use(BootstrapVue)

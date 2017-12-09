@@ -5,6 +5,7 @@ import Auth from '@/components/Auth'
 import Page from '@/components/Page'
 import Listing from '@/components/Listing'
 import Calendar from '@/components/Calendar'
+import Project from '@/components/Project'
 
 Vue.use(Router)
 export default new Router({
@@ -37,6 +38,13 @@ export default new Router({
       path: '/calendar',
       name: 'Calendar',
       component: Calendar,
+      props: true,
+      meta: { reuse: false }
+    },
+    {
+      path: '/project/:_id/',
+      name: 'Project',
+      component: Project,
       props: true,
       meta: { reuse: false }
     }
