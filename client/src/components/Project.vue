@@ -1,8 +1,17 @@
 <template>
   <div class="project">
-    <h1>{{name}}</h1>
+    <div class="heading">
+      <h3 class="heading-text">{{project.current.name}} ({{project.current.symbol}})</h3>
+      <div class="heading-actions">
+        <a :href="'http://new.petrusenko.pro/base/edit/?'+_id" target="_blank" class="btn btn-primary" v-if="user.icobaseEditor">Edit</a>
+        <!-- <a :href="'http://new.petrusenko.pro/base/edit/?'+_id" target="_blank" class="btn btn-primary">Edit</a> -->
+      </div>
+    </div>
+    <br>
+    <p>Platform: {{project.current.platform}}</p>
+    <p>Stage</p>
+    <p>Type: {{project.current.sales[0].type}}</p>
     <p>{{project}}</p>
-    <a href="#" class="btn btn-primary" v-if="user.icobaseEditor">Edit</a>
   </div>
 </template>
 
@@ -14,7 +23,7 @@ export default {
   name: 'page',
   props: ['_id', 'name'],
   data: () => ({
-    project: []
+    project: {}
   }),
   mounted: function() {
     axios.get('/base/' + this._id, {

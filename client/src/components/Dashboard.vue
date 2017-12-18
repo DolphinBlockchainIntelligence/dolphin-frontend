@@ -60,6 +60,7 @@
         :is-resizable="isResizable"
         :margin="[10, 10]"
         :use-css-transforms="true"
+        @layout-updated="layoutUpdatedEvent"
       >
         <grid-item v-for="widget in widgets"
           :x="widget.x"
@@ -84,8 +85,8 @@
               </div>
             </div>
         </grid-item>
-        <!-- <grid-item :key="blank" x="4" y="7">
-          <div>hello</div>
+        <!-- <grid-item :key="blank" :x="authX" :y="authY" :w="authW" :h="authH" class="login-widget">
+          <div>Please <a href="/#/auth">log in</a> or <a href="/#/auth">sign up</a> to add widgets you want</div>
         </grid-item> -->
       </grid-layout>
     </div>
@@ -94,15 +95,22 @@
 
 
 <script>
+import { mapState } from 'vuex'
+import axios from 'axios'
 import Navbar from './blocks/Navbar'
 import { GridLayout, GridItem } from 'vue-grid-layout'
-import { mapState } from 'vuex'
 export default {
   name: 'dashboard',
   data: () => ({
     isDraggable: false,
     isResizable: false,
-    pageTitle: 'Dashboard'
+    pageTitle: 'Dashboard',
+    widgets: [],
+    pages: [],
+    authX: null,
+    authY: null,
+    authW: null,
+    authH: null
   }),
   components: {
     GridLayout,
@@ -111,14 +119,18 @@ export default {
   },
   computed: {
     ...mapState([
-      'widgets',
       'user'
     ])
   },
   mounted: function() {
     document.getElementById('main').classList.remove('center')
+    this.loadWidgets()
   },
   methods: {
+    layoutUpdatedEvent: function(newLayout){
+      // console.log("Updated layout: ", newLayout)
+      console.log("Updated layout:")
+    },
     resizedWidget: () => {
       window.dispatchEvent(new Event('resize'))
     },
@@ -143,6 +155,73 @@ export default {
     showHelp: function(event) {
       var widget = event.currentTarget.parentElement.parentElement.parentElement.parentElement
       widget.getElementsByTagName('iframe')[0].setAttribute('src', '/help.html')
+    },
+    loadWidgets: function(){
+      if (!this.user) {
+        axios.get('/dashboard/apps', {
+        }).then((response) => {
+          const defaultId = 583449
+          // widgets
+          var widgets = response.data.widgets
+          widgets = widgets.filter((item) => {
+            return (item.url.search(/sentiments/i) < 0)
+          })
+          widgets.forEach(function(item, i){
+            item.i = i.toString()
+            item.x = (i%2)*6
+            item.y = i*10
+            item.w = 6
+            item.h = 10
+            item.name = item.title.split(' ').join('')
+          })
+          this.authX = ((widgets.length-2)%2)*6
+          this.authY = (widgets.length-3)*10
+          this.authW = 6
+          this.authH = 10
+          this.widgets = widgets
+          // commit('SET_WIDGETS_LIST', { list: widgets})
+          // pages
+          var pages = response.data.pages
+          pages.forEach(function(item, i){
+            item.id = item.title.toLowerCase().split(' ').join('-')
+          })
+          // commit('SET_PAGES_LIST', { list: pages })
+          this.pages = pages
+
+          // var domGridItems = document.getElementsByClassName('vue-grid-item')
+          // console.log(domGridItems)
+          // console.log(domGridItems[0].classList.add('red'))
+        }, (err) => {
+          console.log(err)
+        })
+      } else {
+        axios.get('/dashboard/'+this.user.dashboards[0], {
+        }).then((response) => {
+          const defaultId = 583449
+          // widgets
+          var widgets = response.data.widgets
+          widgets = widgets.filter((item) => {
+            return (item.url.search(/sentiments/i) < 0)
+          })
+          widgets.forEach(function(item, i){
+            item.i = i.toString()
+            item.x = (i%2)*6
+            item.y = i*10
+            item.w = 6
+            item.h = 10
+            item.name = item.title.split(' ').join('')
+          })
+          this.widgets = widgets
+          // pages
+          var pages = response.data.pages
+          pages.forEach(function(item, i){
+            item.id = item.title.toLowerCase().split(' ').join('-')
+          })
+          this.pages = pages
+        }, (err) => {
+          console.log(err)
+        })
+      }
     }
   }
 }

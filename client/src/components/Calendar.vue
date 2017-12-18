@@ -1,9 +1,14 @@
 <template>
   <div class="container">
-    <h3>Calendar</h3>
+    <div class="heading">
+      <h3 class="heading-text">Calendar</h3>
+      <div class="heading-actions">
+        <!-- <a href="http://new.petrusenko.pro/base/edit/#5a118cd38e44d09a57f3dc80" target="_blank" class="btn btn-primary">Add project</a> -->
+      </div>
+    </div>
     <br>
     <form class="filters">
-      <input type="text" class="form-control search" id="search" placeholder="Search">
+      <input type="text" class="form-control search" id="search" placeholder="Search" v-model="searchQuery">
     </form>
     <br>
     <table class="table table-hover">
@@ -34,6 +39,8 @@
           </tr>
       </tbody>
     </table>
+    <b-pagination size="md" :total-rows="totalRows" v-model="currentPage" :per-page="25" align="center"></b-pagination>
+    <br>
   </div>
 </template>
 
@@ -81,16 +88,44 @@ export default {
       //   'tokenToSell': '1000000',
       //   'totalTokensPercent': '100%',
       // }
-    ]
+    ],
+    currentPage: 1,
+    totalRows: 0,
+    searchQuery: ''
   }),
+  watch: {
+    searchQuery: function (query) {
+      this.getListing('1', this.searchQuery)
+      this.currentPage = 1
+    },
+    currentPage: function (page) {
+      this.getListing(page, this.searchQuery)
+    }
+  },
   mounted: function() {
     document.getElementById('main').classList.remove('center')
-    axios.get('/base/events/json', {
-    }).then((response) => {
-      this.projects = response.data.items
-    }, (err) => {
-      console.log(err)
-    })
+    // axios.get('/events/json', {
+    // }).then((response) => {
+    //   this.projects = response.data.items
+    // }, (err) => {
+    //   console.log(err)
+    // })
+    this.getListing(1, '')
+  },
+  methods: {
+    goToPost: function(_id, name) {
+      routes.push({ name: 'Project', params: { _id: _id, name: name }})
+    },
+    getListing: function(page, searchQuery) {
+      axios.get('/base/events/json?page='+page+'&q='+searchQuery, {
+      }).then((response) => {
+        this.totalRows = response.data.info.total
+        this.projects = response.data.items
+        console.log(this.projects)
+      }, (err) => {
+        console.log(err)
+      })
+    }
   }
 }
 </script>

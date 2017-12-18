@@ -3,12 +3,12 @@
     <nav class="navbar navbar-expand-lg navbar-light">
       <router-link to="/" class="navbar-brand">
         <div class="brand-logo">
-          <img src="/static/img/dolphin.png" class="d-inline-block align-top" alt="">
+          <img src="/static/img/dolphin.svg" class="d-inline-block align-top" alt="">
         </div>
-        <div class="brand-names">
+        <!-- <div class="brand-names">
           <div class="brand-name">Dolphin</div>
           <div class="brand-subname">blockchain intelligence</div>
-        </div>
+        </div> -->
       </router-link>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -53,14 +53,14 @@
           <h3>Services</h3>
           <ul>
             <li><a href="#">Add project</a></li>
-            <li><a href="#">Get report on your project</a></li>
+            <li><a href="https://presale.dolphin.bi/orderreport">Get report on your project</a></li>
           </ul>
         </div>
         <div class="flex-item">
           <h3>Company</h3>
           <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Team</a></li>
+            <li><a href="https://presale.dolphin.bi/" target="_blank">About</a></li>
+            <li><a href="https://presale.dolphin.bi/#team" target="_blank">Team</a></li>
             <li><a href="#">Contacts</a></li>
           </ul>
         </div>
@@ -74,10 +74,9 @@
         <div class="flex-item">
           <h3>Follow us</h3>
           <ul>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">Telegram</a></li>
-            <li><a href="#">Email</a></li>
+            <li><a href="https://twitter.com/dolphin_bi" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/dolphin.blockchain.intelligence/" target="_blank">Facebook</a></li>
+            <li><a href="https://t.me/dolphin_bi_en" target="_blank">Telegram</a></li>
           </ul>
         </div>
       </div>
@@ -119,8 +118,32 @@ export default {
     logout() {
       axios.post('/auth/logout', {
       }).then((response) => {
-        console.log(resonse.data)
-        this.$store.dispatch('LOAD_USER')
+        console.log(response.data)
+        if (response.data.status == 'ok') {
+          // setCookie('karamba', null, {path: '/'})
+          // setCookie('connect.sid', null, {path: '/', secure: true})
+
+          // this.$cookie.delete('karamba')
+          // this.$cookie.delete('connect.sid')
+          // this.$cookie.delete('Session_id')
+          // this.$cookie.delete('Secure_session_id')
+          // document.cookie = ''
+          // console.log('karamba before')
+          // console.log(this.$cookie.get('karamba'))
+          // console.log('connect.sid before')
+          // console.log(this.$cookie.get('connect.sid'))
+
+          // this.$cookie.set('karamba', null, {expires: -1, path: '/'})
+          // this.$cookie.set('connect.sid', null, {expires: -1, path: '/'})
+          // document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); })
+          // this.$store.dispatch('LOAD_USER')
+
+          location.reload()
+          // console.log('karamba')
+          // console.log(this.$cookie.get('karamba'))
+          // console.log('connect.sid')
+          // console.log(this.$cookie.get('connect.sid'))
+        }
       }, (err) => {
         console.log(err)
       })
@@ -136,6 +159,16 @@ body
 // helper
 .pointer
   cursor: pointer
+
+.heading
+  display: flex
+  margin-bottom: 8px
+  justify-content: center
+  align-items: center
+  .heading-text
+    flex: 1 0 auto
+    margin: 0
+
 </style>
 
 <style lang="sass" scoped>
@@ -143,7 +176,7 @@ body
   margin-bottom: 20px
   background: white
   border-bottom: 1px solid #eee
-  box-shadow: 0 0 20px 5px rgba(0,0,0,.05)  
+  box-shadow: 0 0 20px 5px rgba(0,0,0,.05)
 .navbar-brand
   display: flex
   justify-content: center
@@ -177,7 +210,6 @@ body
   // border-top: 1px solid #eee
   box-shadow: 0 0 20px 5px rgba(0,0,0,.05)
   // background: #ddd
-  background: #5f5f5f
   color: white
   a
     color: white
@@ -185,7 +217,7 @@ body
     padding: 20px
     display: flex
     justify-content: space-around
-    border-bottom: 1px solid #7f7f7f
+    background: #2C3E50
     .flex-item
       ul
         list-style: none
@@ -194,6 +226,7 @@ body
         text-align: left
   .footer-bottom
     padding: 20px
+    background: #3C404D
     text-align: center
     p
       margin: 0

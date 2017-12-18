@@ -1,10 +1,15 @@
 <template>
   <div class="container">
-    <h3>Listing</h3>
+    <div class="heading">
+      <h3 class="heading-text">Listing</h3>
+      <div class="heading-actions">
+        <!-- <a href="http://new.petrusenko.pro/base/edit/#5a118cd38e44d09a57f3dc80" target="_blank" class="btn btn-primary">Add project</a> -->
+      </div>
+    </div>
     <br>
     <form class="filters">
       <input type="text" class="form-control search" id="search" placeholder="Search" v-model="searchQuery">
-      <select name="stage" id="stage" class="form-control stage">
+      <!-- <select name="stage" id="stage" class="form-control stage">
         <option value="All">Stage</option>
         <option value="Development">Development</option>
         <option value="Live">Live</option>
@@ -14,7 +19,7 @@
         <option value="All">Industry</option>
         <option value="Platform">Platform</option>
         <option value="Market">Market</option>
-      </select>
+      </select> -->
     </form>
     <br>
     <table class="table table-hover">
@@ -46,6 +51,7 @@
 
 
 <script>
+// import { mapState } from 'vuex'
 import axios from 'axios'
 import routes from '../router'
 export default {
@@ -76,6 +82,11 @@ export default {
     //   }
     // ]
   }),
+  // computed: {
+  //   ...mapState([
+  //     'user'
+  //   ])
+  // },
   mounted: function() {
     document.getElementById('main').classList.remove('center')
     this.getListing(1, '')

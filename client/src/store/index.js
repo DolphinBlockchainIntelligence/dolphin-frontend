@@ -9,7 +9,8 @@ const store = new Vuex.Store({
     assets: [],
     widgets: [],
     pages: [],
-    user: false
+    user: false,
+    // user: {"_id":"5a1c02c48e44d09a57fb4b8f","icobaseEditor":true,"dashboards":["5a1fea1b9d19d300010f904e"],"pages":[],"favorites":[],"current":{"_id":"5a1fea1b9d19d300010f904e"},"name":"Eugen Soloviov"}
   },
   actions: {
     LOAD_REGISTER: function ({ commit }) {
@@ -47,7 +48,6 @@ const store = new Vuex.Store({
       }, (err) => {
         console.log(err)
       })
-      // commit('SET_USER', { user: {'_id': 'suenot'} })
     }
   },
   mutations: {

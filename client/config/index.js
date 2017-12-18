@@ -31,15 +31,15 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/dashboard/data': {
-        target: 'https://beta.dolphin.bi',
+        target: 'http://new.petrusenko.pro',
         changeOrigin: true
       },
-      '/dashboard/apps': {
-        target: 'https://beta.dolphin.bi',
+      '/dashboard': {
+        target: 'http://new.petrusenko.pro',
         changeOrigin: true
       },
       '/apps': {
-        target: 'https://beta.dolphin.bi',
+        target: 'http://new.petrusenko.pro',
         changeOrigin: true
       },
       '/auth': {
