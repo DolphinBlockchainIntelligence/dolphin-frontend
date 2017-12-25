@@ -99,6 +99,7 @@ import { mapState } from 'vuex'
 import axios from 'axios'
 import Navbar from './blocks/Navbar'
 import { GridLayout, GridItem } from 'vue-grid-layout'
+
 export default {
   name: 'dashboard',
   data: () => ({

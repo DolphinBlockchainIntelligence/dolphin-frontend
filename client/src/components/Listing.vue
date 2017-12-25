@@ -9,17 +9,18 @@
     <br>
     <form class="filters">
       <input type="text" class="form-control search" id="search" placeholder="Search" v-model="searchQuery">
-      <!-- <select name="stage" id="stage" class="form-control stage">
-        <option value="All">Stage</option>
+      <select name="stage" id="stage" class="form-control stage" v-model="status">
+        <option value="">Status</option>
         <option value="Development">Development</option>
         <option value="Live">Live</option>
-        <option value="Died">Died</option>
+        <option value="Died">Dead</option>
       </select>
-      <select name="industry" id="industry" class="form-control industry">
-        <option value="All">Industry</option>
+      <select name="industry" id="industry" class="form-control industry" v-model="industry">
+        <option value="">Industry</option>
         <option value="Platform">Platform</option>
         <option value="Market">Market</option>
-      </select> -->
+        <option value="trading">trading</option>
+      </select>
     </form>
     <br>
     <table class="table table-hover">
@@ -28,13 +29,13 @@
           <th scope="col">Logo</th>
           <th scope="col">Name</th>
           <th scope="col">Ticker</th>
-          <th scope="col">Stage</th>
+          <th scope="col">Status</th>
           <th scope="col">Industry</th>
           <th scope="col">Description</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="project in projects" @click="goToPost(project._id, project.name)" :key="project._id" class="pointer">
+        <tr v-for="project in projects" @click="goToProject(project._id, project.name)" :key="project._id" class="pointer">
           <td><img :src="project.logo" :alt="project.name"></td>
           <td>{{project.name}}</td>
           <td>{{project.symbol}}</td>
@@ -60,7 +61,9 @@ export default {
     projects: [],
     currentPage: 1,
     totalRows: 0,
-    searchQuery: ''
+    searchQuery: '',
+    status: '',
+    industry: ''
     // projects: [
     //   {
     //     '_id': 'sdf8i69',
@@ -89,23 +92,29 @@ export default {
   // },
   mounted: function() {
     document.getElementById('main').classList.remove('center')
-    this.getListing(1, '')
+    this.getListing(1, this.searchQuery, this.industry, this.status)
   },
   watch: {
     searchQuery: function (query) {
-      this.getListing('1', this.searchQuery)
+      this.getListing('1', this.searchQuery, this.industry, this.status)
       this.currentPage = 1
     },
     currentPage: function (page) {
-      this.getListing(page, this.searchQuery)
+      this.getListing(page, this.searchQuery, this.industry, this.status)
+    },
+    industry: function() {
+      this.getListing('1', this.searchQuery, this.industry, this.status)
+    },
+    status: function() {
+      this.getListing('1', this.searchQuery, this.industry, this.status)
     }
   },
   methods: {
-    goToPost: function(_id, name) {
+    goToProject: function(_id, name) {
       routes.push({ name: 'Project', params: { _id: _id, name: name }})
     },
-    getListing: function(page, searchQuery) {
-      axios.get('/base/json?page='+page+'&q='+searchQuery, {
+    getListing: function(page, searchQuery, industry, status) {
+      axios.get('/base/json?page='+page+'&q='+searchQuery+'&i='+industry+'&s='+status, {
       }).then((response) => {
         this.totalRows = response.data.info.total
         this.projects = response.data.items

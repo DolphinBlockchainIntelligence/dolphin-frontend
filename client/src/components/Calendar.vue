@@ -14,11 +14,9 @@
     <table class="table table-hover">
       <thead class="thead-dark">
           <tr>
-            <th scope="col">Logo</th>
             <th scope="col">Name</th>
             <th scope="col">Ticker</th>
             <th scope="col">Stage</th>
-            <th scope="col">Status</th>
             <th scope="col">Start date</th>
             <th scope="col">End date</th>
             <th scope="col">Token to sell</th>
@@ -26,12 +24,10 @@
           </tr>
       </thead>
       <tbody>
-          <tr v-for="project in projects">
-            <td><img :src="project.logo" :alt="project.name"></td>
+          <tr v-for="project in projects" @click="goToProject(project._id, project.name)" :key="project._id" class="pointer">
             <td>{{project.name}}</td>
             <td>{{project.symbol}}</td>
             <td>{{project.saletype}}</td>
-            <td>{{project.status}}</td>
             <td>{{project.start}}</td>
             <td>{{project.end}}</td>
             <td>{{project.tokenToSell}}</td>
@@ -47,6 +43,8 @@
 
 <script>
 import axios from 'axios'
+import moment from 'moment'
+import routes from '../router'
 
 export default {
   name: 'calendar',
@@ -93,6 +91,16 @@ export default {
     totalRows: 0,
     searchQuery: ''
   }),
+  computed: {
+    // projectsComputed() {
+    //   this.projects.forEach(function(item){
+    //     try {
+    //       item.start = moment(Date.parse(item.start)).fromNow()
+    //     } catch(err) {}
+    //   })
+    //   console.log(this.project)
+    // }
+  },
   watch: {
     searchQuery: function (query) {
       this.getListing('1', this.searchQuery)
@@ -113,7 +121,7 @@ export default {
     this.getListing(1, '')
   },
   methods: {
-    goToPost: function(_id, name) {
+    goToProject: function(_id, name) {
       routes.push({ name: 'Project', params: { _id: _id, name: name }})
     },
     getListing: function(page, searchQuery) {
@@ -121,6 +129,12 @@ export default {
       }).then((response) => {
         this.totalRows = response.data.info.total
         this.projects = response.data.items
+        this.projects.forEach(function(item){
+          try {
+            item.start = moment(Date.parse(item.start)).format('YYYY-DD.MM')
+            item.end = moment(Date.parse(item.end)).format('YYYY-DD.MM')
+          } catch(err) {}
+        })
         console.log(this.projects)
       }, (err) => {
         console.log(err)

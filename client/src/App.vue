@@ -226,7 +226,7 @@ body
         text-align: left
   .footer-bottom
     padding: 20px
-    background: #3C404D
+    background: #2C3E50
     text-align: center
     p
       margin: 0

@@ -1,5 +1,5 @@
 <template>
-  <div class="project">
+  <div class="container">
     <div class="heading">
       <h3 class="heading-text">{{project.current.name}} ({{project.current.symbol}})</h3>
       <div class="heading-actions">
@@ -8,10 +8,6 @@
       </div>
     </div>
     <br>
-    <p>Platform: {{project.current.platform}}</p>
-    <p>Stage</p>
-    <p>Type: {{project.current.sales[0].type}}</p>
-    <p>{{project}}</p>
   </div>
 </template>
 
