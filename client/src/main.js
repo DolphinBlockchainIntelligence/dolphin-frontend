@@ -3,6 +3,8 @@ import App from './App'
 import router from './router'
 import VueAnalytics from 'vue-analytics'
 import store from './store'
+import BootstrapVue from 'bootstrap-vue'
+Vue.use(BootstrapVue)
 
 Vue.config.productionTip = false
 
@@ -18,6 +20,3 @@ Vue.use(VueAnalytics, {
   id: 'UA-96940785-3',
   router
 })
-
-import BootstrapVue from 'bootstrap-vue'
-Vue.use(BootstrapVue)
