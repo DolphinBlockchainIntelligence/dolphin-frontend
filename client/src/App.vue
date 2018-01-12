@@ -1,6 +1,6 @@
 <template>
   <div class="app" id="app">
-      <b-navbar>
+      <b-navbar toggleable="lg">
         <router-link to="/" class="navbar-brand">
           <div class="brand-logo">
             <img src="/static/img/dolphin.svg" class="d-inline-block align-top" alt="">
