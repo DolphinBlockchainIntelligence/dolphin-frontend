@@ -43,6 +43,7 @@
 
 <script>
 import axios from 'axios'
+// import moment from 'moment/src/moment'
 import moment from 'moment'
 import routes from '../router'
 
@@ -131,8 +132,8 @@ export default {
         this.projects = response.data.items
         this.projects.forEach(function(item){
           try {
-            item.start = moment(Date.parse(item.start)).format('YYYY-DD.MM')
-            item.end = moment(Date.parse(item.end)).format('YYYY-DD.MM')
+            item.start = moment(Date.parse(item.start)).format('YYYY-DD-MM')
+            item.end = moment(Date.parse(item.end)).format('YYYY-DD-MM')
           } catch(err) {}
         })
         console.log(this.projects)

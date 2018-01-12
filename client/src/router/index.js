@@ -6,6 +6,7 @@ import Page from '@/components/Page'
 import Listing from '@/components/Listing'
 import Calendar from '@/components/Calendar'
 import Project from '@/components/Project'
+import ProjectAddEdit from '@/components/ProjectAddEdit'
 
 Vue.use(Router)
 export default new Router({
@@ -45,6 +46,20 @@ export default new Router({
       path: '/project/:_id/',
       name: 'Project',
       component: Project,
+      props: true,
+      meta: { reuse: false }
+    },
+    // {
+    //   path: '/project/add/',
+    //   name: 'ProjectAddEdit',
+    //   component: ProjectAddEdit,
+    //   props: true,
+    //   meta: { reuse: false }
+    // }
+    {
+      path: '/project/edit/:_id/',
+      name: 'ProjectAddEdit',
+      component: ProjectAddEdit,
       props: true,
       meta: { reuse: false }
     }

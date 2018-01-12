@@ -85,9 +85,6 @@
               </div>
             </div>
         </grid-item>
-        <!-- <grid-item :key="blank" :x="authX" :y="authY" :w="authW" :h="authH" class="login-widget">
-          <div>Please <a href="/#/auth">log in</a> or <a href="/#/auth">sign up</a> to add widgets you want</div>
-        </grid-item> -->
       </grid-layout>
     </div>
   </div>

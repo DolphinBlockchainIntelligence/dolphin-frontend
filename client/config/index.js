@@ -53,6 +53,14 @@ module.exports = {
       '/base': {
         target: 'http://new.petrusenko.pro',
         changeOrigin: true
+      },
+      '/widgets': {
+        target: 'http://new.petrusenko.pro',
+        changeOrigin: true
+      },
+      '/data': {
+        target: 'http://new.petrusenko.pro',
+        changeOrigin: true
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

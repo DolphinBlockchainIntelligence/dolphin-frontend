@@ -26,7 +26,6 @@
     <table class="table table-hover">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">Logo</th>
           <th scope="col">Name</th>
           <th scope="col">Ticker</th>
           <th scope="col">Status</th>
@@ -36,7 +35,6 @@
       </thead>
       <tbody>
         <tr v-for="project in projects" @click="goToProject(project._id, project.name)" :key="project._id" class="pointer">
-          <td><img :src="project.logo" :alt="project.name"></td>
           <td>{{project.name}}</td>
           <td>{{project.symbol}}</td>
           <td>{{project.stage}}</td>
