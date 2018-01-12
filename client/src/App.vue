@@ -1,48 +1,42 @@
 <template>
   <div class="app" id="app">
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <router-link to="/" class="navbar-brand">
-        <div class="brand-logo">
-          <img src="/static/img/dolphin.svg" class="d-inline-block align-top" alt="">
-        </div>
-        <!-- <div class="brand-names">
-          <div class="brand-name">Dolphin</div>
-          <div class="brand-subname">blockchain intelligence</div>
-        </div> -->
-      </router-link>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <router-link to="/listing" class="nav-link" href="#">Listing</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/calendar" class="nav-link" href="#">Calendar</router-link>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav">
-          <li class="nav-item nav-btn">
-            <a class="btn btn-outline-info" href="#">Add project</a>
-          </li>
-          <li class="nav-item nav-btn">
-            <a class="btn btn-outline-info" href="https://presale.dolphin.bi/orderreport">Order an ICO report</a>
-          </li>
-          <li class="nav-item auth" v-if="user">
-            <a href="#"><span>{{user.name}}</span></a>
-            <a href="#" @click.prevent="logout()"><i class="material-icons">exit_to_app</i></a>
-          </li>
-          <li class="nav-item not-auth" v-else>
-            <router-link to="/auth" class="nav-link" href="#">Log in / Sign up</router-link>
-          </li>
-        </ul>
-      </div>
+      <b-navbar>
+        <router-link to="/" class="navbar-brand">
+          <div class="brand-logo">
+            <img src="/static/img/dolphin.svg" class="d-inline-block align-top" alt="">
+          </div>
+        </router-link>
+        <b-navbar-toggle target="navbarNavDropdown"></b-navbar-toggle>
+        <b-collapse is-nav id="navbarNavDropdown">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <router-link to="/listing" class="nav-link" href="#">Listing</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/calendar" class="nav-link" href="#">Calendar</router-link>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item nav-btn">
+              <a class="btn btn-outline-info" href="#">Add project</a>
+            </li>
+            <li class="nav-item nav-btn">
+              <a class="btn btn-outline-info" href="https://presale.dolphin.bi/orderreport">Order an ICO report</a>
+            </li>
+            <li class="nav-item auth" v-if="user">
+              <a href="#"><span>{{user.name}}</span></a>
+              <a href="#" @click.prevent="logout()"><i class="material-icons">exit_to_app</i></a>
+            </li>
+            <li class="nav-item not-auth" v-else>
+              <router-link to="/auth" class="nav-link" href="#">Log in / Sign up</router-link>
+            </li>
+          </ul>
+        </b-collapse>
 
-    </nav>
+    </b-navbar>
 
     <main id="main" class="main">
       <router-view :key="$route.path" />
