@@ -13,26 +13,26 @@
     <br>
     <table class="table table-hover">
       <thead class="thead-dark">
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Ticker</th>
-            <th scope="col">Stage</th>
-            <th scope="col">Start date</th>
-            <th scope="col">End date</th>
-            <th scope="col">Token to sell</th>
-            <th scope="col">% of total supply</th>
-          </tr>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Ticker</th>
+          <th scope="col">Stage</th>
+          <th scope="col">Start date</th>
+          <th scope="col">End date</th>
+          <th scope="col">Token to sell</th>
+          <th scope="col">% of total supply</th>
+        </tr>
       </thead>
       <tbody>
-          <tr v-for="project in projects" @click="goToProject(project._id, project.name)" :key="project._id" class="pointer">
-            <td>{{project.name}}</td>
-            <td>{{project.symbol}}</td>
-            <td>{{project.saletype}}</td>
-            <td>{{project.start}}</td>
-            <td>{{project.end}}</td>
-            <td>{{project.tokenToSell}}</td>
-            <td>{{project.totalTokensPercent}}</td>
-          </tr>
+        <tr v-for="project in projects" @click="goToProject(project._id, project.name)" :key="project._id" class="pointer">
+          <td>{{project.name}}</td>
+          <td>{{project.symbol}}</td>
+          <td>{{project.saletype}}</td>
+          <td>{{project.start}}</td>
+          <td>{{project.end}}</td>
+          <td>{{project.tokenToSell}}</td>
+          <td>{{project.totalTokensPercent}}</td>
+        </tr>
       </tbody>
     </table>
     <b-pagination size="md" :total-rows="totalRows" v-model="currentPage" :per-page="25" align="center"></b-pagination>

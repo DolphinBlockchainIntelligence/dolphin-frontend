@@ -9,14 +9,15 @@
     </div>
     <br>
 
-    <grid-layout
+    <!-- PRODUCTION VERSION -->
+    <!-- <grid-layout
       :layout="widgets"
       :col-num="12"
       :row-height="30"
       :margin="[10, 10]"
       :use-css-transforms="true"
     >
-      <!-- <grid-item
+      <grid-item
         v-for="widget in widgets"
         :x="widget.x"
         :y="widget.y"
@@ -40,7 +41,40 @@
             </div>
           </div>
       </grid-item> -->
+      
+
+    <grid-layout
+      :layout="widgets"
+      :col-num="12"
+      :row-height="30"
+      :margin="[10, 10]"
+      :use-css-transforms="true"
+    >
       <grid-item
+        v-for="widget in widgets"
+        :x="widget.x"
+        :y="widget.y"
+        :w="widget.w"
+        :h="widget.h"
+        :i="widget.i"
+        :key="widget.id"
+        @resized="resizedWidget()">
+          <div class="widget">
+            <div class="widget-header">
+              <div class="title">{{widget.title}}</div>
+              <div class="actions">
+                <a href="#"><i class="material-icons" @click.prevent="showSettings($event)">settings</i></a>
+                <a href="#"><i class="material-icons" @click.prevent="showHelp($event)">help_outline</i></a>
+              </div>
+            </div>
+            <div class="iframe-mask hide"></div>
+            <div class="iframe-wrapper">
+              <iframe :src="widget.url+_id" frameborder="0" />
+            </div>
+          </div>
+      </grid-item>
+
+      <!-- <grid-item
         :x="widgets[0].x"
         :y="widgets[0].y"
         :w="widgets[0].w"
@@ -57,13 +91,13 @@
             </div>
             <div class="iframe-mask hide"></div>
             <div class="iframe-wrapper">
-              <!-- <iframe v-if="widgets[0].id" :src="'/apps/'+widgets[0].url+'?id='+widgets[0].id" frameborder="0" /> -->
-              <!-- <iframe v-else :src="'/apps/'+widgets[0].url" frameborder="0" /> -->
               <iframe :src="'/widgets/ico-info/index.html?id='+_id" frameborder="0" />
             </div>
           </div>
-      </grid-item>
-      <grid-item
+      </grid-item> -->
+
+
+      <!-- <grid-item
         :x="widgets[1].x"
         :y="widgets[1].y"
         :w="widgets[1].w"
@@ -80,12 +114,10 @@
             </div>
             <div class="iframe-mask hide"></div>
             <div class="iframe-wrapper">
-              <!-- <iframe v-if="widgets[1].id" :src="'/apps/'+widgets[1].url+'?id='+widget.id" frameborder="0" /> -->
-              <!-- <iframe v-else :src="'/apps/'+widget.url" frameborder="0" /> -->
               <iframe :src="'/widgets/linechart/linechart.html?id='+sentimentId" frameborder="0" />
             </div>
           </div>
-      </grid-item>
+      </grid-item> -->
     </grid-layout>
 
   </div>
@@ -102,24 +134,62 @@ export default {
   data: () => ({
     project: {},
     sentimentId: undefined,
-    widgets: [{
-      title: 'Project info',
-      x: 0,
-      y: 0,
-      w: 12,
-      h: 12,
-      i: '1',
-      url: '/widgets/ico-info/index.html?id='
-    },
-    {
-      title: 'Sentiments',
-      x: 0,
-      y: 12,
-      w: 12,
-      h: 12,
-      i: '2',
-      url: ''
-    }]
+    widgets: [
+        {
+        title: 'Project info',
+        x: 0,
+        y: 0,
+        w: 12,
+        h: 12,
+        i: '1',
+        url: '/widgets/ico-info/index.html?id='
+      },
+      // {
+      //   title: 'Sentiments',
+      //   x: 0,
+      //   y: 12,
+      //   w: 12,
+      //   h: 12,
+      //   i: '2',
+      //   url: ''
+      // },
+      {
+        title: 'Project',
+        x: 0,
+        y: 24,
+        w: 12,
+        h: 12,
+        i: '2',
+        url: '/widgets/ico-info-project/index.html?id='
+      },
+      {
+        title: 'Links',
+        x: 0,
+        y: 36,
+        w: 12,
+        h: 12,
+        i: '3',
+        url: '/widgets/ico-info-links/index.html?id='
+      },
+      {
+        title: 'Team',
+        x: 0,
+        y: 48,
+        w: 12,
+        h: 12,
+        i: '4',
+        url: '/widgets/ico-info-team/index.html?id='
+      },
+      {
+        title: 'Token',
+        x: 0,
+        y: 60,
+        w: 12,
+        h: 12,
+        i: '5',
+        url: '/widgets/ico-info-token/index.html?id='
+      }
+    ]
   }),
   components: {
     GridLayout,
