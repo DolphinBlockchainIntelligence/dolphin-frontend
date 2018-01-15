@@ -98,15 +98,15 @@
 
 
       <!-- <grid-item
-        :x="widgets[1].x"
-        :y="widgets[1].y"
-        :w="widgets[1].w"
-        :h="widgets[1].h"
-        :i="widgets[1].i"
-        :key="widgets[1].id">
+        :x="0"
+        :y="0"
+        :w="12"
+        :h="12"
+        :i="10"
+        :key="10">
           <div class="widget">
             <div class="widget-header">
-              <div class="title">{{widgets[1].title}}</div>
+              <div class="title">Sentiments</div>
               <div class="actions">
                 <a href="#"><i class="material-icons" @click.prevent="showSettings($event)">settings</i></a>
                 <a href="#"><i class="material-icons" @click.prevent="showHelp($event)">help_outline</i></a>
@@ -115,6 +115,27 @@
             <div class="iframe-mask hide"></div>
             <div class="iframe-wrapper">
               <iframe :src="'/widgets/linechart/linechart.html?id='+sentimentId" frameborder="0" />
+            </div>
+          </div>
+      </grid-item>
+      <grid-item
+        :x="0"
+        :y="12"
+        :w="12"
+        :h="12"
+        :i="11"
+        :key="11">
+          <div class="widget">
+            <div class="widget-header">
+              <div class="title">Sentiments</div>
+              <div class="actions">
+                <a href="#"><i class="material-icons" @click.prevent="showSettings($event)">settings</i></a>
+                <a href="#"><i class="material-icons" @click.prevent="showHelp($event)">help_outline</i></a>
+              </div>
+            </div>
+            <div class="iframe-mask hide"></div>
+            <div class="iframe-wrapper">
+              <iframe :src="'/widgets/comments/comments.html?id='+sentimentId" frameborder="0" />
             </div>
           </div>
       </grid-item> -->
@@ -138,25 +159,16 @@ export default {
         {
         title: 'Project info',
         x: 0,
-        y: 0,
+        y: 24,
         w: 12,
         h: 12,
         i: '1',
         url: '/widgets/ico-info/index.html?id='
       },
-      // {
-      //   title: 'Sentiments',
-      //   x: 0,
-      //   y: 12,
-      //   w: 12,
-      //   h: 12,
-      //   i: '2',
-      //   url: ''
-      // },
       {
         title: 'Project',
         x: 0,
-        y: 24,
+        y: 36,
         w: 12,
         h: 12,
         i: '2',
@@ -165,29 +177,56 @@ export default {
       {
         title: 'Links',
         x: 0,
-        y: 36,
+        y: 60,
         w: 12,
         h: 12,
         i: '3',
         url: '/widgets/ico-info-links/index.html?id='
       },
       {
-        title: 'Team',
-        x: 0,
-        y: 48,
-        w: 12,
-        h: 12,
-        i: '4',
-        url: '/widgets/ico-info-team/index.html?id='
-      },
-      {
         title: 'Token',
         x: 0,
-        y: 60,
+        y: 72,
         w: 12,
         h: 12,
         i: '5',
         url: '/widgets/ico-info-token/index.html?id='
+      },
+      {
+        title: 'Team',
+        x: 0,
+        y: 84,
+        w: 12,
+        h: 12,
+        i: '6',
+        url: '/widgets/ico-info-team/index.html?items=1&id='
+      },
+      {
+        title: 'Team',
+        x: 0,
+        y: 96,
+        w: 12,
+        h: 12,
+        i: '7',
+        url:  '/widgets/ico-info-team/index.html?items=2&id='
+      },
+      {
+        title: 'Team',
+        x: 0,
+        y: 112,
+        w: 12,
+        h: 12,
+        i: '8',
+        url:  '/widgets/ico-info-team/index.html?items=3&id='
+      },
+      {
+        title: 'Event',
+        x: 0,
+        y: 124,
+        w: 12,
+        h: 12,
+        i: '9',
+        url:  '/widgets/ico-info-event/index.html?id='
       }
     ]
   }),
