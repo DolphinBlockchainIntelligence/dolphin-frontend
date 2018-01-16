@@ -209,9 +209,15 @@ body
     color: white
   .footer-top
     padding: 20px
-    display: flex
-    justify-content: space-around
     background: #2C3E50
+    @media (min-width: 576px)
+      display: flex
+      justify-content: space-around
+    @media (max-width: 767px)
+      flex-wrap: wrap
+      .flex-item
+        flex:  0 0 50%
+        margin-top: 15px
     .flex-item
       ul
         list-style: none
@@ -241,21 +247,34 @@ main
     align-items: center
 
 .nav-btn
-  &+.nav-btn
-    margin-left: 16px
+    &+.nav-btn
+      margin-top: 15px
+      @media (min-width: 992px)
+        margin-left: 16px
+        margin-top: 0
 
 .not-auth, .auth
   margin-left: 16px
   display: flex
   align-items: center
-  justify-content: center
   vertical-align: middle
+  @media (min-width: 992px)
+    justify-content: center
   a
     display: flex
     align-items: center
     justify-content: center
     vertical-align: middle
     text-decoration: none
+.navbar-nav:not(.mr-auto)
+  @media (max-width: 991px)
+      li:nth-child(1)
+        order: 2
+      li:nth-child(2)
+        order: 3
+      li:nth-child(3)
+        order: 1
+        margin: 0
 </style>
 
 <style lang="sass" scoped>
