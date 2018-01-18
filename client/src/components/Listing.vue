@@ -3,7 +3,7 @@
     <div class="heading">
       <h3 class="heading-text">Listing</h3>
       <div class="heading-actions">
-        <a href="/base/edit/" target="_blank" class="btn btn-primary">Add project</a>
+        <!-- <a href="/base/edit/" target="_blank" class="btn btn-primary">Add project</a> -->
       </div>
     </div>
     <br>
