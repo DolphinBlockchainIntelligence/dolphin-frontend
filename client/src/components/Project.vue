@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="content-wrapper">
     <div class="heading">
       <h3 class="heading-text">{{project.current.name}} ({{project.current.symbol}})</h3>
       <div class="heading-actions">
