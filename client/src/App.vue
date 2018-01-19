@@ -21,7 +21,7 @@
           </ul>
           <ul class="navbar-nav">
             <li class="nav-item nav-btn">
-              <a class="btn btn-outline-info" href="#">Add project</a>
+              <router-link to="/project/edit/0/" class="btn btn-outline-info">Add project</router-link>
             </li>
             <li class="nav-item nav-btn">
               <a class="btn btn-outline-info" href="https://presale.dolphin.bi/orderreport">Order an ICO report</a>
