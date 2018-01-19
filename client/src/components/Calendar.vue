@@ -3,7 +3,7 @@
     <div class="heading">
       <h3 class="heading-text">Calendar</h3>
       <div class="heading-actions">
-        <!-- <a href="http://new.petrusenko.pro/base/edit/#5a118cd38e44d09a57f3dc80" target="_blank" class="btn btn-primary">Add project</a> -->
+        <!-- <a href="/base/edit/" target="_blank" class="btn btn-primary">Add project</a> -->
       </div>
     </div>
     <br>

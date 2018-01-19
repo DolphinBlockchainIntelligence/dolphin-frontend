@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="content-wrapper">
     <div class="heading">
       <h3 class="heading-text">{{project.current.name}} ({{project.current.symbol}})</h3>
       <div class="heading-actions">
@@ -166,67 +166,13 @@ export default {
         url: '/widgets/ico-info/index.html?id='
       },
       {
-        title: 'Project',
+        title: 'Expert opinions',
         x: 0,
         y: 36,
         w: 12,
         h: 12,
         i: '2',
-        url: '/widgets/ico-info-project/index.html?id='
-      },
-      {
-        title: 'Links',
-        x: 0,
-        y: 60,
-        w: 12,
-        h: 12,
-        i: '3',
-        url: '/widgets/ico-info-links/index.html?id='
-      },
-      {
-        title: 'Token',
-        x: 0,
-        y: 72,
-        w: 12,
-        h: 12,
-        i: '5',
-        url: '/widgets/ico-info-token/index.html?id='
-      },
-      {
-        title: 'Team',
-        x: 0,
-        y: 84,
-        w: 12,
-        h: 12,
-        i: '6',
-        url: '/widgets/ico-info-team/index.html?items=1&id='
-      },
-      {
-        title: 'Team',
-        x: 0,
-        y: 96,
-        w: 12,
-        h: 12,
-        i: '7',
-        url:  '/widgets/ico-info-team/index.html?items=2&id='
-      },
-      {
-        title: 'Team',
-        x: 0,
-        y: 112,
-        w: 12,
-        h: 12,
-        i: '8',
-        url:  '/widgets/ico-info-team/index.html?items=3&id='
-      },
-      {
-        title: 'Event',
-        x: 0,
-        y: 124,
-        w: 12,
-        h: 12,
-        i: '9',
-        url:  '/widgets/ico-info-event/index.html?id='
+        url: '/widgets/expert-opinions/index.html?id='
       }
     ]
   }),
