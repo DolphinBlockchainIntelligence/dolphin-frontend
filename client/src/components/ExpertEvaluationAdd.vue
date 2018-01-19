@@ -1,124 +1,45 @@
 <template>
   <div class="container">
+    <div class="heading">
+      <h3 class="heading-text">Add expert opinion</h3>
+    </div>
+    <br>
     <form @submit.prevent="onSubmit()">
-      <div>
-        <label>idea</label>
-        <select v-model="idea">
-          <option value="-">-</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
+      <div class="form-group">
+        <label>Idea</label>
+        <star-rating :increment="1" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" v-model="idea"></star-rating>
       </div>
-      <div>
-        <label>team</label>
-        <select v-model="team">
-          <option value="-">-</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
+      <div class="form-group">
+        <label>Team</label>
+        <star-rating :increment="1" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" v-model="team"></star-rating>
       </div>
-      <div>
-        <label>busmodel</label>
-        <select v-model="busmodel">
-          <option value="-">-</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
+      <div class="form-group">
+        <label>Busmodel</label>
+        <star-rating :increment="1" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" v-model="busmodel"></star-rating>
       </div>
-      <div>
-        <label>market</label>
-        <select v-model="market">
-          <option value="-">-</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
+      <div class="form-group">
+        <label>Market</label>
+        <star-rating :increment="1" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" v-model="market"></star-rating>
       </div>
-      <div>
-        <label>tech</label>
-        <select v-model="tech">
-          <option value="-">-</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
+      <div class="form-group">
+        <label>Tech</label>
+        <star-rating :increment="1" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" v-model="tech"></star-rating>
       </div>
-      <div>
-        <label>code</label>
-        <select v-model="code">
-          <option value="-">-</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
+      <div class="form-group">
+        <label>Code</label>
+        <star-rating :increment="1" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" v-model="code"></star-rating>
       </div>
-      <div>
-        <label>legal</label>
-        <select v-model="legal">
-          <option value="-">-</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
+      <div class="form-group">
+        <label>Legal</label>
+        <star-rating :increment="1" :fixed-points="2" :read-only="false" :star-size="28" :border-width="1" border-color="#3f51b5" inactive-color="#fff" active-color="#3f51b5" v-model="legal"></star-rating>
       </div>
 
-      <div>
-        <textarea rows="4" v-model="review"></textarea>
+      <div class="form-group">
+        <label for="review">Review</label>
+        <textarea rows="4" v-model="review" class="form-control" id="review"></textarea>
       </div>
-      <div>
-        <button type="submit">submit</button>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </form>
   </div>
@@ -126,20 +47,24 @@
 
 <script>
 import axios from 'axios'
+import StarRating from 'vue-star-rating'
 
 
 export default {
   name: 'ExpertEvaluationAdd',
   data: () => ({
-    idea: '-',
-    team: '-',
-    busmodel: '-',
-    market: '-',
-    tech: '-',
-    code: '-',
-    legal: '-',
+    idea: 0,
+    team: 0,
+    busmodel: 0,
+    market: 0,
+    tech: 0,
+    code: 0,
+    legal: 0,
     review: ''
   }),
+  components: {
+    StarRating
+  },
   methods: {
     onSubmit: function(){
       var form = {
