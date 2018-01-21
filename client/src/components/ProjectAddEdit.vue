@@ -28,7 +28,7 @@
           <label for="3" class="col-sm-3 text-right col-form-label">Keywords&nbsp;:</label>
           <div class="col-sm-9">
             <multiselect id="3"
-              :options="['one', 'two', 'three']" :multiple="true" placeholder="" select-label="" deselect-label="">
+              v-model="selectedKeywords" :options="optionsKeywords" :multiple="true" placeholder="" select-label="" deselect-label="" :taggable="true" @tag="addTag">
             </multiselect>
           </div>
         </div>
@@ -329,25 +329,42 @@ export default {
   // props: ['_id']
   components: { Multiselect, datePicker },
   data () {
-      return {
-        date: null,
-        configs: {
-          wrap: true,
-          basic: {
-            format: 'DD/MM/YYYY',
-            useCurrent: false,
-          },       
-        },
-      }
-    },
+    return {
+      date: null,
+      configs: {
+        wrap: true,
+        basic: {
+          format: 'DD/MM/YYYY',
+          useCurrent: false,
+        },       
+      },
+      optionsKeywords: [],
+      selectedKeywords: [],
+    }
+  },
+  methods: {
+      addTag (newTag) {
+        console.log(newTag)
+        const tag = {
+          name: newTag,
+          code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+        }
+        console.log(tag)
+        this.optionsKeywords.push(newTag)
+        this.selectedKeywords.push(newTag)
+      },
+
+  }
 }
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style lang="sass" scoped>
-  .multiselect
-    z-index: 3
+  //.multiselect
+    //z-index: 3
   .form-group
+    .input-group .form-control
+      z-index: 0
     label
       sup
         color: red
