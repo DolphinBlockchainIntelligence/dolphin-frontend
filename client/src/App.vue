@@ -21,8 +21,8 @@
           </ul>
           <ul class="navbar-nav">
             <li class="nav-item nav-btn">
-              <router-link to="/project/edit/0/" class="btn btn-outline-info">Add project</router-link>
-              <!-- <a class="btn btn-outline-info" href="/base/edit/" target="_blank">Add project</a>-->
+              <!-- <router-link to="/project/edit/0/" class="btn btn-outline-info">Add project</router-link> -->
+              <a class="btn btn-outline-info" href="/base/edit/" target="_blank">Add project</a>
             </li>
             <li class="nav-item nav-btn">
               <a class="btn btn-outline-info" href="https://presale.dolphin.bi/orderreport">Order an ICO report</a>
