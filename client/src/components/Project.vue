@@ -159,18 +159,18 @@ export default {
         {
         title: 'Project info',
         x: 0,
-        y: 24,
+        y: 0,
         w: 12,
-        h: 12,
+        h: 15,
         i: '1',
         url: '/widgets/ico-info/index.html?id='
       },
       {
         title: 'Expert opinions',
         x: 0,
-        y: 36,
+        y: 15,
         w: 12,
-        h: 12,
+        h: 15,
         i: '2',
         url: '/widgets/expert-opinions/index.html?id='
       }
