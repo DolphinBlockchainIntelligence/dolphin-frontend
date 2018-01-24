@@ -22,7 +22,7 @@
         <label class="col-md-2 control-label">Photo</label>
         <div class="col-md-10">
           <b-form-file v-model="userProfile.photo"  @change="onFileChange" accept=".jpg, .jpeg, .png, .gif" placeholder="Choose a file..."></b-form-file>
-          <div v-if="fileerror"><small class="form-text text-muted alert alert-danger">{{ fileerror }}.</small></div>
+          <div v-if="fileError"><small class="form-text text-muted alert alert-danger">{{ fileError }}.</small></div>
           <div v-if="userProfile.photoUrl">
             <img :src="userProfile.photoUrl" height="100"/>
           </div>
@@ -36,9 +36,9 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-primary" v-bind:class="{preloader: preloader, disabled:!showSave}"
+      <button class="btn btn-primary" v-bind:class="{preLoader: preLoader, disabled:!showSave}"
               @click.prevent="saveChanges">
-        <span v-if="preloader">Loading...</span>
+        <span v-if="preLoader">Loading...</span>
         <span v-else>Save</span>
       </button>
     </div>
@@ -56,10 +56,24 @@
     name: 'userprofile',
     props: ['id'],
     data: () => ({
-      userProfile: false,
+//      userProfile: false,
+      userProfile: {
+        "realName": "Eugen Soloviov",
+        "photo": null,
+        "photoUrl": null,
+        "profileText": "lalala",
+        "social": {
+          "Facebook": 'https://www.facebook.com/ArtemEVS',
+          'Twitter': 'https://twitter/123',
+          'Reddit': null,
+          'Github': null,
+          'Youtube': null,
+          'Bitcointalk': null
+        }
+      },
       showSave: false,
-      preloader: false,
-      fileerror: false
+      preLoader: false,
+      fileError: false
     }),
     mounted: function () {
       this.getUserProfile()
@@ -67,7 +81,7 @@
     watch: {
       userProfile: {
         handler: function (a) {
-          if (!this.fileerror)
+          if (!this.fileError)
             this.showSaveBtn()
           // console.log(a)
         },
@@ -89,28 +103,27 @@
       saveChanges() {
         if (this.showSave) {
           let config = { headers: { 'Content-Type': 'multipart/form-data' } }
-          this.preloader = true
+          this.preLoader = true
           axios.post(
             '/private/user/profile', this.userProfile, config).then((response) => {
             if (response.data == 'ok') {
-              this.preloader = false
+              this.preLoader = false
               this.showSave = false
               console.log(this.userProfile)
             }
           }, (err) => {
-            this.preloader = false
+            this.preLoader = false
             this.showSave = false
             console.log(err)
           })
         }
       },
       onFileChange (event) {
+        this.fileError = null
         console.log(event.target.files[0].size)
         if (event.target.files[0].size > 8000000) {
-          this.fileerror = 'File size should be less than 8Mb'
+          this.fileError = 'File size should be less than 8Mb'
           this.showSave = false
-        } else {
-          this.fileerror = null
         }
       }
     }
