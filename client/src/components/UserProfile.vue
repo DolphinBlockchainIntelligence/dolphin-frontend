@@ -117,8 +117,7 @@
       },
       onFileChange(e) {
         var files = e.target.files || e.dataTransfer.files
-        if (!files.length)
-          return;
+        if (!files.length) return
         this.createImage(files[0])
       },
       createImage(file) {
@@ -126,7 +125,7 @@
 
         reader.onload = (e) => {
           this.userProfile.photo = e.target.result
-        };
+        }
         reader.readAsDataURL(file)
       },
       removeImage: function (e) {
