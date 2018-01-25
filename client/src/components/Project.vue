@@ -69,7 +69,7 @@
             </div>
             <div class="iframe-mask hide"></div>
             <div class="iframe-wrapper">
-              <iframe :src="widget.url+_id" frameborder="0" />
+              <iframe :src="widget.url" frameborder="0" />
             </div>
           </div>
       </grid-item>
@@ -155,26 +155,7 @@ export default {
   data: () => ({
     project: {},
     sentimentId: undefined,
-    widgets: [
-        {
-        title: 'Project info',
-        x: 0,
-        y: 0,
-        w: 12,
-        h: 15,
-        i: '1',
-        url: '/widgets/ico-info/index.html?id='
-      },
-      {
-        title: 'Expert opinions',
-        x: 0,
-        y: 15,
-        w: 12,
-        h: 15,
-        i: '2',
-        url: '/widgets/expert-opinions/index.html?id='
-      }
-    ]
+    widgets: []
   }),
   components: {
     GridLayout,
@@ -184,15 +165,56 @@ export default {
     axios.get('/base/' + this._id, {
     }).then((response) => {
       this.project = response.data
-      var pattern = /\D+/g;
-      var that = this;
-      this.project.current.links.forEach(function(item){
-        if (item.type == 'Bitcointalk forum topic'){
-          var id = item.url.split(pattern);
-          that.sentimentId = id[1];
+      var pattern = /\D+/g
+      var widgets = [
+        {
+          title: 'Project info',
+          x: 0,
+          y: 0,
+          w: 12,
+          h: 15,
+          i: '1',
+          url: '/widgets/ico-info/index.html?id=' + this.project._id
+        },
+        {
+          title: 'Expert opinions',
+          x: 0,
+          y: 15,
+          w: 12,
+          h: 15,
+          i: '2',
+          url: '/widgets/expert-opinions/index.html?id=' + this.project._id
         }
-      })
-      console.log(this.sentimentId)
+      ]
+      try {
+        this.project.current.links.forEach((link) => {
+          if (link.type == 'Bitcointalk forum topic'){
+            var id = link.url.split(pattern)
+            this.sentimentId = id[1]
+          }
+        })
+        if (this.sentimentId) {
+          widgets.push({
+            title: 'Sentiments',
+            x: 0,
+            y: 30,
+            w: 12,
+            h: 15,
+            i: '3',
+            url: '/widgets/linechart/linechart.html?id=' + this.sentimentId
+          })
+          widgets.push({
+            title: 'Sentiments',
+            x: 0,
+            y: 45,
+            w: 12,
+            h: 15,
+            i: '4',
+            url: '/widgets/comments/comments.html?id=' + this.sentimentId
+          })
+        }
+      } catch(err) {}
+      this.widgets = widgets
     }, (err) => {
       console.log(err)
     })
