@@ -184,8 +184,15 @@ export default {
     axios.get('/base/' + this._id, {
     }).then((response) => {
       this.project = response.data
-      console.log(this.project)
-      this.sentimentId = 47417
+      var pattern = /\D+/g;
+      var that = this;
+      this.project.current.links.forEach(function(item){
+        if (item.type == 'Bitcointalk forum topic'){
+          var id = item.url.split(pattern);
+          that.sentimentId = id[1];
+        }
+      })
+      console.log(this.sentimentId)
     }, (err) => {
       console.log(err)
     })
