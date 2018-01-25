@@ -21,12 +21,10 @@
       <div class="form-group row">
         <label class="col-md-2 control-label">Photo</label>
         <div class="col-md-10">
-          <div v-if="!userProfile.photo">
-            <input type="file" class="form-control-file" @change="onFileChange">
-          </div>
-          <div v-else>
-            <img :src="userProfile.photo" height="100"/>
-            <button @click="removeImage">Remove image</button>
+          <b-form-file v-model="userProfile.photo"  @change="onFileChange" accept=".jpg, .jpeg, .png, .gif" placeholder="Choose a file..."></b-form-file>
+          <div v-if="fileError"><small class="form-text text-muted alert alert-danger">{{ fileError }}.</small></div>
+          <div v-if="userProfile.photoUrl">
+            <img :src="userProfile.photoUrl" height="100"/>
           </div>
         </div>
       </div>
@@ -38,9 +36,9 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-primary" v-bind:class="{preloader: preloader, disabled:!showSave}"
+      <button class="btn btn-primary" v-bind:class="{preLoader: preLoader, disabled:!showSave}"
               @click.prevent="saveChanges">
-        <span v-if="preloader">Loading...</span>
+        <span v-if="preLoader">Loading...</span>
         <span v-else>Save</span>
       </button>
     </div>
@@ -58,31 +56,34 @@
     name: 'userprofile',
     props: ['id'],
     data: () => ({
-      // userProfile: false
+//      userProfile: false,
       userProfile: {
         "realName": "Eugen Soloviov",
-        "photo": "",
+        "photo": null,
+        "photoUrl": null,
         "profileText": "lalala",
         "social": {
           "Facebook": 'https://www.facebook.com/ArtemEVS',
           'Twitter': 'https://twitter/123',
-          'Reddit': '',
-          'Github': '',
-          'Youtube': '',
-          'Bitcointalk': ''
+          'Reddit': null,
+          'Github': null,
+          'Youtube': null,
+          'Bitcointalk': null
         }
       },
       showSave: false,
-      preloader: false
+      preLoader: false,
+      fileError: false
     }),
     mounted: function () {
-      this.getUserProfile();
+      this.getUserProfile()
     },
     watch: {
       userProfile: {
         handler: function (a) {
-          this.showSaveBtn()
-          console.log(a)
+          if (!this.fileError)
+            this.showSaveBtn()
+          // console.log(a)
         },
         deep: true
       }
@@ -101,37 +102,36 @@
       },
       saveChanges() {
         if (this.showSave) {
-          this.preloader = true
-          axios.post('/private/user/profile', this.userProfile).then((response) => {
+          let config = { headers: { 'Content-Type': 'multipart/form-data' } }
+          this.preLoader = true
+          axios.post(
+            '/private/user/profile', this.userProfile, config).then((response) => {
             if (response.data == 'ok') {
-              this.preloader = false
+              this.preLoader = false
               this.showSave = false
               console.log(this.userProfile)
             }
           }, (err) => {
-            this.preloader = false
+            this.preLoader = false
             this.showSave = false
             console.log(err)
           })
         }
       },
-      onFileChange(e) {
-        var files = e.target.files || e.dataTransfer.files
-        if (!files.length)
-          return;
-        this.createImage(files[0])
-      },
-      createImage(file) {
-        var reader = new FileReader()
-
-        reader.onload = (e) => {
-          this.userProfile.photo = e.target.result
-        };
-        reader.readAsDataURL(file)
-      },
-      removeImage: function (e) {
-        this.userProfile.photo = ''
+      onFileChange (event) {
+        this.fileError = null
+        console.log(event.target.files[0].size)
+        if (event.target.files[0].size > 8000000) {
+          this.fileError = 'File size should be less than 8Mb'
+          this.showSave = false
+        }
       }
     }
   }
 </script>
+
+<style>
+  .hidden {
+    display: none;
+  }
+</style>
