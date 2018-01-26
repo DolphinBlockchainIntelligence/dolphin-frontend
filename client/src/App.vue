@@ -28,7 +28,7 @@
               <a class="btn btn-outline-info" href="https://presale.dolphin.bi/orderreport">Order an ICO report</a>
             </li>
             <li class="nav-item auth" v-if="user">
-              <a href="#"><span>{{user.name}}</span></a>
+              <a href="/#/profile"><span>{{user.name}}</span></a>
               <a href="#" @click.prevent="logout()"><i class="material-icons">exit_to_app</i></a>
             </li>
             <li class="nav-item not-auth" v-else>
@@ -115,29 +115,7 @@ export default {
       }).then((response) => {
         console.log(response.data)
         if (response.data.status == 'ok') {
-          // setCookie('karamba', null, {path: '/'})
-          // setCookie('connect.sid', null, {path: '/', secure: true})
-
-          // this.$cookie.delete('karamba')
-          // this.$cookie.delete('connect.sid')
-          // this.$cookie.delete('Session_id')
-          // this.$cookie.delete('Secure_session_id')
-          // document.cookie = ''
-          // console.log('karamba before')
-          // console.log(this.$cookie.get('karamba'))
-          // console.log('connect.sid before')
-          // console.log(this.$cookie.get('connect.sid'))
-
-          // this.$cookie.set('karamba', null, {expires: -1, path: '/'})
-          // this.$cookie.set('connect.sid', null, {expires: -1, path: '/'})
-          // document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); })
-          // this.$store.dispatch('LOAD_USER')
-
           location.reload()
-          // console.log('karamba')
-          // console.log(this.$cookie.get('karamba'))
-          // console.log('connect.sid')
-          // console.log(this.$cookie.get('connect.sid'))
         }
       }, (err) => {
         console.log(err)
