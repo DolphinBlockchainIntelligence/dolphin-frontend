@@ -102,10 +102,29 @@
       },
       saveChanges() {
         if (this.showSave) {
-          let config = { headers: { 'Content-Type': 'multipart/form-data' } }
           this.preLoader = true
+          var data = new FormData();
+
+          data.append('photo', this.userProfile.photo);
+          data.append('realName', this.userProfile.realName);
+          data.append('photoUrl', this.userProfile.photoUrl);
+          data.append('profileText', this.userProfile.profileText);
+          data.append('Facebook', this.userProfile.social.Facebook);
+          data.append('Twitter', this.userProfile.social.Twitter);
+          data.append('Reddit', this.userProfile.social.Reddit);
+          data.append('Github', this.userProfile.social.Github);
+          data.append('Youtube', this.userProfile.social.Youtube);
+          data.append('Bitcointalk', this.userProfile.social.Bitcointalk);
+
+          var config = {
+            onUploadProgress: function(progressEvent) {
+              var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+            },
+            headers: { 'Content-Type': 'multipart/form-data' }
+          };
+
           axios.post(
-            '/private/user/profile', this.userProfile, config).then((response) => {
+            '/private/user/profile', data, config).then((response) => {
             if (response.data == 'ok') {
               this.preLoader = false
               this.showSave = false
