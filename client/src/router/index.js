@@ -7,7 +7,7 @@ import Listing from '@/components/Listing'
 import Calendar from '@/components/Calendar'
 import Project from '@/components/Project'
 import ProjectAddEdit from '@/components/ProjectAddEdit'
-import ExpertEvaluationAdd from '@/components/ExpertEvaluationAdd'
+import ExpertOpinionAdd from '@/components/ExpertOpinionAdd'
 import UserProfile from '@/components/UserProfile'
 
 Vue.use(Router)
@@ -66,9 +66,9 @@ export default new Router({
       meta: { reuse: false }
     },
     {
-      path: '/evaluation/add/',
-      name: 'ExpertEvaluationAdd',
-      component: ExpertEvaluationAdd,
+      path: '/opinion/add/:_id/',
+      name: 'ExpertOpinionAdd',
+      component: ExpertOpinionAdd,
       props: true,
       meta: { reuse: false }
     },

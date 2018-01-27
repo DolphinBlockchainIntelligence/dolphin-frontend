@@ -51,7 +51,7 @@ import StarRating from 'vue-star-rating'
 
 
 export default {
-  name: 'ExpertEvaluationAdd',
+  name: 'ExpertOpinionAdd',
   data: () => ({
     idea: 0,
     team: 0,
@@ -62,6 +62,7 @@ export default {
     legal: 0,
     review: ''
   }),
+  props: ['_id'],
   components: {
     StarRating
   },
@@ -78,7 +79,7 @@ export default {
         review: this.review
       }
       console.log(form)
-      axios.post('/base/rating/5a252cfd6ea08d0f96839aaa', form)
+      axios.post('/base/rating/' + this.id, form)
       .then(function(response){
         console.log(response.status);
       }); 
