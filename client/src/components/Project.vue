@@ -180,10 +180,19 @@ export default {
           title: 'Expert opinions',
           x: 0,
           y: 15,
-          w: 12,
+          w: 9,
           h: 15,
           i: '2',
           url: '/widgets/expert-opinions/index.html?id=' + this.project._id
+        },
+        {
+          title: 'Expert opinions: avegage',
+          x: 9,
+          y: 15,
+          w: 3,
+          h: 15,
+          i: '3',
+          url: '/widgets/expert-opinions-average/index.html?id=' + this.project._id
         }
       ]
       try {
@@ -200,7 +209,7 @@ export default {
             y: 30,
             w: 12,
             h: 15,
-            i: '3',
+            i: '4',
             url: '/widgets/linechart/linechart.html?id=' + this.sentimentId
           })
           widgets.push({
@@ -209,7 +218,7 @@ export default {
             y: 45,
             w: 12,
             h: 15,
-            i: '4',
+            i: '5',
             url: '/widgets/comments/comments.html?id=' + this.sentimentId
           })
         }

@@ -48,6 +48,7 @@
 <script>
 import axios from 'axios'
 import StarRating from 'vue-star-rating'
+import routes from '../router'
 
 
 export default {
@@ -79,9 +80,12 @@ export default {
         review: this.review
       }
       console.log(form)
-      axios.post('/base/rating/' + this.id, form)
-      .then(function(response){
+      axios.post('/base/rating/' + this._id, form)
+      .then((response) => {
         console.log(response.status);
+        if (response.status == 200) {
+          routes.push({ name: 'Project', params: { _id: this._id }})
+        }
       }); 
     }
   },
