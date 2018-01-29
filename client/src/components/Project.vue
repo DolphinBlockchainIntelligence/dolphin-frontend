@@ -171,28 +171,28 @@ export default {
           title: 'Project info',
           x: 0,
           y: 0,
-          w: 12,
+          w: 9,
           h: 15,
           i: '1',
           url: '/widgets/ico-info/index.html?id=' + this.project._id
         },
         {
+          title: 'Dolphin Truth Serum',
+          x: 9,
+          y: 0,
+          w: 3,
+          h: 15,
+          i: '2',
+          url: '/widgets/expert-opinions-average/index.html?id=' + this.project._id
+        },
+        {
           title: 'Expert opinions',
           x: 0,
           y: 15,
-          w: 9,
-          h: 15,
-          i: '2',
-          url: '/widgets/expert-opinions/index.html?id=' + this.project._id
-        },
-        {
-          title: 'Expert opinions: avegage',
-          x: 9,
-          y: 15,
-          w: 3,
+          w: 12,
           h: 15,
           i: '3',
-          url: '/widgets/expert-opinions-average/index.html?id=' + this.project._id
+          url: '/widgets/expert-opinions/index.html?id=' + this.project._id
         }
       ]
       try {

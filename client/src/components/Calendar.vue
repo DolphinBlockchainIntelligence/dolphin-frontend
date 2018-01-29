@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="project in projects" @click="goToProject(project._id, project.name)" :key="project._id" class="pointer">
+        <tr v-for="(project, id) in projects" @click="goToProject(project._id, project.name)" :key="id" class="pointer">
           <td>{{project.name}}</td>
           <td>{{project.symbol}}</td>
           <td>{{project.saletype}}</td>
@@ -43,83 +43,29 @@
 
 <script>
 import axios from 'axios'
-// import moment from 'moment/src/moment'
 import moment from 'moment'
 import routes from '../router'
 
 export default {
   name: 'calendar',
   data: () => ({
-    projects: [
-      // {
-      //   '_id': 'sdf8i69',
-      //   'logo': 'https://www.tokendata.io/assets/logos/district0x.png',
-      //   'name': 'District0x',
-      //   'ticker': 'DNT',
-      //   'stage': 'Presale',
-      //   'status': 'Ongoing',
-      //   'start': '2017-11-12',
-      //   'end': '2017-11-28',
-      //   'tokenToSell': '1000000',
-      //   'totalTokensPercent': '100%',
-      // },
-      // {
-      //   '_id': 'sdf8i70',
-      //   'logo': 'https://www.tokendata.io/assets/logos/modum.png',
-      //   'name': 'Modum',
-      //   'ticker': 'MOD',
-      //   'stage': 'ICO',
-      //   'status': 'Upcoming',
-      //   'start': '2017-11-12',
-      //   'end': '2017-11-28',
-      //   'tokenToSell': '1000000',
-      //   'totalTokensPercent': '100%',
-      // },
-      // {
-      //   '_id': 'sdf8i7sdfhh0',
-      //   'logo': 'https://www.tokendata.io/assets/logos/adshares.png',
-      //   'name': 'Adshares',
-      //   'ticker': 'ADST',
-      //   'stage': 'ICO',
-      //   'status': 'Past',
-      //   'start': '2017-11-12',
-      //   'end': '2017-11-28',
-      //   'tokenToSell': '1000000',
-      //   'totalTokensPercent': '100%',
-      // }
-    ],
+    projects: [],
     currentPage: 1,
     totalRows: 0,
     searchQuery: ''
   }),
-  computed: {
-    // projectsComputed() {
-    //   this.projects.forEach(function(item){
-    //     try {
-    //       item.start = moment(Date.parse(item.start)).fromNow()
-    //     } catch(err) {}
-    //   })
-    //   console.log(this.project)
-    // }
-  },
   watch: {
     searchQuery: function (query) {
       this.getListing('1', this.searchQuery)
       this.currentPage = 1
     },
-    currentPage: function (page) {
-      this.getListing(page, this.searchQuery)
-    }
+    // currentPage: function (page) {
+    //   this.getListing(page, this.searchQuery)
+    // }
   },
   mounted: function() {
     document.getElementById('main').classList.remove('center')
-    // axios.get('/events/json', {
-    // }).then((response) => {
-    //   this.projects = response.data.items
-    // }, (err) => {
-    //   console.log(err)
-    // })
-    this.getListing(1, '')
+    this.getListing(1, this.searchQuery)
   },
   methods: {
     goToProject: function(_id, name) {
@@ -128,14 +74,17 @@ export default {
     getListing: function(page, searchQuery) {
       axios.get('/base/events/json?page='+page+'&q='+searchQuery, {
       }).then((response) => {
+        console.log(response.data)
         this.totalRows = response.data.info.total
-        this.projects = response.data.items
-        this.projects.forEach(function(item){
+        var projects = response.data.items
+        projects.forEach(function(item){
           try {
             item.start = moment(Date.parse(item.start)).format('YYYY-DD-MM')
             item.end = moment(Date.parse(item.end)).format('YYYY-DD-MM')
           } catch(err) {}
         })
+        this.projects = []
+        this.projects = projects
         console.log(this.projects)
       }, (err) => {
         console.log(err)

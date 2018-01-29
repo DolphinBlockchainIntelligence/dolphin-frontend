@@ -3,7 +3,6 @@
     <div class="heading">
       <h3 class="heading-text">Listing</h3>
       <div class="heading-actions">
-        <!-- <a href="/base/edit/" target="_blank" class="btn btn-primary">Add project</a> -->
       </div>
     </div>
     <br>
@@ -48,9 +47,7 @@
   </div>
 </template>
 
-
 <script>
-// import { mapState } from 'vuex'
 import axios from 'axios'
 import routes from '../router'
 export default {
@@ -62,32 +59,7 @@ export default {
     searchQuery: '',
     status: '',
     industry: ''
-    // projects: [
-    //   {
-    //     '_id': 'sdf8i69',
-    //     'logo': 'https://www.tokendata.io/assets/logos/district0x.png',
-    //     'name': 'District0x',
-    //     'ticker': 'DNT',
-    //     'stage': 'Died',
-    //     'industry': 'Platform',
-    //     'description': 'Network of decentralized markets and communities'
-    //   },
-    //   {
-    //     '_id': 'sdf8i70',
-    //     'logo': 'https://www.tokendata.io/assets/logos/modum.png',
-    //     'name': 'Modum',
-    //     'ticker': 'MOD',
-    //     'stage': 'Died',
-    //     'industry': 'Market',
-    //     'description': 'Data integrity for supply chain operations'
-    //   }
-    // ]
   }),
-  // computed: {
-  //   ...mapState([
-  //     'user'
-  //   ])
-  // },
   mounted: function() {
     document.getElementById('main').classList.remove('center')
     this.getListing(1, this.searchQuery, this.industry, this.status)
