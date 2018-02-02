@@ -451,7 +451,7 @@ export default {
         basic: {
           format: 'DD/MM/YYYY',
           useCurrent: false,
-        },       
+        },
       },
       optionsKeywords: [],
       selectedKeywords: [],

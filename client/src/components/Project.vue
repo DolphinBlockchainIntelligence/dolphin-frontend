@@ -3,8 +3,7 @@
     <div class="heading">
       <h3 class="heading-text">{{project.current.name}} ({{project.current.symbol}})</h3>
       <div class="heading-actions">
-        <a :href="'http://new.petrusenko.pro/base/edit/?'+_id" target="_blank" class="btn btn-primary" v-if="user.icobaseEditor">Edit</a>
-        <!-- <a :href="'http://new.petrusenko.pro/base/edit/?'+_id" target="_blank" class="btn btn-primary">Edit</a> -->
+        <a :href="'/base/edit/?'+_id" target="_blank" class="btn btn-primary" v-if="user.icobaseEditor">Edit</a>
       </div>
     </div>
     <br>
