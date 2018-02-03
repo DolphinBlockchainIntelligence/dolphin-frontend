@@ -135,12 +135,12 @@ export default {
     toggleSettings: function(event) {
       this.isDraggable = !this.isDraggable
       this.isResizable = !this.isResizable
-      let btnText = event.currentTarget.querySelector('span').textContent
-      if (btnText == 'Customize') {
-        event.currentTarget.querySelector('span').textContent = 'Save settings'
-      } else {
-        event.currentTarget.querySelector('span').textContent = 'Customize'
-      }
+      // let btnText = event.currentTarget.querySelector('span').textContent
+      // if (btnText == 'Customize') {
+      //   event.currentTarget.querySelector('span').textContent = 'Save settings'
+      // } else {
+      //   event.currentTarget.querySelector('span').textContent = 'Customize'
+      // }
       document.querySelectorAll('.iframe-mask').forEach(function(item, i){
         item.classList.toggle('hide')
       })
@@ -226,6 +226,12 @@ export default {
 </script>
 
 <style lang="sass">
+.button-customize
+  line-height: 0 !important
+  i
+    line-height: 1em
+    font-size: 20px
+
 .not-auth-intro
   display: flex
   justify-content: center

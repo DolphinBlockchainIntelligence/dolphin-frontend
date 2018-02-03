@@ -3,6 +3,7 @@
     <div class="heading">
       <h3 class="heading-text">{{project.current.name}} ({{project.current.symbol}})</h3>
       <div class="heading-actions">
+        <a href="#" class="btn btn-outline-info button-customize" @click.prevent="toggleSettings($event)"><i class="material-icons left">settings</i></a>
         <a :href="'/base/edit/?'+_id" target="_blank" class="btn btn-primary" v-if="user.icobaseEditor">Edit</a>
       </div>
     </div>
@@ -48,6 +49,8 @@
       :row-height="30"
       :margin="[10, 10]"
       :use-css-transforms="true"
+      :is-draggable="isDraggable"
+      :is-resizable="isResizable"
     >
       <grid-item
         v-for="widget in widgets"
@@ -154,7 +157,10 @@ export default {
   data: () => ({
     project: {},
     sentimentId: undefined,
-    widgets: []
+    similarweb: undefined,
+    widgets: [],
+    isDraggable: false,
+    isResizable: false,
   }),
   components: {
     GridLayout,
@@ -201,6 +207,14 @@ export default {
             this.sentimentId = id[1]
           }
         })
+        if (!this.sentimentId) {
+          this.project.current.links.forEach((link) => {
+            if (link.type == 'Announcement (bitcointalk or other)'){
+              var id = link.url.split(pattern)
+              this.sentimentId = id[1]
+            }
+          })
+        }
         if (this.sentimentId) {
           widgets.push({
             title: 'Sentiments',
@@ -222,6 +236,24 @@ export default {
           })
         }
       } catch(err) {}
+      try {
+        this.project.current.links.forEach((link) => {
+          if (link.type == 'Website'){
+            this.similarweb = link.url.replace(/.*?:\/\//g, "")
+          }
+        })
+        if (this.similarweb) {
+          widgets.push({
+            title: 'SimilarWeb',
+            x: 0,
+            y: 60,
+            w: 12,
+            h: 15,
+            i: '6',
+            url: '/widgets/similarweb/index.html?url=' + this.similarweb
+          })
+        }
+      } catch(err) {}
       this.widgets = widgets
     }, (err) => {
       console.log(err)
@@ -233,9 +265,22 @@ export default {
     ])
   },
   methods: {
-    // loadWidgets: function(){
-
-    // }
+    resizedWidget: () => {
+      window.dispatchEvent(new Event('resize'))
+    },
+    toggleSettings: function(event) {
+      this.isDraggable = !this.isDraggable
+      this.isResizable = !this.isResizable
+      // let btnText = event.currentTarget.querySelector('span').textContent
+      // if (btnText == 'Customize') {
+      //   event.currentTarget.querySelector('span').textContent = 'Save settings'
+      // } else {
+      //   event.currentTarget.querySelector('span').textContent = 'Customize'
+      // }
+      document.querySelectorAll('.iframe-mask').forEach(function(item, i){
+        item.classList.toggle('hide')
+      })
+    }
   }
 }
 </script>
