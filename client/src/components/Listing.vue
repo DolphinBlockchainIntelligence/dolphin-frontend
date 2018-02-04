@@ -16,9 +16,7 @@
       </select>
       <select name="industry" id="industry" class="form-control industry" v-model="industry">
         <option value="">Industry</option>
-        <option value="Platform">Platform</option>
-        <option value="Market">Market</option>
-        <option value="trading">trading</option>
+        <option :value="i" v-for="i in industries" :key="i">{{i}}</option>
       </select>
     </form>
     <br>
@@ -33,11 +31,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="project in projects" @click="goToProject(project._id, project.name)" :key="project._id" class="pointer">
+        <tr v-for="(project, id) in projects" @click="goToProject(project._id, project.name)" :key="id" class="pointer">
           <td>{{project.name}}</td>
           <td>{{project.symbol}}</td>
           <td>{{project.stage}}</td>
-          <td>{{project.category}}</td>
+          <td>{{project.industry}}</td>
           <td>{{project.description}}</td>
         </tr>
       </tbody>
@@ -58,7 +56,10 @@ export default {
     totalRows: 0,
     searchQuery: '',
     status: '',
-    industry: ''
+    industry: '',
+    category: '',
+    industries: ['Coal', 'Oil & Gas', 'Oil & Gas Related Equipment and Services', 'Renewable Energy', 'Uranium', 'Chemicals', 'Metals & Mining', 'Construction Materials', 'Paper & Forest Products', 'Containers & Packaging', 'Aerospace & Defense', 'Machinery, Equipment & Components', 'Construction & Engineering', 'Diversified Trading & Distributing', 'Professional & Commercial Services', 'Industrial Conglomerates', 'Freight & Logistics Services', 'Passenger Transportation Services', 'Transport Infrastructure', 'Automobiles & Auto Parts', 'Textiles & Apparel', 'Homebuilding & Construction Supplies', 'Household Goods', 'Leisure Products', 'Hotels & Entertainment Services', 'Media & Publishing', 'Diversified Retail', 'Other Specialty Retailers', 'Beverages', 'Food & Tobacco', 'Personal &Household Products & Services', 'Food & Drug Retailing', 'Banking Services', 'Investment Banking & Investment Services', 'Insurance', 'Real Estate Operations', 'Residential & Commercial REIT', 'Collective Investments', 'Holding Companies', 'Healthcare Equipment & Supplies', 'Healthcare Providers & Services', 'Pharmaceuticals', 'Biotechnology & Medical Research', 'Semiconductors & Semiconductor Equipment', 'Communications & Networking', 'Electronic Equipment & Parts', 'Office Equipment', 'Computers, Phones & Household Electronics', 'Software & IT Services', 'Telecommunications Services', 'Electrical Utilities & IPPs', 'Natural Gas Utilities', 'Water Utilities', 'Multiline Utilities'],
+    categories: ['Blockchain infrastructure', 'Crypto-currency', 'Distributed Application', 'Identity Platform', 'Smart-contract platform', 'Tokenized Application', 'Non-software (just fundraising)', 'Other']
   }),
   mounted: function() {
     document.getElementById('main').classList.remove('center')
@@ -102,7 +103,7 @@ export default {
   display: flex
   .search
     flex: 0 1 auto
-  .stage, .industry
+  .stage, .industry, .category
     flex: 0 1 200px
     margin-left: 20px
 </style>
