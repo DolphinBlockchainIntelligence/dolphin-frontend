@@ -239,7 +239,9 @@ export default {
       try {
         this.project.current.links.forEach((link) => {
           if (link.type == 'Website'){
-            this.similarweb = link.url.replace(/.*?:\/\//g, "")
+            // this.similarweb = link.url.replace(/.*?:\/\//g, "")
+            this.similarweb = link.url.split(/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/g)[3]
+            // console.log(this.similarweb)
           }
         })
         if (this.similarweb) {
