@@ -3,7 +3,7 @@
     <div class="container">
       <div class="card expert_reviews">
         <div class="card-header">
-          <div class="person_img_wrap" style="background-image: url(http://new.petrusenko.pro/profile/images/f119fee3e59bd1661ebf865b0cc51ae7.png);"></div>
+          <div class="person_img_wrap" style="background-image: url(/profile/images/f119fee3e59bd1661ebf865b0cc51ae7.png);"></div>
           <div class="person_name">
             Cheburah Miu-Yong
             <star-rating :increment="1" :fixed-points="0" :read-only="false" :star-size="24" :border-width="1" border-color="#429eae" inactive-color="#fff" active-color="#429eae" :max-rating="5" v-model="temp" :show-rating="false"></star-rating>
@@ -34,31 +34,31 @@
                 <h6>Review rating</h6>
                 <ul>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_1.svg">
+                    <img src="/widgets/expert-opinions/img/mark_1.svg">
                     <p>idea</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_10.svg">
+                    <img src="/widgets/expert-opinions/img/mark_10.svg">
                     <p>team</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_1.svg">
+                    <img src="/widgets/expert-opinions/img/mark_1.svg">
                     <p>busmodel</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_5.svg">
+                    <img src="/widgets/expert-opinions/img/mark_5.svg">
                     <p>market</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_2.svg">
+                    <img src="/widgets/expert-opinions/img/mark_2.svg">
                     <p>tech</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_7.svg">
+                    <img src="/widgets/expert-opinions/img/mark_7.svg">
                     <p>code</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_0.svg">
+                    <img src="/widgets/expert-opinions/img/mark_0.svg">
                     <p>legal</p>
                   </li>
                 </ul>
@@ -67,7 +67,7 @@
             </li>
             <li class="list-group-item review">
               <div class="review_target">
-                <img src="http://new.petrusenko.pro/base/upload/7cb19c9b5674edee2ddc622a40b62e75.png">
+                <img src="/base/upload/7cb19c9b5674edee2ddc622a40b62e75.png">
                 <h6>AKASHA (AETH)</h6>
                 <span>3 mounth ago</span>
                 <br>
@@ -84,31 +84,31 @@
                 <h6>Review rating</h6>
                 <ul>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_1.svg">
+                    <img src="/widgets/expert-opinions/img/mark_1.svg">
                     <p>idea</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_10.svg">
+                    <img src="/widgets/expert-opinions/img/mark_10.svg">
                     <p>team</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_1.svg">
+                    <img src="/widgets/expert-opinions/img/mark_1.svg">
                     <p>busmodel</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_5.svg">
+                    <img src="/widgets/expert-opinions/img/mark_5.svg">
                     <p>market</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_2.svg">
+                    <img src="/widgets/expert-opinions/img/mark_2.svg">
                     <p>tech</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_7.svg">
+                    <img src="/widgets/expert-opinions/img/mark_7.svg">
                     <p>code</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_0.svg">
+                    <img src="/widgets/expert-opinions/img/mark_0.svg">
                     <p>legal</p>
                   </li>
                 </ul>
@@ -117,7 +117,7 @@
             </li>
             <li class="list-group-item review">
               <div class="review_target">
-                <img src="http://new.petrusenko.pro/base/upload/15abfcda40795d1516b00e2a6c45d45a.png">
+                <img src="/base/upload/15abfcda40795d1516b00e2a6c45d45a.png">
                 <h6>0x (ZRX)</h6>
                 <span>3 mounth ago</span>
                 <br>
@@ -134,31 +134,31 @@
                 <h6>Review rating</h6>
                 <ul>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_1.svg">
+                    <img src="/widgets/expert-opinions/img/mark_1.svg">
                     <p>idea</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_10.svg">
+                    <img src="/widgets/expert-opinions/img/mark_10.svg">
                     <p>team</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_1.svg">
+                    <img src="/widgets/expert-opinions/img/mark_1.svg">
                     <p>busmodel</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_5.svg">
+                    <img src="/widgets/expert-opinions/img/mark_5.svg">
                     <p>market</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_2.svg">
+                    <img src="/widgets/expert-opinions/img/mark_2.svg">
                     <p>tech</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_7.svg">
+                    <img src="/widgets/expert-opinions/img/mark_7.svg">
                     <p>code</p>
                   </li>
                   <li>
-                    <img src="http://new.petrusenko.pro/widgets/expert-opinions/img/mark_0.svg">
+                    <img src="/widgets/expert-opinions/img/mark_0.svg">
                     <p>legal</p>
                   </li>
                 </ul>

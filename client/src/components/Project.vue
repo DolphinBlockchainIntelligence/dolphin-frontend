@@ -1,7 +1,7 @@
 <template>
   <div class="content-wrapper">
     <div class="heading">
-      <h3 class="heading-text">{{project.current.name}} ({{project.current.symbol}})</h3>
+      <h3 class="heading-text">{{project.current.name}}<span v-if="project.current.symbol"> ({{project.current.symbol}})</span></h3>
       <div class="heading-actions">
         <a href="#" class="btn btn-outline-info button-customize" @click.prevent="toggleSettings($event)"><i class="material-icons left">settings</i></a>
         <a :href="'/base/edit/?'+_id" target="_blank" class="btn btn-primary" v-if="user.icobaseEditor">Edit</a>
@@ -169,7 +169,11 @@ export default {
   mounted: function() {
     axios.get('/base/' + this._id, {
     }).then((response) => {
-      this.project = response.data
+      var project = response.data
+      this.project = project
+      if (project.symbol = 'NA') {
+          delete project.current.symbol
+      }
       var pattern = /\D+/g
       var widgets = [
         {
@@ -201,14 +205,14 @@ export default {
         }
       ]
       try {
-        this.project.current.links.forEach((link) => {
+        project.current.links.forEach((link) => {
           if (link.type == 'Bitcointalk forum topic'){
             var id = link.url.split(pattern)
             this.sentimentId = id[1]
           }
         })
         if (!this.sentimentId) {
-          this.project.current.links.forEach((link) => {
+          project.current.links.forEach((link) => {
             if (link.type == 'Announcement (bitcointalk or other)'){
               var id = link.url.split(pattern)
               this.sentimentId = id[1]
@@ -223,40 +227,52 @@ export default {
             w: 12,
             h: 15,
             i: '4',
-            url: '/widgets/linechart/linechart.html?id=' + this.sentimentId
+            url: '/widgets/sentiments-britecharts-stacked-area/index.html?id=' + this.sentimentId
           })
-          widgets.push({
-            title: 'Sentiments',
-            x: 0,
-            y: 45,
-            w: 12,
-            h: 15,
-            i: '5',
-            url: '/widgets/comments/comments.html?id=' + this.sentimentId
-          })
+          // widgets.push({
+          //   title: 'Sentiments',
+          //   x: 0,
+          //   y: 45,
+          //   w: 12,
+          //   h: 15,
+          //   i: '5',
+          //   url: '/widgets/comments/comments.html?id=' + this.sentimentId
+          // })
         }
       } catch(err) {}
       try {
-        this.project.current.links.forEach((link) => {
+        project.current.links.forEach((link) => {
           if (link.type == 'Website'){
-            // this.similarweb = link.url.replace(/.*?:\/\//g, "")
-            this.similarweb = link.url.split(/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/g)[3]
-            // console.log(this.similarweb)
+            var similarweb = link.url.replace(/.*?:\/\//g, "")
+            this.similarweb = similarweb.substring(0, similarweb.indexOf('/'))
+            // this.similarweb = link.url.split(/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/g)[3]
+            console.log(link.url)
+            console.log(this.similarweb)
           }
         })
         if (this.similarweb) {
           widgets.push({
             title: 'SimilarWeb',
             x: 0,
-            y: 60,
-            w: 12,
+            y: 45,
+            w: 6,
             h: 15,
-            i: '6',
+            i: '5',
             url: '/widgets/similarweb/index.html?url=' + this.similarweb
           })
         }
       } catch(err) {}
+      widgets.push({
+        title: 'Google trends',
+        x: 6,
+        y: 45,
+        w: 6,
+        h: 15,
+        i: '5',
+        url: '/widgets/google-trends/index.html?keyword=' + project.current.name
+      })
       this.widgets = widgets
+      this.project = project
     }, (err) => {
       console.log(err)
     })
