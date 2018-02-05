@@ -1,7 +1,12 @@
 <template>
   <div class="content-wrapper">
     <div class="heading">
-      <h3 class="heading-text">{{project.current.name}}<span v-if="project.current.symbol"> ({{project.current.symbol}})</span></h3>
+      <!-- <div class="heading-logo">
+        <img :src="'/base/upload/'+project.current.logotype">
+      </div> -->
+      <h3 class="heading-text">
+        {{project.current.name}}<span v-if="project.current.symbol"> ({{project.current.symbol}})</span>
+      </h3>
       <div class="heading-actions">
         <a href="#" class="btn btn-outline-info button-customize" @click.prevent="toggleSettings($event)"><i class="material-icons left">settings</i></a>
         <a :href="'/base/edit/?'+_id" target="_blank" class="btn btn-primary" v-if="user.icobaseEditor">Edit</a>
@@ -224,10 +229,10 @@ export default {
             title: 'Sentiments',
             x: 0,
             y: 30,
-            w: 12,
+            w: 6,
             h: 15,
             i: '4',
-            url: '/widgets/sentiments-britecharts-stacked-area/index.html?id=' + this.sentimentId
+            url: '/widgets/linechart/linechart.html?id=' + this.sentimentId
           })
           // widgets.push({
           //   title: 'Sentiments',
@@ -244,8 +249,9 @@ export default {
         project.current.links.forEach((link) => {
           if (link.type == 'Website'){
             var similarweb = link.url.replace(/.*?:\/\//g, "")
-            this.similarweb = similarweb.substring(0, similarweb.indexOf('/'))
+            //this.similarweb = similarweb.substring(0, similarweb.indexOf('/'))
             // this.similarweb = link.url.split(/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/g)[3]
+            this.similarweb = similarweb
             console.log(link.url)
             console.log(this.similarweb)
           }
@@ -253,8 +259,8 @@ export default {
         if (this.similarweb) {
           widgets.push({
             title: 'SimilarWeb',
-            x: 0,
-            y: 45,
+            x: 6,
+            y: 30,
             w: 6,
             h: 15,
             i: '5',
@@ -262,15 +268,15 @@ export default {
           })
         }
       } catch(err) {}
-      widgets.push({
-        title: 'Google trends',
-        x: 6,
-        y: 45,
-        w: 6,
-        h: 15,
-        i: '5',
-        url: '/widgets/google-trends/index.html?keyword=' + project.current.name
-      })
+      // widgets.push({
+      //   title: 'Google trends',
+      //   x: 6,
+      //   y: 45,
+      //   w: 6,
+      //   h: 10,
+      //   i: '6',
+      //   url: '/widgets/google-trends/index.html?keyword=' + project.current.name
+      // })
       this.widgets = widgets
       this.project = project
     }, (err) => {
@@ -302,3 +308,9 @@ export default {
   }
 }
 </script>
+
+<style lang="sass" scoped>
+.heading-logo img
+  height: 34px
+  margin-right: 7px
+</style>
