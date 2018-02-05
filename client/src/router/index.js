@@ -9,6 +9,8 @@ import Project from '@/components/Project'
 import ProjectAddEdit from '@/components/ProjectAddEdit'
 import ExpertOpinionAdd from '@/components/ExpertOpinionAdd'
 import UserProfile from '@/components/UserProfile'
+import ExpertReviews from '@/components/ExpertReviews'
+import ExpertFeedbacks from '@/components/ExpertFeedbacks'
 
 Vue.use(Router)
 export default new Router({
@@ -76,6 +78,20 @@ export default new Router({
       path: '/profile/',
       name: 'User profile',
       component: UserProfile,
+      props: true,
+      meta: { reuse: false }
+    },
+    {
+      path: '/expert/:_id/reviews/',
+      name: 'ExpertReviews',
+      component: ExpertReviews,
+      props: true,
+      meta: { reuse: false }
+    },
+    {
+      path: '/expert/:_id/feedbacks/',
+      name: 'ExpertFeedbacks',
+      component: ExpertFeedbacks,
       props: true,
       meta: { reuse: false }
     }
