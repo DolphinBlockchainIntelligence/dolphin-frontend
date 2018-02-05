@@ -1,7 +1,10 @@
 <template>
   <div class="content-wrapper">
     <div class="heading">
-      <h3 class="heading-text">{{project.current.name}} ({{project.current.symbol}})</h3>
+      <h3 class="heading-text">
+        {{project.current.name}} ({{project.current.symbol}})
+        <img :src="'/base/upload/'+project.current.logotype" style="height: 34px">
+      </h3>
       <div class="heading-actions">
         <a href="#" class="btn btn-outline-info button-customize" @click.prevent="toggleSettings($event)"><i class="material-icons left">settings</i></a>
         <a :href="'/base/edit/?'+_id" target="_blank" class="btn btn-primary" v-if="user.icobaseEditor">Edit</a>
