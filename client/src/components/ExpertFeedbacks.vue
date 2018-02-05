@@ -3,14 +3,14 @@
     <div class="container">
       <div class="card expert_reviews">
         <div class="card-header">
-          <div class="person_img_wrap" style="background-image: url(http://new.petrusenko.pro/widgets/expert-opinions/img/profile.svg);"></div>
+          <div class="person_img_wrap" style="background-image: url(http://new.petrusenko.pro/profile/images/f119fee3e59bd1661ebf865b0cc51ae7.png);"></div>
           <div class="person_name">
             Cheburah Miu-Yong
             <star-rating :increment="1" :fixed-points="0" :read-only="false" :star-size="24" :border-width="1" border-color="#429eae" inactive-color="#fff" active-color="#429eae" :max-rating="5" v-model="temp" :show-rating="false"></star-rating>
           </div>
           <div class="person_statistics">
-            <span class="active">6 reviews</span>
-            <span>150 feedbacks</span>
+            <span>6 reviews</span>
+            <span class="active">2 feedbacks</span>
           </div>
         </div>
         <div class="card-body">
@@ -68,6 +68,40 @@
           </ul>
         </div>
       </div>
+      
+      <h5 class="title_divider">Feedbacks</h5>
+      <div class="card expert_reviews">
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item feedback">
+              <div class="feedback_details">
+                <div class="person_img" style="background-image: url(http://new.petrusenko.pro/widgets/expert-opinions/img/profile.svg);"></div>
+                <p>User</br>Username</p>
+                <span>3 mounth ago</span>
+                <span>feedback rating</span>
+                <star-rating :increment="1" :fixed-points="0" :read-only="false" :star-size="14" :border-width="1" border-color="#429eae" inactive-color="#fff" active-color="#429eae" :max-rating="5" v-model="temp" :show-rating="false"></star-rating>
+              </div>
+              <div class="feedback_content">
+                <h6>Feedback</h6>
+                <p>Idea is cool. The site does not contain information about the team. You have to guess yourself. Don't understand the relationship between token and Block.one</p>
+              </div>
+            </li>
+            <li class="list-group-item feedback">
+              <div class="feedback_details">
+                <div class="person_img" style="background-image: url(http://new.petrusenko.pro/widgets/expert-opinions/img/profile.svg);"></div>
+                <p>User</br>Username</p>
+                <span>3 mounth ago</span>
+                <span>feedback rating</span>
+                <star-rating :increment="1" :fixed-points="0" :read-only="false" :star-size="14" :border-width="1" border-color="#429eae" inactive-color="#fff" active-color="#429eae" :max-rating="5" v-model="temp" :show-rating="false"></star-rating>
+              </div>
+              <div class="feedback_content">
+                <h6>Feedback</h6>
+                <p>no feedback</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -89,6 +123,10 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.title_divider
+  font-size: 28px
+  margin: 20px 0
+  padding: 0 30px
 .expert_reviews
   margin-bottom: 30px
   .card-header
@@ -197,5 +235,35 @@ export default {
             font-size: 10px
             line-height: 10px
             margin-bottom: 5px
-
+  .feedback
+    display: table
+    .feedback_details
+      display: table-cell
+      vertical-align: top
+      text-align: center
+      width: 70px
+      .person_img
+        display: inline-block
+        width: 60px
+        height: 60px
+        border-radius: 100%
+        overflow: hidden
+        background-size: cover
+        background-position: center
+        background-repeat: no-repeat
+      span
+        font-size: 10px
+        line-height: 10px
+        color: #ccc
+        display: block
+      p
+        font-size: 12px
+        line-height: 12px
+    .feedback_content
+      display: table-cell
+      vertical-align: top
+      padding-left: 14px
+      h6
+        color: #ccc
+        font-size: 14px
 </style>
