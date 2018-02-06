@@ -175,7 +175,7 @@ export default {
     axios.get('/base/' + this._id, {
     }).then((response) => {
       var project = response.data
-      this.project = project
+      // this.project = project
       if (project.symbol = 'NA') {
           delete project.current.symbol
       }
@@ -188,7 +188,7 @@ export default {
           w: 9,
           h: 15,
           i: '1',
-          url: '/widgets/ico-info/index.html?id=' + this.project._id
+          url: '/widgets/ico-info/index.html?id=' + project._id
         },
         {
           title: 'Dolphin Truth Serum',
@@ -197,7 +197,7 @@ export default {
           w: 3,
           h: 15,
           i: '2',
-          url: '/widgets/expert-opinions-average/index.html?id=' + this.project._id
+          url: '/widgets/expert-opinions-average/index.html?id=' + project._id
         },
         {
           title: 'Expert opinions',
@@ -206,7 +206,7 @@ export default {
           w: 12,
           h: 15,
           i: '3',
-          url: '/widgets/expert-opinions/index.html?id=' + this.project._id
+          url: '/widgets/expert-opinions/index.html?id=' + project._id
         }
       ]
       try {
@@ -277,6 +277,18 @@ export default {
       //   i: '6',
       //   url: '/widgets/google-trends/index.html?keyword=' + project.current.name
       // })
+      // tellow, peaks, headstart
+      if (project._id == '5a74890501bf07000150410c' || project._id == '5a78a6d15b82e50001b5ae12' || project._id == '5a73628f8f45f500017ebb7b') {
+        widgets.push({
+          title: 'iTrend',
+          x: 0,
+          y: 45,
+          w: 6,
+          h: 15,
+          i: '6',
+          url: '/widgets/itrend/index.html?id=' + project._id
+        })
+      }
       this.widgets = widgets
       this.project = project
     }, (err) => {
