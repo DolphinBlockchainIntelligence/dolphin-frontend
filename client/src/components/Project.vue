@@ -191,7 +191,7 @@ export default {
           url: '/widgets/ico-info/index.html?id=' + project._id
         },
         {
-          title: 'Dolphin Truth Serum',
+          title: 'Average Expert Opinions',
           x: 9,
           y: 0,
           w: 3,

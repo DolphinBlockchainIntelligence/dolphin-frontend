@@ -18,8 +18,8 @@
         <!-- <option value="">Industry</option> -->
         <!-- <option :value="i" v-for="i in industries" :key="i">{{i}}</option> -->
       <!-- </select> -->
-      <multiselect id="stage" v-model="status" :options="statuses" placeholder="Status" select-label="" deselect-label="" ></multiselect>
-      <multiselect id="industry" v-model="industry" :options="industries" placeholder="Industry" select-label="" deselect-label=""></multiselect>
+      <multiselect id="stage" :multiple="true" v-model="status" :options="statuses" placeholder="Status" select-label="" deselect-label="" ></multiselect>
+      <multiselect id="industry" :multiple="true" v-model="industry" :options="industries" placeholder="Industry" select-label="" deselect-label=""></multiselect>
     </form>
     <br>
     <table class="table table-hover">
@@ -36,7 +36,7 @@
         <tr v-for="(project, id) in projects" @click="goToProject(project._id, project.name)" :key="id" class="pointer">
           <td>{{project.name}}</td>
           <td>{{project.symbol}}</td>
-          <td>{{project.stage}}</td>
+          <td>{{project.status}}</td>
           <td>{{project.industry}}</td>
           <td>{{project.description}}</td>
         </tr>
@@ -49,6 +49,7 @@
 
 <script>
 import axios from 'axios'
+import _ from 'lodash'
 import routes from '../router'
 import Multiselect from 'vue-multiselect'
 
@@ -60,11 +61,11 @@ export default {
     currentPage: 1,
     totalRows: 0,
     searchQuery: '',
-    status: '',
-    statuses: ['All','Development', 'Live', 'Died'],
-    industry: '',
-    category: '',
-    industries: ['All', 'Coal', 'Oil & Gas', 'Oil & Gas Related Equipment and Services', 'Renewable Energy', 'Uranium', 'Chemicals', 'Metals & Mining', 'Construction Materials', 'Paper & Forest Products', 'Containers & Packaging', 'Aerospace & Defense', 'Machinery, Equipment & Components', 'Construction & Engineering', 'Diversified Trading & Distributing', 'Professional & Commercial Services', 'Industrial Conglomerates', 'Freight & Logistics Services', 'Passenger Transportation Services', 'Transport Infrastructure', 'Automobiles & Auto Parts', 'Textiles & Apparel', 'Homebuilding & Construction Supplies', 'Household Goods', 'Leisure Products', 'Hotels & Entertainment Services', 'Media & Publishing', 'Diversified Retail', 'Other Specialty Retailers', 'Beverages', 'Food & Tobacco', 'Personal &Household Products & Services', 'Food & Drug Retailing', 'Banking Services', 'Investment Banking & Investment Services', 'Insurance', 'Real Estate Operations', 'Residential & Commercial REIT', 'Collective Investments', 'Holding Companies', 'Healthcare Equipment & Supplies', 'Healthcare Providers & Services', 'Pharmaceuticals', 'Biotechnology & Medical Research', 'Semiconductors & Semiconductor Equipment', 'Communications & Networking', 'Electronic Equipment & Parts', 'Office Equipment', 'Computers, Phones & Household Electronics', 'Software & IT Services', 'Telecommunications Services', 'Electrical Utilities & IPPs', 'Natural Gas Utilities', 'Water Utilities', 'Multiline Utilities'],
+    status: [],
+    statuses: ['Development', 'Live', 'Died'],
+    industry: [],
+    category: [],
+    industries: ['Coal', 'Oil & Gas', 'Oil & Gas Related Equipment and Services', 'Renewable Energy', 'Uranium', 'Chemicals', 'Metals & Mining', 'Construction Materials', 'Paper & Forest Products', 'Containers & Packaging', 'Aerospace & Defense', 'Machinery, Equipment & Components', 'Construction & Engineering', 'Diversified Trading & Distributing', 'Professional & Commercial Services', 'Industrial Conglomerates', 'Freight & Logistics Services', 'Passenger Transportation Services', 'Transport Infrastructure', 'Automobiles & Auto Parts', 'Textiles & Apparel', 'Homebuilding & Construction Supplies', 'Household Goods', 'Leisure Products', 'Hotels & Entertainment Services', 'Media & Publishing', 'Diversified Retail', 'Other Specialty Retailers', 'Beverages', 'Food & Tobacco', 'Personal &Household Products & Services', 'Food & Drug Retailing', 'Banking Services', 'Investment Banking & Investment Services', 'Insurance', 'Real Estate Operations', 'Residential & Commercial REIT', 'Collective Investments', 'Holding Companies', 'Healthcare Equipment & Supplies', 'Healthcare Providers & Services', 'Pharmaceuticals', 'Biotechnology & Medical Research', 'Semiconductors & Semiconductor Equipment', 'Communications & Networking', 'Electronic Equipment & Parts', 'Office Equipment', 'Computers, Phones & Household Electronics', 'Software & IT Services', 'Telecommunications Services', 'Electrical Utilities & IPPs', 'Natural Gas Utilities', 'Water Utilities', 'Multiline Utilities'],
     categories: ['Blockchain infrastructure', 'Crypto-currency', 'Distributed Application', 'Identity Platform', 'Smart-contract platform', 'Tokenized Application', 'Non-software (just fundraising)', 'Other'],
   }),
   mounted: function() {
@@ -94,11 +95,17 @@ export default {
       routes.push({ name: 'Project', params: { _id: _id, name: name }})
     },
     getListing: function(page, searchQuery, industry, status) {
-      axios.get('/base/json?page='+page+'&q='+searchQuery+'&i='+industry+'&s='+status, {
+      var industryEncoded = _.clone(industry)
+      industryEncoded.forEach(function(item, i){
+        industryEncoded[i] = encodeURIComponent(item)
+      })
+      var industryJoined = industryEncoded.join(',')
+      var statusJoined = status.join(',')
+      axios.get('/base/json?page='+page+'&q='+searchQuery+'&i='+industryJoined+'&s='+statusJoined, {
       }).then((response) => {
         this.totalRows = response.data.info.total
         this.projects = response.data.items
-        console.log(this.projects)
+        // console.log(this.projects)
       }, (err) => {
         console.log(err)
       })
