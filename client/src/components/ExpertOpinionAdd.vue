@@ -79,14 +79,20 @@ export default {
         legal: this.legal,
         review: this.review
       }
-      console.log(form)
+      // console.log(form)
       axios.post('/base/rating/' + this._id, form)
       .then((response) => {
-        console.log(response.status);
+        console.log(response.status)
         if (response.status == 200) {
-          routes.push({ name: 'Project', params: { _id: this._id }})
+          this.$snotify.success('Your opinion was saved')
+          setTimeout(function(){
+            routes.push({ name: 'Project', params: { _id: this._id }})
+          }, 1000)
         }
-      }); 
+      })
+      .catch((error) => {
+        this.$snotify.error('Error: ' + error.response.status)
+      })
     }
   },
 }

@@ -30,8 +30,8 @@
           <td>{{project.saletype}}</td>
           <td>{{project.start}}</td>
           <td>{{project.end}}</td>
-          <td>{{project.tokenToSell}}</td>
-          <td>{{project.totalTokensPercent}}</td>
+          <td>{{project.emission | numberWithSpaces}}</td>
+          <td>{{project.tokenprct | percent}}</td>
         </tr>
       </tbody>
     </table>
@@ -89,6 +89,16 @@ export default {
       }, (err) => {
         console.log(err)
       })
+    }
+  },
+  filters: {
+    numberWithSpaces: function (value) {
+      if (!value) return ''
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+    },
+    percent: function (value) {
+      if (!value) return ''
+      return (value * 100).toFixed(0) + '%'
     }
   }
 }

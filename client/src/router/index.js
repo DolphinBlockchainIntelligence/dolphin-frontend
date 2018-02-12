@@ -15,6 +15,7 @@ import ExpertFeedbacks from '@/components/ExpertFeedbacks'
 Vue.use(Router)
 export default new Router({
   routes: [
+    { path: '/_=_', redirect: '/' },
     {
       path: '/',
       name: 'Dashboard',

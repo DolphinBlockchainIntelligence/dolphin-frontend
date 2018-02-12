@@ -1,5 +1,6 @@
 <template>
   <div class="app" id="app">
+      <vue-snotify></vue-snotify>
       <b-navbar toggleable="lg">
         <router-link to="/" class="navbar-brand">
           <div class="brand-logo">
@@ -87,6 +88,7 @@
 import { mapState } from 'vuex'
 import routes from './router'
 import axios from 'axios'
+import "vue-snotify/styles/material.css"
 
 export default {
   name: 'app',

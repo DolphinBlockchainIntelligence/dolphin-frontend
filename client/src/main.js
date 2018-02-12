@@ -6,6 +6,9 @@ import store from './store'
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 
+import Snotify from 'vue-snotify'
+Vue.use(Snotify)
+
 Vue.config.productionTip = false
 
 new Vue({
