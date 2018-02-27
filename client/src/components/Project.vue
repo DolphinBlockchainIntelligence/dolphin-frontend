@@ -232,7 +232,18 @@ export default {
             w: 6,
             h: 15,
             i: '4',
+            // url: '/widgets/linechart/linechart.html?id=' + this.sentimentId
+            url: '/widgets/sentiments-britecharts-stacked-area/index.html?id=' + this.sentimentId
+          })
+          widgets.push({
+            title: 'Sentiments',
+            x: 6,
+            y: 30,
+            w: 6,
+            h: 15,
+            i: '5',
             url: '/widgets/linechart/linechart.html?id=' + this.sentimentId
+            // url: '/widgets/sentiments-britecharts-stacked-area/index.html?id=' + this.sentimentId
           })
           // widgets.push({
           //   title: 'Sentiments',
@@ -259,11 +270,11 @@ export default {
         if (this.similarweb) {
           widgets.push({
             title: 'SimilarWeb',
-            x: 6,
-            y: 30,
+            x: 0,
+            y: 45,
             w: 6,
             h: 15,
-            i: '5',
+            i: '6',
             url: '/widgets/similarweb/index.html?url=' + this.similarweb
           })
         }
@@ -281,11 +292,11 @@ export default {
       if (project._id == '5a74890501bf07000150410c' || project._id == '5a78a6d15b82e50001b5ae12' || project._id == '5a73628f8f45f500017ebb7b') {
         widgets.push({
           title: 'iTrend',
-          x: 0,
+          x: 6,
           y: 45,
           w: 6,
           h: 15,
-          i: '6',
+          i: '7',
           url: '/widgets/itrend/index.html?id=' + project._id
         })
       }

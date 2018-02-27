@@ -11,6 +11,7 @@ import ExpertOpinionAdd from '@/components/ExpertOpinionAdd'
 import UserProfile from '@/components/UserProfile'
 import ExpertReviews from '@/components/ExpertReviews'
 import ExpertFeedbacks from '@/components/ExpertFeedbacks'
+import OpinionFeedbacks from '@/components/OpinionFeedbacks'
 
 Vue.use(Router)
 export default new Router({
@@ -83,18 +84,25 @@ export default new Router({
       meta: { reuse: false }
     },
     {
-      path: '/expert/:_id/reviews/',
+      path: '/user/:_id/reviews/',
       name: 'ExpertReviews',
       component: ExpertReviews,
       props: true,
       meta: { reuse: false }
     },
+    // {
+    //   path: '/user/:_id/feedbacks/',
+    //   name: 'ExpertFeedbacks',
+    //   component: ExpertFeedbacks,
+    //   props: true,
+    //   meta: { reuse: false }
+    // },
     {
-      path: '/expert/:_id/feedbacks/',
-      name: 'ExpertFeedbacks',
-      component: ExpertFeedbacks,
+      path: '/opinion/:_id/',
+      name: 'OpinionFeedbacks',
+      component: OpinionFeedbacks,
       props: true,
       meta: { reuse: false }
-    }
+    },
   ]
 })
